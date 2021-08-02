@@ -1,0 +1,219 @@
+$primary-text-color: #333333;
+$background-color: #F5F5F5;
+$secondary-text-color: #305F9A;
+
+#homepage-bestseller {
+  background-color: $background-color;
+  padding-top: 55px;
+  padding-bottom: 30px;
+
+  h2 {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 45px;
+    font-weight: bold;
+  }
+
+  ul.best-seller-list {
+
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+
+    li.item {
+      .b-price {
+        color: $secondary-text-color;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+
+      .b-name {
+
+        a {
+          color: $primary-text-color;
+
+        }
+
+        h5 {
+          font-size: 18px;
+          font-weight: bold;
+          color: $primary-text-color;
+          padding: 0px 10px 0px 0px;
+          margin: 5px 0px;
+
+        }
+      }
+
+      .b-part-number {
+        color: $primary-text-color;
+        font-size: 16px;
+      }
+    }
+
+    .owl-buttons {
+      visibility: hidden;
+
+        .owl-prev, .owl-next {
+          background-color: $secondary-text-color;
+        }
+    }
+
+    &:hover {
+      .owl-buttons {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+
+/**
+ Must Have for your Car
+ */
+$primary-text-color: #FFFFFF;
+$primary-background: #305F9A;
+$secondary-background: #FFFFFF;
+$secondary-text-color: #305F9A;
+
+#must-have-item {
+  background-color: $primary-background;
+  padding-bottom: 60px;
+  padding-top: 50px;
+  margin-top: 40px;
+
+  @media  (max-width: 950px) {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+
+  h2 {
+      text-align: center;
+      color: $primary-text-color;
+      font-size: 45px;
+      margin-top: 10px;
+      font-weight: bold;
+  }
+
+  p.sub-title {
+      text-align: center;
+      color: $primary-text-color;
+      display: block;
+      max-width: 86%;
+      font-size: 16px;
+      margin: 30px auto 30px;
+
+    @media  (max-width: 950px) {
+      max-width: 100%;
+    }
+  }
+
+  ul.item-wrapper {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    li {
+      background-color: $secondary-background;
+      max-width: 210px;
+      padding: 20px;
+      height: 217px;
+      position: relative;
+
+      @media  (max-width: 950px) {
+        margin: auto;
+      }
+
+
+      h3 {
+        margin-top: 0px;
+        color: $secondary-text-color;
+        font-size: 16px;
+        font-weight: bold;
+
+        i.fa {
+          float: right;
+          font-weight: normal;
+          font-size: 16px;
+          margin-top: 2px;
+        }
+      }
+      p {
+        font-size: 16px;
+        color: #333333;
+        line-height: 18px;
+      }
+
+      img {
+       position: absolute;
+        left: 20px;
+        bottom: 20px;
+      }
+    }
+  }
+
+}
+
+.owl-pagination {
+  .owl-page {
+
+    &.active {
+      span {
+        background-color:  #FFFFFF !important;
+      }
+    }
+  }
+}
+
+.cms-index-index #spp-banner {
+  margin-top: 0px;
+}
+.owl-carousel-default.owl-carousel.owl-theme .owl-buttons div {
+      position: absolute;
+      background: transparent !important;
+      color: #323232 !important;
+      font-size: 55px !important;
+      z-index: 9;
+      opacity: 1;
+      top: 25%;
+  }  
+.owl-carousel-default.owl-carousel.owl-theme .owl-prev {
+    left: -30px;
+   
+    
+}
+ .owl-carousel-default.owl-carousel.owl-theme .owl-next {
+    right:  -30px;
+    
+}
+.owl-carousel-default.owl-carousel.owl-theme .owl-item {
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+}
+.owl-carousel-default.owl-carousel.owl-theme .owl-item  img{
+    width: auto;
+    max-height: 115px;
+}
+.owl-item div span {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+div#feat-model h2 {
+    text-align: center;
+    color: #000;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+div#feat-model {
+    margin: 50px 0;
+}

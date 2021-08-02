@@ -1,0 +1,85 @@
+<?php
+#$OrderNumber = $this->getOrderId();//Put your order Number here
+$orders = Mage::getModel('sales/order')->getCollection()
+     ->setOrder('entity_id','DESC')
+     ->setPageSize(1)
+     ->setCurPage(1);
+$orderId = $orders->getFirstItem()->getEntityId();
+$order = Mage::getModel('sales/order')->load($orderId);
+
+?>
+<script>
+// Send transaction data with a pageview if available
+// when the page loads. Otherwise, use an event when the transaction
+// data becomes available.
+dataLayer.push({
+  'event':'purchase',	
+  'ecommerce': {
+    'purchase': {
+      'actionField': {
+		'id': '<?php echo $order->getIncrementId(); ?>',                 
+		'revenue': '<?php echo round($order->getGrandTotal(),2); ?>',
+		'tax':'<?php echo round($order->getTaxAmount(),2); ?>',
+		'shipping': '<?php echo round($order->getShippingAmount(),2); ?>',
+		'coupon': '<?php echo $order->getCouponCode(); ?>',
+		'StoreName':'<?php echo Mage::app()->getStore()->getFrontendName(); ?>',
+		'SessionID':'<?php echo Mage::getSingleton('core/session')->getEncryptedSessionId(); ?>',
+      },
+      'products': [
+			<?php 
+			foreach($order->getAllVisibleItems() as $item){
+				$_product = Mage::getModel('catalog/product')->load($item->getProductId());
+				$id = $item->getProductId();
+
+
+
+
+
+
+
+
+				$brand = array();
+				$category = array();
+
+
+        if($id){
+
+            /** @var Homebase_Autopart_Model_Resource_Mix_Collection $_mixes */
+            $_mixes = Mage::getModel('hautopart/mix')->getCollection()
+                ->addFieldToFilter('product_id', $id);
+ 
+                /** @var Homebase_Autopart_Model_Mix $mix */
+                foreach($_mixes as $mix){
+
+	$resource = Mage::getSingleton('core/resource');
+	$readConnection = $resource->getConnection('core_read');
+	$year = $readConnection->fetchOne("SELECT value FROM eav_attribute_option_value WHERE option_id='{$mix->getYear()}' ");
+	$make = $readConnection->fetchOne("SELECT value FROM eav_attribute_option_value WHERE option_id='{$mix->getMake()}' ");
+	$model = $readConnection->fetchOne("SELECT value FROM eav_attribute_option_value WHERE option_id='{$mix->getModel()}' ");
+
+	$category[] = "$year $make $model ".$_product->getPartName();
+	$brand[] = "$make";
+
+                }
+            }
+
+
+
+			?>
+		   {
+		   'name': '<?php echo (htmlentities($_product->getName())); ?>', 
+		   'category': <?php echo json_encode($category); ?>,
+		   'brand': <?php echo json_encode(array_unique($brand)); ?>,
+		   'id': '<?php echo ($_product->getSku()); ?>',
+		   'mfg': '<?php echo (htmlentities($_product->getAmpPartNumber())); ?>',
+		   'price':'<?php echo round($item->getPrice(),2); ?>',
+		   'quantity':'<?php echo round($item->getQtyOrdered()); ?>',
+			},
+			<?php
+			} 
+			?>	  
+	  ]
+    }
+  }
+});
+</script>	

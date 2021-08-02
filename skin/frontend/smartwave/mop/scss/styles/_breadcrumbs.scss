@@ -1,0 +1,31 @@
+.main-container,.page{
+  .breadcrumbs{
+    margin-top: 25px;
+    margin-bottom: 30px;
+
+    li {
+      font-size: 16px;
+      a {
+        color:$grey-primary;
+        text-transform: capitalize;
+      }
+
+      span{
+        text-transform: capitalize;
+      }
+
+      &:last-child{
+        text-transform: capitalize;
+
+        span,a{
+          color: $black-color;
+        }
+      }
+
+      span.breadcrumbs-split{
+        font-size: 16px;
+      }
+
+    }
+  }
+}

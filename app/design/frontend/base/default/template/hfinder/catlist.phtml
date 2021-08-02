@@ -1,0 +1,44 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 11/21/16
+ * Time: 8:56 PM
+ */
+
+$catId = Mage::getSingleton('core/session')->getYmmCategory();
+$_category =  Mage::getModel('catalog/category')->load($catId);
+$subcats = explode(',',$_category->getChildren());
+$groupsubcats = array();
+$itr = 0;
+$temp = array();
+foreach($subcats as $subcat){
+    if($itr % 4 == 0){
+        $groupsubcats[]  = $temp;
+        $temp = array();
+    }
+    $itr++;
+    $temp[] = $subcat;
+}
+$groupsubcats[] = $temp;
+//remove first empty element
+array_shift($groupsubcats);
+?>
+<div id="weekly_featured_product" class="hide-addtocart hide-addtolinks owl-middle-outer-narrow" style="margin: 50px -10px 0">
+    <?php foreach($groupsubcats as $listgroup) :?>
+        <?php foreach($listgroup as $category): ?>
+            <div class="row product-list-container">
+                <div class="col-sm-3">
+                    <h3><a href="#">Repair Parts</a></h3>
+                    <div class="product-item-container">
+                        <a href="#">
+                            <div class="product-item-thumb">
+                                <img src="#" alt="">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</div>

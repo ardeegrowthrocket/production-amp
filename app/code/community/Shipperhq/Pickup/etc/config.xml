@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<!--
+/**
+*
+* Webshopapps Shipping Module
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade Magento to newer
+* versions in the future. If you wish to customize Magento for your
+* needs please refer to http://www.magentocommerce.com for more information.
+*
+* Shipper HQ Shipping
+*
+* @category ShipperHQ
+* @package ShipperHQ_Shipping_Carrier
+* @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+* @author ShipperHQ Team sales@shipperhq.com
+*/
+-->
+<config>
+    <modules>
+        <Shipperhq_Pickup>
+            <version>0.0.8</version>
+            <!-- implemented in module file -->
+            <!--<active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Shipping/>
+                <Shipperhq_Shipper/>
+            </depends> -->
+        </Shipperhq_Pickup>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_pickup>
+                <class>Shipperhq_Pickup_Block</class>
+            </shipperhq_pickup>
+            <checkout>
+                <rewrite>
+                    <multishipping_addresses>Shipperhq_Pickup_Block_Checkout_Multishipping_Addresses</multishipping_addresses>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <helpers>
+            <shipperhq_pickup>
+                <class>Shipperhq_Pickup_Helper</class>
+            </shipperhq_pickup>
+        </helpers>
+        <models>
+            <shipperhq_pickup>
+                <class>Shipperhq_Pickup_Model</class>
+            </shipperhq_pickup>
+            <checkout>
+                <rewrite>
+                    <type_multishipping>Shipperhq_Frontend_Model_Checkout_Type_Multishipping</type_multishipping>
+                </rewrite>
+            </checkout>
+        </models>
+        <resources>
+            <shipperhq_pickup_setup>
+                <setup>
+                    <module>Shipperhq_Pickup</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </shipperhq_pickup_setup>
+        </resources>
+        <sales>
+            <shipping>
+                <carriers>
+                    <pickup>
+                        <class>Shipperhq_Pickup_Model_Carrier_Shipper</class>
+                    </pickup>
+                </carriers>
+            </shipping>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <shipperhq_location/>
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+        <events>
+            <!--display Pickup as option on Multi Address Checkout -->
+            <controller_action_postdispatch_checkout_multishipping_index>
+                <observers>
+                    <shipperhq_pickup_checkout_multishipping_index>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>hookCheckoutMultishippingIndexPostdispatch</method>
+                    </shipperhq_pickup_checkout_multishipping_index>
+                </observers>
+            </controller_action_postdispatch_checkout_multishipping_index>
+            <!-- use to notify SHQ of pickup slot selected -->
+            <sales_order_place_after>
+                <observers>
+                    <shipperhq_pickup_sales_order_observer>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>recordPickupSlot</method>
+                    </shipperhq_pickup_sales_order_observer>
+                </observers>
+            </sales_order_place_after>
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <shipperhq_pickup_save_shipping_method_observer>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>savePickupLocation</method>
+                    </shipperhq_pickup_save_shipping_method_observer>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+            <opc_controller_json_save_shipping_method>
+            	<observers>
+            		<shipperhq_pickup_save_shipping_method_observer>
+            			<class>shipperhq_pickup/observer</class>
+            			<method>savePickupLocation</method>
+            		</shipperhq_pickup_save_shipping_method_observer>
+            	</observers>
+            </opc_controller_json_save_shipping_method>
+            <controller_action_postdispatch_onestepcheckout_ajax_set_methods_separate>
+                <observers>
+                    <shipperhq_shipper_osc_sep_method>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>savePickupLocation</method>
+                    </shipperhq_shipper_osc_sep_method>
+                </observers>
+            </controller_action_postdispatch_onestepcheckout_ajax_set_methods_separate>
+            <adminhtml_sales_order_create_process_data>
+                <observers>
+                    <shipperhq_pickup_save_shipping_method_admin_observer>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>savePickupLocationInAdmin</method>
+                    </shipperhq_pickup_save_shipping_method_admin_observer>
+                </observers>
+            </adminhtml_sales_order_create_process_data>
+            <checkout_controller_multishipping_shipping_post>
+                <observers>
+                    <shipperhq_pickup_mulitaddress_save_shipping_method_observer>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>savePickupLocationMulti</method>
+                    </shipperhq_pickup_mulitaddress_save_shipping_method_observer>
+                </observers>
+            </checkout_controller_multishipping_shipping_post>
+            <controller_action_predispatch>
+                <observers>
+                    <controller_action_before>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>hookToControllerActionPreDispatch</method>
+                    </controller_action_before>
+                </observers>
+            </controller_action_predispatch>
+            <shipperhq_save_shipping_before>
+                <observers>
+                    <controller_action_before>
+                        <class>shipperhq_pickup/observer</class>
+                        <method>saveShippingBefore</method>
+                    </controller_action_before>
+                </observers>
+            </shipperhq_save_shipping_before>
+        </events>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <time_slot>
+                    <to_order>*</to_order>
+                </time_slot>
+                <pickup_date>
+                    <to_order>*</to_order>
+                </pickup_date>
+                <pickup_location>
+                    <to_order>*</to_order>
+                </pickup_location>
+                <pickup_latitude>
+                    <to_order>*</to_order>
+                </pickup_latitude>
+                <pickup_longitude>
+                    <to_order>*</to_order>
+                </pickup_longitude>
+                <pickup_location_id>
+                    <to_order>*</to_order>
+                </pickup_location_id>
+            </sales_convert_quote_address>
+            <sales_convert_order>
+                <time_slot>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </time_slot>
+                <pickup_date>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </pickup_date>
+                <pickup_location>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </pickup_location>
+                <pickup_latitude>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </pickup_latitude>
+                <pickup_longitude>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </pickup_longitude>
+                <pickup_location_id>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </pickup_location_id>
+            </sales_convert_order>
+        </fieldsets>
+    </global>
+    <frontend>
+        <routers>
+            <shipperhq_pickup>
+                <use>standard</use>
+                <args>
+                    <module>Shipperhq_Pickup</module>
+                    <frontName>shipperhq_pickup</frontName>
+                </args>
+            </shipperhq_pickup>
+        </routers>
+        <translate>
+            <modules>
+                <shipperhq_pickup>
+                    <files>
+                        <default>Shipperhq_Pickup.csv</default>
+                    </files>
+                </shipperhq_pickup>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <shipperhq_pickup>
+                    <file>shipperhq/storepickup.xml</file>
+                </shipperhq_pickup>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <shipperhq_pickup>
+                    <file>shipperhq/storepickup.xml</file>
+                </shipperhq_pickup>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <shipperhq_pickup after="Mage_Adminhtml">Shipperhq_Pickup_Adminhtml</shipperhq_pickup>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <carriers>
+            <pickup>
+                <active>0</active>
+                <model>shipperhq_pickup/carrier_storepickup</model>
+                <sort_order>999</sort_order>
+            </pickup>
+        </carriers>
+    </default>
+</config>

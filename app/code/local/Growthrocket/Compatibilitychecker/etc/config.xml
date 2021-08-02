@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Compatibilitychecker>
+      <version>0.1.0</version>
+    </Growthrocket_Compatibilitychecker>
+  </modules>
+  <frontend>
+    <routers>
+      <compatibilitychecker>
+        <use>standard</use>
+          <args>
+            <module>Growthrocket_Compatibilitychecker</module>
+            <frontName>compatibilitychecker</frontName>
+          </args>
+      </compatibilitychecker>
+    </routers>
+		<layout>
+		  <updates>
+			<compatibilitychecker>
+			  <file>compatibilitychecker.xml</file>
+			</compatibilitychecker>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <compatibilitychecker>
+        <class>Growthrocket_Compatibilitychecker_Helper</class>
+      </compatibilitychecker>
+    </helpers>
+  </global>
+</config> 

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+	<adminhtml_sales_order_view>
+		<reference name="order_info">
+			<block type="adminhtml/sales_order_view_info" name="ordernotes.order.info.custom.block" template="ordernotes/ordernotesbackend.phtml" before="order_history" />
+		</reference>
+	</adminhtml_sales_order_view>
+</layout>

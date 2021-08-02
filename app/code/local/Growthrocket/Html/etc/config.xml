@@ -1,0 +1,110 @@
+<config>
+    <modules>
+        <Growthrocket_Html>
+            <version>0.1.1</version>
+        </Growthrocket_Html>
+    </modules>
+    <global>
+        <helpers>
+            <grhtml>
+                <class>Growthrocket_Html_Helper</class>
+            </grhtml>
+        </helpers>
+        <blocks>
+            <grhtml>
+                <class>Growthrocket_Html_Block</class>
+            </grhtml>
+            <page>
+                <rewrite>
+                    <html_head>Growthrocket_Html_Block_Html_Head</html_head>
+                </rewrite>
+            </page>
+        </blocks>
+        <models>
+            <grhtml>
+                <class>Growthrocket_Html_Model</class>
+                <resourceModel>grhtml_resource</resourceModel>
+            </grhtml>
+            <grhtml_resource>
+                <class>Growthrocket_Html_Model_Resource</class>
+                <depercatedNode>grhtml_resource_eav_mysql4</depercatedNode>
+                <entities>
+                    <pages>
+                        <table>grhtml_pages</table>
+                    </pages>
+                </entities>
+            </grhtml_resource>
+        </models>
+        <resources>
+            <grhtml_setup>
+                <setup>
+                    <module>Growthrocket_Html</module>
+                </setup>
+            </grhtml_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <grhtml before="Mage_Adminhtml">Growthrocket_Html_Adminhtml</grhtml>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <grhtml>
+                    <file>grhtml/index.xml</file>
+                </grhtml>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <grhtml translate="title" module="grhtml">
+                                            <title>GrowthRocket HTML</title>
+                                        </grhtml>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <grhtml>
+            <make>
+                <title><![CDATA[Discount %s Parts & Genuine Dealer Accessories Online]]></title>
+            </make>
+            <model>
+                <title><![CDATA[Genuine %s %s Parts & Accessories]]></title>
+            </model>
+            <ymm>
+                <title><![CDATA[%s %s %s Parts & Accessories]]></title>
+            </ymm>
+            <cat>
+                <title><![CDATA[%s %s %s %s]]></title>
+            </cat>
+            <sku>
+                <title><![CDATA[%s (Part No: %s)]]></title>
+            </sku>
+            <category>
+                <description><![CDATA[Shop discount OEM dealer auto parts & accessories for your Jeep, Dodge, Chrysler & RAM. Wide selection of parts & accessories at AllMoparParts.com]]></description>
+            </category>
+        </grhtml>
+    </default>
+</config>

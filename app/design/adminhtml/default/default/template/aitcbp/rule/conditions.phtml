@@ -1,0 +1,49 @@
+<?php $_rule = $this->getRule(); ?>
+
+<style>
+<!--
+.aitcbp-select, .aitcbp-text {
+	background:none repeat scroll 0 0 #FFFFFF;
+	border-color:#AAAAAA #C8C8C8 #C8C8C8 #AAAAAA;
+	border-style:solid;
+	border-width:1px;
+	font:12px arial,helvetica,sans-serif;
+	min-height:17px;
+	width: 100px;
+}
+-->
+</style>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Conditions') ?></h4>
+    <div class="form-buttons"></div>
+</div>
+<div class="fieldset " id="aitcbp_form">
+    <div class="hor-scroll">
+        <?php echo $this->__('If revenue for the last') ?>
+                        
+        <select id="revenue_number" name="revenue_number" class="required-entry required-entry aitcbp-select">
+        <?php $_values = $this->getNumbers(); ?>
+        <?php foreach ($_values as $_key => $_value): ?>
+        <option value="<?php echo $_key ?>"<?php if ($_rule->getRevenueNumber() == $_key): ?> selected<?php endif ?>><?php echo $_value ?></option>
+        <?php endforeach ?>
+		</select> 
+		
+		<select id="revenue_period" name="revenue_period" class="required-entry required-entry aitcbp-select">
+        <?php $_values = $this->getPeriods(); ?>
+        <?php foreach ($_values as $_key => $_value): ?>
+        <option value="<?php echo $_key ?>"<?php if ($_rule->getRevenuePeriod() == $_key): ?> selected<?php endif ?>><?php echo $_value ?></option>
+        <?php endforeach ?>
+		</select>
+		
+		<select id="revenue_clause" name="revenue_clause" class="required-entry required-entry aitcbp-select">
+        <?php $_values = $this->getClauses(); ?>
+        <?php foreach ($_values as $_key => $_value): ?>
+        <option value="<?php echo $_key ?>"<?php if ($_rule->getRevenueClause() == $_key): ?> selected<?php endif ?>><?php echo $_value ?></option>
+        <?php endforeach ?>
+		</select>  
+    	
+        <input id="revenue_sum" name="revenue_sum" value="<?php echo $_rule->getRevenueSum() ?>" class="required-entry aitcbp-text" type="text"/>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<?php
+/**
+ * WebShopApps Shipping Module
+ *
+ * @category    WebShopApps
+ * @package     WebShopApps_Shipperhq
+ * User         Joshua Stewart
+ * Date         18/07/2014
+ * Time         15:05
+ * @copyright   Copyright (c) 2014 Zowta Ltd (http://www.WebShopApps.com)
+ *              Copyright, 2014, Zowta, LLC - US license
+ * @license     http://www.WebShopApps.com/license/license.txt - Commercial license
+ *
+ */
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    <?php if (Mage::helper('shipperhq_postorder')->isActive()): ?>
+    simpleItemCarriergroupsJson = '<?php echo $this->getSimpleCarriergroupText(); ?>';
+    simpleItemDetails = simpleItemCarriergroupsJson.evalJSON();
+    bundleItemDetailsJson =  '<?php echo $this->getBundleCarriergroupText(); ?>';
+    bundleItemDetails =   bundleItemDetailsJson.evalJSON();
+
+    tableOuter = $$('table.data')[1];
+    myColumn = document.createElement("col");
+    myColumn.setAttribute("width","1");
+
+    tableOuter.appendChild(myColumn);
+    allBodyRows = tableOuter.tBodies;
+
+    simpleCount = 0;
+    bundleCount = 0;
+    for (var i=0; i < allBodyRows.length; i++) {
+        innerBodyRows = allBodyRows[i].rows;
+        if (innerBodyRows.length==1) {
+            cell = innerBodyRows[0].insertCell(1);
+            cell.innerHTML = '<td class="a-center">'+simpleItemDetails[simpleCount]+'</td>';
+            simpleCount++;
+        } else {
+            cell = innerBodyRows[0].insertCell(1);
+            cell.innerHTML = '<td class="a-center"></td>';
+            cell = innerBodyRows[1].insertCell(1);
+            cell.innerHTML = '<td class="a-center"></td>';
+            for (var j=2; j < innerBodyRows.length; j++) {
+                cell = innerBodyRows[j].insertCell(1);
+                if ((j % 2)!=1) {
+                    cell.innerHTML = '<td class="a-center">'+bundleItemDetails[bundleCount]+'</td>';
+                    bundleCount++;
+                }
+            }
+        }
+    }
+
+    <?php endif; ?>
+    //]]>
+</script>

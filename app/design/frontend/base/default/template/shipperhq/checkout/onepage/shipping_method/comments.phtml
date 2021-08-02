@@ -1,0 +1,30 @@
+<div class="input-box">
+    <label for="delivery_comments"
+           id="delivery_comments_label"><?php echo $this->__('Delivery Comments') ?></label>
+    <div class="input-box">
+        <input type="text" class="input-text validation-passed"
+               value="<?php echo $this->getDeliveryCommentsInitialText() ?>" id="delivery_comments"
+               name="delivery_comments" />
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var deliveryComments = $j("#delivery_comments");
+
+    deliveryComments.on('focus', function() {
+            if(this.value==this.defaultValue){
+                this.value = '';
+            }
+        }
+    );
+
+    deliveryComments.on('blur', function() {
+            if(this.value=='') {
+                this.value=this.defaultValue;
+            }
+        }
+    );
+
+</script>

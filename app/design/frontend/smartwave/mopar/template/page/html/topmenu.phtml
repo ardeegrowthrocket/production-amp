@@ -1,0 +1,267 @@
+    <?php
+
+$baseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+
+$moparCategoryId = 368;
+$exteriorCategoryId = 369;
+$interiorCategoryId = 374;
+$maintenanceId = 435;
+$catArray = $this->getSubmenuItems();
+
+$mopar_accessories =    $catArray[$moparCategoryId];
+$interior_accessories = $catArray[$interiorCategoryId];
+$exterior_accessories = $catArray[$exteriorCategoryId];
+$browseModel = $this->getBrowseModel();
+$colSize = 12 / count($browseModel);
+$maintenance = $catArray[$maintenanceId];
+$helper = Mage::helper('hutility');
+?>
+<div class="container">
+    <div class="col-xs-12 col-sm-12">
+        <div class="header-wrapper">
+            <div class="main-nav">
+                <div class="menu-wrapper">
+                    <div class="menu-all-pages-container">
+                        <ul class="menu">
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">Mopar Performance Parts</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>category/mopar-performance-parts.html">Mopar Performance Parts</a></h5>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <?php foreach(array_chunk($mopar_accessories, 10) as $mopar_accessory): ?>
+                                                                    <ul class="col-sm-3 parts-listing">
+                                                                        <?php foreach($mopar_accessory as $part): ?>
+                                                                            <li><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                        <?php endforeach; ?>
+                                                                    </ul>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <p><br>
+                                                                    <a href="<?php echo $baseUrl; ?>category/mopar-performance-parts.html"><b>See More Mopar Performance Parts</b></a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">Interior Accessories</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>category/interior-accessories.html">Interior Accessories</a></h5>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <?php foreach(array_chunk($interior_accessories, 10) as $interior_accessory): ?>
+                                                                    <ul class="col-sm-3 parts-listing">
+                                                                        <?php foreach($interior_accessory as $part): ?>
+                                                                            <li><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                        <?php endforeach; ?>
+                                                                    </ul>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <p><br>
+                                                                    <a href="<?php echo $baseUrl; ?>category/interior-accessories.html"><b>See More Interior Accessories Parts</b></a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">Exterior Accessories</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>category/exterior-accessories.html">Exterior Accessories</a></h5>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <?php foreach(array_chunk($exterior_accessories, 10) as $exterior_accessory): ?>
+                                                                    <ul class="col-sm-3 parts-listing">
+                                                                        <?php foreach($exterior_accessory as $part): ?>
+                                                                            <li><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                        <?php endforeach; ?>
+                                                                    </ul>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <p><br>
+                                                                    <a href="<?php echo $baseUrl; ?>category/exterior-accessories.html"><b>See More Exterior Accessories Parts</b></a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">Maintenance</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html">Maintenance</a></h5>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <?php foreach(array_chunk($maintenance, 7) as $maintenance_accessory): ?>
+                                                                    <ul class="col-sm-3 parts-listing">
+                                                                        <?php foreach($maintenance_accessory as $part): ?>
+                                                                            <li><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                        <?php endforeach; ?>
+                                                                    </ul>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                            <!-- -->
+                                                            <div class="col-sm-12">
+                                                                <p><br>
+                                                                    <a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html"><b>See More Maintenance Parts</b></a>
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">About Us</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>about-us">About Us</a></h5>
+                                                            <div class="col-sm-12">
+                                                                <ul>
+                                                                    <li><a href="<?php echo $baseUrl ?>contact-us">Contact Us</a></li>
+                                                                    <li><a href="<?php echo $baseUrl ?>conditions">Condition of Use</a></li>
+                                                                    <li><a href="<?php echo $baseUrl ?>privacy">Privacy Notice</a></li>
+                                                                    <li><a href="<?php echo $baseUrl ?>shipping-and-returns">Shipping & Returns</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">My Account</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+
+                                <div class="nav-sublist-dropdown">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <h5><a href="<?php echo $baseUrl; ?>customer/account">My Account</a></h5>
+                                                            <div class="col-sm-12">
+                                                                    <ul>
+                                                                        <?php
+                                                                        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                                                                            ?>
+                                                                            <li><a href="<?php echo Mage::getUrl('customer/account'); ?>"><?php echo $this->__('Dashboard'); ?></a></li>
+                                                                            <li><a href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__('Log out'); ?></a></li>
+                                                                        <?php } else {
+                                                                            ?>
+                                                                            <li><a href="<?php echo Mage::getUrl('customer/account/login'); ?>"><?php echo $this->__('Log in'); ?></a></li>
+                                                                            <li><a href="<?php echo Mage::getUrl('customer/account/create'); ?>"><?php echo $this->__('Register'); ?></a></li>
+                                                                        <?php } ?>
+                                                                        <li><a href="<?php echo $baseUrl ?>sales/order/history">Order History</a></li>
+                                                                    </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="menu-full-width with-child <?php echo $helper->hasActiveFitmentQuery() ? 'has-active-ymm':'' ?> open-by-click">
+                                <a href="#">
+                                    <div class="anchor-container">Browse By Model</div><i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                    <div class="container">
+                                        <div class="mega-columns">
+                                            <div class="block1">
+                                                <div class="row" style="margin:0">
+                                                    <ul>
+                                                        <li class="menu-item col-sm-12" style="list-style: none;">
+                                                            <?php foreach($browseModel as $key => $list): ?>
+                                                                <ul class="col-sm-<?php echo $colSize ?>">
+                                                                    <li><h5><a href="<?php echo array_values($list)[0]['make_url'] ?>"><?php echo $key; ?></a></h5></li>
+                                                                    <?php foreach($list as $row): ?>
+                                                                        <li><a href="<?php echo $row['model_url']; ?>"><?php echo $row['model']; ?></a></li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            <?php endforeach; ?>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

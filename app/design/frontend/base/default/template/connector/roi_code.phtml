@@ -1,0 +1,22 @@
+<?php
+if(Mage::helper('ddg')->isRoiAvailable()):
+    $order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+    $orderId = $this->getOrderId();
+    $items = $order->getAllItems();
+    $total = number_format($order->getBaseGrandTotal(), 2, '.', ',');
+?>
+<script type="text/javascript">
+    var dmTracks = window.dmTracks || [];
+    <?php foreach ($items as $item) : ?>
+        <?php if ($item->getParentItemId() != null) continue ?>
+        dmTracks.push({
+            'name' : 'product',
+            'value' : "<?= str_replace('"', ' ', $item->getName()) ?>"
+        });
+    <?php endforeach ?>
+    dmTracks.push({
+        'name' : 'CheckOutAmount',
+        'value' : '<?= $total ?>'
+    });
+</script>
+<?php endif;

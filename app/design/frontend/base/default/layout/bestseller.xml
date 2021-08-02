@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index translate="label">
+        <reference name="head">
+            <action method="addCss">
+                <type>css/bestseller.css</type>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="bestseller_js" template="bestseller/application.phtml" />
+        </reference>
+    </cms_index_index>
+</layout>

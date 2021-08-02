@@ -1,0 +1,88 @@
+<config>
+    <modules>
+        <Growthrocket_Fitment>
+            <version>0.1.0</version>
+        </Growthrocket_Fitment>
+    </modules>
+    <global>
+        <helpers>
+            <grfitment>
+                <class>Growthrocket_Fitment_Helper</class>
+            </grfitment>
+        </helpers>
+        <blocks>
+            <grfitment>
+                <class>Growthrocket_Fitment_Block</class>
+            </grfitment>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tab_settings>Growthrocket_Fitment_Block_Adminhtml_Catalog_Product_Edit_Tab_Settings</catalog_product_edit_tab_settings>
+                    <catalog_product_edit_tab_websites>Growthrocket_Fitment_Block_Adminhtml_Catalog_Product_Edit_Tab_Websites</catalog_product_edit_tab_websites>
+                    <catalog_product_edit>Growthrocket_Fitment_Block_Adminhtml_Catalog_Product_Edit</catalog_product_edit>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <models>
+            <grfitment>
+                <class>Growthrocket_Fitment_Model</class>
+                <resourceModel>grfitment_resource</resourceModel>
+            </grfitment>
+            <grfitment_resource>
+                <class>Growthrocket_Fitment_Model_Resource</class>
+                <deprecatedNode>grfitment_mysql4</deprecatedNode>
+                <entities>
+                    <category>
+                        <table>auto_type_store</table>
+                    </category>
+                </entities>
+            </grfitment_resource>
+        </models>
+        <resources>
+            <grfitment_setup>
+                <setup>
+                    <module>Growthrocket_Fitment</module>
+                </setup>
+            </grfitment_setup>
+        </resources>
+
+    <events>
+      <controller_action_layout_load_before> <!-- identifier of the event we want to catch -->
+        <observers>
+          <controller_action_layout_load_before_handler_grfitment> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>grfitment/observer</class> <!-- observers class alias -->
+            <method>Checkredirect</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </controller_action_layout_load_before_handler_grfitment>
+        </observers>
+      </controller_action_layout_load_before>
+    </events>
+
+    </global>
+
+
+    <adminhtml>
+        <events>
+
+
+
+
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <grfitment_core_block_abstract_to_html_before_handler>
+                        <class>grfitment/observer</class>
+                        <method>injectWebsiteTab</method>
+                    </grfitment_core_block_abstract_to_html_before_handler>
+                </observers>
+            </core_block_abstract_to_html_before>
+            <controller_action_postdispatch_adminhtml_catalog_product_attribute_save>
+                <observers>
+                    <grfitment_controller_action_postdispatch_adminhtml_catalog_product_attribute_save_handler>
+                        <class>grfitment/observer</class>
+                        <method>saveTypeProduct</method>
+                    </grfitment_controller_action_postdispatch_adminhtml_catalog_product_attribute_save_handler>
+                </observers>
+            </controller_action_postdispatch_adminhtml_catalog_product_attribute_save>
+        </events>
+    </adminhtml>
+</config>

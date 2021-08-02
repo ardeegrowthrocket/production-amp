@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Updater>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Growthrocket_Updater>
+  </modules>
+</config>

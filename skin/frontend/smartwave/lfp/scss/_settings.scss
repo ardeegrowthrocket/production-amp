@@ -1,0 +1,68 @@
+/** $primary-bg-color : #1579BA;  */
+$primary-bg-color : #1579BA;
+
+/** $dark-bg-color: #122A4E; */
+$dark-bg-color: #122A4E;
+
+/** $tertiary-bg-color: #F8CC59; */
+$tertiary-bg-color: #F8CC59;
+
+/** $grey-bg-color: #EFF3F9;  */
+$grey-bg-color: #EFF3F9;
+
+/** $primary-text-color: #3A3A3A; */
+$primary-text-color: #3A3A3A;
+
+/** $deep-pastel-blue: #20609E;  */
+$deep-pastel-blue: #20609E;
+
+/** $pale-pastel-blue: #238ABC; */
+$pale-pastel-blue: #238ABC;
+
+/** $secondary-text-color: #122A4E; */
+$secondary-text-color: #122A4E;
+
+/**  $tertiary-text-color: #6F7989; */
+$tertiary-text-color: #6F7989;
+
+/** $white-text-color:#ffffff; */
+$white-text-color:#ffffff;
+
+/** $white-sand-text: #EFF3F9;  */
+$white-sand-text: #EFF3F9;
+
+/** $black-text-color: #000000; */
+$black-text-color: #000000;
+
+/** $error-text-color: #ff0000; */
+$error-text-color: #ff0000;
+
+$hover-for-white-color: #DAE1E2;
+$hover-for-tertiary-by: #DEB343;
+$hover-for-deep-pale: $pale-pastel-blue;
+
+$text-box-color: #C0C3C7;
+
+$text-pastel-blue: #9AC5DA;
+
+$success-text-color: #81c537;
+
+$banner-background: #01202E;
+
+/** default classes */
+.dark-blue {
+  background-color: $dark-bg-color;
+}
+
+.lfp-blue {
+  background-color: $deep-pastel-blue;
+}
+
+.lfp-primary-bg {
+  background-color: $primary-bg-color;
+}
+
+
+.bg-white{
+  background:$white-text-color;
+}

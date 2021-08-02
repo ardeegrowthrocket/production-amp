@@ -1,0 +1,86 @@
+"General Information","Generelle Information"
+"Group Name",Gruppenname
+"Markup Type",Markuptyp
+"Markup Amount",Markupmenge
+Status,Status
+Active,Aktiv
+Inactive,"Nicht aktiv"
+"Customer Groups",Kundengruppen
+ID,ID
+Name,Name
+SKU,SKU
+Price,Preis
+"Group Information",Gruppeninformation
+General,Generell
+"Group Products",Gruppenprodukte
+"Save Group","Gruppe speichern"
+"Delete Group","Gruppe loeschen"
+"Save And Continue Edit","Speichern und Bearbeitung fortsetzen"
+Alert,Alarm
+"Add Group","Gruppe hinzufuegen"
+"Edit Group '%s'","Gruppe '%s' bearbeiten"
+"Group Title",Gruppentitel
+Type,Art
+Fixed,Fixiert
+Percent,Zins
+Amount,Menge
+Action,Aktion
+Edit,Bearbeiten
+Actions,Aktionen
+Select,Auswaelen
+"Increase Markup","Aufschlag steigern"
+"Decrease Markup","Aufschlag verkleinern"
+"Increase Percent Markup","Zinsaufschlag steigern"
+"Decrease Percent Markup","Zinsaufschlag verkleinern"
+"Increase Fixed Markup","Fixierten Aufschlag steigern"
+"Decrease Fixed Markup","Fixierten Aufschlag verkleinern"
+"Increase/decrease by ","Steigern/verkleinern nach"
+"Stop further rules processing","Weiterer Regelprozess stoppen"
+Yes,Ja
+No,Nein
+"day (s)","Tag (e)"
+"month (s)","Monat (e)"
+"year (s)","Jahr (e)"
+is,ist
+"is not","ist nicht"
+"equals or greater than","gleicht oder mehr als"
+"equals or less than","gleicht oder weniger als"
+"greater than","mehr als"
+"less than","weniger als"
+"is one of","ist ein der"
+"is not one of","ist kein der"
+"Rule Name",Regelname
+Group,Gruppen
+Priority,Prioritaet
+"Rule Information",Regelinformation
+Conditions,Bedingungen
+"Save Rule","Regel speichern"
+"Delete Rule","Regel loeschen"
+"Add Rule","Regel hinzufuegen"
+"Edit Rule '%s'","Regel '%s' bearbeiten"
+"Rule Groups",Gruppenregeln
+"Manage Groups","Gruppen bearbeiten"
+"Manage Automatic Price Rules","Automatische Preisregeln bearbeiten"
+"Group manager",Gruppenmanager
+Catalog,"Katalog "
+"Cost Based Price","Ausgabenabhaengiger Preis"
+"New Group","Neue Gruppe"
+"Group does not exist","Gruppe existiert nicht"
+"Group was successfully saved","Gruppe war erfolgreich gespeichert"
+"Item was successfully deleted","Posten war erfolgreich geloescht"
+"Rules manager","Manager der Regeln"
+"New Rule","Neue Regel"
+"Rule does not exist","Regel existiert nicht"
+"Rule was successfully saved","Regel war erfolgreich gespeichert"
+"Automatic Pricing","Automatische Preisbildung"
+Groups,Gruppen
+Rules,Regeln
+"Delivery Date",Lieferdatum
+"Automatic Pricing Settings","Einstellungen der automatischen Preisbildung"
+"Automatic Pricing Enabled by Default","Automatische Preisbildung ist by default eingeschaltet"
+Disabled,Ausgeschaltet
+inactive,inaktiv
+"Automatic Pricing Group","Gruppe der automatischen Preisbildung"
+"If revenue for the last","Wenn es gab Einkommen"
+"Cost based price","Ausgabenabhaengiger Preis"
+"Tier price","Differenzierte Preisbildung"

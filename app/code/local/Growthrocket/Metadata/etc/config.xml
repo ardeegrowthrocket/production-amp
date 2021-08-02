@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Metadata>
+      <version>0.1.0</version>
+    </Growthrocket_Metadata>
+  </modules>
+  <global>
+    <helpers>
+      <growthrocket_metadata>
+        <class>Growthrocket_Metadata_Helper</class>
+      </growthrocket_metadata>
+    </helpers>
+	<models>
+	  <growthrocket_metadata>
+		<class>Growthrocket_Metadata_Model</class>
+		<resourceModel>metadata_mysql4</resourceModel>
+	  </growthrocket_metadata>
+	</models>
+    <events>
+	  <catalog_controller_product_init_after>
+        <observers>
+          <catalog_controller_product_init_after_handler>
+            <type>singleton</type>
+            <class>growthrocket_metadata/observer</class>
+            <method>setProductMetaData</method>
+            <args></args>
+          </catalog_controller_product_init_after_handler>
+        </observers>
+      </catalog_controller_product_init_after>
+        <controller_action_layout_generate_blocks_after>
+            <observers>
+                <controller_action_layout_generate_blocks_after_meta_handler>
+                    <type>singleton</type>
+                    <class>growthrocket_metadata/observer</class>
+                    <method>changeCustomMetaTitle</method>
+                </controller_action_layout_generate_blocks_after_meta_handler>
+            </observers>
+        </controller_action_layout_generate_blocks_after>
+    </events>
+  </global>
+    <websites>
+        <lfp>
+            <design>
+                <head>
+                    <default_title>Ford Performance Parts</default_title>
+                    <title_suffix>| Levittown Ford</title_suffix>
+                    <default_description><![CDATA[ Buy quality Ford OEM parts & accessories at Levittown Ford Parts. Browse from our wide selection of ram truck parts at a discounted price. Shop now!]]></default_description>
+                </head>
+            </design>
+        </lfp>
+    </websites>
+</config> 

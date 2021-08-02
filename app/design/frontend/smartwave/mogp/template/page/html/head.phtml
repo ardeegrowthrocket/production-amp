@@ -1,0 +1,43 @@
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','<?php echo Mage::getStoreConfig('gta/gta_groups/key'); ?>');</script>
+<!-- End Google Tag Manager -->
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<?php $routeAction = $this->getRequest()->getActionName(); ?>
+<?php if($routeAction === 'ymms') :?>
+    <meta name="robots" content="NOINDEX,FOLLOW" />
+<?php else: ?>
+    <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<?php endif; ?>
+
+<?php
+$theme = Mage::helper('porto');
+$charSubset = '&subset=latin';
+$d = $theme->getCfgSectionDesign();
+$s = $theme->getCfgSectionSettings();
+if(!isset($s['general']['disable_responsive']) || (isset($s['general']['disable_responsive']) && !$s['general']['disable_responsive'])){
+    ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <?php
+}
+?>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+<script type="text/javascript">
+    //<![CDATA[
+    if (typeof dailydealTimeCountersCategory == 'undefined') {
+        var dailydealTimeCountersCategory = new Array();
+        var i = 0;
+    }
+    //]]>
+</script>

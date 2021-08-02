@@ -1,0 +1,7 @@
+<layout>
+    <!--<adminhtml_homebase_index_index>-->
+        <!--<reference name="content">-->
+            <!--<block type="hfinder/adminhtml_record"/>-->
+        <!--</reference>-->
+    <!--</adminhtml_homebase_index_index>-->
+</layout>

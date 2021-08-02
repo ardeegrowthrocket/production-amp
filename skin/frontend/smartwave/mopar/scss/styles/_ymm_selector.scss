@@ -1,0 +1,89 @@
+.ymm-form-container{
+  background: $secondary-bg-color;
+  .full-width{
+    background: $secondary-bg-color;
+  }
+  .inner-wrapper{
+    background: $secondary-bg-color;
+    @include border-radius();
+
+    .ymm-wrapper{
+      min-height: 100px;
+      display: flex;
+      text-align: center;
+
+      .amfinder-responsive{
+        &.open{
+          text-indent: inherit;
+          background-image: none;
+        }
+        ul{
+          li{
+            min-width: 215px;
+            padding: 9px 15px 10px 38px;
+            &:before{
+              background-color: $tertiary-bg-color;
+              @include border-radius(3px,0,0,3px, true);
+              color: $white-color;
+              font-family: robotobold;
+              left: 0;
+              padding: 13px 11px 13px;
+              position: absolute;
+              text-align: center;
+              top: 9px;
+              width: 40px;
+              box-sizing: border-box;
+            }
+
+            select{
+              font-family: robotoregular;
+              height: 40px;
+              line-height: 28px;
+              font-size: 16px;
+              padding-left: 15px;
+              border: 0px;
+              @include border-radius(0,3px,3px, 0,true);
+              background-image: url("../images/arrow-down.svg");
+              background-repeat: no-repeat;
+              background-position: 95% center;
+              @include remove-selector-design();
+            }
+
+            .amfinder-buttons{
+              span{
+                background:  $tertiary-bg-color;
+                font-family: robotobold;
+                width: 145px;
+                height: 40px;
+                text-transform: uppercase;
+                color: $white-color;
+              }
+            }
+            &.last{
+              padding-left: 0px;
+            }
+
+            .ymm-label{
+              text-transform: uppercase;
+              color: $primary-bg-color;
+              font-family: robotobold;
+              font-size: 22px;
+              line-height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.cms-index-index{
+  .ymm-form-container{
+    background:none !important;
+  }
+
+  .ymm-master-container{
+     margin-top: -50px;
+  }
+}

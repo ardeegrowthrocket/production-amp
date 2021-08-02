@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <menu>
+        <catalog translate="title" module="hsitemap">
+            <children>
+                <hsitemap_dashboard>
+                    <title>Allmoparts Multi-sitemap</title>
+                    <sort_order>999</sort_order>
+                    <action>adminhtml/multimap_index/index</action>
+                </hsitemap_dashboard>
+            </children>
+        </catalog>
+    </menu>
+</config>

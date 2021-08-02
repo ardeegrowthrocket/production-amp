@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Customexport>
+      <version>0.1.0</version>
+    </Growthrocket_Customexport>
+  </modules>
+  <global>
+    <helpers>
+      <customexport>
+        <class>Growthrocket_Customexport_Helper</class>
+      </customexport>
+    </helpers>
+	<blocks>
+	  <customexport>
+		<class>Growthrocket_Customexport_Block</class>
+	  </customexport>
+	</blocks>
+  </global>
+  <admin>
+	<routers>
+		<adminhtml>
+		<args>
+		  <modules><growthrocket_customexport before="Mage_Adminhtml">Growthrocket_Customexport_Adminhtml</growthrocket_customexport></modules>
+		</args>
+	  </adminhtml>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+		<system>
+			<children>
+				<customexportbackend module="customexport">
+					<title>Export Dimensional Data</title>
+					<sort_order>10</sort_order>
+					<action>adminhtml/customexportbackend/index</action>
+				</customexportbackend>
+			</children>
+		</system>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<customexport translate="title" module="customexport">
+			  <title>Customexport</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <customexportbackend translate="title">
+			<title>Backend Page Title</title>
+		  </customexportbackend>
+			  </children>
+			</customexport>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<customexport>
+		  <file>customexport.xml</file>
+		</customexport>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

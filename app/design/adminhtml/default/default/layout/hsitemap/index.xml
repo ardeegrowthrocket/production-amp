@@ -1,0 +1,12 @@
+<layout>
+    <adminhtml_multimap_index_index>
+        <reference name="content">
+            <block type="hsitemap/adminhtml_multimap"/>
+        </reference>
+    </adminhtml_multimap_index_index>
+    <adminhtml_multimap_index_edit>
+        <reference name="content">
+            <block type="hsitemap/adminhtml_multimap_edit" name="multimap_edit"></block>
+        </reference>
+    </adminhtml_multimap_index_edit>
+</layout>

@@ -1,0 +1,26 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<div class="am_finder_overlay" id="am_finder_overlay" style="display: none;">
+&nbsp;
+</div>
+<div class="am_finder_popup" id="am_finder_popup" style="display: none;">
+	<h1><?php echo Mage::helper('amfinder')->__('Progress')?></h1>
+	<span class="close"><a href="#" onclick="amFinderCloseImportPopUp();"><?php echo Mage::helper('amfinder')->__('Close')?></a></span>
+	<div class="am_finder_popup_log">
+		<ul id="am_finder_popup_log">
+		</ul>
+	</div>
+	<div class="am_finder_popup_progress_container">
+		<div class="am_finder_popup_progress" id="am_finder_popup_progress">
+			&nbsp;
+		</div>				
+	</div>
+	<?php /*<div class="am_finder_popup_result">
+		<?php echo Mage::helper('amfinder')->__('Download the file:')?><span id="am_finder_popup_result"></span>
+	</div>*/ ?>
+</div>

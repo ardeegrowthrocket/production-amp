@@ -1,0 +1,72 @@
+@import "settings/mixin";
+
+@media (max-width: 1024px){
+
+}
+
+@media (max-width: 768px){
+
+  .must-have .owl-carousel .owl-item .item{
+    height: 360px !important;
+  }
+  .page #featured-product{
+    margin-bottom: 40px;
+  }
+  .page #featured-product ul li {
+    font-size: 16px;
+    padding: 15px 10px 15px 30px;
+  }
+  .page .must-have{
+    margin-bottom: 40px;
+  }
+}
+
+@media  (max-width: 767px) {
+  #featured-product{
+    .navigation{
+        display: none;
+    }
+  }
+  #featured-product .mobile-featured-selector{
+    display: block !important;
+    margin-bottom: 20px;
+
+    select{
+      width: 100%;
+      @include secondary-font();
+    }
+  }
+
+  .top-selling .inner-wrapper{
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+    height: 300px;
+
+    img{
+      background-size: cover;
+      height: 100%;
+      background-position: center;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 459px) {
+      #featured-product{
+        .tab-content{
+            .single-item{
+              width: 50%;
+            }
+        }
+      }
+  .car-model{
+    .col-lg-3{
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 460px){
+
+
+}

@@ -1,0 +1,37 @@
+<?php
+$collection = $this->getCollection();
+$limit = 12;
+$showPerPage = 12;
+$counter = 0;
+$totalItems = count($collection);
+if(Mage::helper('mobiledetect')->isMobile()) {
+    $showPerPage = 2;
+}
+if(Mage::helper('mobiledetect')->isTablet()) {
+    $showPerPage = 4;
+}
+?>
+<?php if(!empty($collection)): ?>
+    <div class="container">
+        <div class="row">
+            <div class="category-partname" data-total-item="<?php echo $totalItems ?>" data-show-per-page="<?php echo $showPerPage ?>" data-limit="<?php echo $limit ?>">
+                <div class="row">
+                    <h2 class="title"><?php echo $this->__('Shop More %s', $this->getTitle()) ?></h2>
+                    <?php foreach ($collection as $item): ?>
+                        <?php
+                        $counter += 1;
+                        ?>
+                        <div class="item col-sm-3 col-md-2 col-xs-6" <?php echo ($counter> $limit) ? "style='display:none'" : '';  ?> >
+                            <a class="image" href="<?php echo $item['url'] ?>"><img width="163px" height="105px" class="lazyload" data-src="<?php echo $item['image'] ?>"  title="<?php echo $item['label'] ?>" alt="<?php echo $item['label'] ?>"/> </a>
+                            <a class="title" href="<?php echo $item['url'] ?>"><span><?php echo $item['label'] ?></span></a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php if(count($collection) > $limit): ?>
+                    <button class="show-less"><?php echo $this->__('Show Less') ?></button>
+                    <button class="show-more"><?php echo $this->__('Show More') ?></button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

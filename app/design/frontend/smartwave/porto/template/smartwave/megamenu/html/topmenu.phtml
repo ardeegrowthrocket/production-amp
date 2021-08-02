@@ -1,0 +1,189 @@
+<?php $menuHelper = Mage::helper('megamenu'); ?>
+<?php $menuData = $menuHelper->getMenuData(); extract($menuData); ?>
+
+<?php
+$categories = Mage::getModel('catalog/category')->getCollection()
+->addAttributeToSelect('id')
+->addAttributeToSelect('name')
+->addAttributeToSelect('url_key')
+->addAttributeToSelect('url')
+->addAttributeToFilter('level', 2)
+->addAttributeToSelect('is_active');
+
+
+?>
+
+
+<div class="header-wrapper">
+<div class="main-nav">
+    <div class="menu-wrapper">
+        <div class="menu-all-pages-container">
+            <ul class="menu">
+                <?php
+                foreach ($categories as $category)
+                {
+                    if ($category->getIsActive()) { 
+                        // $entity_id = $category->getId();
+                        // $name = $category->getName();
+                        // $url_key = $category->getUrlKey();
+                        // $url_path = $category->getUrl();
+                        echo '<li class="act">' . "\r\n";
+                        echo '  <a href="'.$category->getUrl().'">' . "\r\n";
+                        echo '      <span>'.$category->getName().'</span>' . "\r\n";
+                        echo '  </a>' . "\r\n";
+                        echo '</li>' . "\r\n";
+                    }
+                }
+                ?>
+                <!-- <li class="act">
+                    <a href="/jeep.html">
+                        <span>Jeep</span>
+                     </a>
+                 </li>
+                 <li class="act">
+                    <a href="/ram.html">
+                        <span>Ram</span>
+                     </a>
+                 </li>
+                 <li class="act">
+                    <a href="dodge.html">
+                        <span>Dodge</span>
+                     </a>
+                 </li>
+                 <li class="act">
+                    <a href="/chrysler.html">
+                        <span>Chrysler</span>
+                     </a>
+                 </li> -->
+                 <li class="menu-full-width  ">
+                    <a href="#">Browse by Model</a>
+                    <div style="display: none;" class="nav-sublist-dropdown">
+                        <div class="container">
+                            <div class="mega-columns">
+                                <div class="block1">
+                                    <div class="row" style="margin:0">
+                                        <ul>
+                                            <?php
+                                            foreach ($categories as $_category)
+                                            {
+                                                if ($_category->getIsActive()) { 
+                                                    echo '<li class="menu-item col-sm-3">';
+                                                    echo '<h5>'.$_category->getName().' Parts</h5>';
+
+                                                    $_subsubcategories = $_category->getChildrenCategories();
+
+                                                    $_subcategories = array();
+                                                    foreach($_subsubcategories as $subcategory){
+                                                        $_subcategories [] = array('name' => $subcategory->getName(), 'url' => $subcategory->getUrl());
+                                                    }
+                                                    $ordSubcats = array_sort2($_subcategories,'name');
+                                                    echo '<ul class="sub-menu">';
+
+                                                    foreach($ordSubcats as $_subcategory){
+                                                         echo '<li><a href="'.$_subcategory['url'].'">'.substr($_subcategory['name'],0,strpos($_subcategory['name'],'Repair Parts & Accessories')).'</a></li>';
+                                                    }
+                                                    echo '</ul>';
+                                                    echo '</li>';
+                                                }
+                                            }
+                                            ?>
+                                            <!-- <li class="menu-item col-sm-3">
+                                                <a href="//dev.allmoparparts.com/women/new-arrivals.html" class="level1"><span>New Arrivals</span></a>
+                                            </li>
+                                            <li class="menu-item col-sm-3">
+                                                <a href="//dev.allmoparparts.com/women/tops-blouses.html" class="level1"><span>Tops &amp; Blouses</span></a>
+                                            </li>
+                                            <li class="menu-item col-sm-3">
+                                                <a href="//dev.allmoparparts.com/women/new-arrivals.html" class="level1"><span>New Arrivals</span></a>
+                                            </li>
+                                            <li class="menu-item col-sm-3">
+                                                <a href="//dev.allmoparparts.com/women/tops-blouses.html" class="level1"><span>Tops &amp; Blouses</span></a>
+                                            </li> -->
+                                            <!-- <li class="menu-item col-sw-6  "><a href="//dev.allmoparparts.com/women/pants-denim.html" class="level1"><span>Pants &amp; Denim</span></a></li><li class="menu-item col-sw-6  "><a href="//dev.allmoparparts.com/women/dresses-skirts.html" class="level1"><span>Dresses &amp; Skirts</span></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!-- <ul class="menu">
+                <?php //echo $menuHelper->getMenuContent(); ?>
+            </ul> -->
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+var SW_MENU_POPUP_WIDTH = <?php echo $_popupWidth; ?>;
+jQuery(function($){
+    $(document).ready(function(){
+        $('.main-nav .menu').et_menu({
+            type: "default",
+            delayTime: <?php echo $menuHelper->getConfig('popup/popup_delay'); ?>
+        });
+<?php if($menuHelper->getConfig('popup/ajax_load_popups')): ?>
+        url = "<?php echo Mage::getBaseUrl()."swmegamenu/index/showpopup" ?>";
+        $(".main-nav ul.menu > li.menu-static-width, .main-nav ul.menu > li.menu-full-width, .main-nav ul.menu > li.menu-item").off("mouseover").on("mouseover",function(){
+            if(!$(this).hasClass("ajax-loaded") && !$(this).hasClass("ajax-loading") && $(this).attr("data-id")) {
+                var cur_menu_item = $(this);
+                param = "?category_id="+$(this).attr("data-id");
+                $(cur_menu_item).addClass("ajax-loading");
+                $.ajax({
+                    url: url+param,
+                    dataType: 'json',
+                    type: 'post',
+                    success: function(data) {
+                        $(cur_menu_item).removeClass("ajax-loading").addClass("ajax-loaded");
+                        $(cur_menu_item).children(".nav-sublist-dropdown").children(".container").html(data['popup_content']).hide().fadeIn();
+                    },
+                    error: function(){
+                        $(cur_menu_item).removeClass("ajax-loading");
+                    }
+                });
+            }
+        });
+<?php endif; ?>
+    });
+});
+</script>
+<?php
+
+function array_sort2($array, $on, $order=SORT_ASC){
+    $new_array = array();
+    $sortable_array = array();
+
+    if (count($array) > 0) {
+        foreach ($array as $k => $v) {
+            if (is_array($v)) {
+                foreach ($v as $k2 => $v2) {
+                    if ($k2 == $on) {
+                        $sortable_array[$k] = $v2;
+                    }
+                }
+            } else {
+                $sortable_array[$k] = $v;
+            }
+        }
+
+        switch ($order) {
+            case SORT_ASC:
+                asort($sortable_array);
+                break;
+            case SORT_DESC:
+                arsort($sortable_array);
+                break;
+        }
+
+        foreach ($sortable_array as $k => $v) {
+            $new_array[$k] = $array[$k];
+        }
+    }
+
+    return $new_array;
+}
+
+?>

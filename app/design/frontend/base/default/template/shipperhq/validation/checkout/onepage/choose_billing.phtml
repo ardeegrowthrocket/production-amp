@@ -1,0 +1,318 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Zowta, LLC (http://www.webshopapps.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php echo $this->getChildHtml('billingorig') ?>
+
+<script type="text/javascript">
+//<![CDATA[
+deferredShipperHQCode(function () {
+
+    var invalid = '<?php echo Shipperhq_Validation_Model_Validator_Result::INVALID; ?>';
+    var not_validated = '<?php echo Shipperhq_Validation_Model_Validator_Result::NOT_VALIDATED; ?>';
+    var valid = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+    var ambiguous = '<?php echo Shipperhq_Validation_Model_Validator_Result::AMBIGUOUS; ?>';
+
+    var validStr =
+        '<li class="fields shipperhq-field">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="billing[address_valid]" id="billing:address_valid" value="0">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+
+    var destinationType =
+        '<li class="fields shipperhq-field">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="billing[destination_type]" id="billing:destination_type" value="">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+
+    var updatedAddress =
+        '<li class="fields shipperhq-field">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="billing[updated_address_flag]" id="billing:updated_address_flag" value="0">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+
+    var dialogPlaceholder =
+        '<div id="checkout-dialog-billing-load">' +
+            '<p><?php Mage::helper('shipperhq_validation')->__('We have had trouble validating your address. Please select a valid address from the dropdown menu below')?></p>'+
+            '</div>';
+
+    var noneDialogPlaceholder =
+        '<div id="checkout-nonedialog-billing-load">' +
+            '<p><?php Mage::helper('shipperhq_validation')->__('We have had trouble validating your address. Please select an option below')?></p>'+
+            '</div>';
+
+    $("billing:telephone").insert({after:dialogPlaceholder});
+    $("billing:telephone").insert({after:noneDialogPlaceholder});
+    // SHQ18-122 billing:postcode is probably the least likely field to be absent, so let's hook off of it
+    var parentUl = $("billing:postcode").up('ul');
+    parentUl.insert({bottom:validStr});
+    parentUl.insert({bottom:destinationType});
+    parentUl.insert({bottom:updatedAddress});
+
+    //This is the logic and config for the jQuery popup. $j is jQuery, $ and $$ is prototype in this file
+    $j(function() {
+        var addressValidatedResult = '<?php echo Mage::helper('shipperhq_validation')->checkAddressValidResult($this->getAddress()->getAddressValid()); ?>';
+        $("billing:address_valid").value = addressValidatedResult;
+
+        $j( "#checkout-dialog-billing-load" ).dialog({
+            autoOpen: false,
+            height: "auto",
+            width: "auto",
+            maxWidth: 600, //This is set here so it can be altered by fluidDialog()
+            fluid: true,
+            draggable:true,
+            title: "<?php echo Mage::helper('shipperhq_validation')->__('Address Validation')/*getTitleText()*/; ?>",
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "Use The Address I've Entered": function() {
+                    $("billing:address_valid").value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    $j( this ).dialog( "close" );
+                    if (typeof FireCheckout !== 'undefined') {
+                        checkout.save();
+                    }
+                },
+                "Use Validated Address": function() {
+                    if(candidateSwitcherBilling()) {
+                        if($("billing-address-select")) {
+                            changeSelectByValue('billing-address-select','',true);
+                        }
+                        $j( this ).dialog( "close" );
+                        if (typeof FireCheckout !== 'undefined') {
+                            checkout.save();
+                        }
+                    }
+                }
+            }
+        });
+
+
+        $j( "#checkout-nonedialog-billing-load" ).dialog({
+            autoOpen: false,
+            height: "auto",
+            width: "auto",
+            maxWidth: 600, //This is set here so it can be altered by fluidDialog()
+            fluid: true,
+            draggable:true,
+            title: "<?php echo Mage::helper('shipperhq_validation')->__('Address Not Validated')/*getTitleText()*/; ?>",
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "Edit Address": function() {
+                    $("billing:address_valid").value = not_validated;
+                    $j( this ).dialog( "close" );
+                },
+                "Use Address I've Entered": function() {
+                    $("billing:address_valid").value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    $j( this ).dialog( "close" );
+                    if (typeof FireCheckout !== 'undefined') {
+                        checkout.save();
+                    }
+                }
+            }
+        });
+
+        // on window resize run function
+        $j(window).resize(function () {
+            fluidDialog();
+        });
+
+        // catch dialog if opened within a viewport smaller than the dialog width
+        $j(document).on("dialogopen", ".ui-dialog", function (event, ui) {
+            fluidDialog();
+        });
+
+        function fluidDialog() {
+            var $visible = $j(".ui-dialog:visible");
+            // each open dialog
+            $visible.each(function () {
+                var $this = $j(this);
+                var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
+                // if fluid option == true
+                if (dialog.options.fluid) {
+                    var wWidth = $j(window).width();
+                    // check window width against dialog width
+                    if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
+                        // keep dialog from filling entire screen
+                        $this.css("max-width", "90%");
+                    } else {
+                        // fix maxWidth bug
+                        $this.css("max-width", dialog.options.maxWidth + "px");
+                    }
+                    //reposition dialog
+                    dialog.option("position", dialog.options.position);
+                }
+            });
+
+        }
+    });
+
+    Event.observe($('billing:street1'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    Event.observe($('billing:street2'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    Event.observe($('billing:city'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    Event.observe($('billing:region_id'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    Event.observe($('billing:postcode'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    Event.observe($('billing:country_id'), 'change', function(){
+        $("billing:address_valid").value = not_validated;
+    });
+
+    if($('billing-address-select')) {
+        Event.observe($('billing-address-select'), 'change', function(){
+            $("billing:updated_address_flag").value = 0;
+            var newAddressId = $('billing-address-select').value;
+            var url = "<?php echo $this->getUrl('shipperhq_validation/checkout/getAddressValidResult', array('_secure'=>true)) ?>";
+            var parameters = {
+                address_id: newAddressId
+            }
+            var request = new Ajax.Request(
+                url,
+                {
+                    method: 'get',
+                    onComplete: updateAddressValidResult,
+                    parameters: parameters
+                }
+            );
+        });
+    }
+
+    function updateAddressValidResult(transport)
+    {
+        if(transport.responseText != '') {
+            var results = transport.responseText.evalJSON();
+            var outcome = results.valid_result;
+            $('billing:address_valid').value = outcome;
+        }
+
+    }
+
+    function candidateSwitcherBilling() {
+        if($('billing-address-select')) {
+            $("billing:updated_address_flag").value = $('billing-address-select').value;
+        }
+
+        var selected = $F("billingcandidates");
+
+        if(selected == -1) {
+            $("billing:address_valid").value = 0;
+            return false;
+        }
+
+        var splitAddress = selected.split('|');
+
+        //define here to be populated below
+        var addressLine = '';
+        var addressLine2 = '';
+        var city = '';
+        var state = '';
+        var zip = '';
+        var countryId = '';
+        var addressType = '';
+
+        for(var i=0; i<splitAddress.length; i++) {
+            switch(i) {
+                case 0: addressLine = splitAddress[i]; break;
+                case 1: addressLine2 = splitAddress[i]; break;
+                case 2: city = splitAddress[i]; break;
+                case 3: state = splitAddress[i]; break;
+                case 4: zip = splitAddress[i]; break;
+                case 5: countryId = splitAddress[i]; break;
+                case 6: addressType = splitAddress[i]; break;
+            }
+        }
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+            <?php if($this->isCustomerLoggedIn()): ?>
+                this.checkout.getStep('billing').newAddress(true);
+            <?php endif; ?>
+        <?php endif; ?>
+
+        $("billing:street1").value = addressLine;
+        $("billing:street2").value = addressLine2;
+        $("billing:city").value = city;
+        $("billing:region_id").value = state;
+        $("billing:postcode").value = zip;
+        $("billing:country_id").value = countryId;
+        $("billing:destination_type").value = addressType;
+        $("billing:address_valid").value = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+
+
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+            this.checkout.getStep('billing').handleChange({});
+        <?php endif; ?>
+
+
+        return true;
+    }
+    /**
+     * Method to change the selected value of a select dropdown
+     * @param ddlID String - the name of the element
+     * @param value String - value to set it to
+     * @param change Boolean - should we fire onchange
+     */
+    function changeSelectByValue(ddlID, value, change) {
+        var ddl = document.getElementById(ddlID);
+
+        for (var i = 0; i < ddl.options.length; i++) {
+            if (ddl.options[i].value == value) {
+                if (ddl.selectedIndex != i) {
+                    ddl.selectedIndex = i;
+                    if (change) {
+                        ddl.onchange();
+                    }
+                }
+                break;
+            }
+        }
+    }
+});
+
+//]]>
+</script>

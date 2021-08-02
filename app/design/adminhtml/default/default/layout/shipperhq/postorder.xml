@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   ShipperHQ
+ * @copyright  Copyright (c) 2014 Zowta Ltd (http://www.WebShopApps.com)
+ *             Copyright, 2014, Zowta, LLC - US license
+ * @license    http://www.shipperhq.com/license/license.txt - Commercial license
+ */
+ -->
+<layout version="0.1.0">
+    <!-- ORDERS -->
+    <adminhtml_sales_order_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>shipperhq/css/postorder.css</name>
+            </action>
+        </reference>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/order/view/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/carriergroup.phtml" output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_view>
+    <!-- INVOICES -->
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/invoice/view/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/invoice/new/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/alt_carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/invoice/new/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/alt_carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <!-- CREDIT MEMOS -->
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/creditmemo/view/updated_items.phtml</template>
+            </action>
+           <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/creditmemo/new/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/creditmemo/new/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <!--SHIPMENTS-->
+    <adminhtml_sales_order_shipment_new>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/shipment/new/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table" template="shipperhq/postorder/sales/items/alt_carriergroup.phtml"  output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+    <adminhtml_sales_order_shipment_view>
+        <reference name="shipment_items">
+            <action method="setTemplate">
+                <template>shipperhq/postorder/sales/shipment/view/updated_items.phtml</template>
+            </action>
+            <block type="shipperhq_postorder/adminhtml_sales_items_carriergroup" name="carriergroup_table"
+                   template="shipperhq/postorder/sales/items/alt_carriergroup.phtml" output="toHtml"/>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+</layout>

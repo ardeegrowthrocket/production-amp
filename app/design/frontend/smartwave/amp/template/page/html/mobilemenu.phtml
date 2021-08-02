@@ -1,0 +1,52 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php $baseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>
+<?php
+$modelList = $this->getBrowseModel();
+$allowedMake = array('Chrysler', 'Dodge', 'Jeep', 'Ram');
+?>
+<div class="mobile-nav side-block container">
+   <span class="close-sidebar-menu"><i class="icon-cancel"></i></span>
+   <div class="menu-all-pages-container">
+      <ul class="menu sw-mobile-menu">
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/interior-accessories.html">Interior Accessories</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/exterior-accessories.html">Exterior Accessories</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html">Maintenance</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/mopar-performance-parts.html">Performance Parts</a></li>
+         <li class="menu-full-width">
+            <a href="#">Browse By Model</a>
+            <ul class="sw-mobile-menu" style="display: none">
+                <?php foreach ($modelList as $make => $makeArray): ?>
+                    <?php if(in_array($make, $allowedMake)): ?>
+                <li>
+                    <a href="<?php echo end($makeArray)['make_url'] ?>"><?php echo $make ?></a>
+                    <ul style="display: none;">
+                        <?php foreach ($makeArray as $model):  ?>
+                            <li style="list-style: none;">
+                                <a href="<?php echo $model['model_url'] ?>"><?php echo $model['model']  ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+         </li>
+
+         <li class="act"><a href="<?php echo $baseUrl; ?>customer/account/login">My Account</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>wishlist">Wishlist</a></li>
+
+    <?php
+        if ($this->helper('customer')->isLoggedIn()) {
+            ?>
+           
+            <li class="act"> <a href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__('Log out'); ?></a></li>
+        <?php } else {
+            ?>
+            <li class="act"><a href="<?php echo Mage::getUrl('customer/account/login'); ?>">Log In</a></li>
+           
+        <?php } ?>
+
+
+       
+      </ul>
+   </div>
+</div>

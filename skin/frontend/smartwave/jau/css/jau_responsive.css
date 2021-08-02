@@ -1,0 +1,444 @@
+@media (max-width:1300px){
+    div#spp-banner{
+        height: 434px;
+    }
+    .spp-banner-text{
+        top:60px;
+    }
+
+}
+
+
+@media only screen and (min-width: 1367px) {
+    .cms-index-index .top-banner {
+        min-height: 447px;
+    }
+}
+@media screen and (max-width: 1536px) and (min-width: 1205px) {
+    .cms-index-index .top-banner {
+        min-height: 333px;
+    }
+}
+@media screen and (max-width: 1204px) and (min-width: 1000px) {
+    .cms-index-index .top-banner {
+        min-height: 221px;
+    }
+}
+@media screen and (max-width: 900px) and (min-width: 300px) {
+    .cms-index-index #spp-banner {
+        height: 200px !important;;
+    }
+    .cms-index-index #spp-banner .spp-banner-text{
+        top:0px !important;
+    }
+}
+@media (max-width:1024px){
+    .header-container.type6 .menu li a span{
+        font-size:15px;
+    }
+    .menu-all-pages-container .menu .fa, .menu-all-pages-container .menu svg{
+        margin-left:10px;
+    }
+    .fixed-header .menu > li.menu-full-width .nav-sublist-dropdown, .main-nav .menu > li.menu-full-width .nav-sublist-dropdown{
+        top:74px;
+    }
+    #top-cat .text-img.bottom-right,#top-cat .text-img.bottom-left{
+        top:30%;
+    }
+    /*#spp-banner>div.container{*/
+    /*top:25px;*/
+    /*}*/
+    div.spp-banner-text h2{
+        font-size:50px;
+    }
+    .spp-banner-text .jau-info p{
+        margin-bottom:15px;
+        font-size:16px;
+    }
+    .footer-middle .block.block-subscribe .input-box button.button span{
+        padding:0;
+    }
+    .featured-list-container ul.control-products li{
+        font-size:23px;
+    }
+    .featured-list-container ul.control-products li.current::after{
+        border-top: 26px solid transparent;
+        border-bottom: 26px solid transparent;
+        border-left: 25px solid #38411a;
+        right: -25px;
+    }
+    .tab-content .feat-content-container div{
+        padding:0 15px;
+    }
+    div#spp-banner{
+        /*height: 333px;*/
+        height: 415px;
+    }
+    .spp-banner-text{
+        top:25px;
+    }
+    .product-info-wrapper .actions .button{
+        padding:10px 40px 2px;
+    }
+}
+@media (max-width:991px){
+    .header-container.type6 .menu-icon{
+        margin-right: 4%;
+        line-height: 3.5;
+    }
+    .menu-container{
+        width: 100%;
+        right: 0;
+        top: 0;
+        position: absolute;
+        background: transparent;
+    }
+    .header-container-parts-catalog h2{
+        font-size:14px;
+    }
+    .header-container-parts-catalog button.button{
+        padding: 9px 27px 6px;
+        font-size: 10px;
+        margin-top: 28px;
+    }
+
+    .ymm-wrapper,.ymm-form-container .container{
+        height:auto;
+    }
+    .spp-banner-text{
+        margin-top:0;
+        padding-top:20px;
+    }
+    div.spp-banner-text h2{
+        font-size:39px;
+    }
+    .spp-banner-text .jau-info p{
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .featured-list-container ul.control-products li{
+        font-size:14px;
+    }
+    .featured-list-container ul.control-products li.current::after{
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 26px solid #38411a;
+        right: -26px;
+    }
+    .tab-content .tab-table{
+        margin-top:10px;
+    }
+    .tab-content .tab-table.right{
+        padding-left:15px;
+    }
+    .tab-content .tab-table.left{
+        padding-right:15px;
+    }
+    .feat-img-container{
+        width:215px;
+    }
+    .tab-content .feat-content-container div{
+        max-width: none;
+    }
+    .header-container-parts-catalog button.btn-cta-mobile, .cta-tagline{
+        display:block;
+    }
+    .header-container-parts-catalog button.btn-cta-mobile{
+        margin-top:0;
+    }
+    .header-container-parts-catalog .cta-tagline{
+        color: #ffff;
+        margin-top: 14px;
+        font-size: 12px;
+        text-align: center;
+        font-family: 'karlaregular';
+        margin-bottom:6px;
+    }
+    .header-container-parts-catalog button.btn-cta-desktop{
+        display:none;
+    }
+    .std li {
+        list-style: none;
+        padding-left: 14px;
+        position: relative;
+    }
+    .std li {
+        list-style: none;
+        padding-left: 14px;
+        position: relative;
+    }
+
+    .std li:before {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: #333;
+        border-radius: 10px;
+        left: 0;
+        top: 5px;
+    }
+}
+@media(max-width: 768px){
+    .product-info,#product_addtocart_form .add-to-box{
+        background: inherit;
+    }
+    a.btn-more-fitments.show-more, a.btn-more-fitments.show-less{
+        font-size:18px;
+    }
+    .product-view p{
+        margin-bottom:0;
+    }
+    .col-sm-12.btn-cart-wrapper{
+        padding-bottom: 25px;
+    }
+    div#spp-banner{
+        margin-bottom:0px;
+        height:324px;
+    }
+    .spp-banner-text{
+        top:0;
+    }
+    .opc .buttons-set p.required{
+        display:none;
+    }
+    .opc .step{
+        padding: 20px 15px 55px 15px;
+    }
+    ol#checkoutSteps button{
+        margin-top:20px;
+    }
+    .cms-index-index .ymm-form-out-container{
+        margin-top:0;
+    }
+    .short-description .std, .short-description .std p{
+        font-size: 16px;
+    }
+    ol#checkoutSteps #checkout-step-login .col-1 button{
+        margin-top: 2px;
+    }
+    .product-small-view p.msrp-container,.product-small-view p.savings-container{
+        font-size: 15px;
+    }
+    .product-small-view .special-price, .product-small-view .regular-price{
+        font-size:25px;
+    }
+    .products-grid .product-info-wrapper{
+        display: none;
+    }
+    .paypal-express-review .main-container{
+        margin-top:60px;
+    }
+    .product-small-view .button-blue{
+        padding: 8px 50px 2px 50px;
+    }
+    button#ymm-btn{
+        margin-top:10px;
+        padding:10px 27px 0px;
+    }
+    div#featured-product h2{
+        text-indent:200px;
+    }
+}
+@media (max-width:414px){
+    ol#checkoutSteps #checkout-step-login .col-1 button{
+        margin-top:0;
+    }
+    ol#checkoutSteps button{
+        margin-top:0;
+    }
+    .logo-container{
+        text-align:center;
+    }
+    .header-search-box{
+        margin-top:0;
+    }
+    .header-container-parts-catalog{
+        display:block;
+        padding:0;
+    }
+    div.header-container.type6 .header .form-search{
+        width:100%;
+    }
+    .header-container.type6 .menu-icon{
+        line-height: 64px;
+        margin-right:20px;
+    }
+    .header-container.type6 .header{
+        margin-bottom: 0;
+        padding-bottom:30px;
+    }
+    .menu-container{
+        top: 5px;
+        text-align: right;
+        background: transparent;
+    }
+    div.spp-banner-text h2{
+        font-size:15px;
+        margin-bottom:0;
+    }
+    .spp-banner-text .jau-info p{
+        margin-bottom: 0;
+        font-size: 9px;
+    }
+    .banner-action{
+        text-align: center;
+        margin-top:15px;
+    }
+    .spp-banner-text .banner-action button{
+        font-size:10px;
+    }
+    .tab-content .feat-content-container div{
+        padding:0;
+    }
+    .tab-content{
+        margin-left:15px;
+        margin-right:15px;
+    }
+    .tab-content h3{
+        font-size:15px;
+    }
+    .feat-img-container{
+        width:205px;
+    }
+    a.btn-more-fitments.show-more, a.btn-more-fitments.show-less{
+        padding:5px 30px 3px;
+        font-size:20px;
+    }
+    .product-list-category .product-item-container{
+        margin-bottom:30px;
+    }
+    .product-list-make .product-item-thumb img{
+        height:215px;
+    }
+    .product-list-make .product-item-container{
+        min-height:285px;
+    }
+    .checkout-cart-index button, .checkout-cart-index button span{
+        font-size:16px;
+    }
+    .show-more-fitments{
+        float:none;
+        position:relative;
+        top:10px;
+    }
+
+    div#spp-banner{
+        margin-bottom:0;
+        height:174px;
+    }
+    .featured-list-container ul.control-products li.current::after{
+        border:none;
+    }
+    ul.control-products li>div{
+        border:none;
+    }
+    #featured-product .container-fluid > .row{
+        margin-right:0px;
+    }
+    .tab-content .tab-table.left,.tab-content .tab-table.right{
+        padding-right:0;
+    }
+    .tab-action-container .col-md-12{
+        padding:0 0 0 15px;
+    }
+    .paypal-express-review .main-container{
+        margin-top:15px;
+    }
+    button#ymm-btn{
+        margin-top:0px;
+        padding:5px 27px 0px;
+    }
+    .header-container-parts-catalog>div{
+        position: relative;
+        right: 0;
+        text-align: center;
+
+    }
+    .header-container-parts-catalog button.button{
+        font-size:18px;
+        margin-top:20px;
+    }
+    .header-container-parts-catalog button.btn-cta-mobile{
+        margin:0 auto;
+        width: 100%;
+    }
+    .header-container-parts-catalog .cta-tagline{
+        margin-bottom:5px;
+        font-size:14px;
+    }
+    div#featured-product h2{
+        text-indent:0;
+    }
+}
+@media (max-width: 375px){
+    #spp-banner>div.container{
+        top:0;
+    }
+    .spp-banner-text .banner-action button{
+        padding:5px 5px 2px 5px;
+        font-size:10px;
+        margin-top:10px;
+    }
+    /*.banner-action{*/
+    /*margin-top:-5px;*/
+    /*}*/
+    .featured-list-container ul.control-products li{
+        padding: 0px 15px;
+        text-indent: 20px;
+    }
+    .featured-list-container ul.control-products li.current::after {
+        border: none;
+    }
+    a.btn-more-fitments.show-more, a.btn-more-fitments.show-less{
+        padding:5px 25px 3px;
+        font-size:12px;
+    }
+    .cart-table button.button{
+        padding: 5px 20px 8px;
+    }
+    .checkout-cart-index button, .checkout-cart-index button span{
+        font-size:14px;
+    }
+    div#spp-banner{
+        height:150px;
+    }
+    .ymm-action-wrapper{
+        display: block;
+        margin-bottom:10px;
+    }
+    .header-container-parts-catalog button.button{
+        font-size:15px;
+    }
+}
+@media (max-width: 375px){
+    .spp-banner-text{
+        padding-top:5px;
+    }
+    .spp-banner-text .banner-action button{
+        margin-top:0;
+    }
+    .product-small-view .button-blue{
+        padding:8px 50px 2px 50px;
+    }
+}
+@media (max-width: 360px){
+    .banner-action{
+        margin-top:-5px;
+    }
+}
+@media (max-width: 320px){
+    a.btn-more-fitments.show-more, a.btn-more-fitments.show-less{
+        padding:5px 13px 3px;
+        font-size: 16px;
+    }
+    .checkout-cart-index button, .checkout-cart-index button span{
+        font-size:12px;
+    }
+    .cart-table button.button{
+        padding: 5px 5px 8px;
+    }
+    .header-container-parts-catalog button.button{
+        font-size:12px;
+    }
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <adminhtml_customexportbackend_index>
+	<reference name="content">
+	  <block type="customexport/adminhtml_customexportbackend" name="customexportbackend" template="customexport/customexportbackend.phtml"/>
+	</reference>
+  </adminhtml_customexportbackend_index>
+</layout>

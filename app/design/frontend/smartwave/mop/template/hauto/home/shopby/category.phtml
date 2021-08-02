@@ -1,0 +1,45 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/26/17
+ * Time: 6:01 PM
+ */
+
+$collection = $this->getListing();
+$numberOfItem = ceil($collection->count()/ 4);
+$begin = true;
+$ctr = 1;
+?>
+<div id="shop-cat">
+    <div class="container">
+        <div class="row">
+            <div class="heading">
+                <h2><span class="bold">Shop</span> By <span class="bold">Category</span></h2>
+            </div>
+            <div class="sby-category-listing">
+               <div class="row">
+                   <?php foreach($collection as $item): ?>
+                       <?php if($begin): ?>
+                           <div class="group-sby-group-listing  col-sm-3 col-xs-12">
+                       <?php endif;  ?>
+                       <?php if($item->getIid() != 438):?>
+                           <a href="<?php echo $item->getLink(); ?>" class="link-item"><span><?php echo $item->getTitle(); ?></span></a>
+                       <?php endif; ?>
+                       <?php if($ctr % $numberOfItem == 0 || $ctr == $collection->count()): ?>
+                           <?php $begin = true; ?>
+                           </div>
+                       <?php else: ?>
+                           <?php $begin = false; ?>
+                       <?php endif; ?>
+                       <?php
+                       $ctr++;
+                       ?>
+                   <?php endforeach; ?>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,86 @@
+<?php //echo $this->getChildHtml('sticky.nav') ?>
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+?>
+<div class="container-fluid bg-gray">
+    <div class="container">
+        <div class="top-links">
+            <div class="col-md-4 col-sm-3 col-xs-12">
+                <?php echo $this->getChildHtml('topSearch'); ?>
+            </div>
+            <div class="col-md-5 col-sm-4 col-xs-12">
+                <div class="top-header-text">
+                    <p><?php echo $this->getChildHtml('welcome'); ?> </p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-5 col-xs-12">
+                <?php
+                $store_currency = $this->getChildHtml('store_currency');
+                $store_language = $this->getChildHtml('store_language');
+                $compare_link = $this->getChildHtml('compare_link');
+                ?>
+                <?php echo $store_currency; ?>
+                <?php if($store_currency && $store_language):?>
+                <?php endif; ?>
+                <?php //echo $store_language; ?>
+                <?php if(($store_currency || $store_language) && $compare_link):?>
+                    <span class="split"></span>
+                <?php endif; ?>
+                <?php echo $compare_link; ?>
+                <div class="top-links-area">
+                    <?php /* <div class="top-links-icon"><a href="javascript:void(0)"><?php echo $this->__("links"); ?></a></div> */ ?>
+                    <?php
+                    echo $this->getChildHtml('minicart');
+                    echo $this->getChildHtml('topLinks');
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="container-fluid bg-black">
+    <div class="container">
+        <div class="logo-menu">
+            <!-- LOGO -->
+            <div class="col-xs-12 col-md-4">
+                <div class="col-xs-10">
+                    <?php if ($this->getIsHomePage()):?>
+                        <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                    <?php else:?>
+                        <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                    <?php endif; ?>
+                </div>
+                <div class="col-xs-2">
+                    <div class="menu-icon"><a href="javascript:void(0)" title="Menu"><i class="fa fa-bars"></i></a></div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <?php echo $this->getChildHtml('topMenu') ?>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<?php echo $this->getChildHtml('mobileMenu') ?>
+<?php //echo $this->getChildHtml('mobile.nav') ?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(document).ready(function(){
+        var scrolled = false;
+        jQuery(window).scroll(function(){
+            if(200<jQuery(window).scrollTop() && !scrolled){
+                jQuery('#slideshow .ymm-form-container').addClass('sticky-header').css('top','-50px').animate({top:'0px'}, 500);
+                scrolled = true;
+            }
+            if(200>jQuery(window).scrollTop() && scrolled){
+                jQuery('#slideshow .ymm-form-container').removeClass('sticky-header');
+                scrolled = false;
+            }
+        })
+    });
+    //]]>
+</script>

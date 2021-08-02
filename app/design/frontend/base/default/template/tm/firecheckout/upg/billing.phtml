@@ -1,0 +1,31 @@
+<?php
+    $paymentHelper = Mage::helper('upg_payments');
+?>
+
+<?php if($paymentHelper->getB2bEnabled() && $paymentHelper->getShowExtendedB2bOnCheckout()): ?>
+<li class="fields">
+    <div class="field">
+        <label for="upg_company_registration_id"><?php echo $paymentHelper->__('Company Registration Id') ?></label>
+        <div class="input-box">
+            <input type="text" name="billing[upg_company_registration_id]" id="billing:upg_company_registration_id" title="<?php echo $paymentHelper->__('Company Registration Id') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getUpgCompanyRegistrationId()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('upg_company_registration_id') ?>" />
+        </div>
+    </div>
+    <?php if($paymentHelper->getB2bShowRegistrationType()): ?>
+        <div class="field">
+            <label for="upg_company_registration_type"><?php echo $paymentHelper->__('Company Registration Type') ?></label>
+            <div class="input-box">
+                <select name="billing[upg_company_registration_type]" id="billing:upg_company_registration_type">
+                    <?php foreach($paymentHelper->getRegistrationTypeOptions() as $value=>$label): ?>
+                        <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    $('billing\:upg_company_registration_type').setValue('<?php echo $this->escapeHtml($this->getAddress()->getUpgCompanyRegistrationType()); ?>');
+                    //]]>
+                </script>
+            </div>
+        </div>
+    <?php endif; ?>
+</li>
+<?php endif; ?>

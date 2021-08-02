@@ -1,0 +1,58 @@
+.banner-about-us{
+  position: relative;
+  background-color: $tertiary-bg-color;
+  margin-top: 80px;
+  padding-bottom: 58px;
+  padding-top: 45px;
+  background-image: url("../images/steering-wheels.png");
+  background-repeat: no-repeat;
+  background-position: 65% center;
+
+  .left-container{
+    color: $white-color;
+    text-align: left;
+    width: 60%;
+
+
+    .heading{
+      h2{
+        font-size: 32px;
+        color: $white-color;
+        text-transform: capitalize;
+      }
+    }
+    p{
+      font-size: 16px;
+      line-height: 22px;
+    }
+    a{
+      &.button{
+        margin-top: 13px;
+        text-transform: uppercase;
+        min-width: 245px;
+      }
+    }
+  }
+  .right-container{
+    position: absolute;
+    @include border-radius();
+    right: 0;
+    background-color: $white-color;
+    padding: 45px 50px 50px 65px;
+    width: 37%;
+    bottom: -33px;
+    @include custom-box-shadow();
+
+    p{
+      font-size: 24px;
+      font-family: robotolight;
+      color: $grey-color-3;
+      text-align: left;
+
+      span.bold{
+        font-family: robotobold;
+        color: $tertiary-bg-color;
+      }
+    }
+  }
+}

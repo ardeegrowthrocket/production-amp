@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/28/17
+ * Time: 7:51 PM
+ */
+$list = $this->getList();
+?>
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong>
+            <?php echo $this->__('Filter By ') ?>
+        </strong>
+    </div>
+
+    <div class="block-content toggle-content">
+        <dl id="narrow-by-list">
+            <dt class="odd"><?php echo $this->getLayerTitle(); ?></dt>
+            <dd class="odd">
+                <ol style="display: none;">
+                    <?php foreach($list as $item): ?>
+                        <li data-val="<?php echo $item->getLabel(); ?>" class="">
+                            <a href="<?php echo $item->getLink(); ?>">
+                                <?php echo $item->getLabel(); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </dd>
+        </dl>
+    </div>
+</div>
+<script type="text/javascript">
+        jQuery('#narrow-by-list ol').show();
+</script>

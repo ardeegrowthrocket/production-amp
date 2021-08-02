@@ -1,0 +1,184 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "Here are the available accessories for your vehicle:";
+}
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+?>
+    <style type="text/css">
+        .product-item-thumb img{
+            width: 100%;
+            height: 193px;
+        }
+        @media (max-width:414px){
+            .product-item-thumb img{
+                height:209px;
+            }
+        }
+        .product-image, .product-item-thumb{
+            height: auto !important;
+            background-color: white;
+        }
+        .product-item-container {
+            padding: 10px;
+            background: #ebebeb;
+            text-align: center;
+            float: left;
+            margin-bottom: 30px;
+            width: 100%;
+            min-height: 450px;
+        }
+
+        .product-item-container:hover {
+            background: #215f9f;
+        }
+
+        .product-item-container:hover span.listing-label{
+            color:#ffffff;
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 63.9375em) {
+            .product-item-container a {
+                font-size: 4vmin;
+            }
+            .main-container h1{
+                font-size: 5vmin;
+            }
+        }
+        @media (max-width:550px){
+            .product-item-container {
+                min-height: 200px;
+            }
+        }
+    </style>
+    <!--YMM FORM -->
+<?php if(count($list) > 0): ?>
+    <div class="container">
+        <h1><?php echo $this->getAutoName(); ?></h1>
+        <?php if (!empty($subtitle)) : ?>
+            <p><?php echo $subtitle; ?></p>
+        <?php endif; ?>
+        <div class="listing-top-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+        </div>
+        <div id="weekly_featured_product">
+            <div class="row product-list-container product-list-category">
+                <?php $x = 0; ?>
+                <?php $unq = 0; ?>
+                <?php foreach ($list as $item): ?>
+                    <?php if($unq == 0): ?>
+                        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('repair_parts')->toHtml(); ?>
+                        <?php $x++; ?>
+                    <?php endif; ?>
+                    <?php $unq++; ?>
+                    <div class="col-xs-12 col-sm-6 col-md-3 product-list-item">
+                        <div class="product-item-container">
+                            <a href="<?php echo $item->getLink(); ?>">
+                                <div class="product-item-thumb">
+                                    <?php $path = '#'; ?>
+                                    <?php if($this instanceof Homebase_Autopart_Block_Category_Year):?>
+                                        <?php $path = $this->getImage($item->getOptionId()) ?>
+                                    <?php endif; ?>
+                                    <img src="<?php echo $path; ?>" class="check">
+                                </div>
+                                <div class="product-item-label">
+                                    <?php echo $item->getOptionLabel(); ?>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+            <?php echo $this->getChildHtml('make-model-part.listing') ?>
+        </div>
+        <div class="listing-bottom-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('img').imageFallback(['<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>category/model-watermark.png']);
+        });
+        (function($){
+            var verticalAlignListing = function(){
+                $('.product-list-category').each(function(){
+                    var gridRows = [];
+                    var tempRow = [];
+                    var gridElements = $(this).children();
+
+                    gridElements.each(function(index){
+                        if(index > 0 && index % 3 == 0){
+                            gridRows.push(tempRow);
+                            tempRow = [];
+                            tempRow.push(this);
+                        }else{
+                            tempRow.push(this);
+                        }
+                        if(tempRow.length > 0 && (gridElements.length -1 == index)){
+                            gridRows.push(tempRow);
+                        }
+                    });
+                    $.each(gridRows, function(){
+                        var tallest = 0;
+                        $.each(this,function(){
+                            $(this).find('.product-item-container').css({
+                                "min-height": "",
+                                "padding-bottom": ""
+                            });
+                        });
+
+                        var imageHeight = $(this).find('.product-item-thumb').height();
+                        var labelHeight = $(this).find('.product-item-label').height();
+
+                        var totalHeight = imageHeight + labelHeight + 10;
+
+                        if(totalHeight > tallest){
+                            tallest = totalHeight;
+                        }
+
+                        $.each(this, function () {
+                            $(this).find('.product-item-container').css('min-height', tallest);
+                        });
+
+                    })
+                });
+            }
+            verticalAlignListing();
+            $(window).on('delayed-resize', function (e, resizeEvent) {
+                verticalAlignListing();
+            });
+            $(document).ready(function(){
+                verticalAlignListing();
+            });
+            var resizeTimer;
+            $(window).resize(function (e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    $(window).trigger('delayed-resize', e);
+                }, 250);
+            });
+        })(jQuery);
+    </script>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

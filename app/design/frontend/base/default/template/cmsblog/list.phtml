@@ -1,0 +1,32 @@
+<?php
+$collection = $this->blogCollection();
+$_helper = Mage::helper('cmsblog');
+?>
+
+<div class="main-wrapper container">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <?php echo $this->getToolbarHtml(); ?>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">
+                        <h1><?php echo $this->__('Blog') ?></h1>
+                    </div>
+                    <div class="listing">
+                        <?php foreach ($collection as $item): ?>
+                            <div class="item">
+                                <h3 class="title"><a href="<?php echo $_helper->getLink($item) ?>"><?php echo $item->getTitle() ?></a></h3>
+                                <div class="content"><?php echo $_helper->limitContent($item) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="footer-toolbar">
+                        <?php echo $this->getToolbarHtml(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

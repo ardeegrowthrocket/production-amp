@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_CustomUrl>
+      <version>0.1.0</version>
+    </Growthrocket_CustomUrl>
+  </modules>
+  <global>
+    <helpers>
+      <customurl>
+        <class>Growthrocket_CustomUrl_Helper</class>
+      </customurl>
+    </helpers>
+	<models>
+	  <customurl>
+		<class>Growthrocket_CustomUrl_Model</class>
+		<resourceModel>customurl_mysql4</resourceModel>
+	  </customurl>
+	</models>
+  </global>
+    <adminhtml>
+        <events>
+            <catalog_product_save_before>
+                <observers>
+                    <catalog_product_save_before_handler>
+                        <type>model</type>
+                        <class>customurl/observer</class>
+                        <method>SetCustomUrlKey</method>
+                        <args></args>
+                    </catalog_product_save_before_handler>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+    </adminhtml>
+</config> 

@@ -1,0 +1,223 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Zowta, LLC (http://www.webshopapps.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<script type="text/javascript">
+    //<![CDATA[
+    deferredShipperHQCode(function () {
+        var isEnabled = "<?php echo $this->validationEnabled(); ?>";
+
+        var addressValid = false;
+        window.onload = function(){
+            if(isEnabled == 1) {
+                var addressValid = $('address_valid');
+                if(!addressValid) {
+                    var validStr = '<input type="hidden" name="address_valid" id=address_valid" value="0">';
+                    var dialog = '<div id="dialog-candidates" title="Valid Addresses" style="display: none;"></div>';
+                    var destinationType = '<input type="hidden" name="destination_type" id=destination_type" value="">';
+                    $("country").insert({after:validStr});
+                    $("city").insert({after:dialog});
+                    $("country").insert({after:destinationType});
+                    var ajaxLoader = '<span class="please-wait" id="address-validation-loading" style="display:none;" name="address_val_loading">' +
+                        '<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Please wait...') ?>" title="<?php echo $this->__('Please wait...') ?>" class="v-middle" /> <?php echo $this->__('Please wait...') ?></span>';
+                    $("form-validate").insert({after:ajaxLoader});
+
+                }
+            }
+
+        };
+
+        dataForm.validator.validate = dataForm.validator.validate.wrap(function (parentMethod) {
+            if (parentMethod()) {
+                if(isEnabled != 1) {
+                    return true;
+                }
+
+                var form = $('form-validate');
+                var addressValid = form.address_valid;
+                if(addressValid && addressValid.value != 0) {
+                    return true;
+                }
+                //Ajax callout with the form data to get the validation result
+                var url = "<?php echo $this->getUrl('shipperhq_validation/customer/validateAddress', array('_secure'=>true)) ?>";
+                var parameters = {
+                    city: form.city.value,
+                    country_id : form.country_id.value,
+                    country_id : form.country_id.value,
+                    region_id : form.region_id.value,
+                    street1 : $(street_1).value,
+                    street2 : $(street_2).value,
+                    postcode : form.postcode.value
+                }
+                $('address-validation-loading').show();
+                var request = new Ajax.Request(
+                    url,
+                    {
+                        method: 'get',
+                        onComplete: postAddressValidation,
+                        parameters: parameters
+                    }
+                );
+            }
+        });
+
+        function postAddressValidation(transport)
+        {
+            var results = transport.responseText.evalJSON();
+            var outcome = results.outcome;
+            var candidateCount = results.candidate_count;
+            var form = $('form-validate');
+            $('address-validation-loading').hide();
+            switch(outcome) {
+                case 'EXACT_MATCH': {
+                    form.address_valid.value = results.outcome;
+                    form.destination_type.value = results.destination_type;
+                    form.submit();
+                    return true;
+                }
+                case 'INVALID': {
+                    var content = results.html;
+                    showConfirmContinue('url',content);
+                    break;
+                }
+                case 'NEAR_MATCH_WITH_OPTIONS': {
+                    form.address_valid.value = results.outcome;
+                    var content = results.html;
+                    showCandidates('url',content);
+                    break;
+                }
+                case 'CORRECTED_EXACT_MATCH': {
+                    form.address_valid.value = results.outcome;
+                    var content = results.html;
+                    showCandidates('url',content);
+                    break;
+                }
+                default : {
+                    form.address_valid.value = results.outcome;
+                    form.submit();
+                }
+            }
+
+        }
+
+        function showCandidates(url, content) {
+            var titleText = "<?php echo $this->__('Select an address'); ?>";
+            $j("#dialog-candidates").dialog({
+                autoOpen: true,
+                height: "auto",
+                width: "auto",
+                draggable:true,
+                title: titleText,
+                modal: true,
+                closeOnEscape: false,
+                open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+                buttons: {
+                    "<?php echo $this->__('Use The Address I\'ve Entered'); ?>" : function() {
+                        $j( this ).dialog( "close" );
+                        $('form-validate').address_valid.value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                        $('form-validate').submit();
+                    },
+                    "<?php echo $this->__('Use Validated Address'); ?>" : function() {
+                        if(candidateSwitcher()) {
+                            $j( this ).dialog( "close" );
+                            $('form-validate').submit();
+                        }
+                    }
+                }
+            });
+            $('dialog-candidates').update(content);
+        }
+
+        function showConfirmContinue(url,content)
+        {
+
+            var titleText = "<?php echo $this->__('No valid addresses found'); ?>";
+            $j("#dialog-candidates").dialog({
+                autoOpen: true,
+                height: "auto",
+                width: "auto",
+                draggable:true,
+                title: titleText,
+                modal: true,
+                closeOnEscape: false,
+                open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+                buttons: {
+                    "<?php echo $this->__('Edit The Address'); ?>" : function() {
+                        $j( this ).dialog( "close" );
+                    },
+                    "<?php echo $this->__('Use The Address I\'ve Entered'); ?>" : function() {
+                        $('form-validate').address_valid.value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                        $j( this ).dialog( "close" );
+                        $('form-validate').submit();
+
+                    }
+                }
+            });
+            $('dialog-candidates').update(content);
+        }
+
+        function candidateSwitcher() {
+
+            var selected = $('candidates').value;
+            if(selected == -1) {
+                $("address_valid").value = 0;
+                return false;
+            }
+            var form = $('form-validate');
+            var splitAddress = selected.split('|');
+
+            //define here to be populated below
+            var addressLine = '';
+            var addressLine2 = '';
+            var city = '';
+            var state = '';
+            var zip = '';
+            var countryId = '';
+            var addressType = '';
+
+            for(var i=0; i<splitAddress.length; i++) {
+                switch(i) {
+                    case 0: addressLine = splitAddress[i]; break;
+                    case 1: addressLine2 = splitAddress[i]; break;
+                    case 2: city = splitAddress[i]; break;
+                    case 3: state = splitAddress[i]; break;
+                    case 4: zip = splitAddress[i]; break;
+                    case 5: countryId = splitAddress[i]; break;
+                    case 6: addressType = splitAddress[i]; break;
+                }
+            }
+            $("street_1").value = addressLine;
+            $("street_2").value = addressLine2;
+            $("city").value = city;
+            $("region_id").value = state;
+            $("zip").value = zip;
+            $("country").value = countryId;
+            form.address_valid.value = 'valid';
+            form.destination_type.value = addressType;
+            return true;
+        }
+    });
+    //]]>
+</script>

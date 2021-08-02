@@ -1,0 +1,159 @@
+<layout>
+    <default>
+
+
+    </default>
+
+    <hautopart_model_index>
+        <reference name="root">
+            <action method="addBodyClass"><classname>make-page</classname></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/ymm_view.css</stylesheet></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_make" name="make-list" template="homebase/category/list.phtml">
+                <block type="hautopart/category_ListingYmm" name="category.partname" template="homebase/category/partname.phtml"/>
+                <block type="gr_popular/list" name="category.popular.product" template="popular/list.phtml"/>
+            </block>
+        </reference>
+        <reference name="before_footer">
+            <block type="cms/block" name="shop_by_category">
+                <action method="setBlockId">
+                    <block_id>shop-by-category</block_id>
+                </action>
+            </block>
+        </reference>
+    </hautopart_model_index>
+
+    <hautopart_model_model>
+        <reference name="root">
+            <action method="addBodyClass"><classname>make-model-page</classname></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/ymm_view.css</stylesheet></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_model" name="make-list" template="homebase/category/model/list.phtml">
+                <block type="hautopart/category_ListingYmm" name="category.partname" template="homebase/category/partname.phtml"/>
+                <block type="gr_popular/list" name="category.popular.product" template="popular/list.phtml"/>
+            </block>
+        </reference>
+        <reference name="before_footer">
+            <block type="cms/block" name="shop_by_category">
+                <action method="setBlockId">
+                    <block_id>shop-by-category</block_id>
+                </action>
+            </block>
+        </reference>
+    </hautopart_model_model>
+
+    <hautopart_model_ymm>
+        <reference name="head">
+            <reference name="head">
+                <action method="addCss"><stylesheet>css/ymm_view.css</stylesheet></action>
+            </reference>
+            <action method="addJs"><script>infinitescroll/infinite-scroll.pkgd.min.js</script></action>
+        </reference>
+        <reference name="root">
+            <action method="addBodyClass"><classname>make-model-year-page</classname></action>
+            <action method="addBodyClass"><classname>category-page</classname></action>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_year" name="ymm-list" template="homebase/category/custom.phtml">
+                <block type="hautopart/category_ListingYmm" name="category.partname" template="homebase/category/partname.phtml"/>
+                <block type="core/template" name="ymm.product.listing-test" template="homebase/category/ymmlisting.phtml"/>
+                <block type="gr_popular/list" name="category.popular.product" template="popular/list.phtml"/>
+            </block>
+        </reference>
+    </hautopart_model_ymm>
+
+    <hautopart_model_cat>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="addBodyClass"><classname>make-model-year-category-page</classname></action>
+            <action method="addBodyClass"><classname>category-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/listing_page.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/display_category" name="product-list" template="hauto/product/list.phtml">
+                <block type="hauto/layered_attributes2" name="layered-proxy" template="hauto/layered/attributes.phtml"></block>
+                <block type="hautopart/display_list_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="hautopart/display_list_pager" name="display_list_toolbar_pager"/>
+                    <!-- The following code shows how to set your own pager increments -->
+                    <!--
+                        <action method="setDefaultListPerPage"><limit>4</limit></action>
+                        <action method="setDefaultGridPerPage"><limit>9</limit></action>
+                        <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+                        <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+                        <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+                        <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+                        <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                    -->
+                </block>
+                <!--<action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>-->
+                <!--<action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>-->
+                <!--<action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>-->
+                <!--<action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>-->
+                <!--<action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>-->
+                <action method="setToolbarBlockName"><name>display_list_toolbar</name></action>
+            </block>
+        </reference>
+    </hautopart_model_cat>
+
+    <hautopart_model_sku>
+        <reference name="head">
+            <action method="addJs"><script>smartwave/jquery/plugins/slimscroll/jquery.slimscroll.js</script></action>
+        </reference>
+        <update handle="catalog_product_view"></update>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>megamenu/css/font-awesome.min.css</stylesheet></action>
+        </reference>
+    </hautopart_model_sku>
+
+    <hautopart_model_ymms>
+        <update handle="hautopart_model_sku"></update>
+    </hautopart_model_ymms>
+
+    <PRODUCT_TYPE_autopart translate="label" module="hautopart">
+        <label>Catalog Product View (Autopart)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_autopart>
+
+    <catalogsearch_result_index translate="label">
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

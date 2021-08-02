@@ -1,0 +1,44 @@
+<config>
+    <modules>
+        <Homebase_Shipping>
+            <version>0.0.1</version>
+        </Homebase_Shipping>
+    </modules>
+    <global>
+        <rewrite>
+            <homebase_shipping_checkout_onepagecontroller>
+                <from><![CDATA[#^/checkout/onepage/#]]></from> <!-- Mage_Checkout_OnepageController  -->
+                <to>/hshipping/checkout_onepage/</to> <!-- Homebase_Shipping_Checkout_OnepageController  -->
+            </homebase_shipping_checkout_onepagecontroller>
+        </rewrite>
+        <helpers>
+            <hshipping>
+                <class>Homebase_Shipping_Helper</class>
+            </hshipping>
+        </helpers>
+        <blocks>
+            <hshipping>
+                <class>Homebase_Shipping_Block</class>
+            </hshipping>
+            <checkout>
+                <rewrite>
+                    <onepage_shipping_method_available>Homebase_Shipping_Block_Checkout_Onepage_Shipping_Method_Available</onepage_shipping_method_available>
+                </rewrite>
+                <rewrite>
+                    <cart_shipping>Homebase_Shipping_Block_Checkout_Cart_Shipping</cart_shipping>
+                </rewrite>
+            </checkout>
+        </blocks>
+    </global>
+    <frontend>
+        <routers>
+            <hshipping>
+                <use>standard</use>
+                <args>
+                    <module>Homebase_Shipping</module>
+                    <frontName>hshipping</frontName>
+                </args>
+            </hshipping>
+        </routers>
+    </frontend>
+</config>

@@ -1,0 +1,24 @@
+<config>
+    <menu>
+        <grupdater module="grupdater">
+            <children>
+                <grcontent module="grcontent">
+                    <title>Content Template</title>
+                    <sort_order>3</sort_order>
+                    <children>
+                        <content>
+                            <title>Dynamic Content</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/content_index/index</action>
+                        </content>
+                        <page>
+                            <title>Dynamic Content Pages</title>
+                            <sort_order>2</sort_order>
+                            <action>adminhtml/content_page/index</action>
+                        </page>
+                    </children>
+                </grcontent>
+            </children>
+        </grupdater>
+    </menu>
+</config>

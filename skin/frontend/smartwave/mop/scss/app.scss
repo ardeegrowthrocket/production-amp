@@ -1,0 +1,52 @@
+/**
+    Settings
+ */
+@import 'settings/_color';
+@import 'settings/_mixin';
+@import 'settings/_bootstrap';
+
+/**
+    Styles
+ */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, html {
+  font-family: robotoregular;
+}
+p, .std{
+  font-family: robotoregular;
+  font-size: 16px;
+}
+.bold{
+  font-family: robotobold;
+}
+
+@import 'styles/_header';
+@import 'styles/_homebanner';
+@import 'styles/_footer';
+@import 'styles/_car_models';
+@import 'styles/_featured_models';
+@import 'styles/_about_us';
+@import 'styles/_shop_with_us';
+@import 'styles/_bestseller';
+@import 'styles/_shop_more_parts';
+@import 'styles/_must_have';
+@import 'styles/_home_description';
+@import 'styles/_shop_by_category';
+@import 'styles/_featured_products';
+@import 'styles/_ymm_selector';
+@import 'styles/_breadcrumbs';
+@import 'styles/_product_page';
+@import 'styles/_cart';
+@import 'styles/_checkout';
+@import 'styles/_category';
+@import 'styles/_popular_product';
+@import 'styles/_ymm';
+@import 'styles/_customer';
+
+
+@import 'styles/_responsive';

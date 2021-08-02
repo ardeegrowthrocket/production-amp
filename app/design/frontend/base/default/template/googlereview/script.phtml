@@ -1,0 +1,32 @@
+<?php
+$helper = Mage::helper('growthrocket_gtm/review');
+$isEnable = $helper->isEnabled();
+$merchantId = $helper->getMerchantId();
+$position = $helper->getPosition();
+?>
+
+<?php if(!empty($merchantId) && $isEnable): ?>
+<!-- BEGIN GCR Badge Code -->
+<script src="https://apis.google.com/js/platform.js?onload=renderBadge" async defer></script>
+<script>
+    window.renderBadge = function() {
+        var ratingBadgeContainer = document.createElement("div");
+        document.body.appendChild(ratingBadgeContainer);
+        window.gapi.load('ratingbadge', function() {
+            window.gapi.ratingbadge.render(
+                ratingBadgeContainer, {
+                    // REQUIRED
+                    "merchant_id": <?php echo $merchantId ?>,
+                    // OPTIONAL
+                    "position": "<?php echo $position ?>"
+                });
+        });
+    }
+</script>
+<script>
+    window.___gcfg = {
+        lang: 'en-US'
+    };
+</script>
+<!-- END GCR Badge Code -->
+<?php endif; ?>

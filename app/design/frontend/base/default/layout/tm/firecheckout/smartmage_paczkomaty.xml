@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<layout>
+    <firecheckout_index_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>smpaczkomaty/paczkomaty.js</script>
+            </action>
+            <action method="addJs" ifconfig="smpaczkomaty/frontend/addjquery">
+                <script>smpaczkomaty/jquery-1.10.0.min.noConflict.js</script>
+            </action>
+            <block type="core/text" name="paczkomaty_map" as="paczkomaty_map">
+                <action method="setText">
+                    <text><![CDATA[<script async src="https://geowidget.easypack24.net/js/sdk-for-javascript.js"></script>
+<link rel="stylesheet" type="text/css" href="https://geowidget.easypack24.net/css/easypack.css">]]></text>
+                </action>
+            </block>
+        </reference>
+        <reference name="checkout.onepage.shipping_method.available">
+            <action method="setTemplate">
+                <template>smpaczkomaty/shipping_method/available.phtml</template>
+            </action>
+            <block type="smpaczkomaty/paczkomaty" name="smpaczkomaty" template="smpaczkomaty/shipping_method/paczkomaty.phtml"/>
+        </reference>
+    </firecheckout_index_index>
+
+    <firecheckout_index_updatecheckout>
+        <reference name="checkout.shipping.method">
+            <action method="setTemplate">
+                <template>smpaczkomaty/shipping_method/available.phtml</template>
+            </action>
+            <block type="smpaczkomaty/paczkomaty" name="smpaczkomaty" template="smpaczkomaty/shipping_method/paczkomaty.phtml"/>
+        </reference>
+    </firecheckout_index_updatecheckout>
+</layout>

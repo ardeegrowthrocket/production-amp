@@ -1,0 +1,12 @@
+<?php $order = $this->getOrder() ?>
+<div class="entry-edit box-left">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Order Notes') ?></h4>
+    </div>
+    <fieldset>
+        <div id="mymodule_custom_block">
+            <?php echo $order->getOrderNotes() ?>
+        </div>
+    </fieldset>
+</div>
+<div class="clear"></div>

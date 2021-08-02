@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<grupdater_adminhtml_updaterbackend_index>
+		<reference name="content">
+			<block type="grupdater/adminhtml_import_edit"/>
+			<!--<block type="updater/adminhtml_updaterbackend" name="updaterbackend" template="updater/updaterbackend.phtml"/>-->
+		</reference>
+	</grupdater_adminhtml_updaterbackend_index>
+</layout>

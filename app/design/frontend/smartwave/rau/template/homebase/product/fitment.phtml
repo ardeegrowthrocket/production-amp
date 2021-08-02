@@ -1,0 +1,61 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/30/17
+ * Time: 4:21 PM
+ */
+
+$_product = $this->getProduct();
+$fitments = $this->getFitment($_product);
+$make = "";
+?>
+<?php if(count($fitments)> 0): ?>
+    <p id="fits-statement">This product fits the following RAM vehicles:</p>
+    <div class="fitment-guide-wrapper">
+        <table id="fitment-guide" class="data-table">
+            <thead>
+                <tr>
+                    <th><?php echo $this->__('Year'); ?></th>
+                    <th><?php echo $this->__('Model'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $ctr = 0; ?>
+                <?php if($this->isYmmUsed()): ?>
+                    <tr style="background:#e4f9de">
+                        <?php foreach($this->getYmmLabel() as $label): ?>
+                            <?php
+                            if($label == '1500') {
+                                $label = "1500 DS";
+                            }
+                            ?>
+                            <?php if($label !== 'Ram'):?>
+                                <td><?php echo $label; ?></td>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php $ctr++; ?>
+                <?php endif; ?>
+                <?php foreach($fitments as $fitment): ?>
+                    <?php $hideClass = ($ctr > 4) ? ' class="hide"' : ''; ?>
+                    <tr<?php echo $hideClass; ?> <?php if($fitment->getCombination() == $this->getMatchedCombination()){ echo 'style="background:#e4f9de"'; }?>>
+                        <td><?php echo $fitment->getYear(); ?></td>
+                        <td><?php echo $fitment->getModel(); ?></td>
+                    </tr>
+                    <?php $make = $fitment->getMake(); ?>
+                    <?php $ctr++; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if($ctr > 5): ?>
+        <div class="show-more-fitments"><a href="javascript:void(0);" class="btn-more-fitments show-more">Show More</a></div>
+    <?php endif; ?>
+    <script type="text/javascript">
+        // decorateTable("fitment-guide")
+    </script>
+<?php endif; ?>
+<script>
+    var productMake = "<?php echo $make ?>";
+</script>

@@ -1,0 +1,61 @@
+<?php
+$listing = $this->getParts();
+$ctr = 0;
+$limit = $this->getLimit();
+$total = $listing->count();
+$title = $this->getTitle();
+$titlefix = str_replace(" ","-","$title");
+$lowertitle = strtolower($titlefix);
+
+$imageSrc = Mage::getBaseUrl('media') . "category/{$lowertitle}.png";
+$isImageExist = Mage::helper('hauto/path')->checkFileExist($imageSrc);
+?>
+
+<div class="row">
+    <?php if($isImageExist): ?>
+    <div class="col-sm-12">
+        <img src="<?php echo $imageSrc ?>" alt="<?php echo $title ?>" width="100%" />
+    </div>
+    <?php endif; ?>
+    <div class="part-listing-title <?php echo $isImageExist == 1 ? 'has-image' : 'no-image' ?>">
+        <h1><?php echo $this->getTitle(); ?></h1>
+    </div>
+    <div class="listing-top-text">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+    </div>
+    <div class="part-listing-container">
+        <div class="col-sm-12">
+            <p>Choose from these available products:</p>
+            <?php foreach($listing as $item): ?>
+                <?php if($ctr % $limit == 0 ): ?>
+                    <ul class="col-xs-12 col-sm-3 col-md-3 parts-listing listing-group-<?php echo $ctr+1; ?>">
+                <?php endif; ?>
+                    <li>
+                        <a href="<?php echo $item->getLink(); ?>">
+                            <?php echo $item->getLabel(); ?>
+                        </a>
+                    </li>
+                <?php if($ctr % $limit == ($limit - 1) || ($ctr+1) == $total): ?>
+                    </ul>
+                <?php endif; ?>
+                <?php $ctr++; ?>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+    <div class="listing-bottom-text">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+    </div>
+</div>
+
+<div id="shop-cat">
+<?php echo $this->getLayout()->createBlock('hauto/home_shopby_category')->setTemplate('/hauto/home/shopby/category.phtml')->toHtml();
+?>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+         jQuery('#shop-cat').detach().insertBefore('.footer-container ');
+               
+    });
+  
+</script>

@@ -1,0 +1,74 @@
+<?php //echo $this->getChildHtml('sticky.nav') ?>
+<?php
+$helper = Mage::helper('hutility');
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+?>
+<div class="header-container type6">
+    <div class="top-links-container">
+        <div class="top-links container">
+            <div class="menu-icon"><a href="javascript:void(0)" title="<?php echo $this->__('Menu'); ?>"><i class="fa fa-bars"></i></a></div>
+            <div class="top-header-text col-sm-4 col-lg-4 text-left no-padding">
+                <?php echo $this->getChildHtml('topLinks'); ?>
+            </div>
+
+            <?php
+            $store_currency = $this->getChildHtml('store_currency');
+            $store_language = $this->getChildHtml('store_language');
+            $compare_link = $this->getChildHtml('compare_link');
+            ?>
+            <?php echo $store_currency; ?>
+            <?php if($store_currency && $store_language):?>
+            <?php endif; ?>
+            <?php //echo $store_language; ?>
+            <?php if(($store_currency || $store_language) && $compare_link):?>
+
+            <?php endif; ?>
+            <?php echo $compare_link; ?>
+            <div class="welcome-text col-sm-8 col-lg-5"><?php echo $this->getChildHtml('welcome') ?></div>
+            <div class="top-links-area col-sm-4 col-md-12 col-xs-12 col-lg-3">
+                <?php echo $this->getChildHtml('minicart'); ?>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <div class="header container-fluid">
+       <div class="container">
+           <!-- LOGO -->
+           <div class="row parent-row">
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 logo-container">
+                   <?php if ($this->getIsHomePage()):?>
+                           <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /><span>MOPAR</span> Genuine Parts</a>
+                   <?php else:?>
+                       <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /><span>MOPAR</span> Genuine Parts</a>
+                   <?php endif; ?>
+               </div>
+               <!-- LOGO -->
+               <!-- Search -->
+               <div class="header-search-box col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                   <div class="col-xs-12 col-sm-12">
+                       <?php echo $this->getChildHtml('topSearch'); ?>
+                   </div>
+
+                   <div class="col-xs-12 megamenu col-sm-4">
+                       <div class="header-container-parts-catalog">
+                           <div>
+                               <span class="label">Replacement Parts Catalog</span>
+                               <a href="https://parts.mopargenuineparts.com" target="_blank">View Parts Here</span> <i class="fa fa-wrench"></i></a>
+                           </div>
+                       </div> 
+                   </div>
+
+               </div>
+           </div>
+           <!-- Search -->
+       </div>
+    </div>
+    <!-- menu -->
+    <div class="menu-container">
+            <?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+    <!-- menu -->
+</div>
+<?php echo $this->getChildHtml('mobileMenu') ?>

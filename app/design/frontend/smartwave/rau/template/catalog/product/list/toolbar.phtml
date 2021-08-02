@@ -1,0 +1,49 @@
+<?php if($this->getCollection()->getSize()): ?>
+    <div class="toolbar">
+        <?php if( $this->isExpanded() ): ?>
+            <div class="sorter">
+
+                    <div class="col-md-12 col-sm-12 no-padding">
+                        <label><?php echo $this->__('Sort By') ?></label>
+                    </div>
+
+
+                    <div class="col-md-12 col-sm-12 no-padding">
+                        <select onchange="setLocation(this.value)" rel="nofollow">
+                            <option value="<?php echo $this->getOrderUrl('price','desc') ?>" <?php if($this->getCurrentDirection() =='desc' && $this->isOrderCurrent('price')): ?> selected="selected" <?php endif; ?>>
+                                <?php echo $this->__('Price (High to Low)'); ?>
+                            </option>
+                            <option value="<?php echo $this->getOrderUrl('price','asc') ?>" <?php if($this->getCurrentDirection() =='asc' && $this->isOrderCurrent('price')): ?> selected="selected" <?php endif; ?>>
+                                <?php echo $this->__('Price (Low to High)'); ?>
+                            </option>
+                            <option value="<?php echo $this->getOrderUrl('name','asc') ?>" <?php if($this->getCurrentDirection() =='asc' && $this->isOrderCurrent('name')): ?> selected="selected" <?php endif; ?>">
+                            <?php echo $this->__('Name (Ascending)'); ?>
+                            </option>
+                            <option value="<?php echo $this->getOrderUrl('name','desc') ?>" <?php if($this->getCurrentDirection() =='desc' && $this->isOrderCurrent('name')): ?> selected="selected" <?php endif; ?>>
+                                <?php echo $this->__('Name (Descending)'); ?>
+                            </option>
+                        </select>
+                    </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="pager">
+                <?php echo $this->getPagerHtml() ?>
+            </div>
+            <div class="limiter">
+                <div class="col-md-8 no-padding" style="padding-top:10px;">
+                    <label><?php echo $this->__('Results Per Page') ?></label>
+                </div>
+                <div class="col-md-4 no-padding">
+                    <select onchange="setLocation(this.value)" rel="nofollow">
+                        <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                            <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                                <?php echo $_limit ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        <?php endif; ?>
+    </div>
+<?php endif ?>

@@ -1,0 +1,78 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "Here are the available accessories for your vehicle:";
+}
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+?>
+    <!--YMM FORM -->
+<?php if(count($list) > 0): ?>
+    <div class="container">
+        <div class="filter-title-type-2 test-year" style="margin-top:10px;">
+            <span class="title-line">&nbsp;</span>
+            <h1 class="section-title" style="width: 490px;text-align: center;font-weight: 600;color: #085069"><?php echo $this->getAutoName(); ?></h1>
+            <span class="title-line">&nbsp;</span>
+        </div>
+        <?php if (!empty($subtitle)) : ?>
+        <p style="text-align:center;"><?php echo $subtitle; ?></p>
+        <?php endif; ?>
+        <div class="listing-top-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+        </div>
+        <div id="weekly_featured_product" class="hide-addtocart hide-addtolinks owl-middle-outer-narrow" style="margin: 50px -10px 0">
+            <div class="row product-list-container">
+                <?php foreach ($list as $item): ?>
+                    <div class="col-sm-3">
+                        <h3>
+                            <a href="<?php echo $item->getLink(); ?>"><?php echo $item->getOptionLabel(); ?></a>
+                        </h3>
+                        <div class="product-item-container">
+                            <a href="<?php echo $item->getLink();  ?>">
+                                <div class="product-item-thumb">
+                                    <?php $path = '#'; ?>
+                                    <?php if($this instanceof Homebase_Autopart_Block_Category_Year):?>
+                                       <?php $path = $this->getImage($item->getOptionId()) ?>
+                                    <?php endif; ?>
+                                    <img src="<?php echo $path; ?>" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                    if($rowCount ==3){
+                        echo '</div>';
+                        echo '<div class="row product-list-container">';
+                        $rowCount = 0;
+                    }else{
+                        $rowCount++;
+                    }
+                    ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="listing-bottom-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,22 @@
+.home-bottom-description{
+  margin-top: 60px;
+  .item{
+    padding-left: 0px;
+    text-align: left;
+    margin-top: 20px;
+
+    h3{
+      color: $tertiary-bg-color;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    p{
+      font-size: 16px;
+
+      span.bold{
+        color: $tertiary-bg-color;
+      }
+    }
+  }
+}

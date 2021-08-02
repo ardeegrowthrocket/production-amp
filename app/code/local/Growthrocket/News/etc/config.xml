@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Growthrocket_News>
+            <version>0.1.0</version>
+        </Growthrocket_News>
+    </modules>
+    <frontend>
+        <routers>
+            <news>
+                <use>standard</use>
+                <args>
+                    <module>Growthrocket_News</module>
+                    <frontName>grnews</frontName>
+                </args>
+            </news>
+        </routers>
+    </frontend>
+    <global>
+        <helpers>
+            <news>
+                <class>Growthrocket_News_Helper</class>
+            </news>
+        </helpers>
+        <blocks>
+            <news>
+                <class>Growthrocket_News_Block</class>
+            </news>
+        </blocks>
+    </global>
+</config> 

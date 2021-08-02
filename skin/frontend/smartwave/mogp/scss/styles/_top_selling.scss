@@ -1,0 +1,44 @@
+.top-selling-categories{
+
+  h2{
+    font-size: 36px;
+    color: $h2-text-color;
+  }
+
+  .grid{
+    margin-top: 30px;
+    position: relative;
+
+    img{
+      width: 100%;
+    }
+
+    .content {
+      position: absolute;
+      bottom: 0;
+      padding-left: 30px;
+      padding-bottom: 30px;
+      width: 80%;
+
+      ul{
+        li{
+          text-align: left;
+          font-size: 16px;
+          font-family: 'robotolight';
+          padding: 5px 0px;
+        }
+      }
+
+      h3{
+        color: $white-color;
+        font-size: 28px;
+        margin-bottom: 15px;
+        text-align: left;
+        line-height: 32px;
+      }
+      a{
+        color: $white-color;
+      }
+    }
+  }
+}

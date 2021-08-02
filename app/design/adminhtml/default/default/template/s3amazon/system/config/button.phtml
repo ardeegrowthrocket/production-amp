@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function validateData() {
+        var new_bucket = document.getElementById('s3amazon_s3_amazon_options_bucket_key').value;
+        var secretkey  = document.getElementById('s3amazon_s3_amazon_options_secret_key').value;
+        var accesskey  = document.getElementById('s3amazon_s3_amazon_options_access_key').value;
+        var region  = document.getElementById('s3amazon_s3_amazon_options_region').value;
+        if(secretkey=='' || accesskey=='' || region == ''){
+            if(secretkey=='' && accesskey=='' && region == '')
+                alert('Please Enter Secret Key Access Key and Region.');
+            else if(accesskey=='')
+                alert('Please Enter Access Key.');
+            else if(secretkey=='')
+                alert('Please Enter Secret Key.');
+            else
+                alert('Please Enter Region.');
+        }else{
+            new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('s3amazon/adminhtml_s3Amazon/check'); ?>', {
+                method:     'get',
+                parameters: {
+                    'secretkey':secretkey,
+                    'accesskey':accesskey,
+                    'new_bucket':new_bucket,
+                    'region':region,
+                },
+                onSuccess: function(transport){
+                    if (transport.responseText==1){
+                        alert('Bucket Available');
+                        document.getElementById('s3amazon_checkbox').value = 1;
+                    }else{
+                        alert('Bucket Not Available');
+                        document.getElementById('s3amazon_checkbox').value = '';
+                        document.getElementById('s3amazon_s3_amazon_options_bucket_key').value = '';
+                    }
+                }
+            });
+        }
+    }
+    //]]>
+</script>
+ 
+<?php echo $this->getButtonHtml() ?>

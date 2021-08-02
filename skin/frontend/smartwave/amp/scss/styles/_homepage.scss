@@ -1,0 +1,28 @@
+
+#homepage-bestseller{
+  .owl-controls{
+    .owl-buttons{
+      text-align: center;
+
+      .owl-prev,.owl-next{
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.owl-theme .owl-controls .owl-buttons div {
+  color: #FFF;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  margin: 5px;
+  padding: 3px 10px;
+  font-size: 12px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  background: #869791;
+  filter: Alpha(Opacity=50);
+  opacity: 0.5;
+}

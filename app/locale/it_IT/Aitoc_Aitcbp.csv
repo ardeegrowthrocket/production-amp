@@ -1,0 +1,86 @@
+"General Information","Informazione generale"
+"Group Name","Nome del Gruppo"
+"Markup Type","Tipo di Sovrapprezzo"
+"Markup Amount","Importo di Sovrapprezzo"
+Status,Status
+Active,Attivo
+Inactive,Passivo
+"Customer Groups","Gruppi di Clienti"
+ID,ID
+Name,Nome
+SKU,SKU
+Price,Prezzo
+"Group Information","Informazione del Gruppo"
+General,Generale
+"Group Products","Prodotti del Gruppo"
+"Save Group","Salvare Gruppo"
+"Delete Group","Eliminare Gruppo"
+"Save And Continue Edit","Salvare e Continuare a Modificare"
+Alert,Allarme
+"Add Group","Aggiungere Gruppo"
+"Edit Group '%s'","Modificare Gruppo '%s'"
+"Group Title","Titolo del Gruppo"
+Type,Tipo
+Fixed,Fisso
+Percent,Percentuale
+Amount,Importo
+Action,Azione
+Edit,Modificare
+Actions,Azioni
+Select,Scegliere
+"Increase Markup","Aumentare Sovrapprezzo"
+"Decrease Markup","Diminuire Sovrapprezzo"
+"Increase Percent Markup","Aumentare Percentuale di Sovrapprezzo"
+"Decrease Percent Markup","Diminuire Percentuale di Sovrapprezzo"
+"Increase Fixed Markup","Aumentare Sovrapprezzo Fisso"
+"Decrease Fixed Markup","Diminuire Sovrapprezzo Fisso"
+"Increase/decrease by ","Aumentare/diminuire di "
+"Stop further rules processing","Smettere di compilare regole"
+Yes,Si`
+No,No
+"day (s)","giorno (i)"
+"month (s)","mese (i)"
+"year (s)","anno (i)"
+is,e`
+"is not","non e`"
+"equals or greater than","e` uguale o piu` di"
+"equals or less than","e` uguale o meno di"
+"greater than","piu` di"
+"less than","meno di"
+"is one of","e` uno di"
+"is not one of","non e` uno di"
+"Rule Name","Nome della Regola"
+Group,Gruppi
+Priority,Priorita`
+"Rule Information","Informazione su Regola"
+Conditions,Condizioni
+"Save Rule","Salvare Regola"
+"Delete Rule","Eliminare Regola"
+"Add Rule","Aggiungere Regola"
+"Edit Rule '%s'","Modificare Regola '%s'"
+"Rule Groups","Regole di Gruppi"
+"Manage Groups","Dirigere Gruppi"
+"Manage Automatic Price Rules","Gestire le Regole Prezzo Automatico"
+"Group manager","Manager delle Regole"
+Catalog,Catalogo
+"Cost Based Price","Prezzo Basato sul Costo "
+"New Group","Gruppo Nuovo"
+"Group does not exist","Gruppo non esiste"
+"Group was successfully saved","Gruppo e` stato salvato"
+"Item was successfully deleted","Articolo e` stato cancellato"
+"Rules manager","Manager di Regole"
+"New Rule","Regola Nuova"
+"Rule does not exist","Regola non esiste"
+"Rule was successfully saved","Regola e` stata salvata"
+"Automatic Pricing","Calcolo dei Prezzi Automatico"
+Groups,Gruppi
+Rules,Regole
+"Delivery Date","Data di consegna"
+"Automatic Pricing Settings","Impostazioni di Calcolo dei Prezzi Automatico"
+"Automatic Pricing Enabled by Default","Calcolo dei Prezzi Automatico Attivato per Default"
+Disabled,Disattivato
+inactive,inattivo
+"Automatic Pricing Group","Gruppo di Calcolo dei Prezzi Automatico"
+"If revenue for the last","Se entrate per l'ultimo"
+"Cost based price","Prezzo Basato sul Costo "
+"Tier price","Prezzo tier"

@@ -1,0 +1,18 @@
+<config>
+    <modules>
+        <Growthrocket_ImportExport>
+            <version>0.1.0</version>
+        </Growthrocket_ImportExport>
+    </modules>
+    <global>
+        <importexport module="importexport">
+            <import_product_types>
+                <autopart>importexport/import_entity_product_type_simple</autopart>
+            </import_product_types>
+            <export_product_types>
+                <autopart>importexport/export_entity_product_type_simple</autopart>
+            </export_product_types>
+        </importexport>
+
+    </global>
+</config>

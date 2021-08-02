@@ -1,0 +1,49 @@
+.products-grid .item .standalone-bottomline{
+display: flex;
+justify-content: center;
+padding:10px 0;
+}
+
+.prod-detail-container, .yotpo-bottom-container{
+    display: inline-block;
+}
+.yotpo-bottom-container{
+    margin-left: 20px;
+}
+.yotpo .write-review .connect-wrapper{
+    padding-left: 0 !important;
+}
+.yotpo .write-review .socialize-wrapper{
+    display: none !important;
+}
+
+.products-grid .item .standalone-bottomline {
+    justify-content: left;
+}
+
+.small-review{
+    margin-top: 10px;
+}
+.small-review span.yotpo-stars{
+    width: auto;
+}
+@media (max-width: 767px) {
+    .yotpo-review .yotpo .text-m {
+        font-size: 12px !important;
+    }
+    .yotpo-bottom-container{
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+    .yotpo .yotpo-regular-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .yotpo .form-group .form-element .y-input, .yotpo .write-review .connect-wrapper .form-element .y-input {
+        width: 95% !important;
+    }
+}
+
+

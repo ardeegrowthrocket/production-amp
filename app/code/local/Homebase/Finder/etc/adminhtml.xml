@@ -1,0 +1,13 @@
+<config>
+    <menu>
+        <!--<catalog>-->
+            <!--<children>-->
+                <!--<hfinder>-->
+                    <!--<title>hFinder</title>-->
+                    <!--<sort_order>200</sort_order>-->
+                    <!--<action>adminhtml/homebase_index/index</action>-->
+                <!--</hfinder>-->
+            <!--</children>-->
+        <!--</catalog>-->
+    </menu>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <grupdater module="grupdater">
+            <children>
+                <grhtmltitle module="grhtml">
+                    <title>Dynamic Page Title</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/html_index/index</action>
+                </grhtmltitle>
+            </children>
+        </grupdater>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <grupdater translate="title" module="grupdater">
+                        <children>
+                            <grhtmltitle translate="title">
+                                <title>Dynamic Page Title</title>
+                                <sort_order>10</sort_order>
+                            </grhtmltitle>
+                        </children>
+                    </grupdater>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

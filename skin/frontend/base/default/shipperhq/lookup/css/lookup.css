@@ -1,0 +1,23 @@
+.shipperhq-lookup-suburb {
+    z-index: 999;
+}
+.shipperhq-lookup-suburb ul {
+    border: 1px solid #5c7989;
+    background-color: #f9f5f0;
+}
+.shipperhq-lookup-suburb li {
+    border-bottom: 1px solid #f4eee7;
+    margin-bottom: 5px;
+    padding: 2px 8px 1px 8px;
+    cursor: pointer;
+}
+.shipperhq-lookup-suburb li .amount {
+    float: right;
+    font-weight: bold;
+}
+.shipperhq-lookup-suburb li.odd {
+    background-color: #fffefb;
+}
+.shipperhq-lookup-suburb li.selected {
+    background-color:#f7e8dd;
+}

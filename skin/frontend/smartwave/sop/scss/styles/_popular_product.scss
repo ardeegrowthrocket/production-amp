@@ -1,0 +1,52 @@
+.popular-products{
+  margin-top: 50px;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  background-color: $grey-color-6;
+
+  .heading {
+    position: relative;
+    margin-bottom: 40px;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 0px;
+      position: relative;
+      overflow: hidden;
+      @include secondary-font(32px,700);
+      color: $primary-bg-color;
+    }
+  }
+
+  .item{
+    padding: 25px;
+    background-color: $white-color;
+    @include border-radius();
+    min-height: 360px;
+
+    .price{
+      text-align: left;
+      font-size: 20px;
+      font-family: robotobold;
+      color: $primary-bg-color;
+      margin-top: 20px;
+
+    }
+    .title{
+      a{
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        margin: 10px 0px 10px;
+        line-height: 22px;
+        color: $grey-color-3;
+        font-family: robotobold;
+      }
+    }
+    .part_name{
+      text-align: left;
+      color: $grey-primary;
+      font-size: 12px;
+    }
+  }
+}

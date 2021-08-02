@@ -1,0 +1,42 @@
+<?php
+/**
+ * Cost Based Pricing
+ *
+ * @category     :    Aitoc
+ * @package      :     Aitoc_Aitcbp
+ * @version      1.2.5
+ * @license      :     x6dgeRdG539W9ePB2iV0BoCBVG45lQWBh3dhvwjZdt
+ * @copyright    :   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+?>
+<?php $productId = $this->getRequest()->getParam('id');
+$round           = 0;
+$CbpGroup        = null;
+if ($productId) {
+    $CbpGroup = Mage::getModel('catalog/product')->load($productId)->getCbpGroup();
+} ?>
+<script type="text/javascript">
+    //<![CDATA[
+    <?php $_groups = $this->getGroups(); ?>
+    // types
+    var cbpTypes = {};
+    <?php foreach ($_groups as $_group): ?>
+    <?php if ($CbpGroup == $_group->getEntityId() && $CbpGroup) {
+        $round = $_group->getIsRound();
+    }?>
+    cbpTypes['<?php echo $_group->getId() ?>'] = <?php echo $_group->getCbpType() ?>;
+    <?php endforeach; ?>
+    // amounts
+    var cbpAmounts = {};
+    <?php foreach ($_groups as $_group): ?>
+    cbpAmounts['<?php echo $_group->getId() ?>'] = <?php echo $_group->getAmount() ?>;
+    <?php endforeach; ?>
+    cbpLabel = '<?php echo Mage::helper('aitcbp')->__('Cost based price') ?>';
+    cbpTierLabel = '<?php echo Mage::helper('aitcbp')->__('Tier price') ?>';
+    currencyCode = '[<?php echo $this->_getCurrencyCode() ?>]';
+    cpbRound = 0;
+    <?php if ($round):?>
+    cpbRound = <?php echo $round ?>;
+    <?php endif?>
+    //]]>
+</script>

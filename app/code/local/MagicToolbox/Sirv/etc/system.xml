@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <sirv translate="label" module="sirv">
+            <label><![CDATA[<img height="16" src="//sirv.sirv.com/website/sirv-logo-dark-blue.png?scale.height=16&canvas.height=16&canvas.color=%23ffffff00" alt="Sirv" />&nbsp;]]></label>
+            <tab>general</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <notice translate="label">
+                    <label>Sirv for Magento</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>sirv/system_config_form_fieldset_notice</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <comment><![CDATA[Accelerate your website with faster loading images using the Sirv CDN. <a href="https://sirv.com/" target="_blank">About Sirv</a> | <a href="https://my.sirv.com/#/contact" target="_blank">Get support</a>]]></comment>
+                </notice>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Sirv</label>
+                            <comment><![CDATA[<b>If Yes</b>, images will be served from your Sirv account.<br/><b>If No</b>, images will be served from your server.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <network translate="label">
+                            <label>Network</label>
+                            <comment><![CDATA[<b>Sirv CDN</b> delivers your images faster, from a global network of servers.<br/><b>Sirv direct</b> delivers images only from the primary Sirv datacentre.<br/><a target="_blank" href="https://my.sirv.com/#/account/settings">Learn more</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sirv/source_network</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </network>
+                        <сustom_domain translate="label">
+                            <label>Custom domain</label>
+                            <comment><![CDATA[Serve files from your own domain, via the Sirv CDN. You must add a CNAME record to your DNS records, to point your domain to domain name specified in <a target="_blank" href="https://my.sirv.com/#/browse">your Sirv account</a>. You must also provide an SSL certificate for the domain.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </сustom_domain>
+                        <!--
+                        <sirv_image_processing translate="label">
+                            <label>Optimize from originals</label>
+                            <comment><![CDATA[<b>If Yes</b>, Sirv will deliver perfectly resized and optimized images.<br/><b>If No</b>, Sirv will deliver the Magento resized images with weaker optimization.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sirv/source_imageprocessing</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sirv_image_processing>
+                        -->
+                        <magento_watermark translate="label">
+                            <label>Use Magento watermark</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magento_watermark>
+                        <image_folder translate="label">
+                            <label>Folder name on Sirv</label>
+                            <comment><![CDATA[Images will be copied to this folder in <a target="_blank" href="https://my.sirv.com/#/browse">your Sirv account</a>.<br/>The folder will be automatically created by Sirv.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image_folder>
+                        <profile translate="label">
+                            <label>Default profile</label>
+                            <comment><![CDATA[Select a profile to change the image style. Use it to add watermarks, text overlays or other profile effects. Create or change profiles on your <a target="_blank" href="https://my.sirv.com/#/profiles/">Sirv profiles page</a>.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>sirv/system_config_form_field_select_profile</frontend_model>
+                            <source_model>sirv/source_profile</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </profile>
+                        <flush translate="label">
+                            <label>Flush Cache</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>sirv/system_config_form_field_button_flush</frontend_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </flush>
+                        <synchronize translate="label">
+                            <label>Synchronize Media Gallery</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>sirv/system_config_form_field_button_synchronize</frontend_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </synchronize>
+                    </fields>
+                </general>
+                <s3 translate="label">
+                    <label>Sirv account</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <comment><![CDATA[Get your S3 access credentials from <a href="https://my.sirv.com/#/account/settings" target="_blank">your Sirv account</a>. New users can <a href="https://my.sirv.com/#/signup" target="_blank">create an account</a>.]]></comment>
+                    <fields>
+                        <bucket translate="label">
+                            <label>Bucket</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bucket>
+                        <key translate="label">
+                            <label>Access Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </key>
+                        <secret translate="label">
+                            <label>Secret key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </secret>
+                    </fields>
+                </s3>
+            </groups>
+        </sirv>
+    </sections>
+</config>

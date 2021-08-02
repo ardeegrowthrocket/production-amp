@@ -1,0 +1,27 @@
+<?php
+   $lastOrderId = Mage::getSingleton('checkout/session')
+                   ->getLastRealOrderId();
+    $orderId = Mage::getModel('sales/order')
+               ->loadByIncrementId($lastOrderId);
+			   
+	$grandtotal = str_replace(",","",number_format($orderId->getGrandTotal(),2));
+?>
+
+
+<!-- Google Code for Website Conversions Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 995892204;
+var google_conversion_label = "hW_bCJHn7FgQ7Lfw2gM";
+var google_conversion_value = "<?php echo $grandtotal; ?>";
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/995892204/?value=<?php echo $grandtotal; ?>&currency_code=USD&label=hW_bCJHn7FgQ7Lfw2gM&guid=ON&script=0"/>
+</div>
+</noscript>

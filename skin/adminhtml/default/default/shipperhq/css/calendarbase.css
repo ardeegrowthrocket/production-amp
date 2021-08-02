@@ -1,0 +1,135 @@
+/* Old Calendar Styles */
+
+.left {float:left;}
+    
+.right {float: right;}
+
+#co-shipping-method-form .sp-methods dd .location_label label {
+    min-width: 100px;
+    background: none !important;
+    padding: 0;
+}
+
+.location.left {width:100%;}
+
+.location.left .input-box {
+	margin-bottom: 8px;
+	float: none !important;
+	display: block !important;
+	}
+
+.location_label {display:inline-block;}
+
+.location label {margin-right:10px;}
+
+.overlay-container {
+    position:relative;
+}
+
+.overlay-calendar {
+    position:absolute;
+    width:19.2em;
+    visibility: hidden;
+    z-index: 101;
+}
+
+.overlay-text {
+    position:relative;
+    top:45%;
+    left:15%;
+    font-size:16px;
+    font-weight:bold;
+}
+
+
+/*  Calendar Styles V2 */
+.opc .shq-custom-method select,
+#onestepcheckout-form .shq-custom-method select,
+.multiple-checkout .shq-custom-method select {max-width: 100% !important; width: 100% !important; }
+
+.opc .shq-custom-method select,
+.opc .shq-custom-method input,
+#onestepcheckout-form .shq-custom-method select,
+#onestepcheckout-form .shq-custom-method input,
+.multiple-checkout .shq-custom-method select,
+.multiple-checkout .shq-custom-method input {
+	font-size: 12px !important;
+	height: 30px !important;
+	border: 1px solid #ddd !important;
+	max-width: 100%;
+	float: left;
+	color:#555;
+	line-height: 30px;
+	padding-left: 5px;
+	padding-right: 5px;
+	}
+
+.calendar-blk, .clock-blk, .location-blk {fill:#555;}
+
+.shq-custom-method {
+	width: 100%;
+	max-width: 480px;
+	display: inline-block;
+	color:#555 !important;
+}
+.shq-optn-50l,
+.shq-optn-50r,
+.shq-optn-100 {
+	float: left;
+	margin-bottom: 20px;
+	font-size: 12px;
+}
+
+.shq-optn-50l {width: 46%; padding-right: 4%; box-sizing: content-box;}
+.shq-optn-50r {width: 46%; padding-left: 4%; box-sizing: content-box;}
+.shq-optn-100 {width: 100%;}
+
+#onestepcheckout-form .shq-optn-50l,
+.multiple-checkout .shq-optn-50l {width: 100%;padding-right:0;}
+
+#onestepcheckout-form .shq-optn-50r,
+.multiple-checkout .shq-optn-50r {width: 100%;padding-left:0;}
+
+.shq-custom-method label.shq-title,
+.shq-custom-method label.shq-input {
+	padding:0 !important;
+	background: none !important;
+}
+.shq-custom-method label.shq-input input {width: auto; float: left;}
+.shq-custom-method label.shq-title:hover,
+.shq-custom-method label.shq-input:hover {
+	background:none !important;
+}
+
+.shq-title,
+.shq-input {
+	float: left;
+	width:100%;
+	font-weight: normal !important;
+	color: #555 !important;
+	font-size: 12px;
+}
+
+.shq-input {margin-top:5px;}
+.shq-input .shq-input {margin-top:0;}
+.shq-input .shq-input .shq-input {margin-top:0;}
+
+/* These are only used on frontend
+
+.shq-ico-calendar {
+	background: transparent url('../../images/shipperhq/calendar-blk.svg') center center no-repeat;
+}
+
+.shq-ico-clock {
+	background: transparent url('../../images/shipperhq/clock-blk.svg') center center no-repeat;
+}*/
+
+.shq-ico-r  {
+	margin: 8px 0 0 5px !important;
+}
+
+@media only screen and (max-width: 480px) {
+	
+	.shq-optn-50l {width: 100%; padding-right: 0;}
+	.shq-optn-50r {width: 100%; padding-left: 0;}
+}

@@ -1,0 +1,132 @@
+<?php
+/**
+Made by Smartwave.
+ */
+?>
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$footer = Mage::getStoreConfig('porto_settings/footer',$code);
+$oldUrl =  $this->getFormActionUrl();
+
+/*
+6LcjVpwUAAAAAHJNbhcAW-hhyOXsWk_CFCZa0A9R
+
+6LcjVpwUAAAAANGeQNV5_bQlMFyki1wk9yrmeya5
+
+
+6LdBVpwUAAAAAN91Mgb_W3K1IkYxubDJEzx9flQG
+6LdBVpwUAAAAAKnaKDhlvhfdARbGNnkLPHCmK23H
+*/
+?>
+<div class="block block-subscribe">
+<style>
+.grecaptcha-badge{
+    display:none;
+}
+
+.block.block-subscribe .input-box div {
+    display: none;
+}
+
+
+</style>
+    <!-- <div class="block-title">
+        <strong><span><?php //echo $footer['footer_newsletter_title']; ?></span></strong>
+    </div> -->
+    <form action="<?php echo $this->getUrl('news/index/index'); ?>" onsubmit="return ajaxNewsletter()" method="post" id="footer-newsletter-validate-detail">
+        <div class="block-content">
+            <div class="input-box" style="margin-top:0">
+                <!-- <p class="label"><?php //echo $this->__('Enter your e-mail Address'); ?></p> -->
+                <input type="text" name="email" id="newsletter_footer" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text" placeholder="email@email.com" />
+                <button title="<?php echo $this->__('Subscribe') ?>" class="button"><span><span><?php echo $this->__('Subscribe Now') ?></span></span></button>
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        //<![CDATA[
+        //        var footernewsletterSubscriberFormDetail = new VarienForm('footer-newsletter-validate-detail');
+
+        var AjaxVarienForm = Class.create(VarienForm,{
+            ajaxSubmit : function(url){
+                var input = $('newsletter_footer');
+                var parent = Element.up(input);
+                var messageElement = new Element('p');
+                var isEnableCaptcha = '<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('newsletter') ?>';
+
+                if(validateEmail($(input).value) && $(input).value !== ''){
+
+                    var subscribeNewsletter = function(token) {
+                        new Ajax.Request(url, {
+                            method: 'post',
+                            parameters: {email: $('newsletter_footer').value, token:token},
+                            onComplete: function (response) {
+                                var message = $(parent).previous("p");
+                                if (typeof message == 'undefined') {
+                                    Element.insert(parent, {
+                                        before: messageElement,
+                                    });
+                                    message = messageElement;
+                                }
+                                if (response.status == 200) {
+                                    Element.addClassName(message, 'success');
+                                    Element.update(message, response.responseJSON.msg);
+                                    Element.removeClassName(message, 'error');
+                                } else {
+                                    Element.addClassName(message, 'error');
+                                    Element.update(message, response.responseJSON.msg);
+                                    Element.removeClassName(message, 'success');
+                                }
+                                $(message).show();
+                                setTimeout(function () {
+                                    $(message).fade();
+                                }, 5000);
+                            }
+                        });
+                    };
+
+                    if(isEnableCaptcha){
+                        grecaptcha.ready(function() {
+                            grecaptcha.execute('<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>', {action: 'submit_newsletter'}).then(function(token) {
+                                subscribeNewsletter(token);
+                            });
+                        });
+
+                    }else {
+                        subscribeNewsletter('');
+                    }
+
+
+                }else{
+                    var message = $(parent).previous("p");
+                    if(typeof message == 'undefined'){
+                        Element.insert(parent,{
+                            before : messageElement,
+                        });
+                        message = messageElement;
+                    }
+                    Element.addClassName(message, 'error');
+                    Element.update(message, 'Please enter a valid email address.');
+                    Element.removeClassName(message,'success');
+                    $(message).show();
+                    setTimeout(function(){
+                        $(message).fade();
+                    },5000);
+                }
+                return false;
+            }
+        });
+        function ajaxNewsletter(){
+            var footernewsletter = new AjaxVarienForm('footer-newsletter-validate-detail');
+            footernewsletter.ajaxSubmit("<?php echo $this->getUrl('news/index/index'); ?>");
+            setNewsletterCookie();
+            return false;
+        }
+        function validateEmail(v){
+            return Validation.get('IsEmpty').test(v) || /^([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*@([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*\.(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]){2,})$/i.test(v);
+        }
+
+        //]]>
+    </script>
+</div>

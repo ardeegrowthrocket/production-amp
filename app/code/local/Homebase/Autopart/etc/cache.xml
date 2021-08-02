@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <containers>
+        <hautopart_ymm_infoblock>
+            <block>hautopart/ymm</block>
+            <container>Mirasvit_Fpc_Model_Container_Base</container>
+            <depends></depends>
+            <in_app>0</in_app>
+        </hautopart_ymm_infoblock>
+        <hautopart_cache_buster>
+            <block>hautopart/cache_buster</block>
+            <container>Mirasvit_Fpc_Model_Container_Phtmlblock</container>
+            <depends></depends>
+            <in_app>0</in_app>
+        </hautopart_cache_buster>
+        <hautopart_html_wrapper>
+            <block>page/html_wrapper</block>
+            <name>top.container</name>
+            <container>Mirasvit_Fpc_Model_Container_Base</container>
+            <depends></depends>
+            <in_app>0</in_app>
+        </hautopart_html_wrapper>
+    </containers>
+</config>

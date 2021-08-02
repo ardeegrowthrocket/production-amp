@@ -1,0 +1,180 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/4/17
+ * Time: 8:58 PM
+ */
+
+class Homebase_Autopart_Block_Category_Year extends Mage_Core_Block_Template implements Homebase_Autopart_Block_Category_CategoryInterface {
+
+    /** @var  Homebase_Autopart_Helper_Parser $_helper */
+    protected $_helper;
+
+    /** @var  Homebase_Autopart_Helper_Data $_helper */
+    protected $_dataHelper;
+
+    /** @var  Mage_Core_Model_Session */
+    //protected $_session;
+
+    const AUTO_TYPE_ATTRIBUTE_ID = 251;
+    public function _construct(){
+        parent::_construct();
+        $this->_helper  = Mage::helper('hautopart/parser');
+        $this->_dataHelper = Mage::helper('hautopart');
+        //$this->_session = Mage::getSingleton('core/session');
+    }
+    
+    protected function _prepareLayout(){
+        $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+        $params = unserialize($this->getRequest()->getParam('ymm_params'));
+        $size = count($params);
+        $ctr = 0;
+        if($breadcrumbs){
+            $breadcrumbs->addCrumb('home', array(
+                'label' => $this->__('Home'),
+                'title' => $this->__('Go to Home Page'),
+                'link'  => Mage::getBaseUrl()
+            ));
+            foreach($params as $ndx=> $value){
+                $ctr++;
+                $label = $this->_helper->getLabel($value);
+                $breadcrumbs->addCrumb('ymm-' . $ndx, array(
+                    'label' => strtoupper($label),
+                    'title' => $label,
+                    'link'  => (($ctr < $size) ? $this->_helper->getLink($label,$ndx) : '')
+                ));
+            }
+        }
+        return parent::_prepareLayout();
+    }
+    
+    public function getList()
+    {
+        // TODO: Implement getList() method.
+        $params = unserialize($this->getRequest()->getParam('ymm_params'));
+
+        /** @var Homebase_Autopart_Model_Resource_Combination_Collection $collection */
+        $collection = Mage::getModel('hautopart/mix')->getCollection();
+        foreach($params as $key => $val){
+            $collection->addFieldToFilter($key,$val);
+        }
+
+
+
+        if($collection->count() == 0)
+            return;
+        $productIds = $collection->getColumnValues('product_id');
+//        $categories = array();
+        $auto_categories = array();
+
+        foreach($productIds as $productId){
+
+            $productCategories = explode(',',$this->_getCategoryIds($productId));
+
+            if(is_array($productCategories) && count($productCategories) == 1){
+                array_push($auto_categories,array_pop($productCategories));
+            }else{
+                $auto_categories = array_merge($auto_categories,$productCategories);
+            }
+//            /** @var Mage_Catalog_Model_Product $_product */
+//            $_product = Mage::getModel('catalog/product')->load($productId);
+//            $auto_categories = explode(',',$_product->getData('auto_type'));
+//            foreach($auto_categories as $auto_category){
+//                $categories[] = $auto_category;
+//            }
+        }
+        $unq_categories = array_filter(array_unique($auto_categories));
+        $categoryCollection = new Varien_Data_Collection();
+        foreach($unq_categories as $optionId) {
+            $label = $this->_dataHelper->getOptionValue($optionId);
+            $scrubbedLabel = $this->scrubLabel($label);
+            $link = $this->_helper->getLink($scrubbedLabel,'category');
+            $category = new Varien_Object();
+            $category->setOptionId($optionId);
+            $category->setOptionLabel($label);
+            $category->setScrubbedLabel($scrubbedLabel);
+            $category->setLink($link);
+            $categoryCollection->addItem($category);
+        }
+        return Mage::helper('hautopart')->sortGenericCollection($categoryCollection);
+    }
+    public function scrubLabel($label){
+        $conditions = array(
+            array(
+                'needle'    => '&',
+                'replace'   => 'and'
+            ),
+//            array(
+//                'needle'    => '/',
+//                'replace'   => 'and'
+//            ),
+            array(
+                'needle'    => '-',
+                'replace'   => ''
+            )
+        );
+        foreach($conditions as $condition){
+            $label  = str_replace($condition['needle'],$condition['replace'],$label);
+        }
+        $parts = explode(' ', $label);
+        $parts = array_filter($parts);
+        $label = implode(' ', $parts);
+        return $label;
+    }
+    public function getAutoName()
+    {
+        // TODO: Implement getAutoName() method.
+        $params = unserialize($this->getRequest()->getParam('ymm_params'));
+        foreach($params as $param){
+            $ymm[] = $this->_helper->getLabel($param);
+        }
+        return implode(' ', $ymm);
+    }
+    public function getCustomLink($model){
+        return $this->_helper->getLink($model,'category');
+    }
+
+    public function getImage($optionId){
+        $webId = Mage::app()->getStore()->getWebsiteId();
+
+        $imageCollection = Mage::getModel('hautopart/image')->getCollection();
+
+        $imageCollection->addFieldToFilter('option_id', $optionId);
+        $imageCollection->addFieldToFilter('website_id', $webId);
+        $_image = $imageCollection->fetchItem();
+        if($_image && $_image->getId()){
+            return Mage::getBaseUrl('media') . 'hautopart' . $_image->getImgPath();
+        }else{
+            $imageCollection = Mage::getModel('hautopart/image')->getCollection();
+
+            $imageCollection->addFieldToFilter('option_id', $optionId);
+            $imageCollection->addFieldToFilter('website_id', 1);
+            $_image = $imageCollection->fetchItem();
+
+            return Mage::getBaseUrl('media') . 'hautopart' . $_image->getImgPath();
+        }
+    }
+
+    /**
+     * Retrieve category ids using native SQL for optimized run time
+     * @param $productId
+     * @return null
+     */
+    protected function _getCategoryIds($productId){
+        $helper = Mage::helper('hautopart');
+
+        $varcharTable = $helper->_getTable('catalog_product_entity_varchar');
+        $select = $helper->_getReader()->select();
+
+        $select->from($varcharTable,array('value'))
+            ->where('entity_id= ? ',$productId)
+            ->where('attribute_id= ?', self::AUTO_TYPE_ATTRIBUTE_ID);
+        $result = $select->query()->fetchAll(PDO::FETCH_ASSOC, 0);
+        if(count($result) === 1){
+            $value = array_pop($result);
+            return $value['value'];
+        }
+        return null;
+    }
+}

@@ -1,0 +1,11 @@
+<?php $h1Title = Mage::registry('ymm_autoname'); ?>
+<div class="container-fluid recommended-container">
+    <div class="container">
+        <div class="">
+            <div class="col-md-12 ymm-product-listing">
+                <h2 class="ymm-listing-title"><?php echo "Recommended Products for Your {$h1Title}"; ?></h2>
+                <?php echo $this->getChildHtml('gr_recommended') ?>
+            </div>
+        </div>
+    </div>
+</div>

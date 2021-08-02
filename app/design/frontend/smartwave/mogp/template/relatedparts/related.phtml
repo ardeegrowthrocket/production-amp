@@ -1,0 +1,20 @@
+<?php if(Mage::registry('current_product')):  ?>
+<?php
+    $_product = Mage::registry('current_product');
+?>
+<div class="related-items" data-partname="<?php echo $_product->getPartName() ?>" data-auto-type="<?php echo $_product->getAutoType() ?>" data-form-key="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+    <div class="container">
+        <div class="row">
+            <div class="related-parts list2" data-ajax-url="<?php echo Mage::getUrl('relatedparts') ?>">
+                <div class="heading">
+                    <h2>Related Parts</h2>
+                </div>
+                <div class="wrapper owl-carousel related-parts-wrapper">
+
+                </div>
+                <div class="more-link"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

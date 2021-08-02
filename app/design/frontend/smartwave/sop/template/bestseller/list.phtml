@@ -1,0 +1,32 @@
+<?php
+$bestSellerCollection = $this->getCollection();
+if(count($bestSellerCollection) > 0) :
+?>
+<div id="mopar-homepage-bestseller">
+    <div class="container">
+        <div class="row">
+                <div class="heading">
+                    <h2><span><?php echo $this->getTitle() ?></span></h2>
+                </div>
+               <div class="best-seller-list owl-carousel">
+                   <?php foreach ($bestSellerCollection as $item): ?>
+                        <div class="item ga-impressions ga-productClick" data-layer-variable="<?php echo htmlentities(json_encode($item['ga_tracking'])) ?>">
+                           <div class="item-wrapper wow fadeInUp">
+                               <div class="b-image">
+                                   <a href="<?php echo $item['link'] ?>">
+                                       <img src="<?php echo $item['image'] ?>" alt="<?php echo $name ?>" title="<?php echo $name ?>"/>
+                                   </a>
+                               </div>
+                               <div class="b-price"><?php echo Mage::Helper('gr_bestseller')->formatPrice($item['price']); ?></div>
+                               <div class="b-name"><a href="<?php echo $item['link'] ?>"><h5><?php echo $item['name']; ?></h5></a></div>
+                               <div class="b-part-number">Part Number: <?php echo $item['part_number']; ?></div>
+                               <div class="small-review"><div class="yotpo bottomLine" data-product-id="<?php echo $item['product_id'] ?>" data-url="<?php echo $item['link'] ?>"></div></div>
+                           </div>
+                        </div>
+                    <?php endforeach; ?>
+               </div>
+            </div>
+        <div class="custom-nav"></div>
+    </div>
+</div>
+<?php endif; ?>

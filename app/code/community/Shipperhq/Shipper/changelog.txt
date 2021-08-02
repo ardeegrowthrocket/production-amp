@@ -1,0 +1,221 @@
+1.0 - Initial release
+1.1 - Integration update
+1.1 - Release Candidate
+1.2 - Release candidate update
+1.3 - Release
+1.4 - Release Candidate
+1.5 - Pickup preselect in multi address checkout
+1.6 - SHIPPERHQ-441 - Calendar display issues resolved
+1.7 - SHIPPERHQ-466 - Ajax modifications on calendar templates, SHIPPERHQ-415 UK Date Support
+1.8 - SHIPPERHQ-318 - carrier code support, SHIPPERHQ-486 - Discounted item logic
+1.9 - CHEF-108 - Rate request modifications
+1.10 - CHEF-108 - Removed FreeMethodWeight from request
+1.11 - CHEF-110 - Resolved duplicated date in MAC for calendar based rates
+1.12 - SHIPPERHQ-531 - rerequest rates for Pickup carriers to retrieve correct time slots
+	   SHIPPERHQ-507 - added appVersion to the request
+1.13 - SHIPPERHQ-566 - defaults match Dashboard defaults
+1.14 - SHIPPERHQ-577 - Set up default account that will work when the extension is installed
+1.15 - SHIPPERHQ-605 - add ship_box_tolerance attribute and updated some shipperhq attributes to store scope
+1.16 - SHIPPERHQ-641 - added template helper to check for SHQ enabled and return default template if not enabled
+	   SHIPPERHQ-640 - added check for ShipperHQ carrier enabled before attempting to retrieve carriers on config save
+	   SHIPPERHQ-632 - ship separately dependent on rule group not set
+1.17 - SHIPPERHQ-669 - template helper for OSC files. Removed erroneous log messages
+
+1.18  - SHIPPERHQ-611 - Display date selector by default for single calendar carrier in OPC
+1.19  - SHIPPERHQ-764 - implemented currency conversion. DRY changes, SHIPPERHQ-801 - resolve template if statement for pickup rates, SHIPPERHQ-747 - removed free shipping product attribute, SHIPPERHQ-669 - template helper for OSC files. Removed erroneous log messages, SHIPPERHQ-801 - resolve template if statement for pickup rates, SHIPPERHQ-609 - assign carriergroup id to all items and check for display merged on MA checkout, SHIPPERHQ-782 - Adapted processing for merged rate response
+1.20  - SHIPPERHQ-632 - dynamic configuration option display for dimensional attributes
+1.21  - SHIPPERHQ-831 - City field mandatory when autocomplete enabled
+1.22  - SHIPPERHQ-743 - ignore date formatting when comparing date strings
+1.23  - SHIPPERHQ-660 pickup elements hidden for updated rates, pickup elements listener for updated rates on checkout and save shipping method on admin order submit
+1.24  - SHIPPERHQ-889 - removed re-request of rates on OSC submit
+1.25  - SHIPPERHQ-659 default date support
+1.26  - SHIPPERHQ-931 Calendar admin order observer config, SHIPPERHQ-911 sort order on carriers
+1.27  - SHIPPERHQ-968 city required on cart
+1.28  - SHIPPERHQ-937 - removed delivery date string from shipping description, SHIPPERHQ-968 removed city enabled in cart for specific client, SHIPPERHQ-969 - registered shipment items when shipping
+1.29  - SHIPPERHQ-1042 - save default values for display from cart to checkout and on save shipping method, SHIPPERHQ-1041 - accessorial display cache corrected, SHIPPERHQ-1042 - display of selected on admin and customer account, SHIPPERHQ-1041 - accessorial display cache corrected
+1.30  - SHIPPERHQ-1058 Tagging here as not sure on status
+1.31  - SHIPPERHQ-1066 - resolved display of acc on 1.9 cart
+1.32  - SHIPPERHQ-1106 - sort by price
+1.34  - SHIPPERHQ-973, SHIPPERHQ-1165 - display updates
+1.38  - SHIPPERHQ-1101 - configurable item weight display
+1.41  - SHIPPERHQ-1184 - PayPal Express shipping method display patch
+1.46  - SHIPPERHQ-1205 - installation script modifications
+1.50  - SHIPPERHQ-1268, SHIPPERHQ-1269 - installation script modifications
+1.57  - SHIPPERHQ-1258, SHIPPERHQ-1315, SHIPPERHQ-1289 - optional caching of rates, modified attribute seperator in request
+1.58  - SHIPPERHQ-1339 - Freight accessorial changes
+1.63  - SHIPPERHQ-1424 - moved attribute source to base module
+1.64  - SHIPPERHQ-1460 - move carriergroup logic, SHIPPERHQ-1373 Pitney and GSO support
+1.65  - SHIPPERHQ-1442 - store specific credentials
+2.0   - PITNEY-5 - modified request for new address fields
+2.3   - SHIPPERHQ-1508 - display selected dates and time at checkout for review
+2.4   - SHIPPERHQ-1556 - Address validation dialog correction on shipping address
+2.7   - SHIPPERHQ-1616 - correct filtering for store id in orders grid
+2.10  - SHIPPERHQ-1630 - Freight accessorials support for split, SHIPPERHQ-1639 - Merged function logic in templates
+2.12  - SHIPPERHQ-1628 - Accessorial defaults in cart
+2.15  - SHIPPERHQ-1631 - Destination type support on address validation
+2.18  - SHIPPERHQ-1701 - OSC pre selected show elements
+2.20  - SHIPPERHQ-1710, SHIPPERHQ-1709 - OSC support changes, SHIPPERHQ-1689 include virtual items in cart
+2.21  - SHIPPERHQ-1717 Bundle parent carriergroup ID
+2.22  - SHIPPERHQ-1721 Support for security patch SUPEE-6788
+2.23  - SHIPPERHQ-1716 city field enabled via config, SHIPPERHQ-1731 freight accessorials defaults not being used
+2.25  - SHIPPERHQ-1556 support split custom admin shipping and added address type to request as lower case, PITNEY-14 additional logging
+2.27  - SHIPPERHQ-1765 custom rate description implemented
+2.28  - SHIPPERHQ-1765 amend custom rate description implementation, SHIPPERHQ-1326 date support for en-GB locale
+2.30  - SHIPPERHQ-1808 removed dimensions from dimensional rule group restrictions
+2.31  - PITNEY-16 Amended product catalog upload logic
+2.32  - SHIPPERHQ-1823 address validation results on existing addresses, PITNEY-17 - amended order of tax totals
+2.33  - SHIPPERHQ-1826 Shipping detail display for multi address orders
+2.34  - SHIPPERHQ-1842 Master packing boxes support, SHIPPERHQ-1862 time slot on order email, SHIPPERHQ-1863 MAC bundle gift options support
+2.39  - SHQ16-208 - Rate caching amendments, SHIPPERHQ-1899 amended city required in cart
+2.44  - SHQ16-142 - Extended migration tool
+2.46  - SHQ16-477 Freight migrate values from legacy freight extensions
+2.47  - SHQ16-503 - Custom admin shipping support for free shipping
+2.48  - SHQ16-169 - Record delivery date formatted against shipping address
+2.49  - SHQ16-477 further migrations for freight legacy extensions
+2.50  - SHQ16-538 OSC support for v4.0.9
+2.51  - SHQ16-488 Accessorial support in admin
+2.53  - SHQ16-598 Shipment packages created specific to shipping rates
+
+
+
+
+
+2.58 -SHQ16-556
+2.58 -SHQ16-556
+2.59 -SHQ16-673
+2.60 - Removed module from extension
+2.61 - SHQ16-720 bundle display resolved in my orders page
+2.62 - SHIPPERHQ-1855 item weight set to 0 when null, SHQ16-699 handle item id null
+2.63 - SHQ16-98 availability date support
+2.64 - SHQ16-699 item id check support on multi address checkout
+2.65 - SHQ16-865 - Add ability to switch off shipments being displayed in comments. Added ability to switch off order comments
+2.66 - Fixed issue with pickup address not saving to shipping address
+2.67 - Fixed issue with pickup address not saving to shipping address
+2.68 - SHQ16-825 persist carrier group id on custom admin rates
+2.69 - SHQ16-796 shipping method display with span tags
+2.70 - SHQ16-296 SQL update to fix warehouse attribute after update from WSA
+2.71 - Fixed issue with address validation dialog box on checkout.
+2.72 - SHQ16-950 altered allowed methods web service call logic
+2.73 - SHQ16-959 sync mechanism uses last synchronization date
+2.74 - SHQ16-906 Delivery comments at checkout
+2.75 - SHQ16-1008 Added shipperhq_location to variables being passed across
+2.76 - SHQ16-1026 modify display on order for single carrier list rates
+2.77 -  SHQ16-1078 Fixed issue with fatal error on multiaddress checkout when no rates returned
+2.78 - SHQ16-1041 Carrier group detail decoding, SHQ16-1088 remove price sorting
+2.79 - SHQ16-1113 Remove unsafe characters from shipping description on order item display, SHQ16-1121 Remove explicit size on datepicker widget
+2.80 - SHQ16-1118 Reset rate delivery date in carrier group details
+2.81 - SHQ16-994
+2.82 - SHQ16-994 tooltip on custom rates, SHQ16-1134 OSC index observer changes, SHQ16-1139 translation of error message in javascript, log json request
+2.83 - SHQ16-1098 Translate store pickup headings, SHQ16-1066 reformat getAllMethods for ShipperHQ carriers, SHQ16-1085 clean up cart in ShipperLib, SHQ16-1123 Resolve sort order of 0
+2.84 - SHQ16-1158 Fixed SQL upgrade script
+2.85 - SHQ16-1163 Fixed issue with configurable product rendering in admin sales order view
+2.86 - SHQ16-1146
+2.87 - SHQ16-1181 Add support for OneStepCheckout Comments and update OSC rewrite to OSC v4.5.5
+2.88 - SHQ16-1237 Resolved issue with blackout days shifting one day back
+2.89 - SHQ16-1237 Further work on blackout days. Resolves issues with blackout days being +/- one day
+2.90 - SHQ16-1263 Support for Customer Account Carrier type
+2.91 - SHQ16-1263 Support for Customer Account Carrier type - style updates
+2.92 - SHQ16-1299 Fixed issue with display of transaction ID and dim info
+2.93 - SHQ16-1263 Fixed issue with PHP Fatal Error
+2.94 - SHQ16-1328 Fixed issue in SQL install script
+2.95 - SHQ16-1327 Add required changes for compatibility with PVR
+2.96 - 2.96 release tag
+2.97 - SHQ16-1342 Remove null from UPS AP Location text
+2.98 - SHQ16-1399 Will now use the default weight set in SHQ when weight of item is 0 or null
+2.99 - SHQ16-1237 Fixed issue with wrong rate showing on first load
+2.100 - SHIPPERHQ-1622 optionally reset carrier code to default Magento on place order
+2.101 - SHQ16-1467 Fixed pickup address persisting issue
+2.102 - SHIPPERHQ-1635 Add back in transaction ID
+2.103 - SHQ16-1389 save address type used in rate SHQ16-1515 resovled date format bug
+2.104 - SHQ16-1389 save address type used in rate
+2.105 - SHQ16-1518 Calendar default date changes, SHQ16-1502 ignore admin validation of virtual orders
+2.106 - SHIPPERHQ-1370 check for selected calendar rates and display by default if selected
+2.107 - SHQ16-1522 OSC support for legacy versions
+2.108 - SHQ16-1523 display location for preselected pickup, SHQ16-1525 improve synch notifications, SHQ16-1181 order view duplicate comments correction
+2.109 - SHQ16-1566 support for calendar end date
+2.110 - Resolved JS errors on admin view
+2.111 - SHQ16-1616 account for negative discounted prices, SHQ16-1618 save carrier group ID on order packages
+2.112 - Compatibility enhancement for minify JS
+2.113 - IWD Pro Checkout Compatibility. LTL Accessorial display fix
+2.114 - SHQ16-1711 process deliveryMessage, SHQ16-1722 store packages on session, SHQ16-1726 use date selected in accessorial requests
+2.115 - SHQ16-1729 resolve error on shipment email for pickup location
+2.116 - SHQ16-1748 explicitly set collect rates to false on submit, SHQ16-1357 dont show any date for custom calendar carriers on inital load, SHQ16-1750 remove legacy attributes from request
+2.117 - SHQ16-1690 Added section specific classes and removed inline styles
+2.118 - SHQ16-1768 item detail added when merged rates enabled for MAC
+2.119 - SHQ16-1791 Admin order view update improvements. SHQ16-1792 Fixed shipping and handling column in order view 
+2.120 - SHQ16-1777 Admin layout refactor. SHQ16-1792 Resolved issue with dates showing when not applicable in admin
+2.121 - SHQ16-1825 Added further checks to ensure attribute is included in indexer
+2.122 - SHQ16-1831 Method styling on OSC for pickup/access point methods
+2.123 - SHQ16-1834 Autoselect single calendar rate and SHQ16-1791 order email correction for single carrier
+2.124 - SHQ16-1837 Further improvements for OneStepCheckout and pickup functionality. Ensured rendering correct block and template  when using + - item qty in checkout
+2.125 - SHQ16-1804 - support for limited access delivery accesorial
+2.126 - SHQ16-1804 - support for limited access delivery accesorial
+2.127 - SHQ16-1791 refactor order event processing, SHQ16-1834 autoselect single rate on rerequest
+2.128 - SHQ16-1873 Updated extension to handle split shipping groups and store pickup
+2.129 - SHQ16-1873 Updated extension to handle split shipping groups and store pickup
+2.130 - SHQ16-1873 Further work on split shipping groups with one step checkout
+2.131 - SHQ16-1873 Further work on split shipping groups with one step checkout
+2.132 - SHQ16-1605 Additional accessorial support
+2.133 - SHQ16-1893 Work around for Magento issue with taxed discounted base totals
+2.134 - SHQ16-1837 Resolved so OSC single methods are saved, SHQ16-1926 support for shqshared carrier in default carrier code logic
+2.135 - SHQ16-1932 Fixed issue with SHQ details saving on item when order shipping method is not SHQ
+2.136 - SHQ16-1932 only display Delivery Date field in email if date is set
+2.137 - SHQ16-1932 Resolved issue with carriergroup_shipping_details not saving to order
+2.138 - SHQ16-1987 Backup carrier improvements
+2.139 - SHQ16-1987 Backup carrier improvements
+2.140 - SHQ16-1986 Date Rule on Split Checkout only applying to one checkout option
+2.141 - SHQ16-2014 Wrong carrier being autoselected
+2.142 - SHQ16-2020 add bcarriergroup breakdown to order comments
+2.143 -  SHQ16-2023 support for multiple calendar instances in multiaddress checkout
+2.144 - SHQ16-2031 SHQ16-1994 Admin CSS not loading and IWD Order Manager Compatibility
+2.145 - SHQ16-2034 Fixed typo in saveOrderAfter code which stopped log appearing in order
+2.146 - SHQ16-2032 Resolve issue with timeslot and hour lead times2.147 - SHQ16-2023 carrier group support in MAC and SHQ16-2019 PNG images
+2.148 - SHQ16-2023 carrier group support in MAC and SHQ16-2019 PNG images
+2.150 - SHQ16-2078 Support lead time in hours for pickup that pushes to next day2.150 - SHQ16-2078 account for lead time in hours
+2.151 - SHQ16-2065 Fixed issue with inside delivery and limited delivery not being deselectable
+2.152 - SHQ16-2110 Added UPS LTL to use carrier type as code mapping
+2.153 - SHQ16-2091 Inline calendar work missing from last release
+2.154 - SHQ16-2163 Date saved to order incorrectly
+2.155 - SHQ16-2172 destination type false by default
+2.156 - SHQ16-2163 Fixed wrong date saved to order and min/max date set incorrectly on calendars
+2.157 - SHQ16-2183 Compatibility with OSC Coupon codes
+2.158 - SHQ16-2215 Added translations for estimated delivery dates
+2.159 - SHQ16-2258 add config option for shipperhq timeout
+2.160 - SHQ16-2215 Translation of carrier name and estimated delivery text
+2.161 - SHQ16-2269 support required fields on customer account carrier
+2.162 - SHQ16-2269 add class to fields shq processing
+2.163 - M2-49: Changes to calendar display on MAC
+2.164 - M2-49 minor change to calendar template insertion on MAC
+2.165 - M2-49 moved calendar templat insertion on multi address shipping
+2.166 - SHQ16-2360 Fixed display order of shipping method vs shipping price when using calendar
+2.167 - SHQ16-SHQ16-2360 Fixed display order of shipping method vs shipping price in multi address checkout
+2.168 - SHQ16-SHQ16-2360 Fixed display order of shipping method vs shipping price in multi address checkout
+2.169 - SHQ16-2371 display options selected in cart when loading checkout,SHQ16-2366 load base currency using store ID
+2.170 - SHQ-2346 Updated must ship freight attribute with a hint
+2.171 - M2-29 correct date default display for inline calendar
+2.172 - SHQ16-2444 Fixed issue preventing label creation within Magento
+2.173 - SHQ16-2391 Fixed calendar was pushing accessorials out of shipping method area on admin
+2.174 - SHQ16-2481 Make calendar visible for users with sub-admin rights
+2.175 - SHQ16-2481 Fixed issue specific to PHP5.4
+2.176 - SHQ18-5 Fix PHP Strict errors in Calendar module
+2.177 - SHQ16-2485 - Fix admin shipping display, SHQ16-2338 Moved calendar display, SHQ16-2501 Fix shipping details for merged rates, SHQ16-2343 Add ip to request, SHQ16-1938 support always_use_single_carrier_title setting
+2.178 - SHQ18-28 Translation for carrier title
+2.179 - SHQ18-78 Add package breakdown to shipment comments,SHQ18-103 Remove Display shipping methods as dropdowns switch from OSC config
+2.180 - SHQ18-81 Simplify package and automatically enable required modules
+2.181 - SHQ18-81 Simplify package and automatically enable required modules
+2.182 - SHQ18-122 Remove AV dependency on fax field
+2.188 - SHQ18-280 - Stop table rate accessorials showing if no rates found
+2.189 - SHQ18-329 Fix deadlocking issue
+2.190 - SHQ18-329 Fix deadlocking issue
+2.191 - SHQ18-329 Fixed issue with PHP5.3
+2.192 - SHQ18-431 Fixed issue with getting ip address from quote before it exists
+2.193 - SHQ18-438 Support for partial quantities
+2.194 - SHQ18-485 Fix deadlocking issue on quote packages
+2.195 - SHQ18-817 PHP 7 Compatibility
+2.196 - SHQ18-890 Fixed issue with pickup calendar available dates
+2.197 - SHQ18-996 Enable refresh carriers per website
+2.198 - SHQ18-1090 Resolve issue with invalid dates being saved to order when using calendar
+2.199 - SHQ18-1208 Fixed issue where MAC treated Magentos stock carriers as being from a separate carrierGroup
+2.200 - SHQ18-1301 Remove unnecessary call to setId to improve performance
+2.201 - SHQ18-1418 Fixed a possible integration issue with other extns where sales/order data was being double added to the grid
+2.202 - SHQ18-1418 Fixed a possible integration issue with other extns where sales/order data was being double added to the grid

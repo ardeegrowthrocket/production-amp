@@ -1,0 +1,150 @@
+<?php echo $this->getTemplatesHtml() ?>
+<script type="text/javascript">
+    var combinationStepTemplate = '<div class="option-box" id="combination_{{id}}">'+
+        '<table id="<?php echo $this->getFieldId(); ?>_{{id}}" class="option-header" cellpadding="0" cellspacing="0">' +
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_is_delete" name="<?php echo $this->getFieldName() ?>[{{id}}][is_delete]" value="" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_previous_type" name="<?php echo $this->getFieldName() ?>[{{id}}][previous_type]" value="{{type}}" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_previous_group" name="<?php echo $this->getFieldName() ?>[{{id}}][previous_group]" value="" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_id" name="<?php echo $this->getFieldName() ?>[{{id}}][id]" value="{{id}}" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_recid" name="<?php echo $this->getFieldName() ?>[{{id}}][recid]" value="{{recid}}" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_serial" name="<?php echo $this->getFieldName() ?>[{{id}}][serial] value="{{serial}}"/>'+
+        '<thead>'+
+            '<tr>'+
+                '<th class="opt-title"><?php echo $this->jsQuoteEscape(Mage::helper('catalog')->__('Year')) ?> <span class="required">*</span></th>'+
+                '<th class="opt-type"><?php echo $this->jsQuoteEscape(Mage::helper('catalog')->__('Make')) ?> <span class="required">*</span></th>'+
+                '<th class="opt-req"><?php echo $this->jsQuoteEscape(Mage::helper('catalog')->__('Model')) ?> <span class="required">*</span></th></th>'+
+                '<th class="a-right"><?php echo $this->jsQuoteEscape($this->jsQuoteEscape($this->getDeleteButtonHtml())) ?></th>'+
+            '</tr>'+
+        '</thead>'+
+        '<tr>'+
+            '<td><?php echo $this->getYearSelectHtml(); ?></td>'+
+            '<td><?php echo $this->getMakeSelectHtml(); ?></td>'+
+            '<td><?php echo $this->getModelSelectHtml(); ?></td>'+
+            '<td>&nbsp;</td>'+
+        '</tr></table></div>';
+    var productCombination = {
+        div : $('product_combinations_container_top'),
+        templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+        templateText : combinationStepTemplate,
+        itemCount : 1,
+        add: function (data){
+            this.template = new Template(this.templateText, this.templateSyntax);
+
+            if(!data.id){
+                data = {};
+                data.id  = this.itemCount;
+            } else {
+                this.itemCount = data.item_count;
+            }
+
+            Element.insert(this.div, {'after':this.template.evaluate(data)});
+
+            this.itemCount++;
+            this.bindRemoveButtons();
+            productCombinationType.bindSelectInputType();
+        },
+        remove : function(event){
+            var element = $(Event.findElement(event, 'div'));
+            if(element){
+                $('product_'+element.readAttribute('id')+'_'+'is_delete').value = '1';
+                element.addClassName('no-display');
+                element.addClassName('ignore-validate');
+                element.hide();
+            }
+        },
+        bindRemoveButtons : function(){
+            var buttons = $$('div.product-custom-combinations .delete-product-combination');
+            for(var i=0;i<buttons.length;i++){
+                if(!$(buttons[i]).binded){
+                    $(buttons[i]).binded = true;
+                    Event.observe(buttons[i], 'click', this.remove.bind(this));
+                }
+            }
+            var inputs = $$('div.product-custom-options button', 'div.product-custom-options input', 'div.product-custom-options select', 'div.product-custom-options textarea');
+            <?php if ($this->isReadonly()):?>
+            for (var i=0, l = inputs.length; i < l; i ++) {
+                inputs[i].disabled = true;
+                if (inputs[i].tagName.toLowerCase()=='button') {
+                    inputs[i].addClassName('disabled');
+                }
+            }
+            <?php else: ?>
+            inputs.each(function(el) { Event.observe(el, 'change', el.setHasChanges.bind(el));  } )
+            <?php endif;?>
+        }
+    }
+
+    var productCombinationType = {
+        templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+        loadStepTwo : function(event){
+            var element = $(Event.findElement(event, 'select'));
+            template = OptionTemplateSelect;
+        },
+        addDataToValues : function(data){
+            template = OptionTemplateSelect;
+            if(data.year){
+                $A($('<?php echo $this->getFieldId(); ?>_' + data.id + '_year').options).each(function(option){
+                    if(option.value == data.year){
+                        option.selected = true;
+                    }
+                });
+            }
+            if(data.make){
+                $A($('<?php echo $this->getFieldId(); ?>_' + data.id + '_make').options).each(function(option){
+                    if(option.value == data.make){
+                        option.selected = true;
+                    }
+                });
+            }
+            if(data.model){
+                $A($('<?php echo $this->getFieldId(); ?>_' + data.id + '_model').options).each(function(option){
+                    if(option.value == data.model){
+                        option.selected = true;
+                    }
+                });
+            }
+        },
+        bindSelectInputType : function(){
+            var types = $$('.select-product-combination-year');
+            for(var i=0;i<types.length;i++){
+                if(!$(types[i]).binded){
+                    $(types[i]).binded = true;
+                    Event.observe(types[i], 'change', function(event){
+                        productCombinationType.loadStepTwo(event);
+                    });
+                }
+            }
+        }
+    }
+
+    productCombination.bindRemoveButtons();
+
+    Validation.addAllThese([
+        ['required-year-select', <?php echo $this->helper('core')->jsonEncode(Mage::helper('hautopart')->__('Select Year Attribute')) ?>, function(v, elm) {
+            if (elm.getValue() == '') {
+                return false;
+            }
+            return true;
+        }]]);
+    Validation.addAllThese([
+        ['required-make-select', <?php echo $this->helper('core')->jsonEncode(Mage::helper('hautopart')->__('Select Year Attribute')) ?>, function(v, elm) {
+            if (elm.getValue() == '') {
+                return false;
+            }
+            return true;
+        }]]);
+    Validation.addAllThese([
+        ['required-model-select', <?php echo $this->helper('core')->jsonEncode(Mage::helper('hautopart')->__('Select Year Attribute')) ?>, function(v, elm) {
+            if (elm.getValue() == '') {
+                return false;
+            }
+            return true;
+        }]]);
+    <?php foreach($this->getCombinationValues() as $_value): ?>
+        productCombination.add(<?php echo $_value->toJson(); ?>);
+        productCombinationType.addDataToValues(<?php echo $_value->toJson(); ?>);
+    <?php endforeach; ?>
+    if($('<?php echo $this->getAddButtonId() ?>')){
+        Event.observe('<?php echo $this->getAddButtonId() ?>', 'click', productCombination.add.bind(productCombination));
+    }
+</script>

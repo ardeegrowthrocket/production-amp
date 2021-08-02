@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magecomp_S3Amazon>
+            <active>false</active>
+            <codePool>local</codePool>
+            <version>1.0.0</version>
+        </Magecomp_S3Amazon>
+    </modules>
+</config>

@@ -1,0 +1,90 @@
+<?php //echo $this->getChildHtml('sticky.nav') ?>
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+?>
+<div class="container-fluid  dark-blue">
+    <div class="lfp-inner-lg">
+        <div class="top-links">
+            <div class="col-md-5 col-sm-12 col-xs-12 no-padding ups-header">
+                <div class="menu-icon lfp-form-mobile"><a href="javascript:void(0)" title="Menu"><i class="fa fa-bars"></i></a></div>
+                <p class="static-text lfp-for-desktop"><?php echo $this->getChildHtml('welcome') ?></p>
+            </div>
+            <div class="col-md-7 col-sm-12 col-xs-12 no-padding top-mini-cart">
+                  <?php echo $this->getChildHtml('minicart'); ?>
+                  <?php echo $this->getChildHtml('topLinks'); ?>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="container-fluid mobile-search"></div>
+<div class="container-fluid bg-white  logo-container">
+    <div class="lfp-inner-lg">
+        <div class="logo-menu">
+            <!-- LOGO -->
+            <div class="col-xs-12 col-md-4 no-padding">
+                <div class="col-xs-12 no-padding">
+                    <?php if ($this->getIsHomePage()):?>
+                        <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                    <?php else:?>
+                        <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-8 no-padding lfp-menu-link lfp-for-desktop">
+                <a href="https://parts.levittownfordparts.com" class="ford-top-link" target="_blank" rel="nofollow">Ford Repair Parts</a>
+                <span class="line"></span>
+               <?php echo $this->getChildHtml('topSearch'); ?>
+              
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-12 no-padding">
+             <div class="border-top-bottom">
+              <?php echo $this->getChildHtml('topMenu') ?>
+             </div>
+            </div>
+
+ 
+        </div>
+    </div>
+</div>
+
+
+
+<?php echo $this->getChildHtml('mobileMenu') ?>
+<?php //echo $this->getChildHtml('mobile.nav') ?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(document).ready(function(){
+        var scrolled = false;
+        jQuery(window).scroll(function(){
+            if(200<jQuery(window).scrollTop() && !scrolled){
+                jQuery('#slideshow .ymm-form-container').addClass('sticky-header').css('top','-50px').animate({top:'0px'}, 500);
+                scrolled = true;
+            }
+            if(200>jQuery(window).scrollTop() && scrolled){
+                jQuery('#slideshow .ymm-form-container').removeClass('sticky-header');
+                scrolled = false;
+            }
+        })
+    });
+    //]]>
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+    if (/Mobi/.test(navigator.userAgent)) {
+    // mobile!
+        jQuery('.mobile-search').append(jQuery('form#search_mini_form'));
+    }
+    if (navigator.userAgent.match(/Android/i)){
+          jQuery('.mobile-search').append(jQuery('form#search_mini_form'));
+    }
+
+    });
+</script>
+

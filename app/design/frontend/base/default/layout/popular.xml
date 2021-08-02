@@ -1,0 +1,12 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <popular_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="popular/index" name="popular_index" template="popular/index.phtml"/>   
+    </reference>   
+  </popular_index_index>   
+</layout>   
+	

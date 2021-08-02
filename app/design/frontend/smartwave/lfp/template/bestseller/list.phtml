@@ -1,0 +1,31 @@
+<?php
+$bestSellerCollection = $this->getCollection();
+if(count($bestSellerCollection) > 0) :
+?>
+<div id="homepage-bestseller">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2><?php echo $this->getTitle() ?></h2>
+               <ul class="best-seller-list owl-carousel-bestseller">
+                   <?php foreach ($bestSellerCollection as $item): ?>
+                        <li class="item">
+                           <div class="item-wrapper">
+                               <div class="b-image">
+                                   <a href="<?php echo $item['link'] ?>">
+                                       <img data-src="<?php echo $item['image'] ?>" class="lazyload" alt="<?php echo $name ?>" title="<?php echo $name ?>"/>
+                                   </a>
+                               </div>
+                               <div class="b-price"><?php echo Mage::Helper('gr_bestseller')->formatPrice($item['price']); ?></div>
+                               <div class="b-name"><a href="<?php echo $item['link'] ?>"><h5><?php echo $item['name']; ?></h5></a></div>
+                               <div class="b-part-number">Part Number: <?php echo $item['part_number']; ?></div>
+                               <div class="small-review"><div class="yotpo bottomLine" data-product-id="<?php echo $item['product_id'] ?>" data-url="<?php echo $item['link'] ?>"></div></div>
+                           </div>
+                        </li>
+                    <?php endforeach; ?>
+               </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,14 @@
+<?php if(Mage::helper('growthrocket_gtm/captcha')->isEnabled()): ?>
+    <script type="text/javascript">
+        if ('NodeList' in window) {
+            if (!NodeList.prototype.each && NodeList.prototype.forEach) {
+                NodeList.prototype.each = NodeList.prototype.forEach;
+            }
+        }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>"></script>
+<?php endif; ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/index.js') ?>"></script>
+<?php if(Mage::helper('firecheckout')->canFireCheckout()): ?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/firecheckout_ga_events.js') ?>" defer ></script>
+<?php endif ?>

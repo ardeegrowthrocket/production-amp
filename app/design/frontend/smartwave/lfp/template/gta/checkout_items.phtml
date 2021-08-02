@@ -1,0 +1,19 @@
+<?php
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$cartItems = $quote->getAllVisibleItems();
+$checkoutItems = array();
+foreach ($cartItems as $item) {
+    $_product = $item->getProduct();
+    $checkoutItems[] = [
+        "name" => $_product->getName(),
+        "category" => $_product->getAttributeText('auto_type'),
+        "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+        "id" => $_product->getSku(),
+        "price" => str_replace(',','',Mage::getModel('directory/currency')->format($_product->getFinalPrice(), array('display'=>Zend_Currency::NO_SYMBOL), false )),
+        "quantity" => (int) $item->getQty()
+    ];
+}
+?>
+<script type="text/javascript">
+    var checkoutItems = <?php echo json_encode($checkoutItems); ?>;
+</script>

@@ -1,0 +1,44 @@
+@import 'settings/_color';
+@import 'settings/_mixin';
+
+
+.catalogsearch-result-index{
+  h1{
+    @include secondary-font(34px, 700);
+    border-bottom: 1px solid $grey-color;
+    padding-bottom: 35px;
+  }
+
+  .product-image-area{
+
+
+
+    .product-image{
+      height: 100%;
+    }
+  }
+}
+.category-products ul.products-grid li.item:first-child{
+  padding-top: 10px;
+}
+.category-products ul.products-grid li.item:last-child{
+  border-bottom: none;
+}
+
+.subaru-bucks{
+  p{
+    color: $white-color;
+  }
+}
+
+
+
+@media (max-width: 768px){
+  .category-products ul.products-grid li.item .part-no,
+  .category-products ul.products-grid li.item h2.product-name{
+    margin-top: 20px;
+  }
+  .category-products ul.products-grid li.item{
+    padding-top: 20px;
+  }
+}

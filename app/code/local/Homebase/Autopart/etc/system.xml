@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<config>
+    <tabs>
+        <homebase translate="label" module="hautopart">
+            <label>Homebase</label>
+            <sort_order>500</sort_order>
+        </homebase>
+    </tabs>
+    <sections>
+        <hautopart>
+            <label>Autoparts</label>
+            <tab>homebase</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Use Extension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <attributes translate="label">
+                            <label>Attributes</label>
+                            <comment><![CDATA[Attributes that can have the custom images]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>hautopart/system_attribute</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </attributes>
+                        <sortby translate="label">
+                            <label>YMM Partname Sorting</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>hautopart/system_sortby</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sortby>
+                        <exclude_cat translate="label">
+                            <label>Exclude Category on YMM</label>
+                            <source_model>hautopart/system_autotype</source_model>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </exclude_cat>
+                        <remember_fitment translate="label">
+                            <label>Enable Remember Fitment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </remember_fitment>
+                    </fields>
+                </settings>
+                <lfp_performance>
+                    <label>Performance Parts (LFP)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <ford_category translate="label">
+                            <label>Ford Performance Parts</label>
+                            <source_model>hautopart/system_autotype</source_model>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </ford_category>
+                        <roush_category translate="label">
+                            <label>Roush Performance Parts</label>
+                            <source_model>hautopart/system_autotype</source_model>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </roush_category>
+                    </fields>
+                </lfp_performance>
+            </groups>
+        </hautopart>
+        <fitment>
+            <label>Store Fitment</label>
+            <tab>homebase</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <info translate="label">
+                    <label>Info</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </info>
+                <configuration translate="label">
+                    <label>Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Assign specific fitment to Website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <make>
+                            <label>Allowed Vehicle Maker</label>
+                            <comment>Specify allowed vehicle maker</comment>
+                            <source_model>hautopart/system_make</source_model>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </make>
+                    </fields>
+                </configuration>
+            </groups>
+        </fitment>
+    </sections>
+</config>

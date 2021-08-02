@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Shoppingfeed>
+      <version>0.1.0</version>
+    </Growthrocket_Shoppingfeed>
+  </modules>
+  <global>
+    <helpers>
+      <shoppingfeed>
+        <class>Growthrocket_Shoppingfeed_Helper</class>
+      </shoppingfeed>
+    </helpers>
+  </global>
+  <default>
+    <shopping_feed>
+      <sf_info>
+        <filter_product_status>1</filter_product_status>
+      </sf_info>
+    </shopping_feed>
+  </default>
+</config> 

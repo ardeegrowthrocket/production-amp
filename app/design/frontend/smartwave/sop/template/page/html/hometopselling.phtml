@@ -1,0 +1,60 @@
+<?php
+$isMobile = Mage::helper('mobiledetect')->isMobile();
+?>
+<div class="container">
+   <div class="row">
+       <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-car-models')->toHtml(); ?>
+   </div>
+</div>
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('top-selling-accessories')->toHtml(); ?>
+    </div>
+</div>
+
+<?php if(!$isMobile): ?>
+<div class="container-fluid banner-about-us">
+    <div class="row">
+        <img src="<?php echo Mage::getBaseUrl('media') ?>home/sop/about-banner.jpg">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-about-us')->toHtml(); ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<div class="container must-have">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('must_have_for_your_car')->toHtml(); ?>
+    </div>
+</div>
+<?php if(!$isMobile): ?>
+    <div class="container-fluid home-description-1">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-description-1')->toHtml(); ?>
+    </div>
+<?php endif; ?>
+<?php echo Mage::app()->getLayout()->createBlock('gr_bestseller/collection')->setTemplate('bestseller/list.phtml')->toHtml(); ?>
+
+<?php if(!$isMobile): ?>
+    <div class="container-fluid home-description-2">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-description-2')->toHtml(); ?>
+    </div>
+<?php endif; ?>
+<?php echo Mage::app()->getLayout()->createBlock('featuredproduct/List')->setTemplate('featured/product.phtml')->toHtml(); ?>
+
+<?php if(!$isMobile): ?>
+    <div class="container-fluid home-bottom-description no-padding">
+        <div class="container no-padding">
+            <div class="row">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-bottom-description')->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<div class="container-fluid custom-shop-ymm">
+    <div class="container">
+        <div class="row">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homepage_shop_by_ymm')->toHtml(); ?>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+.shop-mopar-parts{
+  background-color: $secondary-bg-color;
+  min-height: 100px;
+  text-align: center;
+  margin-top: 60px;
+  display: flex;
+  padding: 10px 0px;
+  align-items: center;
+  justify-content: center;
+
+  p{
+    font-size: 28px;
+    color: $grey-color-3;
+    margin: 0;
+    line-height: 31px;
+
+    a.button{
+      background-color: $tertiary-bg-color;
+      text-transform: uppercase;
+      color: $white-color;
+      min-width: 140px;
+      margin-left: 50px;
+      height: 40px;
+      padding:0;
+      line-height: 40px;
+    }
+  }
+}

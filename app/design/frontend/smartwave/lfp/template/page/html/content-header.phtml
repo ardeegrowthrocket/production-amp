@@ -1,0 +1,17 @@
+<div class="banner-header">
+    <?php echo $this->getChildHtml("page.header");?>
+</div>
+<div class="banner-container">
+    <?php echo $this->getChildHtml('content.header.banner'); ?>
+</div>
+<?php
+$breadcrumbs = $this->getChildHtml("breadcrumbs");
+if ($breadcrumbs) :
+    ?>
+    <div class="breadcrumbs">
+        <div class="fluid-container lfp-inner-md">
+                <?php echo $breadcrumbs; ?>
+        </div>
+    </div>
+<?php endif; ?>
+

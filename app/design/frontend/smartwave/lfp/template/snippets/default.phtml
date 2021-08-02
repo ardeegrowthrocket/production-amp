@@ -1,0 +1,77 @@
+<?php
+    $store = Mage::app()->getStore();
+    $baseUrl = Mage::getBaseUrl();
+    $telNum =  Mage::getStoreConfig('general/store_information/phone');
+    $storeName = str_replace(' ', '', $store->getName());
+
+?>
+
+<script type="application/ld+json">
+    {
+        "@context":"http://schema.org",
+        "@type":"LocalBusiness",
+        "name":"<?php echo $storeName ?>",
+        "image":"<?php echo $this->getSkinurl(Mage::getStoreConfig('design/header/logo_src')); ?>",
+        "url":"<?php echo $baseUrl ?>",
+        "additionalproperty": {
+            "@type":"propertyValue",
+            "name":"<?php echo $baseUrl ?>"
+        },
+        "priceRange":"$$",
+        "telephone":"<?php echo $telNum ?>",
+        "currenciesAccepted":"USD",
+        "hasMap":"https://www.google.com/maps/place/Levittown+Ford+Service+%26+Parts+Center/@40.7442387,-73.5015492,17z/data=!4m13!1m7!3m6!1s0x89c28068194d9b3f:0xb9dc1ef327e1ac58!2s980+S+Broadway,+Hicksville,+NY+11801,+USA!3b1!8m2!3d40.7442387!4d-73.4993605!3m4!1s0x89c280681e6096df:0xd1162123c6655d4!8m2!3d40.7442649!4d-73.4993853",
+        "address": {
+            "@type":"PostalAddress",
+            "addresslocality": "Hicksville",
+            "addressRegion": "NY",
+            "postalCode": "11801",
+            "streetAddress": "980 S. Broadway"
+        },
+        "areaServed":{
+            "@type":"geoCircle",
+            "name":"<?php echo $storeName ?>",
+            "geoMidpoint": {
+                "latitude":"40.7442387",
+                "longitude":"-73.5015492"
+            }
+        }
+    }
+</script>
+<script type='application/ld+json'>
+    {
+        "@context":"https://schema.org",
+        "@type":"WebSite",
+        "url":"<?php echo $baseUrl; ?>",
+        "name":"<?php echo $storeName ?>",
+        "potentialAction":
+        {
+            "@type":"SearchAction",
+            "target":"<?php echo $baseUrl ?>catalogsearch/result/?q={search_term_string}",
+            "query-input":"required name=search_term_string"
+        }
+    }
+</script>
+<script type='application/ld+json'>
+    {
+        "@context":"https://schema.org",
+        "@type":"Organization",
+        "url":"<?php echo $baseUrl; ?>",
+        "name":"<?php echo $storeName ?>",
+        "logo":"<?php echo $this->getSkinurl(Mage::getStoreConfig('design/header/logo_src')); ?>",
+        "sameAs":["https://www.facebook.com/LevittownFordParts/","https://twitter.com/levittownford"]
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "breadcrumb": "Home",
+        "mainEntity":{
+            "@type": "Service",
+            "url":"<?php echo $baseUrl; ?>"
+        }
+    }
+</script>
+

@@ -1,0 +1,53 @@
+<?php
+    $result = $this->getResult();
+?>
+<?php if(!empty($result)): ?>
+    <div class="col-md-12 gr-faq-wrapper ">
+        <h2 class="legend"><?php echo $this->getPartName() . " Buyer's Guide"; ?></h2>
+        <div class="col-md-3 sidebar for-desktop">
+            <div class="row">
+                <?php foreach ($result as $item): ?>
+                    <ul class="main">
+                        <li class="main-li"><a class="gr-anchor" href="#<?php echo $this->getAnchorId($item[0]['id']); ?>"><?php echo $item[0]['question'] ?></a> </li>
+                        <?php if(count($item) > 1): ?>
+                            <li>
+                                <ul class="sub">
+                                    <?php for ($x = 1; $x < count($item); $x++): ?>
+                                        <?php if(isset($item[$x])): ?>
+                                            <li class="sub-li"><a class="gr-anchor" href="#<?php echo $this->getAnchorId($item[$x]['id']); ?>"><?php echo $item[$x]['question'] ?></a> </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <?php foreach ($result as $item): ?>
+                <div class="gr-faq-content">
+                    <div class="main content-accordion"  id="<?php echo $this->getAnchorId($item[0]['id']); ?>">
+                        <h2><?php echo $item[0]['question'] ?></h2>
+                        <div>
+                            <?php echo $item[0]['answer'] ?>
+
+
+                            <?php if(count($item) > 1): ?>
+                                <?php for ($x = 1; $x < count($item); $x++): ?>
+                                    <?php if(isset($item[$x])): ?>
+                                        <div class="sub-content" id="<?php echo $this->getAnchorId($item[$x]['id']); ?>">
+                                            <h3><?php echo $item[$x]['question'] ?></h3>
+                                            <div><?php echo $item[$x]['answer'] ?></div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>

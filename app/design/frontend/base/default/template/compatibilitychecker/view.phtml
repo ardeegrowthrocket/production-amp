@@ -1,0 +1,22 @@
+<?php
+$currentFitment = $this->getCurrentFitment();
+$product = Mage::registry('current_product');
+$fitmentIds = array();
+if(!empty($currentFitment)){
+    $fitmentIds = json_encode($currentFitment);
+}
+
+?>
+<div id="compatibility-checker" class="vehicle-empty" data-product-id="<?php echo $product->getId() ?>" data-fitment-label="<?php echo $this->getCurrent();  ?>" data-fitment="<?php echo htmlentities($fitmentIds) ?>" data-form-key="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+    <div class="loader" style="display: none"><i class="fa fa-spinner fa-spin"></i></div>
+        <div class="inner-content">
+            <div class="colpart-2 info ">
+                <span>Will this fit my vehicle?</span>
+                <i class="fa fa-info-circle" data-toggle="tooltip" title="<?php echo $this->__('Compatibility tool does not filter engine size, trim color, etc.. To ensure proper fitment please read full product description'); ?>"></i>
+                <span class="alternative"></span>
+            </div>
+            <div class="colpart-3">
+                <a class="open-form" href="#">Choose Vehicle</a>
+            </div>
+        </div>
+</div>

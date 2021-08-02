@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<gr_slider_tab translate="label" module="slider">
+            <label>GR Slider</label>
+            <sort_order>100</sort_order>
+        </gr_slider_tab>
+	  </tabs>
+	  <sections>
+		<gr_slider_section  translate="label" module="slider">
+		<label>Settings</label>
+		<tab>gr_slider_tab</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>0</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>
+					<groups>
+				      <gr_slider_group translate="label"> 
+					  <label>Settings</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>0</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+				       <fields>
+                           <autoplay translate="label">
+                               <label>Autoplay</label>
+                               <frontend_type>select</frontend_type>
+                               <source_model>adminhtml/system_config_source_yesno</source_model>
+                               <sort_order>0</sort_order>
+                               <show_in_default>1</show_in_default>
+                               <show_in_website>1</show_in_website>
+                               <show_in_store>1</show_in_store>
+                           </autoplay>
+                           <loop translate="label">
+                               <label>Loop</label>
+                               <frontend_type>select</frontend_type>
+                               <source_model>adminhtml/system_config_source_yesno</source_model>
+                               <sort_order>0</sort_order>
+                               <show_in_default>1</show_in_default>
+                               <show_in_website>1</show_in_website>
+                               <show_in_store>1</show_in_store>
+                           </loop>
+                           <speed translate="label">
+                               <label>Speed</label>
+                               <frontend_type>text</frontend_type>
+                               <sort_order>0</sort_order>
+                               <show_in_default>1</show_in_default>
+                               <show_in_website>1</show_in_website>
+                               <show_in_store>1</show_in_store>
+                           </speed>
+					   </fields>
+					   </gr_slider_group>
+					</groups>
+		</gr_slider_section>
+	  </sections>
+</config>

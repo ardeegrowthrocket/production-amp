@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<!--
+/**
+*
+* Webshopapps Shipping Module
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade Magento to newer
+* versions in the future. If you wish to customize Magento for your
+* needs please refer to http://www.magentocommerce.com for more information.
+*
+* Shipper HQ Shipping
+*
+* @category ShipperHQ
+* @package ShipperHQ_Shipping_Carrier
+* @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+* @author ShipperHQ Team sales@shipperhq.com
+*/
+-->
+<config>
+    <modules>
+        <Shipperhq_Freight>
+            <version>0.0.11</version>
+        </Shipperhq_Freight>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_freight>
+                <class>Shipperhq_Freight_Block</class>
+            </shipperhq_freight>
+        </blocks>
+        <helpers>
+            <shipperhq_freight>
+                <class>Shipperhq_Freight_Helper</class>
+            </shipperhq_freight>
+        </helpers>
+        <models>
+            <shipperhq_freight>
+                <class>Shipperhq_Freight_Model</class>
+            </shipperhq_freight>
+        </models>
+        <resources>
+            <shipperhq_freight_setup>
+                <setup>
+                    <module>Shipperhq_Freight</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </shipperhq_freight_setup>
+        </resources>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <shipperhq_freight_controller_action_predispatch>
+                        <class>shipperhq_freight/observer</class>
+                        <method>hookToControllerActionPreDispatch</method>
+                    </shipperhq_freight_controller_action_predispatch>
+                </observers>
+            </controller_action_predispatch>
+           <!-- <controller_action_predispatch_onestepcheckout_ajax_set_methods_separate>
+                <observers>
+                    <shipperhq_splitrates_onestepcheckout_ajax_setmethodsseparate>
+                        <class>shipperhq_splitrates/observer</class>
+                        <method>preDispatchSetMethodsSeparate</method>
+                    </shipperhq_splitrates_onestepcheckout_ajax_setmethodsseparate>
+                </observers>
+            </controller_action_predispatch_onestepcheckout_ajax_set_methods_separate -->
+            <shipperhq_save_shipping_method>
+                <observers>
+                    <shipperhq_freight_shq_save_shipping_method_observer>
+                        <class>shipperhq_freight/observer</class>
+                        <method>saveShippingOptionsSelected</method>
+                    </shipperhq_freight_shq_save_shipping_method_observer>
+                </observers>
+            </shipperhq_save_shipping_method>
+           <adminhtml_sales_order_create_process_data>
+                <observers>
+                    <shipperhq_freight_save_shipping_method_admin_observer>
+                        <class>shipperhq_freight/observer</class>
+                        <method>saveOptionsSelectedInAdmin</method>
+                    </shipperhq_freight_save_shipping_method_admin_observer>
+                </observers>
+            </adminhtml_sales_order_create_process_data>
+           <!-- <checkout_controller_multishipping_shipping_post>
+                <observers>
+                    <shipperhq_freight_mulitaddress_save_shipping_method_observer>
+                        <class>shipperhq_freight/observer</class>
+                        <method>saveOptionsSelectedMulti</method>
+                    </shipperhq_freight_mulitaddress_save_shipping_method_observer>
+                </observers>
+            </checkout_controller_multishipping_shipping_post> -->
+        </events>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <freight_quote_id>
+                    <to_order>*</to_order>
+                </freight_quote_id>
+                <liftgate_required>
+                    <to_order>*</to_order>
+                </liftgate_required>
+                <notify_required>
+                    <to_order>*</to_order>
+                </notify_required>
+                <inside_delivery>
+                    <to_order>*</to_order>
+                </inside_delivery>
+                <limited_delivery>
+                    <to_order>*</to_order>
+                </limited_delivery>
+                <destination_type>
+                    <to_order>*</to_order>
+                </destination_type>
+                <customer_carrier>
+                    <to_order>*</to_order>
+                </customer_carrier>
+                <customer_carrier_ph>
+                    <to_order>*</to_order>
+                </customer_carrier_ph>
+                <customer_carrier_account>
+                    <to_order>*</to_order>
+                </customer_carrier_account>
+            </sales_convert_quote_address>
+            <sales_convert_order>
+                <freight_quote_id>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </freight_quote_id>
+                <notify_required>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </notify_required>
+                <inside_delivery>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </inside_delivery>
+                <limited_delivery>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </limited_delivery>
+                <liftgate_required>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </liftgate_required>
+                <destination_type>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </destination_type>
+                <customer_carrier>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </customer_carrier>
+                <customer_carrier_ph>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </customer_carrier_ph>
+                <customer_carrier_account>
+                    <to_quote_address_shipping>*</to_quote_address_shipping>
+                </customer_carrier_account>
+            </sales_convert_order>
+        </fieldsets>
+    </global>
+    <frontend>
+        <routers>
+            <shipperhq_freight>
+                <use>standard</use>
+                <args>
+                    <module>Shipperhq_Freight</module>
+                    <frontName>shipperhq_freight</frontName>
+                </args>
+            </shipperhq_freight>
+        </routers>
+        <layout>
+            <updates>
+                <shipperhq_calendar>
+                    <file>shipperhq/freight.xml</file>
+                </shipperhq_calendar>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <shipperhq_calendar>
+                    <file>shipperhq/freight.xml</file>
+                </shipperhq_calendar>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <shipperhq_freight after="Mage_Adminhtml">Shipperhq_Freight_Adminhtml</shipperhq_freight>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

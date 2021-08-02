@@ -1,0 +1,12 @@
+<?php
+    class Growthrocket_Newslettertracker_Model_Mysql4_Capture_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
+    {
+
+		public function _construct(){
+			$this->_init("newslettertracker/capture");
+		}
+
+		
+
+    }
+	 

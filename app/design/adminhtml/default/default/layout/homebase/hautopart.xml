@@ -1,0 +1,32 @@
+<layout>
+    <adminhtml_hautopart_index_index>
+        <reference name="content">
+            <block type="hautopart/adminhtml_combination"/>
+        </reference>
+    </adminhtml_hautopart_index_index>
+    <adminhtml_hautopart_mass_index>
+        <reference name="content">
+            <block type="core/template" name="fuploader" template="homebase/mass/index.phtml"></block>
+        </reference>
+    </adminhtml_hautopart_mass_index>
+    <!--<adminhtml_hautopart_index_ym>-->
+        <!--<reference name="content">-->
+            <!--<block type="core/template" name="mainfile" template="homebase/associations.phtml"/>-->
+        <!--</reference>-->
+    <!--</adminhtml_hautopart_index_ym>-->
+    <adminhtml_catalog_product_combination>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="hautopart/adminhtml_product_edit_tab_combination_items" name="admin.combination.options"/>
+        </block>
+    </adminhtml_catalog_product_combination>
+
+    <adminhtml_catalog_product_autopart>
+        <reference name="product_tabs">
+            <action method="addTabAfter">
+                <id>combination_items</id>
+                <block>hautopart/adminhtml_product_edit_tab_combination</block>
+                <afterTabId>group_7</afterTabId>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_autopart>
+</layout>

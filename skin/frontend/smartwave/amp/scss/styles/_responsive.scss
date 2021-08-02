@@ -1,0 +1,130 @@
+
+
+@media  (max-width: 1280px) {
+
+  .product-view .pdp-accordion {
+    clear: both;
+    ul{
+      li {
+        a {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+  .product-view .product-info-wrapper{
+    margin-bottom: 0;
+  }
+  .product-view .right-container {
+    z-index: 9;
+  }
+  #mopar-pdp-bestseller .heading h2, .related-items .heading h2 {
+    font-size: 22px;
+  }
+
+  .product-view .right-container{
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 500px) and  (max-width: 1280px) {
+  .product-view .product-img-box {
+    margin-bottom: 170px;
+  }
+  .product-view #product_addtocart_form .add-to-box {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+  }
+
+  .product-view .product-info-wrapper .add-to-box.outer-wrapper{
+    padding-left: 30px !important;
+  }
+  .product-view .right-container {
+     padding-left: 15px;
+  }
+
+
+}
+
+@media (max-width: 767px){
+  .product-view .pdp-accordion {
+    clear: both;
+    ul{
+      flex-direction: column;
+
+      li {
+        width: 100%;
+        a {
+          font-size: 16px;
+          margin-bottom: 6px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+@media (max-width: 460px){
+
+  .product-view{
+    h1.product-name{
+      font-size: 24px;
+      line-height: 28px;
+      margin-top: 25px;
+    }
+
+    .payment-image{
+      padding-left: 0px;
+      margin-top: 20px;
+
+      span{
+        display: block;
+      }
+    }
+  }
+  .product-view{
+    .right-container{
+      padding: 0;
+
+      .product-info-wrapper{
+        flex-direction: column;
+        padding-bottom: 20px;
+        .outer-wrapper.add-to-box{
+          border: none;
+          padding:0;
+          margin-top: 20px;
+
+          .finalprice-label, .finalprice-value{
+            text-align: center;
+          }
+        }
+        .product-info{
+          border: none;
+          padding-right: 10px;
+          padding-left: 0px;
+        }
+
+        .finalprice-label, .finalprice-value{
+          text-align: left !important;
+        }
+      }
+
+      .product-info-wrapper .outer-wrapper.add-to-box {
+        width: 100%;
+        display: block;
+      }
+    }
+
+  }
+  .product-view .pdp-accordion ul li a.selected{
+    border: 0px;
+  }
+
+}

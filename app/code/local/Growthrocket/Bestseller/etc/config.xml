@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Bestseller>
+      <version>0.1.0</version>
+    </Growthrocket_Bestseller>
+  </modules>
+  <frontend>
+		<layout>
+		  <updates>
+			<bestseller>
+			  <file>bestseller.xml</file>
+			</bestseller>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <gr_bestseller>
+        <class>Growthrocket_Bestseller_Helper</class>
+      </gr_bestseller>
+    </helpers>
+	<blocks>
+	  <gr_bestseller>
+		<class>Growthrocket_Bestseller_Block</class>
+	  </gr_bestseller>
+	</blocks>
+  </global>
+</config> 

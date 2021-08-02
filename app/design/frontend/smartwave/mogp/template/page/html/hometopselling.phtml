@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('top_selling_category')->toHtml(); ?>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-featured-models')->toHtml(); ?>
+    </div>
+</div>
+
+<div class="container-fluid must-have">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('must_have_for_your_car')->toHtml(); ?>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homepage_about_us_banner')->toHtml(); ?>
+    </div>
+</div>
+
+<?php echo Mage::app()->getLayout()->createBlock('gr_bestseller/collection')->setTemplate('bestseller/list.phtml')->toHtml(); ?>
+
+
+<?php echo Mage::app()->getLayout()->createBlock('featuredproduct/List')->setTemplate('featured/product.phtml')->toHtml(); ?>
+
+<div class="container-fluid homepage-ymm-listing">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homepage_shop_by_ymm')->toHtml(); ?>
+    </div>
+</div>
+
+

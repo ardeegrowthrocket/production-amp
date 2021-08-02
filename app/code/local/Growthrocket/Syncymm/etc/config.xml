@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Growthrocket_Syncymm>
+            <version>0.1.0</version>
+        </Growthrocket_Syncymm>
+    </modules>
+    <global>
+        <models>
+            <gr_syncymm>
+                <class>Growthrocket_Syncymm_Model</class>
+            </gr_syncymm>
+        </models>
+        <helpers>
+            <gr_syncymm>
+                <class>Growthrocket_Syncymm_Helper</class>
+            </gr_syncymm>
+        </helpers>
+    </global>
+    <crontab>
+        <jobs>
+            <syncymm_runsync>
+                <schedule><cron_expr>*/10 * * * *</cron_expr></schedule>
+                <run><model>gr_syncymm/cron::runSync</model></run>
+            </syncymm_runsync>
+        </jobs>
+    </crontab>
+</config>

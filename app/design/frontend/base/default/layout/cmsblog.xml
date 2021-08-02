@@ -1,0 +1,31 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <cmsblog_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+      <action method="addBodyClass"><classname>cms-blog-listing</classname></action>
+    </reference>
+    <reference name="head">
+      <action method="addCss"><stylesheet>css/blog.css</stylesheet></action>
+    </reference>
+    <reference name="content">   
+      <block type="cmsblog/list" name="cmsblog_list" template="cmsblog/list.phtml">
+
+      </block>
+    </reference>   
+  </cmsblog_index_index>
+
+  <cmsblog_cmsblog_index>
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+      <action method="addBodyClass"><classname>cms-blog-view</classname></action>
+    </reference>
+    <reference name="head">
+      <action method="addCss"><stylesheet>css/blog.css</stylesheet></action>
+    </reference>
+    <reference name="content">
+      <block type="cmsblog/view" name="cmsblog_view" template="cmsblog/view.phtml"/>
+    </reference>
+  </cmsblog_cmsblog_index>
+</layout>   
+	

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Shipperhq_Splitrates>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Shipping />
+                <Shipperhq_Shipper />
+                <Shipperhq_Frontend />
+                <!--<Shipperhq_Postorder />-->
+            </depends>
+		</Shipperhq_Splitrates>
+	</modules>
+</config>

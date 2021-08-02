@@ -1,0 +1,21 @@
+<?php
+/**
+Made by Smartwave.
+ */
+?>
+<style>
+    .grecaptcha-badge{
+        display:none;
+    }
+</style>
+<div class="lfp-newsletter">
+    <label>Sign Up for our Newsletter</label>
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletterForm" data-enable-captcha="<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('newsletter') ?>" data-site-key="<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>">
+        <div class="nl-input">
+            <input type="hidden" name="is_ajax" value="1"/>
+            <input type="text" autocomplete="off" id="email" placeholder="Email Address" name="email" class="input-text">
+            <button class="button"><i class="fa fa-spinner hide fa-spin"></i><span class="label">Subscribe</span></button>
+        </div>
+    </form>
+    <div class="newsletter-message"></div>
+</div>

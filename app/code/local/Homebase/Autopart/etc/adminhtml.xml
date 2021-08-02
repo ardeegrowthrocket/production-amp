@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <menu>
+        <catalog translate="title" module="hautopart">
+            <children>
+                <hautopart_index translate="title" module="hautopart">
+                    <title>Fitment Box Associations</title>
+                    <sort_order>999</sort_order>
+                    <action>adminhtml/hautopart_index/index</action>
+                    <!--<children>-->
+                        <!--<hautopart_ym>-->
+                            <!--<title>Year-Make Associations</title>-->
+                            <!--<sort_order>1</sort_order>-->
+                            <!--<action>adminhtml/hautopart_index/ym</action>-->
+                        <!--</hautopart_ym>-->
+                    <!--</children>-->
+                </hautopart_index>
+                <hautopart_mass translate="title" module="hautopart">
+                    <title>Allmoparparts Mass Fitment Importer</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/hautopart_mass/index</action>
+                </hautopart_mass>
+            </children>
+        </catalog>
+    </menu>
+</config>

@@ -1,0 +1,35 @@
+ul.auto-sublist{
+    list-style: none;
+    padding-left:0;
+}
+
+.popular-category-container h1{
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+}
+.home-cta-banner{
+    padding:40px 0;
+}
+.make-featured h1{
+    display: inline;
+    line-height: 65px;
+    padding-left: 15px;
+}
+
+.product-list-action{
+    text-align: center;
+}
+.shop-by-category{
+    margin-top:20px;
+}
+.sby-category-listing .sby-group-listing{
+    list-style: none;
+    padding-left:0;
+
+}
+.part-listing-container .parts-listing{
+    margin-top:20px;
+}
+.part-listing-container .parts-listing li{
+    line-height: 20px;
+}

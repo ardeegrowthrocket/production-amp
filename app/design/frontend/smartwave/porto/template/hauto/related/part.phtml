@@ -1,0 +1,35 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 7/3/17
+ * Time: 11:40 PM
+ */
+
+$parts = $this->getList();
+$category = $this->getCategory();
+
+$maxColumn = 2;
+$rowCount = 0;
+?>
+<?php if($parts->count() >= 5):?>
+    <div class="section-parts-related">
+        <div class="section-title">
+            <?php echo $this->__('Popular') . ' ' .$this->getTitle(); ?>
+        </div>
+        <div class="section-content">
+            <?php foreach($parts as $part): ?>
+            <?php if(($rowCount % $maxColumn)  == 0): ?>
+                <ul class="parts-list col-md-2">
+            <?php endif; ?>
+                <li>
+                    <a href="<?php echo $part->getLink(); ?>"><?php echo $part->getLabel(); ?></a>
+                </li>
+            <?php if(($rowCount % $maxColumn)  == ($maxColumn -1)): ?>
+                </ul>
+            <?php endif; ?>
+            <?php $rowCount++; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>

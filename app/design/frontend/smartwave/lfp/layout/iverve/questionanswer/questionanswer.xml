@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!--
+ @category    Iverve
+ @package     Iverve_Questionanswer
+-->
+<layout version="0.1.0">
+	<catalog_product_view>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/iverve/questionanswer/jquery_noconflict.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/iverve/questionanswer/ProductQA.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/iverve/questionanswer/font-awesome.min.css</name></action>
+		</reference>
+	   	<reference name="product.info">
+			<block type="questionanswer/questionanswer" name="product.questionanswer" as="questionanswerAs" template="iverve/questionanswer/form.phtml">
+                    <action method="addToParentGroup"><group>detailed_info</group></action>
+                    <action method="setTitle" translate="value"><value>Product's Question Answer</value></action>
+            </block>
+		</reference>
+    </catalog_product_view>
+	<customer_account>
+		<reference name="customer_account_navigation">
+			<action method="addLink" translate="label" module="questionanswer"><name>questionanswer_list</name><path>questionanswer/index/listqa</path><label>My Product Question Answer</label></action>
+		</reference>
+	</customer_account>
+	<questionanswer_index_listqa>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/iverve/questionanswer/jquery-1.7.1.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/iverve/questionanswer/jquery_noconflict.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/iverve/questionanswer/ProductQA.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/iverve/questionanswer/font-awesome.min.css</name></action>
+			<action method="setTitle"><title>Question Answer List</title></action>
+		</reference>
+		<label>Question Answer List</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="questionanswer/questionanswer" name="questionanswer_list" template="iverve/questionanswer/questionanswer_list.phtml"/>
+        </reference>
+	</questionanswer_index_listqa>
+</layout>

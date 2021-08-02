@@ -1,0 +1,26 @@
+<?php
+$collection = $this->getParts();
+$numberOfItem = ceil($collection->count()/ 4);
+$begin = true;
+$ctr = 1;
+?>
+<div class="fluid-container lfp-available-products lfp-inner-sm" >
+    <h2 class="text-center">Choose from these available products:</h2>
+    <div class="lfp-content">
+        <?php foreach($collection as $item): ?>
+            <?php if($begin): ?>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+            <?php endif;  ?>
+            <a href="<?php echo $item->getLink(); ?>" class="link-item"><span><?php echo $item->getLabel(); ?></span></a><br>
+            <?php if($ctr % $numberOfItem == 0 || $ctr == $collection->count()): ?>
+                <?php $begin = true; ?>
+                </div>
+            <?php else: ?>
+                <?php $begin = false; ?>
+            <?php endif; ?>
+            <?php
+            $ctr++;
+        endforeach; ?>
+        <div  class="lfp-clear" ></div>
+     </div>
+</div>

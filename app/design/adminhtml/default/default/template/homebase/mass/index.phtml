@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/20/17
+ * Time: 4:35 PM
+ */
+/** @var Mage_Core_Block_Template $this */
+
+?>
+
+<form name="edit_form" action="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/hautopart_mass/upload")?>" method="post" enctype="multipart/form-data">
+    <?php echo $this->getBlockHtml('formkey'); ?>
+    <input type="file" name="file_csv"/>
+    <button type="submit">
+        Upload
+    </button>
+</form>

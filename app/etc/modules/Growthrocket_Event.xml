@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Growthrocket_Event>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Growthrocket_Event>
+    </modules>
+</config>

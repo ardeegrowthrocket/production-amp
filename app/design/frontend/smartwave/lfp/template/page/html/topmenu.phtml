@@ -1,0 +1,154 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 11/26/17
+ * Time: 8:26 PM
+ */
+$baseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+$models = array(
+    '1500',
+    '2500',
+    '3500',
+    '4500',
+    'promaster',
+    'promaster city'
+);
+
+$exteriorCategoryId = 369;
+$interiorCategoryId = 374;
+$tuneUpMaintenancePart = 435;
+$catArray = $this->getSubmenuItems();
+$interior_accessories = $catArray[$interiorCategoryId];
+$exterior_accessories = $catArray[$exteriorCategoryId];
+$tuneup_maintenance = $catArray[$tuneUpMaintenancePart];
+?>
+    <div class="header-wrapper">
+        <div class="main-nav">
+            <div class="menu-wrapper">
+                <div class="menu-all-pages-container">
+                    <ul class="menu">
+                        <li class="menu-full-width open-by-click">
+                            <a href="#">Interior Accessories<i class="fa fa-caret-down"></i></a>
+                            <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                <div class="container">
+                                    <div class="mega-columns">
+                                        <div class="block1">
+                                            <div class="row" style="margin:0">
+                                                <div class="col-md-12">
+                                                    <h5><a href="<?php echo $baseUrl; ?>category/interior-accessories.html">Interior Accessories</a></h5>
+                                                    <ul class="col-sm-12 act">
+                                                        <div class="col-sm-12">
+                                                            <?php foreach(array_chunk($interior_accessories, 10) as $interior_accessory): ?>
+                                                                <ul class="col-sm-3 parts-listing">
+                                                                    <?php foreach($interior_accessory as $part): ?>
+                                                                        <li class="full"><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="menu-full-width open-by-click">
+                            <a href="#">Exterior Accessories<i class="fa fa-caret-down"></i></a>
+                            <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                <div class="container">
+                                    <div class="mega-columns">
+                                        <div class="block1">
+                                            <div class="row" style="margin:0">
+                                                <div class="col-md-12">
+                                                    <h5><a href="<?php echo $baseUrl; ?>category/exterior-accessories.html">Exterior Accessories</a></h5>
+                                                    <ul class="col-sm-12 act">
+                                                        <div class="col-sm-12">
+                                                            <?php foreach(array_chunk($exterior_accessories, 10) as $exterior_accessory): ?>
+                                                                <ul class="col-sm-3 parts-listing">
+                                                                    <?php foreach($exterior_accessory as $part): ?>
+                                                                        <li class="full"><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="menu-full-width open-by-click">
+                            <a href="#">Maintenance Parts<i class="fa fa-caret-down"></i></a>
+                            <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                <div class="container">
+                                    <div class="mega-columns">
+                                        <div class="block1">
+                                            <div class="row" style="margin:0">
+                                                <div class="col-md-12">
+                                                    <h5><a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html">Maintenance Parts</a></h5>
+                                                    <ul class="col-sm-12 act">
+                                                        <?php foreach ($tuneup_maintenance as $part): ?>
+                                                            <li><a href="<?php echo $baseUrl; ?>part/<?php echo strtolower(str_replace(' ','-',$part)); ?>.html"><?php echo $part; ?></a></li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="menu-full-width open-by-click">
+                            <a href="#">Ford Performance Parts & Accessories<i class="fa fa-caret-down"></i></a>
+                            <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                <div class="container">
+                                    <div class="mega-columns">
+                                        <div class="block1">
+                                            <div class="row" style="margin:0">
+                                                <div class="col-md-12">
+                                                    <h5>Ford Performance Parts & Accessories</h5>
+                                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('megamenu-link-ford-performance')->toHtml(); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li class="menu-full-width open-by-click">
+                            <a href="#">BROWSE BY MODEL<i class="fa fa-caret-down"></i></a>
+                            <div class="nav-sublist-dropdown" style="display: none; list-style: none;">
+                                <div class="container">
+                                    <div class="mega-columns">
+                                        <div class="block1">
+                                            <div class="row" style="margin:0">
+                                                <div class="col-md-12">
+                                                    <h5>Browse by Model</h5>
+                                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('megamenu-link-browse-model')->toHtml(); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .container-remove .sub-menu li {
+        display: block !important;
+    }
+</style>

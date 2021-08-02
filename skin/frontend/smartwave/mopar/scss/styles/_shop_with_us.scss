@@ -1,0 +1,53 @@
+.custom-grid{
+  margin-top: 65px;
+  .wrapper{
+   @include custom-box-shadow();
+    @include border-radius();
+  }
+
+    .item{
+      border-color: $grey-color;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-right-width: 1px;
+      border-right-style: solid;
+      padding: 45px 30px 0 50px;
+      text-align: left;
+      height: 280px;
+
+      .img-container{
+        height: 70px;
+        line-height: 70px;
+
+        img{
+          vertical-align: middle;
+        }
+      }
+
+      h3.title{
+        font-family: robotobold;
+        font-size: 22px;
+        color: $tertiary-bg-color;
+        margin-top: 22px;
+        margin-bottom: 10px;
+      }
+      p{
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    &:nth-child(3),&:nth-child(6){
+      .item{
+        border-right-width: 0;
+        border-right-style: none;
+      }
+    }
+    &:nth-child(4),&:nth-child(5),&:nth-child(6){
+      .item{
+        border-bottom-width: 0;
+        border-bottom-style: none;
+      }
+    }
+
+}

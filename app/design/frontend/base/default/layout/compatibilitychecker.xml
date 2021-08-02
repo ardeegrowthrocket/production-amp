@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <catalog_product_view>
+    <reference name="head">
+      <action method="addCss">
+        <type>css/vehicle-fitment.css</type>
+      </action>
+    </reference>
+    <reference name="product.info">
+      <block type="hautopart/ymm" name="compatibilitychecker_view" template="compatibilitychecker/view.phtml"/>
+    </reference>
+    <reference name="content">
+      <block type="hautopart/ymm" before="-" name="compatibilitychecker_form" template="compatibilitychecker/form.phtml"/>
+    </reference>
+  </catalog_product_view>
+</layout>
+	

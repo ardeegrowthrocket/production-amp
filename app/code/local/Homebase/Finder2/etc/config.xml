@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Homebase_Finder2>
+			<version>0.1.0</version>
+		</Homebase_Finder2>
+	</modules>
+	<global>
+		<helpers>
+			<finder2>
+				<class>Homebase_Finder2_Helper</class>
+			</finder2>
+		</helpers>
+		<blocks>
+			<finder2>
+				<class>Homebase_Finder2_Block</class>
+			</finder2>
+		</blocks>
+		<models>
+			<finder2>
+				<class>Homebase_Finder2_Model</class>
+				<resourceModel>finder2_mysql4</resourceModel>
+			</finder2>
+			<finder2_mysql4>
+				<class>Homebase_Finder2_Model_Mysql4</class>
+				<entities>
+					<finder2>
+						<table>hfinder_base2</table>
+					</finder2>
+				</entities>
+			</finder2_mysql4>
+		</models>
+		<resources>
+			<finder2_setup>
+				<setup>
+					<module>Homebase_Finder2</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</finder2_setup>
+			<finder2_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</finder2_write>
+			<finder2_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</finder2_read>
+		</resources>
+	</global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<finder2 before="Mage_Adminhtml">Homebase_Finder2_Adminhtml</finder2>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<menu>
+			<!--<finder2 module="finder2">-->
+				<!--<title>Allmoparparts Finder</title>-->
+				<!--<sort_order>100</sort_order>-->
+				<!--<children>-->
+					<!--<finder2 module="finder2">-->
+						<!--<title>Manage Finder</title>-->
+						<!--<sort_order>0</sort_order>-->
+						<!--<action>adminhtml/finder2_index/index</action>-->
+					<!--</finder2>-->
+				<!--</children>-->
+			<!--</finder2>-->
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<finder2 translate="title" module="finder2">
+							<title>Allmoparparts Finder</title>
+							<sort_order>1000</sort_order>
+							<children>
+								<finder2 translate="title">
+									<title>Manage Finder</title>
+									<sort_order>0</sort_order>
+								</finder2>
+							</children>
+						</finder2>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<finder2>
+					<file>finder2.xml</file>
+				</finder2>
+			</updates>
+		</layout>
+	</adminhtml>
+</config> 

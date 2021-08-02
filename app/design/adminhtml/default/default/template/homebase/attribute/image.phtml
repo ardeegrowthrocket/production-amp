@@ -1,0 +1,57 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/6/17
+ * Time: 8:54 PM
+ */
+
+
+$options = $this->getOptions();
+
+$websiteCollection = $this->getWebsites();
+?>
+<div class="entity-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">Attribute Images</h4>
+    </div>
+    <div class="box">
+        <div class="hor-scroll">
+            <table class="dynamic-grid">
+                <thead>
+                <tr>
+                    <td><?php echo $this->__('Available Attributes'); ?></td>
+                    <?php foreach($websiteCollection as $item):?>
+                        <td><?php echo $item->getName(); ?></td>
+                    <?php endforeach; ?>
+                </tr>
+                </thead>
+                <?php foreach($options as $option): ?>
+                    <tr>
+                        <td>
+                            <label for=""><?php echo $option['label']; ?></label>
+                        </td>
+                        <?php foreach($websiteCollection as $item): ?>
+                            <td>
+                                <?php $webId = $item->getWebsiteId(); ?>
+                                <?php if(!$this->hasImage($option['id'], $webId)): ?>
+                                    <input type="file" name="option_images_<?php echo $option['id']; ?>_<?php echo $webId;?>">
+                                <?php else: ?>
+                                    <div>
+                                        <img src="<?php echo $this->getImage($option['id'], $webId); ?>" width="72px" height="72px;"/>
+                                        <div style="width:72px;">
+                                            <p style="text-align: center">Delete</p>
+                                            <input type="checkbox" name="option_delete[<?php echo $webId; ?>][<?php echo $option['id']?>]" value="<?php echo $option['id']?>" style="width:100%;"/>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                        <?php endforeach; ?>
+
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+</div>
+

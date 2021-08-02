@@ -1,0 +1,8 @@
+<layout>
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addCss"><name>hfitment.css</name></action>
+            <action method="addJs"><script>hfitment/app.js</script></action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+</layout>

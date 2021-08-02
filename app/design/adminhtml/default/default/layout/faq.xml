@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <adminhtml_grfaq_index>
+	<reference name="content">
+	  <block type="faq/adminhtml_grfaq" name="grfaq" />
+	</reference>
+  </adminhtml_grfaq_index>
+
+	<adminhtml_grfaq_new>
+		<reference name="head">
+			<action method="setCanLoadExtJs"><flag>1</flag></action>
+			<action method="setCanLoadTinyMce"><flag>1</flag></action>
+			<action method="addJs"><script>lib/flex.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+			<action method="addJs"><script>prototype/window.js</script></action>
+			<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+			<action method="addItem"><type>js</type><name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>tiny_mce/tiny_mce.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/jquery3.5.1.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/noconflict.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/application.js</name><params>defer</params></action>
+		</reference>
+	</adminhtml_grfaq_new>
+	<adminhtml_grfaq_edit>
+		<reference name="head">
+			<action method="setCanLoadExtJs"><flag>1</flag></action>
+			<action method="setCanLoadTinyMce"><flag>1</flag></action>
+			<action method="addJs"><script>lib/flex.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+			<action method="addJs"><script>prototype/window.js</script></action>
+			<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+			<action method="addItem"><type>js</type><name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>tiny_mce/tiny_mce.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/jquery3.5.1.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/noconflict.js</name><params/></action>
+			<action method="addItem"><type>js</type><name>faq/application.js</name><params>defer</params></action>
+		</reference>
+	</adminhtml_grfaq_edit>
+</layout>

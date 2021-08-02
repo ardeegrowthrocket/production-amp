@@ -1,0 +1,14 @@
+<config>
+    <modules>
+        <Shipperhq_Frontend>
+            <version>0.0.1</version>
+        </Shipperhq_Frontend>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_frontend>
+                <class>Shipperhq_Frontend_Block</class>
+            </shipperhq_frontend>
+        </blocks>
+    </global>
+</config>

@@ -1,0 +1,137 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+/** @var Homebase_Autopart_Block_Display_List $this */
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if(strpos(Mage::helper('core/url')->getCurrentUrl(), '/make/') !== false) {
+    $subtitle = "<span>Pick your vehicle</span> from the selection below:";
+} else if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/model/') !== false) {
+    $subtitle = "Please select your vehicle's year below:";
+} else if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "Here are the available accessories for your vehicle:";
+}
+
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+
+$titlePrefix = "";
+if($request->getActionName() == 'model') {
+    $titlePrefix = '&nbsp;Parts & Accessories';
+}
+?>
+    <!--YMM FORM -->
+
+<?php if(count($list) > 0): ?>
+    <div class="container">
+       <div class="row">
+           <h1> <?php echo $this->getAutoName() . $titlePrefix; ?></h1>
+           <div class="listing-top-text">
+               <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+           </div>
+           <?php if (!empty($subtitle)) : ?>
+               <div class="sub-heading">
+                   <h2 style="text-align:left;"><?php echo $subtitle; ?></h2>
+               </div>
+           <?php endif; ?>
+       </div>
+        <div id="weekly_featured_product">
+            <div class="row product-list-container">
+                <?php foreach ($list as $item): ?>
+                    <div class="product-item-container col-lg-5ths col-sm-3 col-xs-12">
+                                 <?php if($this instanceof Homebase_Autopart_Block_Category_Model):?>
+                                 <div class="product-item-thumb">
+                                    <?php $path = '#'; ?>
+                                   <?php if($this instanceof Homebase_Autopart_Block_Category_Model):?>
+                                        <div class="year-<?php echo $item->getLabel(); ?>">
+                                            <div class="year-text"><?php echo $item->getLabel(); ?></div>
+                                            <style type="text/css">
+                                                .year-<?php echo $item->getLabel(); ?>{
+                                                        display: none;
+                                                }
+                                            </style>
+                                        </div>
+                                    <?php else: ?>
+                                        <?php $path =$this->getImage($item->getModel(), false, 226, 142); ?>
+                                        <img src="<?php echo $path; ?>" class="check" width="226px">
+                                    <?php endif; ?>
+                                </div>
+                                     <a href="<?php echo $this->getCustomLink($item->getLabel()); ?>"><?php echo $item->getLabel(); ?> <?php echo $this->getAutoName(); ?> <i class="fa fa-angle-right" style="float: right;font-size: 24px;margin-top: -5px;"></i></a>
+                                 <?php else: ?>
+                                    <a href="<?php echo $this->getCustomLink($item->getLabel()); ?>">
+                                    <div class="product-item-thumb">
+                                    <?php $path = '#'; ?>
+                                   <?php if($this instanceof Homebase_Autopart_Block_Category_Model):?>
+                                        <div class="year-<?php echo $item->getLabel(); ?>">
+                                            <div class="year-text"><?php echo $item->getLabel(); ?></div>
+                                            <style type="text/css">
+                                                .year-<?php echo $item->getLabel(); ?>{
+                                                        display: none;
+                                                }
+                                            </style>
+                                        </div>
+                                    <?php else: ?>
+                                        <?php $path =$this->getImage($item->getModel(), false, 198, 116); ?>
+                                        <img src="<?php echo $path; ?>" class="check" width="198px" >
+                                    <?php endif; ?>
+                                </div>
+                                        <span class="listing-label">
+                                             <?php echo $item->getName(); ?>
+                                        </span>
+                                    </a>
+                                 <?php endif; ?>
+
+                        </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+    </div>
+
+<div class="full-wrapper">
+    <div class="container">
+        <div class="row">
+            <?php echo $this->getChildHtml('category.partname') ?>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <?php echo $this->getChildHtml('category.popular.product') ?>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="listing-bottom-text col-md-12">
+            <?php $content = $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+            <?php
+            if(strpos($content, '[view-more]') !== false){
+                echo $content = str_replace('[view-more]','<span class="viewmore"></span>', $content);
+                echo '<a href="" class="view-more">View More</a>';
+            }else {
+                echo $content;
+            }
+            ?>
+        </div>
+        <?php if(empty($content)): ?>
+            <?php echo $this->getChildHtml('default-listing-content'); ?>
+        <?php endif; ?>
+    </div>
+</div>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

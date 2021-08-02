@@ -1,0 +1,147 @@
+
+.footer-container {
+
+  .footer-middle {
+    background: $black-color;
+    color: $white-color;
+    padding: 55px 0 35px;
+
+    p, a {
+      font-size: 16px;
+    }
+
+    .block-title {
+      span {
+        font-family: robotobold;
+        color: $white-color;
+      }
+    }
+
+    .block-content {
+      p {
+        margin: 0;
+      }
+    }
+
+    .footer-menu-links {
+      ul {
+        li {
+          margin-bottom: 7px;
+        }
+      }
+    }
+
+    .social-links {
+      li {
+        display: inline-block;
+        padding-right: 10px;
+        margin-top: 20px;
+
+        a {
+          background-image: url("../images/social_icons.svg");
+          height: 17px;
+          width: 20px;
+          display: block;
+
+          &.fb {
+
+          }
+
+          &.twitter {
+            background-position: 120px 0;
+          }
+
+          &.bing {
+            background-position: 90px 0;
+          }
+
+          &.google-plus {
+            background-position: 58px 0;
+            width: 26px;
+          }
+
+          &.email {
+            background-position: 20px 0px;
+          }
+        }
+      }
+    }
+
+    .block-subscribe {
+      position: relative;
+      padding-right: 60px;
+
+      .input-box {
+        .input-text {
+          height: 39px;
+          @include border-radius();
+          width: 100%;
+          font-family: robotolight;
+          padding-left: 20px;
+          font-size: 15px;
+        }
+
+        button {
+          position: absolute;
+          top: 0px;
+          height: 40px;
+          right: 0px;
+          background-color: $secondary-bg-color;
+          font-family: robotobold;
+          @include border-radius(0, 3px, 3px, 0);
+          width: 103px;
+          font-size: 14px;
+          text-transform: uppercase;
+          color: $white-color;
+
+          span.label{
+            color: $white-color;
+          }
+        }
+      }
+
+    }
+  }
+
+  .copyright {
+    background: $black-color;
+    padding: 30px 0px;
+    text-align: center;
+
+    ul {
+      display: inline-block;
+
+      li {
+        float: left;
+        padding: 0px 15px;
+        color: $white-color;
+        font-size: 16px;
+
+        a {
+          color: $white-color;
+        }
+
+        &.first {
+          border-right: 1px solid #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .block-subscribe {
+    #newsletterForm{
+      .button{
+        span.label{
+          background-color: transparent;
+        }
+      }
+    }
+    .newsletter-message {
+      margin-top: 10px;
+
+      &.success {
+        color: $white-color;
+      }
+    }
+  }
+}

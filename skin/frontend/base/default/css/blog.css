@@ -1,0 +1,32 @@
+.cms-blog .content {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.cms-blog .date {
+  color: #215f9f;
+  font-size: 12px;
+}
+
+.cms-blog-listing .main-wrapper {
+  margin-top: 20px;
+}
+.cms-blog-listing .main-wrapper .page-title h1 {
+  color: #282828;
+}
+.cms-blog-listing .main-wrapper .listing .item {
+  margin-top: 40px;
+}
+.cms-blog-listing .main-wrapper .listing .item h3.title a {
+  text-decoration: none;
+}
+.cms-blog-listing .main-wrapper .sidebar .view-mode, .cms-blog-listing .main-wrapper .sidebar .pager {
+  display: none;
+}
+.cms-blog-listing .main-wrapper .footer-toolbar {
+  margin: 20px 0px 50px;
+}
+.cms-blog-listing .main-wrapper .footer-toolbar .view-mode {
+  display: none;
+}
+
+/*# sourceMappingURL=blog.css.map */

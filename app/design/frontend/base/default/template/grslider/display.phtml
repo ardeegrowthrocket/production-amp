@@ -1,0 +1,25 @@
+<?php
+$helper = Mage::helper('slider');
+$collection = $this->getCollection();
+if(!empty($collection)): ?>
+<div class="banner-slider"
+     data-auto-play-speed="<?php echo $helper->getSliderSpeed() ?>"
+     data-auto-play="<?php echo $helper->isAutoPlay() ?>"
+     data-slider-loop="<?php echo $helper->isSliderLoop() ?>">
+    <?php foreach ($collection as $item): ?>
+    <div class="item">
+        <img class="top-banner-img responsimg" src="<?php echo $helper->getMediaUrl($item['image']); ?>" />
+        <div class="slick-content">
+        <div class="dev-center">
+            <?php echo $item['body']; ?>
+        </div>
+        </div>
+    </div>
+        <?php if(!empty($item['style'])): ?>
+        <style type="text/css">
+            <?php echo $item['style']; ?>
+        </style>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>

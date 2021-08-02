@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<config>
+    <sections>
+        <grcontent>
+            <label>Dynamic Content Settings</label>
+            <tab>grfitment</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <content>
+                    <label>Part Make Content Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <partmake>
+                            <label>Default Content</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>grcontent/system_config_source_content</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </partmake>
+                    </fields>
+                </content>
+                <makemodel>
+                    <label>Part Make Model Content Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <content>
+                            <label>Default Content</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>grcontent/system_config_source_content</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </content>
+                    </fields>
+                </makemodel>
+                <model>
+                    <label>Make Model Content Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <content>
+                            <label>Default Content</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>grcontent/system_config_source_content</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </content>
+                    </fields>
+                </model>
+                <part>
+                    <label>Part Content Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <content>
+                            <label>Default Content</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>grcontent/system_config_source_content</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </content>
+                    </fields>
+                </part>
+            </groups>
+        </grcontent>
+    </sections>
+</config>

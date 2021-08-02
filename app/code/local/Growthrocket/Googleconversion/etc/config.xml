@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Growthrocket_Googleconversion>
+            <version>0.1.0</version>
+        </Growthrocket_Googleconversion>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <googleconversion>
+                    <file>googleconversion.xml</file>
+                </googleconversion>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <helpers>
+            <googleconversion>
+                <class>Growthrocket_Googleconversion_Helper</class>
+            </googleconversion>
+        </helpers>
+        <blocks>
+            <googleconversion>
+                <class>Growthrocket_Googleconversion_Block</class>
+            </googleconversion>
+        </blocks>
+    </global>
+</config> 

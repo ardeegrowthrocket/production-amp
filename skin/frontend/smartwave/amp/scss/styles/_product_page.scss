@@ -1,0 +1,615 @@
+.product-view{
+  #compatibility-checker .inner-content .colpart-2 i.fa {
+    float: left;
+    margin-right: 10px;
+    margin-top: 2px;
+  }
+  .button{
+    font-family: 'avenir-Heavy';
+    color: $white-color;
+    font-size: 14px;
+    background: $secondary-bg-color;
+    display: flex;
+    padding:0px !important;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
+    @include border-radius();
+
+    &:hover{
+      text-decoration: none;
+      color: $grey-color-3;
+      opacity: 0.9;
+    }
+  }
+
+  button.button {
+    span{
+      font-family: 'avenir-Heavy';
+      font-size: 14px;
+      background: $secondary-bg-color;
+      display: inline-block;
+      height: 40px;
+      padding: 0px 0px;
+      color: $white-color;
+      line-height: 42px;
+      min-width: 204px;
+      text-align: center;
+      text-decoration: none;
+      @include border-radius();
+      text-transform: uppercase;
+      border-bottom: 4px solid #b94d11;
+
+
+      &:hover{
+        text-decoration: none;
+        color: $white-color;
+        background: $secondary-bg-color;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .fs-banner {
+    width: 100%;
+    color: #ffffff;
+    background: $ribbon-color;
+    height: 42px;
+    padding: 10px 0px;
+    font-family: 'avenir-Heavy';
+    text-align: center; 
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+
+  h1.product-name{
+      color: $grey-color-3;
+      font-size: 42px;
+
+      margin-bottom: 10px; 
+  }
+
+  .prod-detail-container{
+    font-size: 18px;
+    margin-bottom: 20px;
+
+    span{
+     color:  $tertiary-bg-color;
+      padding-left: 10px;
+    }
+  }
+
+  .right-container{
+    padding-left: 40px;
+
+    .product-info-wrapper{
+      @include border-radius(0px, 0px, 3px, 3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 264px;
+      padding: 30px;
+
+      .product-info{
+        padding-right: 30px;
+        padding-left: 10px;
+
+        h2{
+          &.product-name{
+            font-size: 28px;
+            color: $grey-color-3;
+            line-height: 32px;
+            margin-top: 0px;
+            font-family: 'avenir-Heavy';
+          }
+        }
+
+        .price-box{
+          margin: 0;
+
+          .special-price,.regular-price{
+              display: none;
+          }
+          .old-price{
+            font-family: avenir-Heavy;
+            margin-top: 10px;
+            color: $secondary-bg-color;
+          }
+          .msrp-container{
+            float: left;
+            font-size: 18px;
+            text-transform: capitalize;
+            color: $grey-color;
+            font-family: avenir-Heavy;
+            line-height: 25px;
+            padding-right: 50px;
+            text-decoration: none;
+            margin:20px 0 0 0;
+
+            .price{
+              display: block;
+              text-decoration: line-through;
+              font-size: 20px;
+              font-family: avenir-Heavy;
+
+            }
+          }
+          .savings-container{
+            font-size: 18px;
+            text-transform: capitalize;
+            color: $grey-color-3;
+            font-family: avenir-Heavy;
+            margin:20px 0 0 0;
+
+            .price{
+              display: block;
+              font-size: 20px;
+              color: '#1FCE65';
+              font-family: avenir-Heavy;
+            }
+          }
+        }
+        .shipping-container{
+          margin-top: 10px;
+          text-align: center;
+           img{
+             width: auto;
+             height: auto;
+             max-width: 100%;
+           }
+        }
+      }
+      .outer-wrapper.add-to-box{
+          width: 290px;
+          float: right;
+          border-left: 1px solid #E0E0E0;
+          border-bottom: 0;
+          padding-left: 30px;
+          padding-right: 10px;
+          padding-bottom: 0px;
+          margin: 0;
+          height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .add-to-box{
+          border: 0;
+        }
+        .finalprice-label,.finalprice-value{
+          width: 100%;
+          font-family: avenir-Heavy;
+        }
+
+        .finalprice-label{
+          text-transform: uppercase;
+          color: $grey-color;
+        }
+        .finalprice-value{
+          font-size: 40px;
+          margin: 10px 0px 20px;
+          color: $grey-color-3;
+        }
+
+        .add-to-cart{
+
+          .qty-wrapper{
+            padding-left: 0px;
+            padding-right: 0px;
+
+            label{
+              display: none;
+            }
+
+            .qty-changer{
+              width: 20%;
+               a{
+                 background-color: $grey-color-4;
+                 border: 1px solid $grey-color-4;
+                 width: 100%;
+                 height: 40px;
+                 line-height: 40px;
+                 font-size: 14px;
+                 display: block;
+                 color: $white-color;
+
+                 &.qty_dec{
+                    @include border-radius(3px, 0,0,3px);
+                 }
+
+                 &.qty_inc{
+                   @include border-radius(0, 3px,3px,0);
+                 }
+               }
+            }
+
+            #qty{
+              border-top: 1px solid #E5E5E5;
+              border-bottom: 1px solid #E5E5E5;
+              border-left: none;
+              border-right: none;
+              height: 40px;
+              font-size: 16px;
+              color: $black-color;
+              @include remove-selector-design();
+              width: 100%;
+              text-align: center;
+            }
+          }
+          .btn-cart-wrapper{
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-top: 10px;
+
+            button{
+
+              span{
+                font-size: 14px;
+                font-family: 'Avenir-black';
+                text-transform: uppercase;
+                color: $grey-color-3;
+                height: 40px;
+                background: $secondary-bg-color;
+                line-height: 40px;
+                width: 100%;
+                color: $white-color;
+              }
+            }
+
+          }
+        }
+        .add-to-box{
+          width: auto;
+        }
+      }
+
+    }
+    .heading{
+      h3{
+        margin-top: 30px;
+        font-size: 26px;
+        color: $grey-color-3;
+        font-family: 'Avenir-Medium';
+        text-transform: uppercase;
+
+        span{
+          font-family: 'Avenir-Medium';
+        }
+      }
+    }
+
+    .product-shop{
+      border-bottom: 1px solid #BDBDBD;
+      margin-bottom: 40px;
+
+      .short-description{
+        font-size: 16px;
+
+        .std li {
+          list-style: none;
+          padding-left: 14px;
+          position: relative;
+        }
+        .std li{
+          list-style: none;
+          padding-left: 14px;
+          position: relative;
+        }
+
+        .std li:before{
+          content: '';
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          background: $tertiary-bg-color;
+          border-radius: 10px;
+          left: 0;
+          top: 8px;
+        }
+
+      }
+    }
+  }
+
+  .fitment-guide-title{
+    font-size: 22px;
+    color: $grey-color-3;
+    font-family: 'Avenir-Heavy';
+    text-transform: uppercase;
+    span{
+      font-family: 'Avenir-Medium';
+    }
+  }
+
+  p#fits-statement {
+    font-size: 16px;
+    margin: 15px 0 20px;
+  }
+
+  #fitment-guide{
+    width: 99%;
+    border: 0px;
+      thead{
+        th{
+          text-align: center;
+          color: $white-color;
+          text-transform: uppercase;
+          font-size: 16px;
+          background-color: $fitment-grey;
+          border: 1px solid $fitment-grey;
+        }
+        tr{
+          border: 0px;
+        }
+      }
+    tbody{
+      tr{
+
+        td{
+          border: 1px solid $line-color;
+          text-align: center;
+          font-size: 16px;
+        }
+      }
+    }
+
+  }
+
+  .show-more-fitments{
+    .btn-more-fitments{
+      background-color: $secondary-bg-color;
+      color: $white-color;
+      font-family: 'Avenir-Heavy';
+      text-transform: uppercase;
+      max-width: 205px;
+      margin: 0px auto 0;
+      font-size: 16px;
+      text-decoration: none;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+  }
+  .product-img-box{
+    li.etalage_thumb, li.etalage_small_thumbs li{
+      img {
+        @include border-radius();
+      }
+    }
+  }
+
+  .pdp-accordion{
+    margin-top: 30px;
+
+    ul{
+      padding-left: 0px;
+      padding-right: 0px;
+      //border-bottom: 3px solid $pale-grey;
+      padding-bottom: 3px;
+      background-color: $pale-grey;
+      display: flex;
+      list-style-type: none;
+      align-items: center;
+
+
+      li{
+        &.handle{
+          flex-grow: 1;
+          text-align: center;
+        }
+
+        a{
+          font-size: 18px;
+          font-family: Avenir-Heavy;
+          text-transform: uppercase;
+          padding-bottom: 4px;
+          color:$grey-color-3;
+          text-decoration: none;
+          padding: 10px 28px;
+          background-color: $pale-grey;
+          display: block;
+          position: relative;
+
+
+          &.selected{
+            color: $white-color;
+            background-color: #2372AA;
+
+            &:after{
+              content: '';
+              position: absolute;
+              border: 1px solid #2372AA;
+              width: 100%;
+              left: 0;
+              bottom: -3px;
+            }
+          }
+
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  .accordion-container {
+    padding-top: 18px;
+    border-top: 2px solid #2372AA;
+    padding-bottom: 30px;
+
+    &#col-description{
+      border-top: 0px !important;
+    }
+    .clear{
+      clear: both;
+    }
+  }
+
+  .owl-dots {
+    display: block;
+    text-align: center;
+  }
+
+  #col-ratings {
+    h2 {
+      font-size: 22px;
+      color: #333333;
+      font-family: 'Avenir-Heavy';
+      text-transform: uppercase;
+    }
+    margin-bottom: 20px;
+  }
+
+  .payment-image{
+    padding-left: 20px;
+    margin-top: 10px;
+    span{
+      font-size: 16px;
+      padding-right: 5px;
+    }
+    img{
+      display: inline-block;
+      padding-right: 15px;
+    }
+  }
+}
+
+.hautopart-model-sku{
+  .owl-carousel{
+    .owl-dots{
+      text-align: center;
+      margin-top: 20px;
+
+      button.owl-dot {
+        background: $secondary-bg-color;
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        margin: 0px 0px 0px 7px;
+        @include border-radius(50%,50%,50%,50%);
+        opacity: .5;
+
+        &.active{
+          opacity: .8;
+        }
+      }
+    }
+  }
+  a.fancybox-item.fancybox-close {
+    width: 40px;
+    height: 37px;
+    top: 8px;
+
+    &:after{
+      content: '' !important;
+    }
+  }
+}
+
+
+#mopar-pdp-bestseller{
+    background-color: #f5f5f5;
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 45px;
+
+  .heading{
+    h2{
+      font-family: 'Avenir-Heavy';
+      font-size: 36px;
+      color: $grey-color-3;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  }
+
+  .b-image {
+    margin-bottom: 15px;
+  }
+
+  .b-price{
+    color: $secondary-bg-color;
+    font-size: 22px;
+    font-family: 'Avenir-Heavy';
+  }
+
+  .b-name{
+    margin: 10px 0px;
+    a{
+      font-size: 18px;
+      color: $grey-color-3;
+      font-family: 'Avenir-Heavy';
+      line-height: 22px;
+    }
+  }
+  .b-part-number{
+    font-size: 16px;
+    color: #4F4F4F;
+  }
+}
+
+.related-items{
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: left;
+  .heading{
+    position: relative;
+    h2{
+      font-family: 'Avenir-Heavy';
+      font-size: 36px;
+      color: $grey-color-3;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  }
+
+  .price{
+    color: $secondary-bg-color;
+    font-size: 22px;
+    font-family: 'Avenir-Heavy';
+    margin-top: 10px;
+  }
+  a.name{
+    font-size: 18px;
+    color: $grey-color-3;
+    font-family: 'Avenir-Heavy';
+    line-height: 22px;
+    display: block;
+    margin: 5px 0px 5px;
+  }
+
+  .part_number{
+    font-size: 16px;
+    color: #4F4F4F;
+  }
+
+  .more-link{
+    text-align: center;
+    margin-top: 40px;
+
+    a.button{
+      background-color: $secondary-bg-color;
+      color: $white-color;
+      min-width: 220px;
+      text-transform: uppercase;
+      border-bottom: 4px solid #b94d11;
+      padding: 10px 20px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}
+
+.yotpo.bottomLine .text-m {
+  padding-left: 10px;
+}
+
+.yotpo .yotpo-default-button, .yotpo input[type="button"].yotpo-default-button {
+  background-color: #F3691E !important;
+}
+.yotpo .yotpo-review .yotpo-header .yotpo-header-element .y-label.yotpo-user-name, .yotpo .yotpo-comment .yotpo-header .yotpo-header-element .y-label.yotpo-user-name, .yotpo .yotpo-question .yotpo-header .yotpo-header-element .y-label.yotpo-user-name, .yotpo .yotpo-onsite-upload .yotpo-header .yotpo-header-element .y-label.yotpo-user-name {
+  color: $grey-color-3 !important;
+}

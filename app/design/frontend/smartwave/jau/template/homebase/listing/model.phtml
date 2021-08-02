@@ -1,0 +1,144 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+/** @var Homebase_Autopart_Block_Display_List $this */
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if(strpos(Mage::helper('core/url')->getCurrentUrl(), '/make/') !== false) {
+    $subtitle = "Pick your vehicle’s model from the selection below:";
+} else if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/model/') !== false) {
+    $subtitle = "Please select your vehicle's year below:";
+} else if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "Here are the available accessories for your vehicle:";
+}
+
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+
+$titlePrefix = "";
+if($request->getActionName() == 'model') {
+    $titlePrefix = '&nbsp;Parts & Accessories';
+}
+?>
+    <!--YMM FORM -->
+
+<?php if(count($list) > 0): ?>
+    <style type="text/css">
+
+        .product-item-thumb img{
+            width:100%;
+        }
+        .product-image, .product-item-thumb{
+            height: auto !important;
+            background-color: white;
+            position: relative;
+        }
+
+        .make-model-page .product-item-container{
+
+        }
+
+
+        .product-item-container a {
+            color: white;
+            font-size: 33px;
+            line-height: 1;
+            padding: 26px 0;
+            float: left;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 63.9375em) {
+            .product-item-container a {
+                font-size: 4vmin;
+            }
+            .main-container h1{
+                font-size: 5vmin;
+            }
+        }
+    </style>
+
+    <?php
+    if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/model/') !== false) { ?>
+        <style type="text/css">
+            .product-item-container a {
+                color: #282828;
+                font-size: 22px;
+                line-height: 1;
+                padding: 26px 0;
+                float: left;
+                width: 100%;
+                text-align: left;
+            }
+            @media screen and (max-width: 991px) {
+                .product-item-container a{
+                    font-size: 3vmin;
+                }
+            }
+        </style>
+    <?php } ?>
+    <div class="container">
+        <h1> <?php echo $this->getAutoName()  . $titlePrefix; ?></h1>
+        <div class="listing-top-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+        </div>
+        <?php if (!empty($subtitle)) : ?>
+            <p style="text-align:left;"><?php echo $subtitle; ?></p>
+        <?php endif; ?>
+        <div id="weekly_featured_product">
+            <div class="row product-list-container product-list-model">
+                <?php foreach ($list as $item): ?>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="product-item-container">
+                            <a href="<?php echo $this->getCustomLink($item->getLabel()); ?>">
+                                <?php echo $item->getLabel(); ?> <?php echo $this->getAutoName(); ?>
+                                <i class="fine-angle"></i>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="listing-bottom-text">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+        </div>
+    </div>
+
+    <div id="shop-cat">
+        <?php echo $this->getLayout()->createBlock('hauto/home_shopby_category')->setTemplate('/hauto/home/shopby/category.phtml')->toHtml();
+        ?>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#shop-cat').detach().insertBefore('.footer-container ');
+        });
+
+    </script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+
+            jQuery('img').imageFallback(['<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>category/model-watermark.png']);
+
+        });
+    </script>
+
+
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

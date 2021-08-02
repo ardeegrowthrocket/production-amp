@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<gta translate="title" module="growthrocket_gtm">
+											<title>Google Tag Manager Section</title>
+											<sort_order>0</sort_order>
+										</gta>
+										<google_captcha translate="title" module="growthrocket_gtm">
+											<title>Google reCaptcha v3</title>
+											<sort_order>10</sort_order>
+										</google_captcha>
+										<google_gc_review translate="title" module="growthrocket_gtm">
+											<title>Google Customer Review</title>
+											<sort_order>20</sort_order>
+										</google_gc_review>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

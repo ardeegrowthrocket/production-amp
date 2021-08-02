@@ -1,0 +1,19 @@
+<?php
+
+/*
+$lastOrderId = Mage::getSingleton('checkout/session')
+    ->getLastRealOrderId();
+$orderId = Mage::getModel('sales/order')
+    ->loadByIncrementId($lastOrderId);
+$grandtotal = str_replace(",","",number_format($orderId->getGrandTotal(),2));
+
+?>
+<script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'purchase',
+        'orderID' : '<?php echo $lastOrderId?>',
+        'conversion_value' : '<?php echo $grandtotal; ?>'
+    });
+</script>
+*/ ?>

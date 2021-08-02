@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+	  <sections>
+		<shopping_feed  translate="label" module="shoppingfeed">                    
+		<label>Shopping Feed Generator</label>
+		<tab>general</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>1000</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>0</show_in_website>
+		<show_in_store>0</show_in_store>            
+					<groups>
+				      <sf_info translate="label"> 
+					  <label>Feed Generator Information</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>0</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>0</show_in_website>
+					  <show_in_store>0</show_in_store>
+				       <fields>
+                          <filter_product_status translate="label">
+                            <label>Disallow Disable Product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                          </filter_product_status>
+					   </fields>
+					   </sf_info>
+					</groups>
+		</shopping_feed>
+	  </sections>
+</config>

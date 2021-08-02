@@ -1,0 +1,50 @@
+/**
+Contact us Form
+ */
+.contact-address {
+  font-weight: bold;
+}
+#contactForm {
+  margin-bottom: 50px;
+  .input-containter {
+    label {
+      font-size: 12px;
+      font-weight: normal;
+      color: $primary-text-color;
+
+      em {
+        float: right;
+      }
+    }
+  }
+  .input-box {
+    padding: 0px 0px 15px;
+
+    .input-text, #comment {
+      @include border-radius();
+      border: 1px solid $text-box-color;
+      width: 100%;
+      padding-left: 10px;
+    }
+
+    .input-text {
+      height: 36px;
+    }
+    #comment {
+      height: 150px;
+    }
+  }
+  #rcode {
+    margin-bottom: 15px;
+
+    .captcha {
+      margin-left: 0px;
+    }
+
+    #captcha-required{
+      color: #ff0000;
+      padding-top: 5px;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Shipperhq_Freight>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Shipping />
+                <Shipperhq_Shipper />
+                <Shipperhq_Frontend />
+            </depends>
+        </Shipperhq_Freight>
+    </modules>
+</config>

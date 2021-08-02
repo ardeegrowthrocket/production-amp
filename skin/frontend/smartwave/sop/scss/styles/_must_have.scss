@@ -1,0 +1,43 @@
+.must-have{
+  margin-top: 50px;
+  color: $grey-text-color;
+
+ .heading{
+   width: 56%;
+   margin: 36px auto;
+
+   h2{
+     @include secondary-font(36px,700);
+     color: $primary-bg-color;
+   }
+
+ }
+  .owl-carousel{
+      .owl-item{
+        padding: 10px;
+        .item{
+          @include custom-box-shadow();
+          @include border-radius();
+          height: 288px;
+          padding-top: 25px;
+
+          h3{
+            padding-left: 25px;
+            padding-right: 25px;
+            color: $primary-bg-color;
+            text-align: left;
+
+            i{
+              float: right;
+            }
+          }
+          p{
+            font-size: 16px;
+            padding-left: 25px;
+            padding-right: 25px;
+            text-align: left;
+          }
+        }
+      }
+  }
+}

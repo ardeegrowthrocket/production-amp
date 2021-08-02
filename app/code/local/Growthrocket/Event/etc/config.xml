@@ -1,0 +1,56 @@
+<config>
+    <modules>
+        <Growthrocket_Event>
+            <version>0.1.0</version>
+        </Growthrocket_Event>
+    </modules>
+    <global>
+        <helpers>
+            <grevent>
+                <class>Growthrocket_Event_Helper</class>
+            </grevent>
+        </helpers>
+        <models>
+            <grevent>
+                <class>Growthrocket_Event_Model</class>
+                <resourceModel>grevent_resource</resourceModel>
+            </grevent>
+            <grevent_resource>
+                <class>Growthrocket_Event_Model_Resource</class>
+                <deprecatedNode>grevent_mysql4</deprecatedNode>
+                <entities>
+                    <event>
+                        <table>grevent_processes</table>
+                    </event>
+                </entities>
+            </grevent_resource>
+        </models>
+        <resources>
+            <grevent_setup>
+                <setup>
+                    <module>Growthrocket_Event</module>
+                </setup>
+            </grevent_setup>
+        </resources>
+    </global>
+    <crontab>
+        <jobs>
+            <grevent_process>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>grevent/observer::processPendingEvent</model>
+                </run>
+            </grevent_process>
+            <grevent_cleanup>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>grevent/observer::cleanupEvents</model>
+                </run>
+            </grevent_cleanup>
+        </jobs>
+    </crontab>
+</config>

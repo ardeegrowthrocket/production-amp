@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<layout version="1.0.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/amasty/amfinder.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/amasty/amfinder-cache21.css</stylesheet></action>
+            <action method="addJs"><script>amasty/amfinder/uncached-1.js</script></action>
+            <action method="addJs"><script>amasty/amfinder/finder.js</script></action>
+        </reference>
+    </default>
+
+	<amfinder_index_index>
+        <reference name="left">
+           <block type="catalog/layer_view" name="catalog.leftnav" before="-" template="catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+  <!--              
+                <block type ="amfinder/form" name="amfinder89">
+                    <action method="setId"><id>1</id></action>    
+                    <action method="apply" />
+                </block>    
+-->        
+            
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <action method="setCacheLifetime"><s>null</s></action>
+                </block>
+                <action method="setCacheLifetime"><s>null</s></action>
+            </block>
+        </reference>
+    </amfinder_index_index>
+
+    <catalog_category_default>
+        <reference name="pageHeader">
+            <block type="cms/block" name="amfinder89">
+                <action method="setBlockId">
+                    <block_id>category_products2</block_id>
+                </action>
+                <action method="setCacheLifetime"><s>null</s></action>
+            </block>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="root">
+            <block type="cms/block" name="amfinder89" before="topContainer">
+                <action method="setBlockId">
+                    <block_id>category_products2</block_id>
+                </action>
+                <action method="setCacheLifetime"><s>null</s></action>
+            </block>
+        </reference>
+    </catalog_category_layered>
+
+    <!--
+
+        <catalog_category_default>
+            <reference name="content">
+                <block type ="amfinder/form" name="amfinder89" before="category.products">
+                    <action method="setId"><id>1</id></action>
+                    <action method="apply" />
+                </block>
+            </reference>
+        </catalog_category_default>
+
+         <catalog_category_layered>
+            <reference name="content">
+                <block type ="amfinder/form" name="amfinder89" before="category.products">
+                    <action method="setId"><id>1</id></action>
+                    <action method="apply" />
+                </block>
+            </reference>
+        </catalog_category_layered>
+     -->
+ 
+</layout>

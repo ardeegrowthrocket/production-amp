@@ -1,0 +1,141 @@
+
+.footer-container {
+
+  .footer-middle {
+    background: $primary-bg-color;
+    color: $white-color;
+    padding: 55px 0 50px;
+
+    p, a {
+      font-size: 14px;
+
+      &.tel{
+        margin-top: 10px;
+
+        span{
+          font-weight: bold;
+        }
+      }
+    }
+
+    .block-title {
+      span {
+        font-family: robotobold;
+        color: $white-color;
+      }
+    }
+
+    .footer-menu-links {
+      ul {
+        li {
+          margin-bottom: 7px;
+        }
+      }
+    }
+
+    .social-links {
+      li {
+        display: inline-block;
+        padding-right: 10px;
+        margin-top: 20px;
+
+        a {
+          background-image: url("../images/social_icons.svg");
+          height: 17px;
+          width: 20px;
+          display: block;
+
+          &.fb {
+
+          }
+
+          &.twitter {
+            background-position: 120px 0;
+          }
+
+          &.bing {
+            background-position: 90px 0;
+          }
+
+          &.google-plus {
+            background-position: 58px 0;
+            width: 26px;
+          }
+
+          &.email {
+            background-position: 20px 0px;
+          }
+        }
+      }
+    }
+
+    .block-subscribe {
+      position: relative;
+      padding-right: 60px;
+
+      .input-box {
+        .input-text {
+          height: 40px;
+          @include border-radius();
+          width: 64%;
+          font-family: robotolight;
+          padding-left: 20px;
+          font-size: 15px;
+        }
+
+        button {
+          position: absolute;
+          top: 0px;
+          height: 40px;
+          right: 0px;
+          background-color: $secondary-bg-color;
+          @include secondary-font(14px);
+          @include border-radius();
+          width: 103px;
+          font-size: 14px;
+          text-transform: uppercase;
+          color: $white-color;
+          border-bottom: 3px solid $secondary-border-color;
+        }
+      }
+
+    }
+  }
+
+  .copyright {
+    background: #001F4E;
+    padding: 16px 0px;
+    text-align: center;
+
+    ul {
+      display: inline-block;
+
+      li {
+        float: left;
+        padding: 0px 15px;
+        color: $white-color;
+        font-size: 16px;
+        a {
+          color: $white-color;
+        }
+      }
+    }
+  }
+
+  .block-subscribe {
+    #newsletterForm{
+      .button{
+        span.label{
+          background-color: transparent;
+        }
+      }
+    }
+    .newsletter-message {
+      margin-top: 10px;
+
+      &.success {
+        color: $white-color;
+      }
+    }
+  }
+}

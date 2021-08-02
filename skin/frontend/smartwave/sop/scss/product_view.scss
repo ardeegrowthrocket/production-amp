@@ -1,0 +1,539 @@
+@import 'settings/_color';
+@import 'settings/_mixin';
+
+.product-view{
+
+  h1.product-name{
+    color: $primary-bg-color;
+    @include secondary-font(32px,700);
+    margin-bottom: 10px;
+  }
+
+  .prod-detail-container{
+    font-size: 20px;
+    margin-bottom: 50px;
+
+    span{
+      color:  $grey-text-color;
+      font-family: robotobold;
+      padding-left: 10px;
+    }
+  }
+
+  .product-img-box{
+    .etalage_thumb, .etalage_small_thumb{
+      border: 1px solid $grey-color;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    }
+  }
+  .product-img-box li.etalage_small_thumbs li
+  {
+    padding: 10px;
+  }
+
+  .right-container{
+    padding-left: 40px;
+
+    .product-info-wrapper{
+      border-color: $grey-color;
+      border-style: solid;
+      border-width: 0 1px 1px 1px;
+      @include border-radius(0px, 0px, 3px, 3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 264px;
+      width: 100%;
+
+      &.free-shipping{
+        border-radius: 0;
+        border-bottom: 0;
+      }
+
+      .product-info{
+        padding-right: 30px;
+        padding-left: 10px;
+
+        h2{
+          &.product-name{
+            color: $grey-color-3;
+            @include secondary-font(28px,700);
+            line-height: 32px;
+          }
+        }
+
+        .price-box{
+          margin: 0;
+
+          .old-price{
+            margin-top: 20px;
+
+            .price-label{
+              display: block;
+              font-family: robotobold;
+              font-size: 14px;
+              color: $grey-color-3;
+              text-transform: uppercase;
+
+            }
+            .price {
+              font-family: robotoregular;
+              color: $grey-color-3;
+              font-size: 20px;
+            }
+          }
+
+          .special-price, .regular-price{
+            display: none;
+          }
+          .msrp-container{
+            float: left;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: $grey-color-3;
+            font-family: robotobold;
+            padding-right: 50px;
+            margin:20px 0 0 0;
+
+            .price{
+              display: block;
+              text-decoration: line-through;
+              font-size: 20px;
+              font-family: robotoregular;
+
+            }
+          }
+          .savings-container{
+            font-size: 14px;
+            text-transform: uppercase;
+            color: $grey-color-3;
+            font-family: robotobold;
+            margin:20px 0 0 0;
+
+            .price{
+              display: block;
+              font-size: 20px;
+              color: $primary-bg-color;
+              font-family: robotoregular;
+            }
+          }
+        }
+        .shipping-container{
+          margin-top: 10px;
+          text-align: center;
+          img{
+            width: auto;
+            height: auto;
+            max-width: 100%;
+          }
+        }
+      }
+      .outer-wrapper.add-to-box{
+        width: 290px;
+        float: right;
+        border-left: 1px solid $grey-color;
+        border-bottom: 0;
+        padding-left: 30px;
+        padding-right: 10px;
+        padding-bottom: 0px;
+        margin: 0;
+        min-height: 265px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .add-to-box{
+          border: 0;
+          padding: 0;
+        }
+        .finalprice-label,.finalprice-value{
+          width: 100%;
+          font-family: robotobold;
+          color: $dark-grey;
+        }
+
+        .finalprice-label{
+          text-transform: uppercase;
+        }
+        .finalprice-value{
+          font-size: 42px;
+          margin: 10px 0 0;
+          color: $primary-bg-color;
+        }
+
+        .add-to-cart{
+
+          .qty-wrapper{
+            padding-left: 0px;
+            padding-right: 0px;
+
+            .qty-changer{
+              width: 20%;
+              a{
+                background-color: $primary-bg-color;
+                border: 1px solid $primary-bg-color;
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+                display: block;
+                color: $white-color;
+
+                &.qty_dec{
+                  @include border-radius(3px, 0,0,3px);
+                }
+
+                &.qty_inc{
+                  @include border-radius(0, 3px,3px,0);
+                }
+              }
+            }
+
+            #qty{
+              border-top: 1px solid #E5E5E5;
+              border-bottom: 1px solid #E5E5E5;
+              border-left: none;
+              border-right: none;
+              height: 40px;
+              font-size: 16px;
+              color: $grey-primary;
+              @include remove-selector-design();
+            }
+          }
+          .btn-cart-wrapper{
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-top: 10px;
+
+            button{
+              span{
+                font-size: 14px;
+                font-family: robotobold;
+                text-transform: uppercase;
+                color: $white-color;
+                height: 40px;
+                background: $secondary-bg-color;
+                border-bottom: 3px solid $secondary-border-color;
+                line-height: 40px;
+                width: 100%;
+              }
+            }
+
+          }
+        }
+        .add-to-box{
+          width: auto;
+        }
+      }
+
+    }
+    .heading{
+      h3{
+        margin-top: 40px;
+        color: $primary-bg-color;
+        @include secondary-font(22px,700);
+
+      }
+    }
+
+    .product-shop{
+      border-bottom: 1px solid #BDBDBD;
+      margin-bottom: 40px;
+
+      .short-description{
+        font-size: 16px;
+
+        .std li {
+          list-style: none;
+          padding-left: 14px;
+          position: relative;
+        }
+        .std li{
+          list-style: none;
+          padding-left: 14px;
+          position: relative;
+        }
+
+        .std li:before{
+          content: '';
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          background: $tertiary-bg-color;
+          border-radius: 10px;
+          left: 0;
+          top: 8px;
+        }
+
+      }
+    }
+  }
+
+  .fitment-guide-title{
+    color: $primary-bg-color;
+    @include secondary-font(22px, 700);
+  }
+
+  #fitment-guide{
+    border: 0px;
+    thead{
+      th{
+        text-align: center;
+        color: $primary-bg-color;
+        font-family: robotobold;
+        text-transform: uppercase;
+        font-size: 14px;
+        background-color: $white-color;
+        border-bottom: 1px solid $primary-bg-color;
+      }
+      tr{
+        border: 0px;
+      }
+    }
+    tbody{
+      tr{
+
+        td{
+          border: 0px;
+          text-align: center;
+          font-size: 16px;
+        }
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px solid $primary-bg-color;
+      }
+    }
+
+  }
+
+  .show-more-fitments{
+    .btn-more-fitments{
+      background-color: $secondary-bg-color;
+      color: $white-color;
+      font-family: robotobold;
+      text-transform: uppercase;
+      max-width: 205px;
+      @include border-radius();
+      margin: 25px auto 0;
+      height: 40px;
+      padding: 13px 0px;
+      text-decoration: none;
+    }
+  }
+  .product-img-box{
+    li.etalage_thumb, li.etalage_small_thumbs li{
+      img {
+        @include border-radius();
+      }
+    }
+  }
+  .fs-banner{
+    @include border-radius(0px, 0px, 3px, 3px);
+  }
+
+}
+
+#mopar-pdp-bestseller{
+  background-color: $tertiary-bg-color;
+  text-align: left;
+  padding-top: 50px;
+  padding-bottom: 60px;
+
+  .heading{
+    text-align: center;
+    h2{
+      font-family: robotolight;
+      color: $primary-bg-color;
+      @include secondary-font(28px,700);
+      margin-bottom: 40px;
+    }
+  }
+
+  .owl-item{
+    background: $white-color;
+    @include border-radius();
+    padding: 25px;
+    min-height: 365px;
+  }
+
+  .b-image {
+    margin-bottom: 15px;
+  }
+
+  .b-price{
+    font-size: 20px;
+    font-family: robotobold;
+    color: $primary-bg-color;
+  }
+
+  .b-name{
+    margin: 10px 0px;
+    a{
+      font-size: 16px;
+      color: $grey-color-3;
+      font-family: robotobold;
+      line-height: 22px;
+    }
+  }
+  .b-part-number{
+    font-size: 12px;
+  }
+}
+
+.related-items{
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: left;
+  .heading{
+    text-align: center;
+
+    h2{
+      font-family: robotolight;
+      color: $primary-bg-color;
+      @include secondary-font(28px,700);
+      margin-bottom: 40px;
+    }
+  }
+
+  .owl-item{
+    @include border-radius();
+    @include custom-box-shadow();
+    padding: 25px;
+    min-height: 365px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .price{
+    font-size: 20px;
+    font-family: robotobold;
+    color: $primary-bg-color;
+    margin-top: 15px;
+  }
+  a.name{
+    font-size: 16px;
+    color: $grey-color-3;
+    font-family: robotobold;
+    line-height: 22px;
+    margin: 10px 0px;
+    display: block;
+  }
+
+  .part_number{
+    font-size: 12px;
+  }
+
+  .more-link{
+    text-align: center;
+    margin-top: 40px;
+
+    a.button{
+      background-color: $secondary-bg-color;
+      color: $white-color;
+      min-width: 250px;
+      text-transform: uppercase;
+      @include secondary-font(14px, 700);
+      @include border-radius();
+      border-bottom: 3px solid $secondary-border-color;
+
+    }
+  }
+}
+
+
+/** Mobile Responsive  */
+@media (max-width: 1024px){
+  .product-info-wrapper{
+    .part-container{
+      display: none;
+    }
+  }
+  .no-padding-mobile{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .product-info-container{
+    .product-image-area{
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px){
+  .product-view .product-essential .product-img-box,.product-view .product-essential .product-img-box .col-md-12 {
+    padding: 0;
+  }
+  .must-have .owl-carousel {
+    padding-bottom: 20px;
+  }
+}
+
+@media  (max-width: 767px) {
+  .category-products .product-small-view {
+    display: block;
+
+    .part-container{
+      display: none;
+    }
+  }
+  .product-info-container{
+    .product-image-area{
+      margin: 20px 0px;
+    }
+  }
+}
+
+
+@media (max-width: 460px){
+  .shop-mopar-parts{
+    p{
+      a.button{
+        display: block;
+        margin: 10px auto;
+      }
+    }
+  }
+  .owl-carousel{
+    .owl-item{
+      img {
+        margin: auto;
+      }
+    }
+  }
+
+  .product-view{
+    h1.product-name{
+      font-size: 24px;
+      line-height: 28px;
+      margin-top: 25px;
+    }
+  }
+  .product-view{
+    .right-container{
+      padding: 0;
+
+      .product-info-wrapper{
+        flex-direction: column;
+        padding-bottom: 20px;
+        .outer-wrapper.add-to-box{
+          border: none;
+          padding:0;
+          margin-top: 20px;
+
+          .finalprice-label, .finalprice-value{
+            text-align: center;
+          }
+        }
+        .product-info{
+          border: none;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+
+  .product-list-container .product-item-container .product-item-thumb{
+    height: auto;
+  }
+}

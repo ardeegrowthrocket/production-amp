@@ -1,0 +1,795 @@
+<?php
+/**
+ *
+ * Webshopapps Shipping Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * Shipper HQ Shipping
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ_Shipping_Carrier
+ * @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @author ShipperHQ Team sales@shipperhq.com
+ */
+
+/**
+ * Shipper shipping model
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ_Shipper
+ */
+
+/* @var $this Shipperhq_Pickup_Block_Storepickup */
+?>
+<?php $carriergroupId = $this->getCarriergroupId(); ?>
+<?php $carriercode = $this->getCarrierCode(); ?>
+<?php $isAccessPoints = $this->getIsAccessPoints(); ?>
+<?php
+if (!$this->hasStoreLocations($carriergroupId, $this->getCarrierCode())) {
+    return;
+}
+?>
+<?php $carriergroupInsert = $carriergroupId == '' ? '' : '_' . $carriergroupId; ?>
+<?php $carrierCodeInsert = '_'.$carriercode; ?>
+<?php $_minDate = $this->getMinDate(); ?>
+<?php $_oneStepCheckout = $this->oneStepCheckoutEnabled(); ?>
+<?php $displayMap = $this->getShowMap();?>
+<?php $displayAddress = $this->getShowAddress();?>
+
+<div id="location_table<?php echo $carrierCodeInsert. $carriergroupInsert; ?>" class="location_table<?php echo $carriergroupInsert; ?>" style="display: none">
+    <div class="location outer">
+        <div class="input-box">
+            <div class="location left location_label">
+                <label for="location-select" id="location-select_label<?php echo $carrierCodeInsert. $carriergroupInsert; ?>">
+                    <?php echo $this->__('Location') ?></label>
+            </div>
+            <div class="location left">
+                <?php echo $this->getStoreLocationsHtmlSelect($carrierCodeInsert, $carriergroupInsert) ?>
+            </div>
+        </div>
+    </div>
+    <div class="location left location_calendar_container">
+       <div class="overlay-container">
+            <div class="overlay-pickup" id="retrieving-location<?php echo $carrierCodeInsert . $carriergroupInsert; ?>"></div>
+        </div>
+        <div class="input-box">
+            <div class="location left location_label">
+                <label for="pickup_date_select"
+                       id="pickup_date_select_label<?php echo $carrierCodeInsert . $carriergroupInsert; ?>"><?php echo $this->__('Pickup Date') ?></label>
+            </div>
+            <div class="location left">
+                <input type="text" style="width: 120px;" class="datepickerstorepickup" readonly="readonly" value="" id="pickup_date_select<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" name="pickup_date<?php echo $carrierCodeInsert .$carriergroupInsert; ?>"/>
+            </div>
+        </div>
+        <div class="input-box">
+            <div class="location left location_label">
+                <label for="pickup_slot_select"
+                       id="pickup_slot_select_label<?php echo $carrierCodeInsert . $carriergroupInsert; ?>"><?php echo $this->__('Pickup Time') ?></label>
+            </div>
+            <div class="location left">
+                <?php echo $this->getPickupSlotHtmlSelect($carrierCodeInsert, $carriergroupInsert) ?>
+            </div>
+        </div>
+    </div>
+    <div class="location left">
+       <?php if ($displayMap == 'inline'): ?>
+        <div id="map_container<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" class="map_canvas" title="Pick Up Map" align="center">
+            <div class="overlay-container">
+                <div class="overlay-bg" id="retrieving-map<?php echo $carrierCodeInsert . $carriergroupInsert; ?>"></div>
+            </div>
+            <div id="map-canvas<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" style="height:95%; width:95%;"></div>
+        </div>
+       <?php endif; ?>
+        <?php if ($displayAddress == 'toggle'): ?>
+            <div class="location left" id="location-address-heading<?php echo $carrierCodeInsert . $carriergroupInsert; ?>">
+                <div id="address-heading<?php echo $carriergroupInsert; ?>" class="collapsable_heading"><?php echo $this->__('Address Details') ?></div>
+            </div>
+        <?php endif;?>
+        <div class="location left" id="location-address_content<?php echo $carrierCodeInsert . $carriergroupInsert; ?>">
+            <?php if ($isAccessPoints): ?>
+                <div id="ups-logo-div">
+                    <img style="height: 36px; width:30px; padding: 10px 10px;" class="ups_logo" src="<?php echo $this->getSkinUrl('images/shipperhq/ups.gif'); ?>"/>
+                </div>
+            <?php endif; ?>
+            <div id="location-address<?php echo $carrierCodeInsert . $carriergroupInsert; ?>">
+            </div>
+            <div id="location-image<?php echo $carrierCodeInsert . $carriergroupInsert; ?>">
+            </div>
+            <div id="location-hours<?php echo $carrierCodeInsert . $carriergroupInsert; ?>">
+            </div>
+        </div>
+       <?php if ($displayMap == 'popup'): ?>
+          <div class="location left">
+             <a id="show-map-popup<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" href=" " onClick="return false;">Show Map</a>
+          </div>
+       <?php endif; ?>
+    </div>
+</div>
+<?php if ($displayMap == 'popup'): ?>
+   <div id="map_container<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" class="map_canvas" title="Pick Up Map" align="center">
+      <div class="overlay-container">
+         <div class="overlay-bg" id="retrieving-map<?php echo $carrierCodeInsert . $carriergroupInsert; ?>"></div>
+      </div>
+      <div id="map-canvas<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" style="height:400px; width:600px;"></div>
+   </div>
+<?php endif; ?>
+<?php if ($isAccessPoints): ?>
+    <div id='trademark' class="trademark location left"><p>UPS<sup>®</sup>, the UPS Shield trademark, the UPS Access Point™ and the Color Brown are trademarks of United Parcel Service of America, Inc. All Rights Reserved.</p></div>
+<?php endif; ?>
+
+
+<br style="clear:both"/>
+
+<script type="text/javascript">
+//<![CDATA[
+var StorePickup = Class.create();
+
+var minDate = null;
+var maxDate = null;
+var date_format = null;
+var change_url = null;
+var lat = null;
+var long = null;
+var onestepcheckout = false;
+var map = null;
+var myLatlng = null;
+var mapImage = false;
+window.location_data = {};
+
+deferredShipperHQCode(function () {
+    function extractCarrierGroup (string) {
+        var groupId = '';
+        var groupIdSuffix = '';
+        var matches = string.match(/_([0-9]+)$/);
+        if (matches && matches.length > 0) {
+            groupId = matches[1];
+            groupIdSuffix = '_' + matches[1];
+        }
+
+        return [groupId, groupIdSuffix];
+    }
+
+    $j(function() {
+
+    var carrierCode = "<?php echo $this->getCarrierCode(); ?>";
+    var carriergroupId = "<?php echo $this->getCarriergroupId();?>";
+    var carriergroupInsert = "<?php echo ($this->getCarriergroupId() == '' ? '' :  '_' . $this->getCarriergroupId());  ?>";
+
+   <?php if ($displayMap == 'popup'): ?>
+       $j('#map_container<?php echo $carrierCodeInsert . $carriergroupInsert; ?>').dialog({
+          autoOpen: false,
+          width: 600,
+          height: 400
+       });
+       $j( "#show-map-popup<?php echo $carrierCodeInsert . $carriergroupInsert; ?>" ).click(function() {
+          $j('#map_container<?php echo $carrierCodeInsert . $carriergroupInsert; ?>').dialog('open');
+           if(!mapImage) {
+              google.maps.event.trigger(map, 'resize');
+
+               map.setCenter(myLatlng);
+           }
+       });
+   <?php endif; ?>
+      $j("#pickup_date_select<?php echo $carrierCodeInsert . $carriergroupInsert; ?>").datepicker(
+        {
+            showOn: "button",
+            buttonImage: getImageUrl,
+            buttonImageOnly: true,
+            dateFormat: '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>',
+            minDate: minDate,
+            maxDate: maxDate,
+            beforeShowDay: function(date) {
+                var cgid = '<?php echo $this->getCarriergroupId(); ?>';
+                var locationId = $("location-select_" + carrierCode + ( cgid ? '_' + cgid : '')).value;
+                return available(date, cgid, locationId);
+            },
+            onSelect: function(dateText, inst){
+                var isInitialize = false;
+                var carrierType = '<?php echo $this->getCarrierType(); ?>';
+                var methodCarriergroupId = carriergroupId;
+                var locationId = $("location-select_" + carrierCode + carriergroupInsert).value;
+                var dateSelected = $('pickup_date_select_' + carrierCode + carriergroupInsert).value;
+
+                var retrievingmap = $('retrieving-map_' + carrierCode + carriergroupInsert);
+                var retrievinglocation = $('retrieving-location_' + carrierCode + carriergroupInsert);
+                var inline = '<?php echo $displayMap; ?>' == 'inline';
+                if(inline) {
+                    var mapHeight = $('map-canvas_' + carrierCode + carriergroupInsert).clientHeight ||
+                        $('map-canvas_' + carrierCode + carriergroupInsert).offsetHeight;
+                    var mapWidth = $('map-canvas_' + carrierCode + carriergroupInsert).clientWidth ||
+                        $('map-canvas_' + carrierCode + carriergroupInsert).offsetWidth;
+                    $('map-canvas_' + carrierCode + carriergroupInsert).offsetWidth;
+                    var sStyleHeight = "height:" + mapHeight + "px; ";
+                    var sStyleWidth = "width:" + mapWidth + "px;";
+
+                    retrievingmap.setAttribute("style", sStyleHeight);
+                    retrievingmap.setAttribute("style", sStyleWidth);
+
+                    retrievingmap.innerHTML = "<div class='overlay-text'></div>";
+                    retrievingmap.style.visibility = "visible";
+                }
+                else {
+                    retrievinglocation.setAttribute("style", "height:" + 20 + "px; ");
+                    retrievinglocation.setAttribute("style", "width:" + 230 + "px; ");
+                    retrievinglocation.innerHTML = "<div class='overlay-text'></div>";
+                    retrievinglocation.style.visibility = "visible";
+                }
+                var request = new Ajax.Request(
+                    change_url,
+                    {
+                        method: 'get',
+                        onComplete: maplocation,
+                        parameters: {location_id: locationId, carriergroup_id: methodCarriergroupId, date_selected: dateSelected,
+                            load_only: isInitialize, persist_date: dateSelected, carrier_code: carrierCode, carrier_type: carrierType}
+                    }
+                );
+            }
+        }
+    );
+});
+
+function getImageUrl() {
+    return '<?php echo $this->getSkinUrl("images/fam_calendar.gif") ?>';
+}
+
+function available(date, cgid, locationId) {
+    var dmy = null;
+    var format = '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>';
+    if(format == 'dd-mm-yy'){
+        dmy = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+    }
+    else {
+        dmy = ("0" + (date.getMonth() + 1)).slice(-2) + "/" +("0" + date.getDate()).slice(-2) + "/" + date.getFullYear();
+    }
+    var found = [false,"","unAvailable"];
+    var locData = location_data;
+    var ourLocData = locData[cgid + '_' + locationId];
+
+    var availableDates = ourLocData.pickup_dates;
+
+    for (var key in availableDates) {
+        if(dmy == key) {
+            found = [true, "","Available"];
+        }
+    }
+    return found;
+}
+
+function changeLocation(carriergroupId, carriergroupInsert, thisCarrierCode, isInitialize) {
+
+    var locationId = $("location-select_" + thisCarrierCode + carriergroupInsert).value;
+
+    var dateSelected = $('pickup_date_select_' + thisCarrierCode + carriergroupInsert).value;
+    var retrievingmap = $('retrieving-map_' + thisCarrierCode + carriergroupInsert);
+    var retrievinglocation = $('retrieving-location_' + thisCarrierCode + carriergroupInsert);
+    var inline = '<?php echo $displayMap; ?>' == 'inline';
+    var carrierType = '<?php echo $this->getCarrierType(); ?>';
+    if(inline) {
+        var mapHeight = $('map-canvas_' + thisCarrierCode + carriergroupInsert).clientHeight ||
+            $('map-canvas_' + thisCarrierCode + carriergroupInsert).offsetHeight;
+        var mapWidth = $('map-canvas_' + thisCarrierCode + carriergroupInsert).clientWidth ||
+            $('map-canvas_' + thisCarrierCode + carriergroupInsert).offsetWidth;
+        $('map-canvas_' + thisCarrierCode + carriergroupInsert).offsetWidth;
+        var sStyleHeight = "height:" + mapHeight + "px; ";
+        var sStyleWidth = "width:" + mapWidth + "px;";
+
+        retrievingmap.setAttribute("style", sStyleHeight);
+        retrievingmap.setAttribute("style", sStyleWidth);
+
+        retrievingmap.innerHTML = "<div class='overlay-text'></div>";
+        retrievingmap.style.visibility = "visible";
+    }
+    else {
+        retrievinglocation.setAttribute("style", "height:" + 20 + "px; ");
+        retrievinglocation.setAttribute("style", "width:" + 230 + "px; ");
+        retrievinglocation.innerHTML = "<div class='overlay-text'></div>";
+        retrievinglocation.style.visibility = "visible";
+    }
+    $j(".ui-datepicker-trigger").hide();
+    var request = new Ajax.Request(
+        change_url,
+        {
+            method: 'get',
+            onComplete: function (t) {
+                try {
+                    maplocation(t)
+                } catch (e) {
+                    if (console && console.log) {
+                        console.log(e);
+                    }
+                }
+            },
+            parameters: {location_id: locationId, carriergroup_id: carriergroupId, date_selected: null,
+                load_only: isInitialize, persist_date: dateSelected, carrier_code: thisCarrierCode , carrier_type: carrierType }
+        }
+    );
+
+}
+
+function maplocation(transport) {
+    var locationDetails = transport.responseText.evalJSON();
+    var pickupPrice = locationDetails.price;
+    var carriergroupId = locationDetails.carriergroup_id;
+    var methodName = locationDetails.method_name;
+    var selectedDate = locationDetails.date_selected;
+    var carrierCode = locationDetails.carrier_code;
+    var carrierCodeInsert = '_' + carrierCode;
+    var carriergroupInsert = carriergroupId == '' ? '' : '_' + carriergroupId;
+    location_data[carriergroupId + '_' + locationDetails.location_id] = locationDetails;
+    var storepickupShipping = $('s_method' + carriergroupInsert + '_pickup_collect');
+    if (storepickupShipping) {
+        var parent = storepickupShipping.parentNode;
+        if (parent) {
+            if (parent.tagName == "SPAN") {
+                parent = parent.parentNode;
+            }
+            var label = parent.getElementsByTagName('label')[0];
+            label.innerHTML = methodName + ' ' + pickupPrice;
+        }
+    }
+    if (locationDetails.showDate == 1) {
+        if(!locationDetails.pickup_dates) {
+            $('pickup_date_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+            $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).hide();
+            $j(".ui-datepicker-trigger").hide();
+            var required = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).hasClassName('validate-one-required');
+            if(required) {
+                $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).removeClassName('validate-one-required');
+            }
+        }
+        else {
+            var pickupDates = locationDetails.pickup_dates;
+            var minDateString;
+            var maxDateString;
+            for(var p in pickupDates) {
+                if(!minDateString) {
+                    minDateString =  pickupDates[p];
+                }
+                maxDateString = pickupDates[p];
+            }
+            date_format = '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>';
+
+            minDate = getDateFromString(minDateString, date_format);
+            maxDate = getDateFromString(maxDateString, date_format);
+            var pickupDateSelect = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert);
+            $j('#pickup_date_select'+ carrierCodeInsert + carriergroupInsert).datepicker( "option", "minDate", minDate );
+            $j('#pickup_date_select'+ carrierCodeInsert + carriergroupInsert).datepicker( "option", "maxDate", maxDate );
+            //do not preselect a date unless already chosen
+            pickupDateSelect.value = '';
+            if(selectedDate != null && selectedDate != '') {
+                var selectedAsDate = getDateFromString(selectedDate, date_format);
+                var isAvailable  = available(selectedAsDate,carriergroupId, locationDetails.location_id);
+                if(isAvailable[0] == true  ) {
+                    $j('#pickup_date_select'+ carrierCodeInsert + carriergroupInsert).datepicker('setDate', selectedAsDate);
+                }
+            }
+            $('pickup_date_select_label' + carrierCodeInsert + carriergroupInsert).show();
+            $j(".ui-datepicker-trigger").show();
+            pickupDateSelect.show();
+
+
+        }
+    }
+    else {
+        $('pickup_date_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+        $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).hide();
+        $j(".ui-datepicker-trigger").hide();
+        var required = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).hasClassName('validate-one-required');
+        if(required) {
+            $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).removeClassName('validate-one-required');
+        }
+    }
+
+    if (locationDetails.showTime == 1) {
+        if(!locationDetails.time_slots) {
+            $('pickup_slot_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+            $('pickup_slot_select' + carrierCodeInsert + carriergroupInsert).hide();
+        }
+        else {
+            var selectedDate = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).value;
+            var timeSlotSelect = $('pickup_slot_select' + carrierCodeInsert + carriergroupInsert);
+            if (selectedDate != '') {
+                var timeSlots = locationDetails.time_slots[selectedDate];
+
+                var timeSlotSelect = $('pickup_slot_select' + carrierCodeInsert + carriergroupInsert);
+                timeSlotSelect.show();
+                $('pickup_slot_select_label' + carrierCodeInsert + carriergroupInsert).show();
+                timeSlotSelect.options.length = 0;
+
+                for (var key in timeSlots) {
+                    timeSlotSelect.add(new Option(timeSlots[key], key));
+
+                }
+            }
+            else {
+                timeSlotSelect.hide();
+            }
+        }
+    }
+    else {
+        $('pickup_slot_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+        $('pickup_slot_select' + carrierCodeInsert + carriergroupInsert).hide();
+    }
+
+    var showMap = locationDetails.show_map;
+    var lat = locationDetails.lat;
+    var long = locationDetails.long;
+    var mapExists = document.getElementById('map_container' + carrierCodeInsert + carriergroupInsert);
+    var mapURL = locationDetails.map_url;
+    var showAddress = locationDetails.show_address;
+
+
+
+    if(mapExists) {
+        myLatlng = new google.maps.LatLng(lat, long);
+        if (showMap) {
+            if(mapURL ) {
+                mapImage = true;
+                var mapHeight = $('map-canvas' + carrierCodeInsert + carriergroupInsert).clientHeight ||
+                    $('map-canvas' + carrierCodeInsert + carriergroupInsert).offsetHeight;
+                var mapWidth = $('map-canvas' + carrierCodeInsert + carriergroupInsert).clientWidth ||
+                    $('map-canvas' + carrierCodeInsert + carriergroupInsert).offsetWidth;
+                if(mapHeight <= 0 ) {
+                    mapHeight = 400;
+                }
+                if(mapWidth <= 0) {
+                    mapWidth = 600;
+                }
+                $('map-canvas' + carrierCodeInsert + carriergroupInsert).innerHTML = '<img src='+mapURL+' alt="map" height="'+mapHeight+'" width="'+mapWidth+'">';
+            }
+            else {
+                mapImage = false;
+
+                $('map-canvas' + carrierCodeInsert + carriergroupInsert).innerHTML = '';
+                var mapOptions = {
+                    center: myLatlng,
+                    zoom: 17,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map($('map-canvas' + carrierCodeInsert + carriergroupInsert),
+                    mapOptions);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: "Store Location"
+                });
+               map.setCenter(myLatlng);
+            }
+
+        }
+        else {
+            $('map_container' + carrierCodeInsert + carriergroupInsert).hide()
+        }
+    }
+
+    var address= '';
+
+    if(locationDetails.show_address) {
+        if(showAddress != 'hidden') {
+            var street = '';
+            if(locationDetails.street1 != '') {
+                street = locationDetails.street1 + '<br />';
+            }
+            if (locationDetails.street2) {
+                street = street + locationDetails.street2 + '<br />';
+            }
+            address = address + '<ul>';
+            if(showAddress == 'inline') {
+                address = address + '<strong>' +locationDetails.addressText + '</strong><br/>';
+            }
+            address = address + locationDetails.name + '<br/>' + street
+                 + locationDetails.city + ', ' + locationDetails.region + ' ' + locationDetails.zip +
+                '<br /> T:' + locationDetails.phone;
+
+            if(locationDetails.fax)  {
+                address = address + '<br />F: ' + locationDetails.fax;
+            }
+            if(locationDetails.email) {
+                address = address + '<br />E: ' + locationDetails.email;
+            }
+            if(locationDetails.website) {
+                address = address + '<br />' + locationDetails.website;
+            }
+            address = address + '</p>';
+            if(locationDetails.walking_directions) {
+                address = address + '<p>' + locationDetails.walking_directions + '</p>';
+            }
+
+            address = address + '</ul>';
+
+
+        }
+    }
+
+    $('location-address' + carrierCodeInsert + carriergroupInsert).innerHTML = address;
+    if (locationDetails.open_hours != null) {
+        var open_hours_display = locationDetails.open_hours.replace(/;/g,"<br />");
+        var inHtml = '<strong>' + locationDetails.hoursText + '</strong><br />' +
+            open_hours_display + '<br />' ;
+        $('location-hours' + carrierCodeInsert + carriergroupInsert).innerHTML = inHtml;
+    }
+    $('location-image' + carrierCodeInsert + carriergroupInsert).innerHTML = "";
+    if(locationDetails.image_url) {
+        var imageHeight = $('location-address' + carrierCodeInsert + carriergroupInsert).clientHeight ||
+            $('location-address' + carrierCodeInsert + carriergroupInsert).offsetHeight;
+        var imageWidth = $('location-address' + carrierCodeInsert + carriergroupInsert).clientWidth ||
+            $('location-address' + carrierCodeInsert + carriergroupInsert).offsetWidth;
+        var image ='<img src="' + locationDetails.image_url +'" style= "width: '+ imageWidth +'px; height: '+ imageHeight +'px"/>';
+        $('location-image' + carrierCodeInsert + carriergroupInsert).innerHTML = image;
+
+    }
+
+
+    var inline = '<?php echo $displayMap; ?>' == 'inline';
+    if(inline) {
+        $('retrieving-map' + carrierCodeInsert + carriergroupInsert).innerHTML = "";
+        $('retrieving-map' + carrierCodeInsert + carriergroupInsert).style.visibility = "hidden";
+    }
+    else {
+        $('retrieving-location' + carrierCodeInsert + carriergroupInsert).innerHTML = "";
+        $('retrieving-location' + carrierCodeInsert + carriergroupInsert).style.visibility = "hidden";
+    }
+
+    if(locationDetails.updated_rates) {
+        changeShipOptions(locationDetails.updated_rates, carriergroupInsert, carrierCode, carriergroupId);
+    }
+}
+
+function getDateFromString(dateString, format)
+{
+    if (format == 'dd-mm-yy') {
+        dateArray = dateString.split('-');
+        var date = new Date(dateArray[2], dateArray[1] -1, dateArray[0]);
+    }
+    else {
+        dateArray = dateString.split('/');
+        var date = new Date(dateArray[2], dateArray[0] -1, dateArray[1]);
+    }
+    return date;
+}
+
+
+function changeShipOptions(data, carriergroupInsert, carrierCode, carriergroupId) {
+        var carrierCodeInsert = '_' + carrierCode;
+
+        if (data == false) {
+            <?php $errorMessage = $this->getStandardErrorMessage(); ?>
+            $('radio_choices'+carriergroupInsert + "_" + carrierCode).innerHTML='<ul class="messages"><li class="error-msg"><ul><li><?php echo preg_replace("!\s+!"," ",$errorMessage); ?></li></ul></li></ul>';
+        } else {
+            var existingRadios = document.getElementsByName('shipping_method'+carriergroupInsert);
+            var selectedMethod = false;
+
+            for(i=0;i < existingRadios.length ;i++) {
+                var radio = existingRadios[i];
+                if(radio.checked) {
+                    selectedMethod = radio.value;
+                }
+            }
+            $('radio_choices'+carriergroupInsert + "_" + carrierCode).remove();
+            var radOptions = new Element('div',{id:'radio_choices'+carriergroupInsert + "_" + carrierCode});
+            $('ship_options'+carriergroupInsert + "_" + carrierCode).insert(radOptions);
+            var radioText ='';
+            checkedFlag = false;
+            for (code in data) {
+                if(code == selectedMethod) {
+                    checkedFlag = true;
+                }
+                element = data[code];
+                if (checkedFlag == true) {
+                    radioIndText= '<li><input name="shipping_method'+carriergroupInsert+'" type="radio" checked  value="'+code+'" id="s_method'+carriergroupInsert+'_'+code+'"/>\
+                <label for="s_method'+carriergroupInsert+'_'+code+'">'+element.label+'</label></li>';
+                    checkedFlag = false;
+                }	else {
+                    radioIndText= '<li><input name="shipping_method'+carriergroupInsert+'" type="radio" value="'+code+'" id="s_method'+carriergroupInsert+'_'+code+'"/>\
+                 <label for="s_method'+carriergroupInsert+'_'+code+'">'+element.label+'</label></li>';
+                }
+                radioText += radioIndText;
+
+            }
+            $('radio_choices'+carriergroupInsert + "_" + carrierCode).innerHTML=radioText;
+            for(code in data)
+            {
+                var el = document.getElementById('s_method'+carriergroupInsert+'_'+code);
+                el.addEventListener("click", shippingMethodEventPickup, false);
+            }
+        }
+
+}
+
+function removeOptions(selectbox)
+{
+    var i;
+    for(i=selectbox.options.length-1;i>=0;i--)
+    {
+        selectbox.remove(i);
+    }
+}
+
+function hideCalendarElements(carriergroupInsert)
+{
+    var calendars = document.getElementsByClassName('calendar_table'+ carriergroupInsert);
+    for(i=0;i < calendars.length ;i++) {
+        calendars[i].hide();
+    }
+}
+
+StorePickup.prototype = {
+    initialize: function (form, changeLocationUrl, setGeolocationUrl, carriergroupId, carrierCode) {
+        this.form = form;
+        this.changeLocationUrl = changeLocationUrl;
+        change_url = changeLocationUrl;
+        var carriergroupInsert = carriergroupId == '' ? '' : '_' + carriergroupId;
+        var carrierCodeInsert = '_' + carrierCode;
+
+        var oscelements = document.getElementsByClassName('onestepcheckout-shipping-method-block');
+
+        var popupAddress = '<?php echo $displayAddress; ?>' == 'toggle';
+        if(popupAddress) {
+            $('location-address_content' + carrierCodeInsert + carriergroupInsert).hide();
+            $('location-address-heading' + carrierCodeInsert + carriergroupInsert).observe('click',function () {
+                this.toggleClassName('collapsable_heading');
+                this.toggleClassName('open');
+                  this.next().toggle();
+                }); //end toggle
+        }
+
+        var thisCarrierCode = "<?php echo $this->getCarrierCode(); ?>";
+        this.carrierCode = thisCarrierCode;
+   /*     $('pickup_zip' + carriergroupInsert).observe('change',
+            searchOnZip.bind(this, carriergroupId, carriergroupInsert));*/
+        $('location-select' + carrierCodeInsert + carriergroupInsert).observe('change',
+            changeLocation.bind(this, carriergroupId, carriergroupInsert, thisCarrierCode, false));
+        $('location_table' + carrierCodeInsert +carriergroupInsert).hide();
+        $('pickup_date_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+        $('pickup_date_select' + carrierCodeInsert + carriergroupInsert).hide();
+        $('pickup_slot_select_label' + carrierCodeInsert + carriergroupInsert).hide();
+        $('pickup_slot_select' + carrierCodeInsert + carriergroupInsert).hide();
+        $j(".ui-datepicker-trigger").hide();
+
+        var locationSelected = $('location-select' + carrierCodeInsert + carriergroupInsert).selectedIndex;
+   /*     if (locationSelected == 0) {
+            var options = $$('select#location-select' + carriergroupInsert + ' option');
+            options[0].selected = true;
+        }*/
+        var shippingMethodRadios = $('input[type="radio"][name="shipping_method"]');
+        var carriergroupInsert_2 = carriergroupInsert;
+        var multipleCheckout = document.getElementsByClassName("multiple-checkout");
+        if(multipleCheckout.length > 0) {
+            carriergroupInsert_2 = carriergroupInsert_2.replace('ma','');
+        }
+        var storepickRadio = $('s_method' + carriergroupInsert_2 + '_' + thisCarrierCode +'_collect');
+        if(oscelements.length > 0) {
+            storepickRadio = $('s_method' + carriergroupInsert + '_' + thisCarrierCode);
+            if (storepickRadio && storepickRadio.checked == true) {
+                var storepickupDropdown = $('s_method_dropdown' + carriergroupInsert + '_' + carrierCode);
+                storepickRadio.value = storepickupDropdown.value;
+            }
+        }
+
+        if (storepickRadio) {
+            if (storepickRadio.checked == true) {
+                $('location_table' + carrierCodeInsert +carriergroupInsert).show();
+                var pickupSelect = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert);
+                var required = pickupSelect.hasClassName('validate-one-required');
+                if(!required) {
+                    pickupSelect.addClassName('validate-one-required');
+                }
+
+                changeLocation(carriergroupId, carriergroupInsert, carrierCode, true);
+            }
+        }
+    }
+}
+var carriergroupId = "<?php echo $this->getCarriergroupId(); ?>";
+var carrierCode = "<?php echo $this->getCarrierCode(); ?>";
+
+storePickup = new StorePickup('co-store-pickup-form',
+    "<?php echo $this->getUrl('*/shipperhq_pickup_location/rateLocation', array('_secure'=>true)) ?>",
+    "<?php echo $this->getUrl('*/shipperhq_pickup_location/setGeolocation', array('_secure'=>true)) ?>",
+    carriergroupId, carrierCode);
+
+    $$('input[type="radio"][name^="shipping_method"]').each(function (el) {
+        Event.observe(el, 'click', shippingMethodEventPickup );
+    });
+
+    function shippingMethodEventPickup(event)
+    {
+        var el = $(Event.element(event));
+        shipRadioClickPickup(el);
+    }
+
+    function shipRadioClickPickup(el)
+    {
+        if (el.checked == true) {
+            var methodName = el.id;
+
+            var lastPartMethodName = methodName.substr(9);
+            var indexOfWarehouseEnd = lastPartMethodName.indexOf('_');
+            var methodCarriergroupId = lastPartMethodName.substr(0, indexOfWarehouseEnd);
+            var multipleCheckout = document.getElementsByClassName("multiple-checkout");
+            var carriergroupId = methodCarriergroupId;
+            var splitSGroup = methodCarriergroupId.indexOf('XXXX');
+            if(multipleCheckout.length > 0) {
+                var carriergroupInsert = '_'+ 'ma'+ methodCarriergroupId;
+                var methodCarriergroupId = 'ma'+ methodCarriergroupId;
+
+            }
+            else {
+                if (splitSGroup < 1 && (isNaN(methodCarriergroupId) || isNaN(parseInt(methodCarriergroupId)))) {
+                    var carriergroupInsert = '';
+                    carriergroupId = '';
+                    var methodCarriergroupId = '';
+                } else {
+                    var carriergroupInsert = '_' + methodCarriergroupId;
+                }
+            }
+
+            if(carriergroupId != '') {
+                var carrierPart = lastPartMethodName.replace(carriergroupId +'_', '');
+            }
+            else {
+                var carrierPart = lastPartMethodName;
+            }
+
+
+            var indexOfcarrierUnderscore = carrierPart.indexOf('_');
+            if(indexOfcarrierUnderscore < 0 ) {
+                var carrierCode = carrierPart;
+            }
+            else {
+                var carrierCode = carrierPart.substr(0, indexOfcarrierUnderscore);
+            }
+            var carrierCodeInsert = '_'  + carrierCode;
+
+            if($('location_table' + carrierCodeInsert + carriergroupInsert)) {
+                $('location_table' + carrierCodeInsert + carriergroupInsert).show();
+                hideCalendarElements(carriergroupInsert);
+                var pickupSelect = $('pickup_date_select' + carrierCodeInsert + carriergroupInsert);
+                var required = pickupSelect.hasClassName('validate-one-required');
+                if(!required) {
+                    pickupSelect.addClassName('validate-one-required');
+                }
+                changeLocation(methodCarriergroupId, carriergroupInsert, carrierCode, true);
+
+            }
+            var allPickupDetails = document.getElementsByClassName('location_table' +carriergroupInsert);
+            for(var i = 0; i<allPickupDetails.length; i++) {
+                if(allPickupDetails[i].id == 'location_table' + carrierCodeInsert + carriergroupInsert ) {
+                    continue;
+                }
+                var thisId = allPickupDetails[i].id;
+                var pickupSelect = $('pickup_date_select' + thisId.substr(14));
+
+                var required = pickupSelect.hasClassName('validate-one-required');
+                if(required) {
+                    pickupSelect.removeClassName('validate-one-required');
+                }
+                pickupSelect.value = '';
+                allPickupDetails[i].hide();
+            }
+        }
+    }
+});
+    //]]>
+</script>
+
+
+
+
+

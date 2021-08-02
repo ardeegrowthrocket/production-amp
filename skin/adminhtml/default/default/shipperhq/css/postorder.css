@@ -1,0 +1,2 @@
+/**Add padding to origin box so doesn't overlap with gift messages**/
+.box-right-origin-info  { float:right padding-bottom:1px; }

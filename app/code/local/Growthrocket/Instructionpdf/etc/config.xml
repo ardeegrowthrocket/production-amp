@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Instructionpdf>
+      <version>0.1.0</version>
+    </Growthrocket_Instructionpdf>
+  </modules>
+  <global>
+    <helpers>
+      <instructionpdf>
+        <class>Growthrocket_Instructionpdf_Helper</class>
+      </instructionpdf>
+    </helpers>
+	<resources>
+	  <instructionpdf_setup>
+		<setup>
+		  <module>Growthrocket_Instructionpdf</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </instructionpdf_setup>
+	  <instructionpdf_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </instructionpdf_write>
+	  <instructionpdf_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </instructionpdf_read>
+	</resources>
+  </global>
+</config> 

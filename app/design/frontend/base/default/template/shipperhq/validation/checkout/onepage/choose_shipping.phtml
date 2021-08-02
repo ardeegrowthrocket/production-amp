@@ -1,0 +1,314 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Zowta, LLC (http://www.webshopapps.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getChildHtml('shippingorig') ?>
+
+<script type="text/javascript">
+//<![CDATA[
+deferredShipperHQCode(function () {
+    var invalid = '<?php echo Shipperhq_Validation_Model_Validator_Result::INVALID; ?>';
+    var not_validated = '<?php echo Shipperhq_Validation_Model_Validator_Result::NOT_VALIDATED; ?>';
+    var valid = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+
+    var validStr =
+        '<li class="fields">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="shipping[address_valid]" id="shipping:address_valid" value="0">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+    var destinationType =
+        '<li class="fields">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="shipping[destination_type]" id="shipping:destination_type" value="">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+
+    var updatedAddress =
+        '<li class="fields">'+
+            '<div class="field">'+
+            '<div class="input-box">'+
+            '<input type="hidden" name="shipping[updated_address_flag]" id="shipping:updated_address_flag" value="0">'+
+            '</div>'+
+            '</div>'+
+            '</li>';
+
+    var dialogPlaceholder =
+        '<div id="checkout-dialog-shipping-load">' +
+            '<p><?php Mage::helper('shipperhq_validation')->__('We have had trouble validating your address. Please select a valid address from the dropdown menu below')?></p>'+
+            '</div>';
+
+    var noneDialogPlaceholder =
+        '<div id="checkout-nonedialog-shipping-load">' +
+            '<p><?php Mage::helper('shipperhq_validation')->__('We have had trouble validating your address. Please select an option below')?></p>'+
+            '</div>';
+
+    $("shipping:telephone").insert({after:dialogPlaceholder});
+    $("shipping:telephone").insert({after:noneDialogPlaceholder});
+    // SHQ18-122 billing:postcode is probably the least likely field to be absent, so let's hook off of it
+    var parentUl = $("shipping:postcode").up('ul');
+    parentUl.insert({bottom:validStr});
+    parentUl.insert({bottom:destinationType});
+    parentUl.insert({bottom:updatedAddress});
+
+    //This is the logic and config for the jQuery popup. $j is jQuery, $ and $$ is prototype in this file
+    $j(function() {
+        var addressValidatedResult = '<?php echo Mage::helper('shipperhq_validation')->checkAddressValidResult($this->getAddress()->getAddressValid()); ?>';
+        $("shipping:address_valid").value = addressValidatedResult;
+
+        $j( "#checkout-dialog-shipping-load" ).dialog({
+            autoOpen: false,
+            height: "auto",
+            width: "auto",
+            maxWidth: 600, //This is set here so it can be altered by fluidDialog()
+            fluid: true,
+            draggable:true,
+            title: "<?php echo Mage::helper('shipperhq_validation')->__('Address Validation')/*getTitleText()*/; ?>",
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "Use The Address I've Entered": function() {
+                    $("shipping:address_valid").value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    $j( this ).dialog( "close" );
+                    if (typeof FireCheckout !== 'undefined') {
+                        checkout.save();
+                    }
+                },
+                "Use Validated Address": function() {
+                    if(candidateSwitcherShipping()) {
+                        if($("shipping-address-select")) {
+                            changeSelectByValueShip('shipping-address-select','',true);
+                        }
+                        $j( this ).dialog( "close" );
+                        if (typeof FireCheckout !== 'undefined') {
+                            checkout.save();
+                        }
+                    }
+                }
+
+            }
+        });
+
+
+        $j( "#checkout-nonedialog-shipping-load" ).dialog({
+            autoOpen: false,
+            height: "auto",
+            width: "auto",
+            maxWidth: 600, //This is set here so it can be altered by fluidDialog()
+            fluid: true,
+            draggable:true,
+            title: "<?php echo Mage::helper('shipperhq_validation')->__('Address Not Validated')/*getTitleText()*/; ?>",
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "Edit Address": function() {
+                    $("shipping:address_valid").value = not_validated;
+                    $j( this ).dialog( "close" );
+                },
+                "Use Address I've Entered": function() {
+                    $("shipping:address_valid").value =  '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    $j( this ).dialog( "close" );
+                    if (typeof FireCheckout !== 'undefined') {
+                        checkout.save();
+                    }
+                }
+            }
+        });
+
+        // on window resize run function
+        $j(window).resize(function () {
+            fluidDialog();
+        });
+
+        // catch dialog if opened within a viewport smaller than the dialog width
+        $j(document).on("dialogopen", ".ui-dialog", function (event, ui) {
+            fluidDialog();
+        });
+
+        function fluidDialog() {
+            var $visible = $j(".ui-dialog:visible");
+            // each open dialog
+            $visible.each(function () {
+                var $this = $j(this);
+                var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
+                // if fluid option == true
+                if (dialog.options.fluid) {
+                    var wWidth = $j(window).width();
+                    // check window width against dialog width
+                    if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
+                        // keep dialog from filling entire screen
+                        $this.css("max-width", "90%");
+                    } else {
+                        // fix maxWidth bug
+                        $this.css("max-width", dialog.options.maxWidth + "px");
+                    }
+                    //reposition dialog
+                    dialog.option("position", dialog.options.position);
+                }
+            });
+
+        }
+    });
+
+    Event.observe($('shipping:street1'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    Event.observe($('shipping:street2'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    Event.observe($('shipping:city'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    Event.observe($('shipping:region_id'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    Event.observe($('shipping:postcode'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    Event.observe($('shipping:country_id'), 'change', function(){
+        $("shipping:address_valid").value = not_validated;
+    });
+
+    if($("shipping-address-select")) {
+
+        Event.observe($('shipping-address-select'), 'change', function(){
+            $("shipping:updated_address_flag").value = 0;
+            var newAddressId = $('shipping-address-select').value;
+            var url = "<?php echo $this->getUrl('shipperhq_validation/checkout/getAddressValidResult', array('_secure'=>true)) ?>";
+            var parameters = {
+                address_id: newAddressId
+            }
+            var request = new Ajax.Request(
+                url,
+                {
+                    method: 'get',
+                    onComplete: updateAddressValidResultShipping,
+                    parameters: parameters
+                }
+            );
+        });
+    }
+    function updateAddressValidResultShipping(transport)
+    {
+        if(transport.responseText != '') {
+            var results = transport.responseText.evalJSON();
+            var outcome = results.valid_result;
+            $('shipping:address_valid').value = outcome;
+        }
+
+    }
+
+    function candidateSwitcherShipping() {
+        if($('shipping-address-select')) {
+            $("shipping:updated_address_flag").value = $('shipping-address-select').value;
+        }
+
+        var selected = $F("shippingcandidates");
+
+        if(selected == -1) {
+            $("shipping:address_valid").value = 0;
+            return false;
+        }
+
+        var splitAddress = selected.split('|');
+
+        //define here to be populated below
+        var addressLine = '';
+        var addressLine2 = '';
+        var city = '';
+        var state = '';
+        var zip = '';
+        var countryId = '';
+        var addressType = '';
+
+        for(var i=0; i<splitAddress.length; i++) {
+            switch(i) {
+                case 0: addressLine = splitAddress[i]; break;
+                case 1: addressLine2 = splitAddress[i]; break;
+                case 2: city = splitAddress[i]; break;
+                case 3: state = splitAddress[i]; break;
+                case 4: zip = splitAddress[i]; break;
+                case 5: countryId = splitAddress[i]; break;
+                case 6: addressType = splitAddress[i]; break;
+            }
+        }
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+            <?php if($this->isCustomerLoggedIn()): ?>
+                this.checkout.getStep('shipping').newAddress(true);
+            <?php endif; ?>
+        <?php endif; ?>
+
+        $("shipping:street1").value = addressLine;
+        $("shipping:street2").value = addressLine2;
+        $("shipping:city").value = city;
+        $("shipping:region_id").value = state;
+        $("shipping:postcode").value = zip;
+        $("shipping:country_id").value = countryId;
+        $("shipping:destination_type").value = addressType;
+        $("shipping:address_valid").value = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+
+
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+            this.checkout.getStep('shipping').handleChange({});
+        <?php endif; ?>
+
+        return true;
+    }
+    /**
+     * Method to change the selected value of a select dropdown
+     * @param ddlID String - the name of the element
+     * @param value String - value to set it to
+     * @param change Boolean - should we fire onchange
+     */
+    function changeSelectByValueShip(ddlID, value, change) {
+        var ddl = document.getElementById(ddlID);
+
+        for (var i = 0; i < ddl.options.length; i++) {
+            if (ddl.options[i].value == value) {
+                if (ddl.selectedIndex != i) {
+                    ddl.selectedIndex = i;
+                    if (change) {
+                        ddl.onchange();
+                    }
+                }
+                break;
+            }
+        }
+    }
+});
+
+//]]>
+</script>

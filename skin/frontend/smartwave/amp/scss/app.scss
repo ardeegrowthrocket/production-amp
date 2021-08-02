@@ -1,0 +1,24 @@
+/**
+    Settings
+ */
+@import 'settings/_color';
+@import 'settings/_mixin';
+
+
+
+
+/**
+    Styles
+ */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@import 'styles/_product_page';
+
+
+@import 'styles/_responsive';
+

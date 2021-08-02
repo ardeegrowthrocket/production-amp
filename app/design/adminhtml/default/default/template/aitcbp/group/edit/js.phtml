@@ -1,0 +1,115 @@
+<?php if(($block = $this->getLayout()->getBlock('cbpgroup.product.grid')) && ($_gridJsObject=$block->getJsObjectName())): ?>
+<script type="text/javascript">
+//<![CDATA[
+var groupProducts = new $H({});
+
+function groupProductRowClick(grid, event) {
+	var trElement = Event.findElement(event, 'tr');
+    var isInput   = Event.element(event).tagName == 'INPUT';
+    if(trElement){
+        var checkbox = Element.getElementsBySelector(trElement, 'input');
+        if(checkbox[0]){
+            var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+            <?php echo $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
+        }
+    }
+}
+
+function registerGroupProduct(grid, element, checked) {
+	//if (groupProducts.get(checkbox.value) == undefined) groupProducts.set(checkbox.value, (checkbox.checked) ? 1 : 0);
+	if (checked) {
+		groupProducts.set(element.value, 1);
+	} else {
+		groupProducts.set(element.value, 0);
+	}
+	$('in_group_products').value = groupProducts.toQueryString();
+//	alert(groupProducts.toQueryString());
+}
+
+function addProductToSet(id) {
+	if (groupProducts.indexOf(id) < 0) {
+		groupProducts[groupProducts.length] = id;
+	}
+}
+
+function removeProductFromSet(id) {
+	groupProducts = groupProducts.without(id);
+}
+
+function groupProductRowInit(grid, row) {
+	var checkbox = $(row).getElementsByClassName('checkbox')[0];
+	if (groupProducts.get(checkbox.value) == undefined) {
+		if (checkbox.checked) groupProducts.set(checkbox.value, (checkbox.checked) ? 1 : 0);
+	} else {
+		checkbox.checked =  groupProducts.get(checkbox.value);
+	}
+}
+
+//initRowCallback
+<?php echo $_gridJsObject ?>.initRowCallback = groupProductRowInit;
+<?php echo $_gridJsObject ?>.rowClickCallback = groupProductRowClick;
+<?php echo $_gridJsObject ?>.checkboxCheckCallback = registerGroupProduct;
+<?php echo $_gridJsObject ?>.rows.each(function(row){groupProductRowInit(<?php echo $_gridJsObject ?>, row)});
+//$('in_group_products').value = groupProducts.toQueryString();
+
+//]]>
+</script>
+<?php endif; ?>
+
+
+<?php  /* ?>
+
+<script type="text/javascript">
+//<![CDATA[
+<?php if(($block = $this->getLayout()->getBlock('cbpgroup.product.grid')) && ($_gridJsObject=$block->getJsObjectName())): ?>
+
+//	var temp = 
+	var groupProducts = $H(<?php echo $this->getProductsJson() ?>);
+//	var groupProducts = $H();
+    $('in_group_products').value = groupProducts.toQueryString();
+
+    function registerGroupProduct(grid, element, checked){
+        if(checked){
+            if(element.positionElement){
+                element.positionElement.disabled = false;
+                groupProducts.set(element.value, element.positionElement.value);
+            }
+        }
+        else{
+            if(element.positionElement){
+                element.positionElement.disabled = true;
+            }
+            groupProducts.unset(element.value);
+        }
+        $('in_group_products').value = groupProducts.toQueryString();
+        grid.reloadParams = {'selected_products[]':groupProducts.keys()};
+    }
+    
+    function groupProductRowClick(grid, event){
+        var trElement = Event.findElement(event, 'tr');
+        var isInput   = Event.element(event).tagName == 'INPUT';
+        if(trElement){
+            var checkbox = Element.getElementsBySelector(trElement, 'input');
+            if(checkbox[0]){
+                var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+                <?php echo $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
+            }
+        }
+    }
+
+    function groupProductRowInit(grid, row){
+        var checkbox = $(row).getElementsByClassName('checkbox')[0];
+        if(checkbox){
+        	//alert(groupProducts.toQueryString());
+        }
+    }
+
+	<?php echo $_gridJsObject ?>.rowClickCallback = groupProductRowClick;
+    <?php echo $_gridJsObject ?>.initRowCallback = groupProductRowInit;
+    //<?php echo $_gridJsObject ?>.checkboxCheckCallback = registerGroupProduct;
+    <?php echo $_gridJsObject ?>.rows.each(function(row){groupProductRowInit(<?php echo $_gridJsObject ?>, row)});
+<?php endif; ?>
+//]]>
+</script>
+
+<?php */ ?>

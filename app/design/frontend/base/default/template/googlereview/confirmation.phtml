@@ -1,0 +1,46 @@
+<?php
+$orderId = $this->getOrderId();
+$helper = Mage::helper('growthrocket_gtm/review');
+$isEnable = $helper->isEnabled();
+$merchantId = $helper->getMerchantId();
+$position = $helper->getConfirmationPosition();
+
+if($orderId && $isEnable):
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+
+    $incrementId = $order->getIncrementId();
+    $customerEmail = $order->getCustomerEmail();
+    $shippingAddress = $order->getShippingAddress();
+    $countryCode = $shippingAddress->getCountryId();
+    ?>
+    <?php if(!empty($merchantId)): ?>
+    <!-- BEGIN GCR Opt-in Module Code -->
+    <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+    <script>
+        window.renderOptIn = function() {
+            window.gapi.load('surveyoptin', function() {
+                window.gapi.surveyoptin.render({
+                        "merchant_id": "<?php echo $merchantId ?>",
+                        "order_id": "<?php echo $incrementId ?>",
+                        "email": "<?php echo $customerEmail ?>",
+                        "delivery_country": "<?php echo $countryCode ?>",
+                        "estimated_delivery_date": "<?php echo $helper->getEstimatedDate() ?>",
+                        "opt_in_style": "<?php echo $position ?>"
+                    });
+            });
+        }
+    </script>
+    <!-- END GCR Opt-in Module Code -->
+    <!-- BEGIN GCR Language Code -->
+    <script>
+        window.___gcfg = {
+            lang: 'en-US'
+        };
+    </script>
+    <!-- END GCR Language Code -->
+    <?php endif; ?>
+<?php endif; ?>
+
+
+
+

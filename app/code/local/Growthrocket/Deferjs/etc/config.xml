@@ -1,0 +1,55 @@
+<config>
+    <modules>
+        <Growthrocket_Deferjs>
+            <version>0.0.1</version>
+        </Growthrocket_Deferjs>
+    </modules>
+    <global>
+        <models>
+            <grdeferjs>
+                <class>Growthrocket_Deferjs_Model</class>
+            </grdeferjs>
+        </models>
+        <helpers>
+            <grdeferjs>
+                <class>Growthrocket_Deferjs_Helper</class>
+            </grdeferjs>
+        </helpers>
+    </global>
+    <frontend>
+        <events>
+            <controller_action_postdispatch>
+                <observers>
+                    <grdeferjs_controller_action_postdispatch_handler>
+                        <class>grdeferjs/observer</class>
+                        <method>doDeferScript</method>
+                    </grdeferjs_controller_action_postdispatch_handler>
+                </observers>
+            </controller_action_postdispatch>
+        </events>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everyting</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <grdeferjs>
+                                            <title>GrowthRocket DeferJs</title>
+                                        </grdeferjs>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

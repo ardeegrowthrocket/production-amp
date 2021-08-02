@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Slider>
+      <version>0.1.0</version>
+    </Growthrocket_Slider>
+  </modules>
+  <global>
+    <helpers>
+      <slider>
+        <class>Growthrocket_Slider_Helper</class>
+      </slider>
+    </helpers>
+	<blocks>
+	  <slider>
+		<class>Growthrocket_Slider_Block</class>
+	  </slider>
+	</blocks>
+	<models>
+	  <slider>
+		<class>Growthrocket_Slider_Model</class>
+		<resourceModel>slider_mysql4</resourceModel>
+	  </slider>
+	  <slider_mysql4>
+		<class>Growthrocket_Slider_Model_Mysql4</class>
+		<entities>
+			  <grslider>
+				<table>gr_slider_banner</table>
+			  </grslider>
+        </entities>
+	  </slider_mysql4>
+	</models>
+	<resources>
+	  <slider_setup>
+		<setup>
+		  <module>Growthrocket_Slider</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </slider_setup>
+	  <slider_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </slider_write>
+	  <slider_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </slider_read>
+	</resources>
+  </global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules><growthrocket_slider before="Mage_Adminhtml">Growthrocket_Slider_Adminhtml</growthrocket_slider></modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+  <adminhtml>
+	  <menu>
+		  <cms>
+			  <children>
+				  <grslider module="slider">
+					  <title>Banner Slider</title>
+					  <sort_order>100</sort_order>
+					  <action>adminhtml/grslider/index</action>
+				  </grslider>
+			  </children>
+		  </cms>
+	  </menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<slider translate="title" module="slider">
+			  <title>Slider</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <grslider translate="title">
+			<title>Manage Grslider</title>
+			<sort_order>0</sort_order>
+		  </grslider>
+			  </children>
+			</slider>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<slider>
+		  <file>slider.xml</file>
+		</slider>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

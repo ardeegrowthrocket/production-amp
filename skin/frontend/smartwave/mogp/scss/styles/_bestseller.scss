@@ -1,0 +1,91 @@
+#mopar-homepage-bestseller{
+  margin-top: 60px;
+  background: linear-gradient(0deg, #FFFFFF, #FFFFFF), #FFFFFF;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  .heading{
+    position: relative;
+    margin-bottom: 30px;
+
+    h2{
+      text-align: center;
+      font-size: 36px;
+      font-family: robotobold;
+      color: $h2-text-color;
+    }
+
+  }
+
+  .owl-carousel{
+    .owl-nav{
+      position: absolute;
+      color: $secondary-bg-color;
+      font-size: 24px;
+      top: 50%;
+      width: 100%;
+      font-family: FontAwesome;
+
+      span{
+        display: none;
+      }
+
+      .owl-prev{
+        float: left;
+        margin-left: -30px;
+
+        &:after{
+          content: '\f053';
+        }
+      }
+      .owl-next{
+        float: right;
+        margin-right: -30px;
+
+        &:after{
+          content: '\f054';
+        }
+      }
+    }
+  }
+
+  .best-seller-list{
+
+    .item{
+      border: 1px solid $grey-color;
+      @include border-radius(4px, 4px , 4px, 4px);
+      padding: 20px;
+      min-height: 340px;
+
+    }
+    .b-price{
+      text-align: left;
+      font-size: 22px;
+      font-family: robotobold;
+      color: $secondary-bg-color;
+      margin-top: 20px;
+
+    }
+    .b-name{
+      a{
+        text-decoration: none;
+        h5{
+          font-size: 18px;
+          text-align: left;
+          margin: 7px 0px 7px;
+          line-height: 22px;
+          color: $h2-text-color;
+          font-weight: normal;
+        }
+      }
+    }
+    .b-part-number{
+      text-align: left;
+      color: #4F4F4F;
+      font-size: 14px;
+      font-family: Roboto;
+    }
+  }
+
+}

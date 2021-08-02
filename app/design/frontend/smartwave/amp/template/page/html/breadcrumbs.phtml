@@ -1,0 +1,44 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+
+<div class="col-sm-12 a-left">
+    <ul>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            <?php if($_crumbInfo['link']): ?>
+                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>">
+                    <?php echo $this->escapeHtml(str_replace('Repair Parts & Accessories','',$_crumbInfo['label'])); ?>
+                </a>
+            <?php else: ?>
+                <strong><?php echo $this->escapeHtml($_crumbInfo['label']) ?></strong>
+            <?php endif; ?>
+            <?php if(!$_crumbInfo['last']): ?>
+                <!-- <span class="breadcrumbs-split"><i class="icon-right-open"></i></span> -->
+                <span class="breadcrumbs-split">/</span>
+            <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+
+        <?php
+        $counter = 1;
+        $applicationJson = array(
+            "@context" => "http://schema.org",
+            "@type"    => "BreadcrumbList",
+        );
+
+        foreach($crumbs as $_crumbName=>$_crumbInfo){
+            $applicationJson["itemListElement"][] = array(
+                "@type" =>  "ListItem",
+                "position" => $counter++,
+                "item" => array(
+                        "name" => $this->escapeHtml(str_replace('Repair Parts & Accessories','',$_crumbInfo['label'])),
+                        "@id" => !$_crumbInfo['last'] ? $_crumbInfo['link'] : Mage::helper('core/url')->getCurrentUrl()
+                )
+            );
+        }
+        ?>
+        <script type="application/ld+json">
+        <?php echo json_encode($applicationJson) ?>
+        </script>
+    </ul>
+</div>
+<?php endif; ?>

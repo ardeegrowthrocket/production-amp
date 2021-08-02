@@ -1,0 +1,47 @@
+<?php
+$product = Mage::registry('current_product');
+?>
+<div class="form-vehicle-checker fancybox">
+    <div class="header">
+        <h3>Will it fit?</h3>
+        <p>Set your vehicle’s year, make, and model here.</p>
+    </div>
+    <div class="form-selector">
+        <form method="get" action="<?php echo Mage::getBaseUrl() ?>compatibilitychecker">
+            <?php if($product): ?>
+            <input type="hidden" id="productId" value="<?php echo $product->getId() ?>" name="product_id">
+            <?php endif; ?>
+            <input type="hidden" id="formKey" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+            <div class="field">
+                <span>1</span>
+                <select id="vyear" name="year" class="vselector">
+                    <option value="">Select Year</option>
+                    <?php foreach ($this->getYear() as $item): ?>
+                        <option value="<?php echo $item->getYear(); ?>" <?php if($this->hasActiveFitmentQuery() && $item->getYear() == $this->getSelectedYear()): echo 'selected'; endif;?>><?php echo $item->getYlabel(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="field">
+                <span>2</span>
+                <select id="vmake" name="make" class="vselector">
+                    <option value="">Select Make</option>
+                    <?php foreach ($this->getMake() as $list): ?>
+                        <option value="<?php echo $list['id']?>" <?php if($list['id'] == $this->getSelectedMake()): echo 'selected'; endif;?>><?php echo $list['label']?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="field">
+                <span>3</span>
+                <select id="vmodel" name="model" class="vselector">
+                    <option value="">Select Model</option>
+                    <?php foreach ($this->getModel() as $list): ?>
+                        <option value="<?php echo $list['id']?>"  data-label="<?php echo $list['label']?>"  <?php if($list['id'] == $this->getSelectedModel()): echo 'selected'; endif;?>><?php echo $list['name']?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="submit">
+                <button>Check Compatibility</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.catalogsearch-result-index h1 {
+  font-family: 'exo 2';
+  font-size: 34px;
+  font-weight: 700;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 35px; }
+
+.catalogsearch-result-index .product-image-area .product-image {
+  height: 100%; }
+
+.category-products ul.products-grid li.item:first-child {
+  padding-top: 10px; }
+
+.category-products ul.products-grid li.item:last-child {
+  border-bottom: none; }
+
+.subaru-bucks p {
+  color: #FFFFFF; }
+
+@media (max-width: 768px) {
+  .category-products ul.products-grid li.item .part-no,
+  .category-products ul.products-grid li.item h2.product-name {
+    margin-top: 20px; }
+  .category-products ul.products-grid li.item {
+    padding-top: 20px; } }

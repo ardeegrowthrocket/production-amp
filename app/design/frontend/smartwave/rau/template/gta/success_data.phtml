@@ -1,0 +1,35 @@
+<?php
+$orderId = $this->getOrderId();
+$orderArray = [];
+$currencyModel = Mage::getModel('directory/currency');
+
+if($orderId) {
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+
+    $orderArray['info'] = [
+        "id" => $order->getIncrementId(),
+        "affiliation" => "Online Store",
+        "revenue" => str_replace(",","",$currencyModel->format($order->getGrandTotal(), array('display'=>Zend_Currency::NO_SYMBOL), false )),
+        "tax" => str_replace(",","",$currencyModel->format($order->getTaxAmount(), array('display'=>Zend_Currency::NO_SYMBOL), false )),
+        "shipping" => str_replace(",","",$currencyModel->format($order->getShippingAmount(), array('display'=>Zend_Currency::NO_SYMBOL), false )),
+        "coupon" => (string) $order->getCouponCode(),
+    ];
+
+    foreach ($order->getAllVisibleItems() as $item) {
+        $_product = $item->getProduct();
+        $orderArray['items'][] = [
+            "name" => $_product->getName(),
+            "category" => $_product->getAttributeText('auto_type'),
+            "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+            "id" => $_product->getSku(),
+            "price" => str_replace(",","",$currencyModel->format($_product->getFinalPrice(), array('display'=>Zend_Currency::NO_SYMBOL), false )),
+            "quantity" => (int) $item->getQtyOrdered()
+        ];
+    }
+}
+
+?>
+
+<script type="text/javascript">
+    var purchaseOrder = <?php echo json_encode($orderArray) ?>;
+</script>

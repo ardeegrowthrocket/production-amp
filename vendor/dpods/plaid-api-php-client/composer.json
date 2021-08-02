@@ -1,0 +1,21 @@
+{
+    "name": "dpods/plaid-api-php-client",
+    "description": "PHP API Client for Plaid.com",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Glassanos",
+            "email": "david.glassanos@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plaid\\": "src/"
+        }
+    }
+}

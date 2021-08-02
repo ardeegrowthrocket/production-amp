@@ -1,0 +1,227 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 1/2/18
+ * Time: 10:33 PM
+ */
+?>
+<?php
+
+$websiteid = Mage::app()->getStore()->getWebsiteId();
+/** @var Homebase_Autopart_Block_Ymm $this */
+/** @var Homebase_Autopart_Model_Resource_Combination_Collection $collection*/
+$collection = Mage::getModel('hautopart/combination')->getCollection();
+$collection->getSelect()->join(array('y' => 'auto_combination_list_labels'),' year=y.option',
+    array('ylabel' => 'label'))
+    ->group('label')
+    ->where('main_table.store_id= ?', $websiteid);
+$collection->addOrder('ylabel','Desc');
+
+$_helper = Mage::helper('hautopart');
+$_helper->getYmmPath();
+$mediaUrl = Mage::getBaseUrl('media');
+?>
+<div class="ymm-form-container  <?php if($this->hasActiveFitmentQuery()): echo 'hp-ymm-form'; endif;?>">
+    <div class="container inner-wrapper">
+        <div class="row">
+            <div class="container ymm-result <?php if(!$this->hasActiveFitmentQuery()): echo 'hide'; endif;?>">
+                <div class="ymm-result-wrapper">
+                    <div class="ymm-result-text">
+                        <span>Your Vehicle : </span>
+                        <span class="ymm-selection"><?php echo $this->getCurrent(); ?></span>
+                    </div>
+                    <div class="ymm-result-action">
+                        <a href="#" id="ymm-change">Change</a>
+                        <button class="button finder-reset" id="ymm-reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ymm-wrapper <?php if($this->hasActiveFitmentQuery()): echo 'hide'; endif;?>">
+
+                <div class="ymm-content">
+                    <form method="post" action="<?php echo $this->getUrl('hautopartajax/index/query'); ?>" id="finderForm" class="floating">
+                        <input name="form_key" class="form-key-ymm" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+                        <input type="hidden" name="q" value="1"/>
+                        <div class="form-fields-container">
+                            <div class="amfinder-responsive open">
+                                <div class="amfinder-title">
+                                    <span>Select Your Vehicle</span>
+                                </div>
+                                <ul class="amfinder-toggle">
+                                    <li>
+                                        <div class="ymm-label">
+                                            <span>Start Here</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-title">1</div>
+                                        <div class="dropdown-element amshopby-clearer">
+                                            <select name="year" id="finder-year">
+                                                <option value="0">Select Year</option>
+                                                <?php foreach($collection as $item): ?>
+                                                    <option value="<?php echo $item->getYear(); ?>" <?php if($this->hasActiveFitmentQuery() && $item->getYear() == $this->getSelectedYear()): echo 'selected'; endif;?>><?php echo $item->getYlabel(); ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-title">2</div>
+                                        <div class="dropdown-element amshopby-clearer">
+                                            <select name="model" id="finder-model">
+                                                <option value="0">Select Model</option>
+                                                <?php if($this->hasActiveFitmentQuery()) :?>
+                                                    <?php $modelList = $this->getModel(); ?>
+                                                    <?php foreach($modelList as $list): ?>
+                                                        <option value="<?php echo $list['id']?>"  data-label="<?php echo $list['label']?>"  <?php if($list['id'] == $this->getSelectedModel()): echo 'selected'; endif;?>><?php echo $list['name']?></option>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="last">
+                                        <div class="amfinder-buttons">
+                                            <button class="button" id="ymm-btn" title="Shop Now" type="button"><span>Show Parts</span></button>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="top-banner" style="background-image: url('<?php echo $mediaUrl ?>home/sop/banner.jpg')">
+    <div class="container">
+        <div class="row ">
+            <div class="homepage-title wow fadeInDown" data-wow-duration="3s">
+                <span>Welcome to</span>
+                <h1>SubaruOnlineParts.com</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+var AllmoparFinder = Class.create();
+AllmoparFinder.prototype = {
+    initialize: function(yearEl, makeEl, modelEl){
+        this.condition = {};
+        Event.observe(yearEl, 'change', this.onchange.bind(this));
+//            Event.observe(makeEl, 'change', this.onchange.bind(this));
+        Event.observe(modelEl, 'change', this.onchange.bind(this));
+        $(yearEl).enable();
+    },
+    onchange: function(event){
+        var select = $(Event.findElement(event, 'select'));
+        var value = $(select).getValue();
+        var combinationParameterName = $(select).readAttribute('name');
+        var target = this.getTarget(combinationParameterName);
+        if((typeof target) !== "undefined"){
+            this.resetCondition(combinationParameterName);
+            this.condition[combinationParameterName]  = value;
+            this.refresh(target);
+        }else{
+            //Assign model
+            this.condition[combinationParameterName]  = value;
+            //Submit form;
+            if(value !=0 ){
+                $('ymm-btn').enable();
+                var year = $$('#finder-year option:selected').pop().text;
+                var make = 'subaru'
+                var model = $$('#finder-model option:selected').pop().text;
+                var towncountry =  $$('#finder-model option:selected').pop().text;
+                if(towncountry == 'Town & Country'){
+                    model = 'town-and-country';
+                }
+                model = model.replace(' ','-');
+                var url = '<?php echo Mage::getUrl('hajax/index/query'); ?>';
+                var path =   '?q=' + year + '-' + make.toLowerCase() + '-' + model.toLowerCase();
+                var formKey = jQuery('.form-key-ymm').val();
+                path += '&form_key=' + formKey;
+                $('finderForm').writeAttribute('action',url + path);
+                $('finderForm').submit();
+            }
+        }
+    },
+    getTarget: function(elementName){
+        var target = undefined;
+        if(elementName == 'year'){
+            target = $('finder-model');
+        }
+        return target;
+    },
+    resetCondition: function(currentEl){
+        if(currentEl == 'year'){
+            delete(this.condition['make']);
+            delete(this.condition['model']);
+        }
+        if(currentEl == 'make'){
+            delete(this.condition['model']);
+        }
+    },
+    refresh: function(target){
+        this.condition['make'] = '422';
+        var conditionString = JSON.stringify(this.condition);
+        var columnName = $(target).readAttribute('name');
+        console.log(conditionString);
+        new Ajax.Request('<?php echo $_helper->getHajaxPath(); ?>',{
+            method: 'get',
+            parameters: {
+                condition: conditionString,
+                column: columnName,
+            },
+            onCreate:function(){
+                AllmoparFinder.removeChildElements(Element.childElements(target));
+                Element.insert(target,new Element('option',{value:''}).update('Loading...'));
+            },
+            onSuccess: function(transport){
+                if(transport.status == 200){
+                    var objs = transport.responseJSON;
+                    AllmoparFinder.removeChildElements(Element.childElements(target));
+                    $(target).insert(new Element('option',{value: 0}).update('Please Select'));
+                    objs.each(function(el){
+                        $(target).insert(new Element('option',{value:el.id}).update(el.label));
+                        $(target).enable();
+                    });
+                }
+            }
+        });
+    },
+    attach: function(){
+        $('ymm-change').observe('click',function(event){
+            event.preventDefault();
+            jQuery('.ymm-result').addClass('hide');
+            jQuery('.ymm-wrapper').removeClass('hide');
+        });
+        $('ymm-reset').observe('click',function(){
+            window.location = '<?php echo $this->getResetUrl(); ?>';
+        });
+    }
+};
+AllmoparFinder.removeChildElements = function(elements){
+    $(elements).each(function(el){
+        $(el).remove();
+    })
+}
+var yearEl = $('finder-year');
+var makeEl = null;
+var modelEl = $('finder-model');
+var finder = new AllmoparFinder(yearEl,makeEl,modelEl);
+finder.attach();
+jQuery(document).ready(function(){
+    jQuery('.amfinder-title').unbind('click');
+    jQuery('.amfinder-title').click(function(event){
+        var block = jQuery(this).parent();
+        if (block.hasClass('open')) {
+            block.removeClass('open');
+        } else {
+            block.addClass('open');
+        }
+    });
+});
+</script>

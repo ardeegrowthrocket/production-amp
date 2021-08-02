@@ -1,0 +1,250 @@
+<?php
+/**
+ *
+ * Webshopapps Shipping Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * Shipper HQ Shipping
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ_Shipping_Carrier
+ * @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @author ShipperHQ Team sales@shipperhq.com
+ */
+
+/**
+ * Shipper shipping model
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ_Shipper
+ */
+?>
+<?php $carriercode = $this->getCarrierCode(); ?>
+<?php $carrierCodeInsert = '_'.$carriercode; ?>
+<?php $_minDate = $this->getMinDate(); ?>
+<tr>
+<td colspan=3 id="calendar_table<?php echo $carrierCodeInsert; ?>"
+    <div class="overlay-container">
+        <div class="overlay-calendar" id="retrieving-calendar<?php echo $carrierCodeInsert; ?>"></div>
+    </div>
+    <div class="location left location_label">
+        <label for="del_date_select"
+               id="del_date_select_label<?php echo $carrierCodeInsert; ?>"><?php echo $this->__('Delivery Date') ?></label>
+    </div>
+    <div class="location left">
+        <input type="text" style="width: 120px;" class="datepickercalendar" readonly="readonly" value="" id="del_date_select<?php echo $carrierCodeInsert; ?>" name="del_date<?php echo $carrierCodeInsert;?>"/>
+    </div>
+</td>
+</tr>
+<br style="clear:both"/>
+
+<script type="text/javascript">
+//<![CDATA[
+var CodeCalendar = Class.create();
+
+var minDate = null;
+var maxDate = null;
+var date_format = null;
+var dateselect_url = null;
+
+
+deferredShipperHQCode(function () {
+        $j(function() {
+            var deliverydate_data = '';
+            var carrierCode = "<?php echo $this->getCarrierCode(); ?>";
+
+            $j( '#del_date_select_'+carrierCode).datepicker(
+                {
+                    showOn: "button",
+                    buttonImage: getImageUrl,
+                    buttonImageOnly: true,
+                    dateFormat: '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>',
+                    minDate: minDate,
+                    maxDate: maxDate,
+                    beforeShowDay: isavailable,
+                    onSelect: function(dateText, inst){
+                        onChangeSelectedDate(carrierCode);
+                    }
+                }
+            );
+        });
+
+
+    function getImageUrl() {
+        return '<?php echo $this->getSkinUrl("images/calendar.gif") ?>';
+    }
+
+    function isavailable(date) {
+        var dmy = null;
+        var format = '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>';
+        if(format == 'dd-mm-yy'){
+            dmy = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+        }
+        else {
+            dmy = ("0" + (date.getMonth() + 1)).slice(-2) + "/" +("0" + date.getDate()).slice(-2) + "/" + date.getFullYear();
+        }
+        var found = [false,"","unAvailable"];
+        availableDates = deliverydate_data.delivery_dates;
+        for (var key in availableDates) {
+            if(dmy == key) {
+                found = [true, "","Available"];
+            }
+        }
+        return found;
+    }
+
+    function onChangeSelectedDate(carrierCode) {
+        changeDate(carrierCode, false);
+    }
+
+    function changeDate(carrierCode, isInitialize) {
+        var carrierCodeInsert = '_' + carrierCode;
+        var dateSelected = $('del_date_select' + carrierCodeInsert).value;
+
+        var retrievingcalendar = $('retrieving-calendar' + carrierCodeInsert);
+
+        retrievingcalendar.setAttribute("style", "height:" + 20 + "px; ");
+        retrievingcalendar.setAttribute("style", "width:" + 230 + "px; ");
+        retrievingcalendar.innerHTML = "<div class='overlay-text'><img src=" +
+            "'<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>'></div>";
+        retrievingcalendar.style.visibility = "visible";
+        var request = new Ajax.Request(
+            dateselect_url,
+            {
+                method: 'get',
+                onComplete: completeDateSelect,
+                parameters: {carrier_code: carrierCode, date_selected: dateSelected , load_only: isInitialize}
+            }
+        );
+
+    }
+
+    function completeDateSelect(transport) {
+        var deliveryDateData = transport.responseText.evalJSON();
+        var carrierCode = deliveryDateData.carrier_code;
+        var carrierCodeInsert = '_' + carrierCode;
+        var retrievingcalendar = $('retrieving-calendar' + carrierCodeInsert);
+        retrievingcalendar.innerHTML = "";
+        retrievingcalendar.style.visibility = "hidden";
+
+    }
+    //After initialize and we have retrieved our calendar details
+    function updateDates(transport) {
+        var deliveryDateData = transport.responseText.evalJSON();
+        deliverydate_data = deliveryDateData;
+        var carrierCode = deliveryDateData.carrier_code;
+        var carrierCodeInsert = '_' + carrierCode;
+        var selectedDate = deliveryDateData.date_selected;
+
+        var retrievingcalendar = $('retrieving-calendar' + carrierCodeInsert);
+
+        retrievingcalendar.innerHTML = "";
+        retrievingcalendar.style.visibility = "hidden";
+
+        if (deliveryDateData.show_deldate == true) {
+            if(!deliveryDateData.delivery_dates) {
+                $('del_date_select_label' + carrierCodeInsert ).hide();
+                $('del_date_select' + carrierCodeInsert).hide();
+                $j(".ui-datepicker2-trigger").hide();
+            }
+            else {
+                var deliveryDates = deliveryDateData.delivery_dates;
+                var minDateString;
+                var maxDateString;
+                for(var p in deliveryDates) {
+                    if(!minDateString) {
+                        minDateString =  deliveryDates[p];
+                    }
+                    maxDateString = deliveryDates[p];
+                }
+                date_format = '<?php echo Mage::helper('shipperhq_shipper')->getDatepickerFormat() ?>';
+
+                minDate = getDateFromString(minDateString, date_format);
+                maxDate = getDateFromString(maxDateString, date_format);
+
+                var delDateSelect = $('del_date_select' + carrierCodeInsert );
+
+                $('del_date_select_label' + carrierCodeInsert).show();
+                delDateSelect.show();
+                $j(".ui-datepicker-trigger").show();
+                $j('#del_date_select'+ carrierCodeInsert).datepicker().show();
+
+                if(selectedDate != null && selectedDate != '') {
+                    $j('#del_date_select'+ carrierCodeInsert).datepicker('setDate', selectedDate);
+                }
+                else {
+                    $j('#del_date_select'+ carrierCodeInsert).datepicker('setDate', minDate);
+                }
+                $j('#del_date_select'+carrierCodeInsert ).datepicker( "option", "minDate", minDate );
+                $j('#del_date_select'+carrierCodeInsert).datepicker( "option", "maxDate", maxDate );
+            }
+        }
+    }
+
+
+    function getDateFromString(dateString, format)
+    {
+        if (format == 'dd-mm-yy') {
+            dateArray = dateString.split('-');
+            var date = new Date(dateArray[2], dateArray[1] -1, dateArray[0]);
+        }
+        else {
+            dateArray = dateString.split('/');
+            var date = new Date(dateArray[2], dateArray[0] -1, dateArray[1]);
+        }
+        return date;
+    }
+
+    CodeCalendar.prototype = {
+        initialize: function (form, dateSelectURL, carrierCode, dateSelected) {
+            this.form = form;
+            dateselect_url = dateSelectURL;
+            var carrierCodeInsert = '_' + carrierCode;
+
+            var calendar_url = "<?php echo $this->getUrl('shipperhq_calendar/date/retrieveCalendarDetails', array('_secure'=>true)) ?>";
+            var request = new Ajax.Request(
+                calendar_url,
+                {
+                    method: 'get',
+                    onComplete: updateDates,
+                    parameters: {carrier_code: carrierCode, date_selected: dateSelected , load_only: true}
+                }
+            );
+
+        }
+    }
+    var carrierCode = "<?php echo $this->getCarrierCode(); ?>";
+    var dateSelected = "<?php echo $this->getDateSelected(); ?>";
+
+    codeCalendar = new CodeCalendar('co-store-pickup-form',
+        "<?php echo $this->getUrl('shipperhq_calendar/date/productPageDateSelect', array('_secure'=>true)) ?>",
+        carrierCode, dateSelected);
+
+
+});
+
+
+
+//]]>
+</script>
+
+
+
+
+

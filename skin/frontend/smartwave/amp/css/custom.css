@@ -1,0 +1,266 @@
+.owl-top-narrow #category-slider-demo-7 .owl-controls{right:-2px}
+
+.header .demo-tooltip,.footer .demo-tooltip{position:absolute;right:15px;top:5px;z-index:9;width:20px}
+.header-container.sticky-header .header .demo-tooltip{display:none}
+.footer .demo-tooltip{top:-20px}
+a.tooltip-icon{border:1px solid #fff;color:#fff;border-radius:50%;display:block;width:20px;height:20px;text-align:center;line-height:20px;font-size:10px;-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;-webkit-animation: tooltip-animation 1s ease-in infinite;-moz-animation: tooltip-animation 1s ease-in infinite;-ms-animation: tooltip-animation 1s ease-in infinite;animation: tooltip-animation 1s ease-in infinite;}
+.header-container.type2 a.tooltip-icon,.header-container.type3 a.tooltip-icon,.header-container.type4 a.tooltip-icon,.header-container.type5 a.tooltip-icon,.header-container.type6 a.tooltip-icon,.header-container.type7 a.tooltip-icon,.header-container.type8 a.tooltip-icon{color:#000;border-color:#000}
+
+
+.tooltip-popup{position:absolute;right:-10px;top:30px;width:300px;background-color:#111;box-shadow:0 0 8px rgba(255,255,255,.5);padding:20px;border-radius:10px;font-size:12px;line-height:1.4;color:#fff;text-align:left}
+.tooltip-popup h4{font-size:16px;color:#fff}
+.tooltip-popup p{margin-bottom:10px;color:#fff}
+.tooltip-popup em{font-size:10px}
+a.tooltip-close{position:absolute;right:10px;top:10px;color:#fff}
+.footer-middle>.container{position:relative}
+
+/* tooltip for demo */
+@-webkit-keyframes tooltip-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tooltip-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes tooltip-color {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #333;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@keyframes tooltip-color {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #333;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@-webkit-keyframes tooltip-color-white {
+  0% {
+    color: #444;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #444;
+  }
+}
+@keyframes tooltip-color-white {
+  0% {
+    color: #444;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #444;
+  }
+}
+div.search-area{
+  right: 70px;
+}
+div.cart-area{
+  top:55%!important;
+}
+.cms-index-index div.cart-area{
+  top:50%!important;
+}
+i.icon-mini-cart{
+  color:#63abdd!important;
+}
+#shopping-cart-table button > span{
+  color: #ffffff;
+}
+
+div.theme-border-color{
+  border-color:#f36a1f!important;
+}
+div.almo-paypal{
+  display:none;
+}
+#search_autocomplete{
+  color:#000000;
+  background: #fffbff;
+  border-radius: 14px;
+  z-index: 99;
+}
+#search_autocomplete > ul{
+  list-style: none;
+  text-align: left;
+  padding-left: 10px;
+}
+#search_autocomplete ul li .amount{
+  display:none;
+}
+.category-page #parts-related-container,
+.part-make-page #parts-related-container {
+  margin-top: 60px;
+  border-top: 1px solid #dedede;
+  padding-top: 30px;
+}
+.category-page #parts-related-container .section-title,
+.part-make-page #parts-related-container .section-title {
+  margin-bottom: 25px;
+}
+.category-page .parts-list li,
+.part-make-page .parts-list li {
+  line-height: 25px;
+}
+.category-page .section-content .parts-list:first-child,
+.parts-list .section-content .parts-list:first-child {
+  padding-left: 0;
+}
+.category-page .section-content .parts-list:last-child,
+.parts-list .section-content .parts-list:last-child {
+  padding-right: 0;
+}
+.category-page .parts-list li a,
+.parts-list .parts-list li a {
+  display: block;
+}
+.category-page .static-page-container > .row,
+.parts-list .static-page-container > .row {
+  margin: 0;
+}
+.cms-allmopar-homepage .make-featured {
+  margin-top: 35px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dedede;
+}
+.cms-allmopar-homepage .product-list-container {
+  margin-bottom: 35px;
+}
+.cms-allmopar-homepage .popular-category-container > .row {
+  margin-bottom: 25px;
+}
+.cms-allmopar-homepage .popular-category-container .pop-cat-see {
+  margin-top: 10px;
+  padding-left: 4px;
+}
+.cms-allmopar-homepage .popular-category-container .pop-cat-see a {
+  display: block;
+}
+.cms-allmopar-homepage .popular-category-container .col-sm-4 > img {
+  margin-top: 4px;
+}
+.sby-group-listing li {
+  line-height: 25px;
+}
+.part-listing-container .parts-listing {
+  margin-top: 0;
+}
+.part-listing-container .parts-listing li {
+  line-height: 25px;
+}
+.category-page div.ymm-form-container,
+.part-make-page div.ymm-form-container {
+  top: 0!important;
+}
+.category-page .top-container > div.breadcrumbs,
+.part-make-page .top-container > div.breadcrumbs {
+  /*padding-top: 55px;*/
+}
+.category-page .category-products,
+.part-make-page .category-products {
+  margin-top: 0;
+}
+
+@media only screen and (max-width: 770px) {
+  .ymm-form-container{
+    position:relative;
+    left:0;
+    margin-left:0;
+  }
+  .header-container.type6 .header{
+    padding: 26px 0 0 0;
+    min-height: 125px;
+  }
+  .category-page .top-container > div.breadcrumbs{
+    padding-top: 0;
+    margin-top: 10px;
+  }
+  .top-container{
+    margin-top:0;
+  }
+  .cms-index-index #shop-cat {
+    padding-bottom: 30px;
+  }
+}
+
+
+@media (min-width: 992px){
+  .category-part-listing .cat-list-new .part-item{
+    width: 20%;
+  }
+
+}
+
+.category-part-listing .cat-list {
+  margin-bottom: 40px;
+  width: 100%;
+}
+.category-part-listing .cat-list-new .part-item {
+  min-height: 248px;
+  width: 100%;
+  max-width: 202px; 
+  min-width: 202px;
+  margin: auto;
+}
+.category-part-listing .cat-list-new .part-item a.link {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  margin-top: 10px;
+  display: inline-block;
+
+}
+.category-part-listing .cat-list-new .part-item a.link img {
+  width: 100%;
+}
+.category-part-listing .cat-list-new .part-item .image-container {
+  min-height: 180px;
+  line-height: 180px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+.category-part-listing .cat-list-new .part-item a.link.title {
+  min-height: 45px;
+}
+.category-part-listing .cat-list-new .part-item a.link {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+
+

@@ -1,0 +1,44 @@
+.ratings{
+    display:none;
+}
+
+.catalog-product-view .main.container:after,.catalog-product-view .main.container:before{
+    top:20px;
+}
+.catalog-category-view .price-box p{
+    display:block;
+}
+.old-price .price-label{
+    display: block;
+}
+.old-price span.price{
+    font-size:13px !important;
+}
+.special-price .price-label{
+    display: block;
+    font-weight: normal;
+}
+.old-price{
+    display:block;
+}
+
+#product_addtocart_form .price-box .price{
+    font-weight:normal;
+}
+p.special-price{
+    margin:10px 0 0 0;
+}
+div.product-view .product-info{
+    padding-bottom:0;
+}
+
+ul.menu li.act:nth-child(5){
+    display: none;
+}
+div.mega-columns ul li.menu-item:nth-child(5){
+    display: none;
+}
+.price-box p.savings-container{
+    width: 130px;
+    margin: 12px auto;
+}

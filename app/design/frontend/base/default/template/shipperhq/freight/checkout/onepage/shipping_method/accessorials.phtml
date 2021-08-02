@@ -1,0 +1,545 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * WebShopApps Shipping Module
+ *
+ * @category    WebShopApps
+ * @package     WebShopApps_Wsafreightcommon
+ * Date         1 September 2014
+ * Time         13:05
+ * @copyright   Copyright (c) 2013 Zowta Ltd (http://www.WebShopApps.com)
+ *              Copyright, 2013, Zowta, LLC - US license
+ * @license     http://www.WebShopApps.com/license/license.txt - Commercial license
+ *
+ */
+?>
+<?php $quote = Mage::getSingleton('checkout/session')->getQuote(); ?>
+<?php $carrierCode = $this->getCarrierCode();?>
+<?php $carrierGroup = $this->getCarriergroupId();?>
+<?php $carrierType = $this->getCarrierType(); ?>
+<?php $carrierGroupInsert = $carrierGroup == '' ? '' : '_' . $carrierGroup; ?>
+<div class="inner-box">
+    <ul>
+        <?php if($this->helper('shipperhq_freight')->isDestinationTypeOptionEnabled($carrierGroup, $carrierCode)): ?>
+            <li class="a-left input-box" id="destination_type_div_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+                <label id="destination_type_label_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" for="destination_type">
+                    <?php echo $this->__('Address Type') ?>
+                </label>
+                <?php echo $this->getDestinationTypeHtmlSelect( $this->helper('shipperhq_freight')->getDestinationType($carrierGroup, $carrierCode), $carrierCode, $carrierGroup) ?>
+                <br/>
+            </li>
+        <?php endif; ?>
+
+        <?php if($this->helper('shipperhq_freight')->isNotifyOptionEnabled($carrierGroup, $carrierCode)): ?>
+            <li class="a-left input-checkbox" id="notify_required_div_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+                <input  class="accessorial" type="checkbox" name="notify_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="notify_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" value="1"
+                    <?php if ($this->helper('shipperhq_freight')->getNotifyRequired($carrierGroup, $carrierCode)): ?> checked="checked"<?php endif; ?> />
+                <label id="notify_required_label_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="notify_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__('Notify Required?') ?></label>
+            </li>
+        <?php endif; ?>
+
+        <?php if($this->helper('shipperhq_freight')->isInsideDeliveryEnabled($carrierGroup, $carrierCode)): ?>
+            <li class="a-left input-checkbox" id="inside_delivery_div_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+                <input  class="accessorial" type="checkbox" name="inside_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="inside_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" value="1"
+                    <?php if ($this->helper('shipperhq_freight')->getInsideDelivery($carrierGroup, $carrierCode)): ?> checked="checked"<?php endif; ?> />
+                <label id="inside_delivery_label_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="inside_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__('Inside Delivery?') ?></label>
+            </li>
+        <?php endif; ?>
+
+        <?php if($this->helper('shipperhq_freight')->isLiftgateEnabled($carrierGroup, $carrierCode)): ?>
+            <li class="a-left input-checkbox" id="liftgate_required_div_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+                <input class="accessorial" type="checkbox" name="liftgate_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="liftgate_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" value="1"
+                    <?php if ($this->helper('shipperhq_freight')->getLiftgateRequired($carrierGroup, $carrierCode)): ?> checked="checked"<?php endif; ?> />
+                <label id="liftgate_required_label_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="liftgate_required_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__('Liftgate Required?') ?></label>
+            </li>
+        <?php endif;?>
+
+        <?php if($this->helper('shipperhq_freight')->isLimitedDeliveryEnabled($carrierGroup, $carrierCode)): ?>
+            <li class="a-left input-checkbox" id="limited_delivery_div_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+                <input class="accessorial" type="checkbox" name="limited_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="limited_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" value="1"
+                    <?php if ($this->helper('shipperhq_freight')->getLimitedDelivery($carrierGroup, $carrierCode)): ?> checked="checked"<?php endif; ?> />
+                <label id="limited_delivery_label_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="limited_delivery_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__('Limited Access Delivery?') ?></label>
+            </li>
+        <?php endif;?>
+
+        <?php if($this->helper('shipperhq_freight')->isCustomerAccountCarrier($carrierGroup, $carrierCode, $carrierType)): ?>
+            <li class="a-left input-box">
+                <label class="customer-account-label" id="customer_carrier_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="customer_carrier_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__('Carrier Name') ?></label>
+                <input class="input-text customer-account-field" type="text" maxlength="255" title="Customer Carrier" value="" name="customer_carrier_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="customer_carrier_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+            </li>
+            <li class="a-left input-box">
+                <label class="customer-account-label" id="customer_carrier_ph_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="customer_carrier_ph_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__("Carrier Contact Number") ?></label>
+                <input class="input-text customer-account-field" type="text" maxlength="255" title="Customer Carrier Phone" value="" name="customer_carrier_ph_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="customer_carrier_ph_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+            </li>
+            <li class="a-left input-box">
+                <label class="customer-account-label" id="customer_carrier_account_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"
+                       for="customer_carrier_account_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>"><?php echo $this->__("Account Number") ?></label>
+                <input class="input-text customer-account-field" type="text" maxlength="255" title="Customer Carrier Account" value="" name="customer_carrier_account_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>" id="customer_carrier_account_<?php echo $carrierCode; ?><?php echo $carrierGroupInsert; ?>">
+            </li>
+        <?php endif;?>
+    </ul>
+    <br>
+
+    <div id="retrieving-rates"></div>
+</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var FreightListener = Class.create();
+var oscEnabled = '<?php echo $this->oneStepCheckoutEnabled() && $this->oscShowDropDowns(); ?>';
+
+FreightListener.prototype = {
+
+    initialize: function (form) {
+        this.form = form;
+        this.oscEnabled = oscEnabled;
+        var carrierCode = '<?php echo $carrierCode; ?>';
+        this.carrierCode = carrierCode;
+        var carrierGroupInsert = '<?php echo $carrierGroupInsert; ?>';
+        this.carrierGroupInsert = carrierGroupInsert;
+        this.setUpAccessorialDisplay();
+    },
+
+    onChangeAccessorial: function (event) {
+        var element = event.element();
+        var selectedElementId = element.id;
+
+        if(selectedElementId.indexOf(this.carrierCode) > -1) {
+            if(selectedElementId.indexOf(this.carrierGroupInsert) > -1) {
+                if (this.oscEnabled) {
+                    this.onChangeAccessorialOSC();
+                } else {
+                    this.onChangeAccessorialStd();
+                }
+            }
+        }
+    },
+
+    onChangeAccessorialStd: function () {
+
+        var url = '<?php echo $this->getUrl("shipperhq_freight/Freight/getAccessorialRates", array("_secure"=>true)) ?>';
+        document.getElementById('retrieving-rates').innerHTML =
+            "<img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>'> Retrieving rates...";
+        var carrierCode = '<?php echo $carrierCode; ?>';
+        var carrierGroupInsert = '<?php echo $carrierGroupInsert; ?>';
+        var carrierGroup = '<?php echo $carrierGroup; ?>';
+
+        var liftgate_required = false;
+        var notify_required = false;
+        var destination_type = false;
+        var inside_delivery = false;
+        var limited_delivery = false;
+        var date_selected = false; //SHQ16-1726 explicitly add selected date if present to request
+
+        if($('liftgate_required_'+carrierCode+carrierGroupInsert)) {
+            liftgate_required = $('liftgate_required_'+carrierCode+carrierGroupInsert).checked
+        }
+
+        if($('notify_required_' +carrierCode+carrierGroupInsert)) {
+            notify_required = $('notify_required_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('destination_type_' +carrierCode+carrierGroupInsert)) {
+            destination_type = $('destination_type_' +carrierCode+carrierGroupInsert).value;
+        }
+
+        if($('inside_delivery_' +carrierCode+carrierGroupInsert)) {
+            inside_delivery = $('inside_delivery_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('limited_delivery_' +carrierCode+carrierGroupInsert)) {
+            limited_delivery = $('limited_delivery_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('del_date_select_' + carrierCode + carrierGroupInsert)) {
+            date_selected = $('del_date_select_' + carrierCode + carrierGroupInsert).value;
+        }
+        new Ajax.Request(url, {
+                method: 'get',
+                dataType: 'json',
+                onSuccess: freightListener.updateStdRates,
+                onComplete: function () {
+                    document.getElementById('retrieving-rates').innerHTML = "";
+
+                },
+                parameters: {
+                    carrier_code: carrierCode,
+                    carrier_group: carrierGroup,
+                    liftgate_required: liftgate_required,
+                    notify_required: notify_required,
+                    destination_type: destination_type,
+                    inside_delivery: inside_delivery,
+                    limited_delivery: limited_delivery,
+                    date_selected: date_selected,
+                    onestepcheckout: false
+                }
+            }
+
+        );
+
+    },
+
+    onChangeAccessorialOSC: function () {
+        var url = '<?php echo $this->getUrl("shipperhq_freight/Freight/getAccessorialRates", array("_secure"=>true)) ?>';
+        var set_methods_url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+        var update_payments = <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+        var carrierCode = '<?php echo $carrierCode; ?>';
+        var carrierGroupInsert = '<?php echo $carrierGroupInsert; ?>';
+        var carrierGroup = '<?php echo $carrierGroup; ?>';
+
+        var liftgate_required = false;
+        var notify_required = false;
+        var destination_type = false;
+        var inside_delivery = false;
+        var limited_delivery = false;
+        var date_selected = false; //SHQ16-1726 explicitly add selected date if present to request
+
+        if($('liftgate_required_'+carrierCode+carrierGroupInsert)) {
+            liftgate_required = $('liftgate_required_'+carrierCode+carrierGroupInsert).checked
+        }
+
+        if($('notify_required_' +carrierCode+carrierGroupInsert)) {
+            notify_required = $('notify_required_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('destination_type_' +carrierCode+carrierGroupInsert)) {
+            destination_type = $('destination_type_' +carrierCode+carrierGroupInsert).value;
+        }
+
+        if($('inside_delivery_' +carrierCode+carrierGroupInsert)) {
+            inside_delivery = $('inside_delivery_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('limited_delivery_' +carrierCode+carrierGroupInsert)) {
+            limited_delivery = $('limited_delivery_' +carrierCode+carrierGroupInsert).checked;
+        }
+
+        if($('del_date_select_' + carrierCode + carrierGroupInsert)) {
+            date_selected = $('del_date_select_' + carrierCode + carrierGroupInsert).value;
+        }
+
+        document.getElementById('retrieving-rates').innerHTML =
+            "<img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>'> Retrieving rates...";
+        new Ajax.Request(url, {
+            method: 'get',
+            onSuccess: freightListener.updateOscRates,
+            onComplete: function () {
+                document.getElementById('retrieving-rates').innerHTML = "";
+
+            },
+            parameters: {
+                carrier_code: carrierCode,
+                carrier_group: carrierGroup,
+                liftgate_required: liftgate_required,
+                notify_required: notify_required,
+                destination_type: destination_type,
+                inside_delivery: inside_delivery,
+                limited_delivery: limited_delivery,
+                date_selected: date_selected,
+                onestepcheckout: true
+            }
+
+        });
+    },
+
+    shippingMethodEvent: function (event) {
+        var element = event.element();
+        //e.g. s_method_shqups_2das
+        var selectedElementId = element.id;
+        //e.g. shqups_2das
+        var lastPartMethodName = selectedElementId.substr(9);
+
+        var indexOfWarehouseEnd = lastPartMethodName.indexOf('_');
+        var methodCarriergroupId = lastPartMethodName.substr(0, indexOfWarehouseEnd);
+        var carriergroupId = methodCarriergroupId;
+        var splitSGroup = methodCarriergroupId.indexOf('XXXX');
+        if (splitSGroup < 1 && (isNaN(methodCarriergroupId) || isNaN(parseInt(methodCarriergroupId)))) {
+            var carriergroupInsert = '';
+            carriergroupId = '';
+            var methodCarriergroupId = '';
+        } else {
+            var carriergroupInsert = '_' + methodCarriergroupId;
+        }
+
+        if(carriergroupId != '') {
+            var carrierPart = lastPartMethodName.replace(carriergroupId +'_', '');
+        } else {
+            var carrierPart = lastPartMethodName;
+        }
+
+        var indexOfcarrierUnderscore = carrierPart.indexOf('_');
+        if(indexOfcarrierUnderscore < 0 ) {
+            var carrierCode = carrierPart;
+        } else {
+            var carrierCode = carrierPart.substr(0, indexOfcarrierUnderscore);
+        }
+        var carrierCodeInsert = '_'  + carrierCode;
+
+        var isCustomerAccountCarrier = false;
+        if($('customer_carrier_ph' + carrierCodeInsert + carriergroupInsert)) {
+            isCustomerAccountCarrier = true;
+        }
+
+        var allCustomerAccountFields = document.getElementsByClassName('customer-account-field');
+        for(var i = 0; i<allCustomerAccountFields.length; i++) {
+            if (isCustomerAccountCarrier) {
+                var required = allCustomerAccountFields[i].hasClassName('required-entry');
+                if(!required) {
+                    allCustomerAccountFields[i].addClassName('required-entry');
+                }
+            } else {
+                var required = allCustomerAccountFields[i].hasClassName('required-entry');
+                if(required) {
+                    allCustomerAccountFields[i].removeClassName('required-entry');
+                }
+            }
+        }
+    },
+
+    setUpAccessorialDisplay: function () {
+        var accessorialObjects = document.getElementsByClassName('accessorial');
+        for(i = 0; i < accessorialObjects.length; i++) {
+            if(accessorialObjects[i].type == 'select-one') {
+                accessorialObjects[i].observe('change', this.onChangeAccessorial.bind(this));
+            }
+            else {
+                accessorialObjects[i].observe('click', this.onChangeAccessorial.bind(this));
+            }
+        }
+
+        var shippingRadios = document.getElementsByName('shipping_method');
+        var shippingRadiosTest = document.getElementsByClassName("shipping_method_shq");
+        for(i = 0; i < shippingRadiosTest.length; i++) {
+            shippingRadiosTest[i].observe('click', this.shippingMethodEvent.bind(this));
+            if (shippingRadiosTest.length == 1) {
+                shippingRadiosTest[i].click();
+            }
+        }
+    },
+
+    updateStdRates: function(transport)
+    {
+
+        var oscelements = document.getElementsByClassName('onestepcheckout-shipping-method-block');
+        var is_osc = false;
+        if(oscelements.length > 0) {
+            is_osc = true;
+        }
+        var response = transport.responseText.evalJSON();
+        var carrierCode = response.carrier_code;
+        var carrierGroup = response.carrier_group;
+        var carrierGroupInsert = '';
+        if(carrierGroup != '' ) {
+            carrierGroupInsert = '_' + carrierGroup;
+        }
+        var data = response.shipping_rates;
+        if (data == false) {
+            <?php $errorMessage = $this->getStandardErrorMessage(); ?>
+            $('radio_choices' + carrierGroupInsert +  "_" + carrierCode ).innerHTML='<ul class="messages"><li class="error-msg"><ul><li><?php echo preg_replace("!\s+!"," ",$errorMessage); ?></li></ul></li></ul>';
+        } else {
+            var existingRadios = document.getElementsByName('shipping_method' + carrierGroupInsert);
+            var selectedMethod = false;
+
+            for(i=0;i < existingRadios.length ;i++) {
+                var radio = existingRadios[i];
+                if(radio.checked) {
+                    selectedMethod = radio.value;
+                }
+            }
+            $('radio_choices'+ carrierGroupInsert + "_" + carrierCode ).remove();
+            var radOptions = new Element('div',{id:'radio_choices'+ carrierGroupInsert + "_" + carrierCode });
+            $('ship_options'+ carrierGroupInsert + "_" + carrierCode).insert(radOptions);
+            var radioText ='';
+            checkedFlag = false;
+            for (code in data) {
+                if(code == selectedMethod) {
+                    checkedFlag = true;
+                }
+                element = data[code];
+                if (checkedFlag == true) {
+                    radioIndText= '<dt style="margin-bottom: 5px;"><input name="shipping_method'+carrierGroupInsert+'" type="radio" checked  value="'+code+'" id="s_method'+carrierGroupInsert+'_'+code+'"/>\
+                        <label for="s_method'+carrierGroupInsert+'_'+code+'">'+element.label+'</label></dt>';
+                    checkedFlag = false;
+                }	else {
+                    radioIndText= '<dt style="margin-bottom: 5px;"><input name="shipping_method'+carrierGroupInsert+'" type="radio" value="'+code+'" id="s_method'+carrierGroupInsert+'_'+code+'"/>\
+                         <label for="s_method'+carrierGroupInsert+'_'+code+'">'+element.label+'</label></dt>';
+                }
+                radioText += radioIndText;
+
+            }
+            $('radio_choices'+ carrierGroupInsert + "_" + carrierCode).innerHTML=radioText;
+
+            for(code in data)
+            {
+                var el = document.getElementById('s_method'+carrierGroupInsert+'_'+code);
+                if(is_osc) {
+                    el.addEventListener("click", shippingMethodChosenEvent, false);
+                }
+            }
+            if(is_osc) {
+                var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+                var update_payments = <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+                $$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments));
+            }
+        }
+
+    },
+
+    updateOscRates: function(transport)
+    {
+        var response = transport.responseText.evalJSON();
+        var carrierCode = response.carrier_code;
+        var carrierGroup = response.carrier_group;
+        var carrierGroupInsert = '';
+        if(carrierGroup != '' ) {
+            carrierGroupInsert = '_' + carrierGroup;
+        }
+        var data = response.shipping_rates;
+
+        var methodSelect = $('s_method_dropdown'+ carrierGroupInsert + "_" + carrierCode);
+        var preselectedMethod = methodSelect.value;
+        var errorMessage = false;
+        for (var code in data) {
+            element = data[code];
+            if(element.error) {
+                errorMessage = element.error;
+            }
+        }
+        if (data == false || errorMessage) {
+            methodSelect.hide();
+            if(document.getElementById('s_method_dropdown'+ carrierGroupInsert + "_" + carrierCode +'_single')) {
+                var selectedShipMethodSingle = $('s_method_dropdown'+ carrierGroupInsert + "_" + carrierCode +'_single');
+                selectedShipMethodSingle.hidden = true;
+            }
+            if(!errorMessage) {
+                errorMessage = "<?php echo $this->getStandardErrorMessage(); ?>";
+            }
+
+            var radioChoices = $('radio_choices'+carrierGroupInsert + "_" + carrierCode);
+            radioChoices.innerHTML='<ul class="messages"><li class="error-msg"><ul><li>' + errorMessage + '</li></ul></li></ul>';
+            radioChoices.show();
+
+            var selectedShipMethod = $('s_method' + carrierGroupInsert + '_' + carrierCode);
+
+            selectedShipMethod.value = null;
+            selectedShipMethod.checked=false;
+            selectedShipMethod.disabled = true;
+        } else {
+            $('radio_choices'+carrierGroupInsert + "_" + carrierCode).hide();
+
+            if(document.getElementById('s_method_dropdown'+ carrierGroupInsert + "_" + carrierCode +'_single')) {
+                var methodSelect = $('s_method_dropdown'+ carrierGroupInsert + "_" + carrierCode +'_single');
+                methodSelect.hidden = false;
+                var rateResult = '';
+                for (var code in data) {
+                    element = data[code];
+                    rateResult = element.label;
+                    methodSelect.innerHTML = rateResult;
+                    methodSelect.value = code;
+                }
+            }
+            else {
+                var selectedShipMethod = $('s_method' + carrierGroupInsert + '_' + carrierCode);
+                selectedShipMethod.disabled = false;
+                selectedShipMethod.enabled = true;
+                methodSelect.enabled = true;
+                methodSelect.show();
+                methodSelect.hidden = false;
+                methodSelect.options.length = 0;
+
+                var found = false;
+                var firstValue = false;
+                for (var code in data) {
+                    element = data[code];
+                    var label = element.label;
+                    methodSelect.add(new Option(label, code));
+                    if(code == preselectedMethod) {
+                        found = true;
+                    }
+                    if(!firstValue) {
+                        firstValue = code;
+                    }
+                }
+                if(preselectedMethod != '' && found) {
+                    methodSelect.value = preselectedMethod;
+                }
+                else {
+                    methodSelect.value = firstValue;
+                }
+
+                var selectedShipMethod = $('s_method' + carrierGroupInsert + '_' + carrierCode);
+                selectedShipMethod.value = methodSelect.value;
+                selectedShipMethod.checked=true;
+
+
+            }
+        }
+        //reload totals by calling setMethodSeparate
+        var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+        var form = $('onestepcheckout-form');
+        var shipping_method = $RF(form, 'shipping_method');
+        var payment_method = $RF(form, 'payment[method]');
+        var totals = get_totals_element();
+        totals.update('<div class="loading-ajax">&nbsp;</div>');
+        var parameters = {
+            shipping_method: shipping_method,
+            payment_method: payment_method
+        }
+        new Ajax.Request(url, {
+            method: 'post',
+            onSuccess: function(transport)    {
+                if(transport.status == 200)    {
+                    var data = transport.responseText.evalJSON();
+                    var form = $('onestepcheckout-form');
+
+                    totals.update(data.summary);
+
+
+                }
+            },
+            parameters: parameters
+        });
+
+
+
+    }
+};
+
+var freightListener = new FreightListener('co-store-freightcommon-form');
+
+if(!oscEnabled){
+    //  freightListener.onChangeAccessorial();
+}
+
+//]]>
+</script>

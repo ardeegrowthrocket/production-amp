@@ -1,0 +1,17 @@
+<?php
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$cartItems = $quote->getAllVisibleItems();
+$cartItemArray = array();
+foreach ($cartItems as $item) {
+    $_product = $item->getProduct();
+    $cartItemArray[] = [
+        "name" => $_product->getName(),
+        "category" => $_product->getAttributeText('auto_type'),
+        "id" => $_product->getSku(),
+        "cart_value" => str_replace(",","",Mage::getModel('directory/currency')->format($item->getRowTotal(), array('display'=>Zend_Currency::NO_SYMBOL), false ))
+    ];
+}
+?>
+<script type="text/javascript">
+    var cartItems = <?php echo json_encode($cartItemArray); ?>;
+</script>

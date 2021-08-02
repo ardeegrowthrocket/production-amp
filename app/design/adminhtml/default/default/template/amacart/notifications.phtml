@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Acart
+ */
+?>
+<?php
+
+/**
+ * @see Amasty_Acart_Block_Adminhtml_Notifications
+ */
+?>
+<?php if ($this->canShow()): ?>
+    <div class="notification-global notification-global-warning">
+        <strong style="color:red">Important: </strong>
+        <span>
+            You have enabled debug mode for Amasty Abandoned Cart,
+            it's disable to sent anything to live users. For disable debug mode - please turn off setting in
+            <a href="<?php echo $this->getSecurityAdminUrl(); ?>">System -> Configuration -> Amasty Abandoned Cart</a>.
+        </span>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Homebase_Sitemap>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>Homebase_Auto</depends>
+        </Homebase_Sitemap>
+    </modules>
+</config>

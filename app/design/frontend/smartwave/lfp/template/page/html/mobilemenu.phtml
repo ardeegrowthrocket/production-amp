@@ -1,0 +1,39 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php $baseUrl = Mage::getBaseUrl(); ?>
+<?php
+?>
+<div class="mobile-nav side-block">
+    <span class="close-sidebar-menu"><i class="icon-cancel"></i></span>
+    <div class="menu-all-pages-container">
+        <ul class="menu sw-mobile-menu">
+            <li>
+                <a href="<?php echo $baseUrl ?>customer/account">My Account</a>
+                <ul style="display: none">
+                    <?php
+                    if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                        ?>
+                        <li><a href="<?php echo Mage::getUrl('customer/account'); ?>"><?php echo $this->__('Dashboard'); ?></a></li>
+                        <li><a href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__('Log out'); ?></a></li>
+                    <?php } else {
+                        ?>
+                    <li><a href="<?php echo Mage::getUrl('customer/account/login'); ?>"><?php echo $this->__('Log in'); ?></a></li>
+                    <li><a href="<?php echo Mage::getUrl('customer/account/create'); ?>"><?php echo $this->__('Register'); ?></a></li>
+                    <?php } ?>
+                </ul>
+            </li>
+            <li class="act"><a href="<?php echo $baseUrl; ?>category/interior-accessories.html">Interior Accessories</a></li>
+            <li class="act"><a href="<?php echo $baseUrl; ?>category/exterior-accessories.html">Exterior Accessories</a></li>
+            <li class="act"><a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html">Maintenance Parts</a></li>
+            <li class="act"></li>
+            <li class="act"><a href="<?php echo $baseUrl; ?>category/tuneup-and-maintenance-parts.html">Ford Performance Parts & Accessories</a>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('megamenu-link-ford-performance')->toHtml(); ?>
+            </li>
+
+            <li class="act"><a href="#">BROWSE BY MODEL</a>
+                 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('megamenu-link-browse-model-mobile')->toHtml(); ?>
+            </li>
+            <li></li>
+            <li class="act"><a href="https://parts.levittownfordparts.com" target="_blank" rel="nofollow">Ford Repair Parts</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <advr translate="label" module="advr">
+            <label>Advanced Reports</label>
+            <tab>mstcore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <view>
+                    <label>Appearance</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <link_under_report translate="label">
+                            <label>Display Advanced Reports under native Reports</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </link_under_report>
+                    </fields>
+                </view>
+                <report>
+                    <label>Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <process_orders translate="label">
+                            <label>Process Orders</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>advr/system_config_source_status</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </process_orders>
+                        <customer_report_addresses translate="label">
+                            <label>Display addresses in the Customers report</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>not recommended for large collections</comment>
+                        </customer_report_addresses>
+                        <time_of_created_at translate="label">
+                            <label>Group data by time of</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>advr/system_config_source_timeOfCreating</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Default value: Order Created</comment>
+                        </time_of_created_at>
+                    </fields>
+                </report>
+                <reporttime>
+                    <label>Time Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <timeoffset translate="label">
+                            <label>Additional time offset, hours</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                            <comment>Please do not change without the needs</comment>
+                        </timeoffset>
+                    </fields>
+                </reporttime>
+            </groups>
+        </advr>
+    </sections>
+</config>

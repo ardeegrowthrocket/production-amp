@@ -1,0 +1,150 @@
+<?php
+$_helper = $this->helper('catalog/output');
+$helper_richsnippets = $this->helper('porto/richsnippets');
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+$product = $_product;
+$product_type = $_product->getTypeId();
+$enabled_richsnippets = ($helper_richsnippets->isEnabled() && $product_type !== "grouped");
+$price_properties = "";
+
+if($enabled_richsnippets){
+    $price_properties = $helper_richsnippets->getPriceProperties($_product);
+}
+
+$enable_addtocart_sticky = Mage::getStoreConfig("porto_settings/product_view/enable_addtocart_sticky",$code);
+$move_product_tab = Mage::getStoreConfig("porto_settings/product_view/move_product_tab",$code);
+$sticky_header = "";
+if(!Mage::getStoreConfig("porto_settings/header/sticky_header", $code))
+    $sticky_header = "no-sticky-header";
+?>
+<?php
+$varDataLayer = [
+    "name" => $_product->getName(),
+    "category" => $_product->getAttributeText('auto_type'),
+    "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+    "id" => $_product->getSku(),
+    "price" => Mage::getModel('directory/currency')->format(
+        $_product->getFinalPrice(),
+        array('display'=>Zend_Currency::NO_SYMBOL),
+        false
+    ),
+    "list" => "Product Details Page",
+    "url" => $_product->getProductUrl()
+];
+
+?>
+    <script type="text/javascript">
+        var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+        var productDetails = <?php echo json_encode($varDataLayer) ?>;
+    </script>
+    <div class="bg-gray product-title-section">
+        <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 no-padding">
+                    <h1 id="product_<?php echo $_product->getId(); ?>" class="product-name" <?php if($enabled_richsnippets): ?>itemprop="name"<?php endif; ?>><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <div class="prod-detail-container">
+                        <label>Part Number:</label>
+                        <span><?php echo $_product->getData('amp_part_number'); ?></span>
+                    </div>
+                    <div class="yotpo-bottom-container"> <?php echo $this->helper('yotpo')->showBottomline($this, $_product); ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-view-section">
+        <div class="container">
+            <div class="product-view <?php if($move_product_tab): ?>moved-tab<?php endif;?>" <?php if($enabled_richsnippets): ?><?php echo $helper_richsnippets->getProductItemscope(); ?><?php endif; ?>>
+                <div class="product-essential">
+                    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                        <?php echo $this->getBlockHtml('formkey') ?>
+                        <div class="no-display">
+                            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                            <input type="hidden" name="related_product" id="related-products-field" value="" />
+                        </div>
+                        <!-- PRODUCT MODEL -->
+                        <div class="custom-product-detail-container">
+                            <div id="ymms-product-<?php echo $_product->getId(); ?>" class="ymms-product-name"></div>
+                        </div>
+                        <div class="product-image-section">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="product-img-box">
+                                        <?php echo $this->getChildHtml('media') ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 product-info-containment">
+                                    <?php echo $this->getChildHtml('compatibilitychecker_view'); ?>
+                                    <div class="product-info-wrapper">
+                                        <div class="product-info">
+                                            <p class="our-price-tag"><?php echo $this->__('Our Price'); ?></p>
+                                            <div <?php if($enabled_richsnippets) echo $helper_richsnippets->getOfferItemscope(); ?>>
+                                                <?php echo $this->getChildHtml('product_type_data'); ?>
+                                                <?php echo $this->getTierPriceHtml(); ?>
+                                                <?php echo $price_properties; ?>
+                                            </div>
+                                            <?php echo $this->getChildHtml('extrahint') ?>
+                                            <?php if ($this->canEmailToFriend()): ?>
+                                                <!-- <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p> -->
+                                            <?php endif; ?>
+                                            <?php if($sku = $_product->getSku()): ?>
+                                                <?php if($enabled_richsnippets): ?>
+                                                    <meta itemprop="productID" content="sku:<?php echo $sku; ?>" />
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                            <?php echo $this->getChildHtml('alert_urls') ?>
+                                            <?php echo $this->getChildHtml('other');?>
+
+                                        </div>
+                                        <?php if(!empty($_product->getFreeShippingProduct())): ?>
+                                            <div class="fs-banner">
+                                                <span><?php echo $this->__('Free Shipping On This Item') ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="product-addto-cart-wrapper">
+                                        <?php if($_product->isSaleable()): ?>
+                                            <?php echo $this->getChildHtml('addtocart') ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content-section">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <?php if ($_product->getDescription()):?>
+                                        <div class="short-description" style="border:none">
+                                            <h2><?php echo $this->__('Product Description') ?></h2>
+                                            <div class="std" <?php if($enabled_richsnippets): ?>itemprop="description"<?php endif; ?>>
+                                                <?php $description = $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+                                                <?php echo $description; ?>
+                                            </div>
+                                        </div>
+                                    <?php endif;?>
+<?php
+$installationPDF = Mage::helper('instructionpdf')->getInstallationGuidePdf($_product);
+if(!empty($installationPDF)){
+?>
+  <p>  For <?php echo $_product->getData('part_name'); ?> Installation, <a href="<?php echo Mage::helper('instructionpdf')->getGuidePdfUrl($installationPDF); ?>" target="_blank">click here</a></p>
+<?php 
+}
+?>                                        
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="product-collateral">
+                                        <?php echo $this->getChildHtml('product_additional_data'); ?>
+                                    </div>
+                                    <?php echo $this->helper('yotpo')->showWidget($this, $_product); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <firecheckout_index_index>
+        <reference name='head'>
+            <reference name="head">
+                <action method="addItem"><type>js</type><name>storepickup/jquery-1.6.4.min.js</name></action>
+                <action method="addItem"><type>js</type><name>storepickup/noconflict.js</name></action>
+            </reference>
+        </reference>
+        <reference name='checkout.onepage.shipping_method.available'>
+            <action method='setTemplate'><template>storepickup/checkout/onepage/shipping_method/available.phtml</template></action>
+        </reference>
+    </firecheckout_index_index>
+    <firecheckout_index_updatecheckout>
+        <reference name="checkout.shipping.method">
+            <action method="setTemplate">
+                <template>storepickup/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+        </reference>
+    </firecheckout_index_updatecheckout>
+</layout>

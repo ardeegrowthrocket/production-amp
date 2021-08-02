@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Popular>
+      <version>0.1.0</version>
+    </Growthrocket_Popular>
+  </modules>
+  <global>
+    <helpers>
+      <gr_popular>
+        <class>Growthrocket_Popular_Helper</class>
+      </gr_popular>
+    </helpers>
+	<blocks>
+	  <gr_popular>
+		<class>Growthrocket_Popular_Block</class>
+	  </gr_popular>
+	</blocks>
+  </global>
+</config> 

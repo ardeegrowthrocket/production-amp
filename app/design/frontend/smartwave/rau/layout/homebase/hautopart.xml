@@ -1,0 +1,179 @@
+<layout>
+    <hautopart_model_index>
+        <reference name="root">
+            <action method="addBodyClass"><classname>make-page</classname></action>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+            <action method="setMainClass"><classname>bg-gray</classname></action>
+        </reference>
+        <reference name="top.container">
+            <action method="setElementId"><value>banner-section</value></action>
+            <action method="setElementClass"><value>top-container bg-gray</value></action>
+            <reference name="pageHeader">
+                <action method="setTemplate">
+                    <template>page/html/content-header.phtml</template>
+                </action>
+                <block type="core/template" name="content.header.banner" template="page/html/content-banner.phtml"></block>
+                <reference name="page.header">
+                    <block type="hautopart/ymm" name="ymm" template="page/ymm/box-wo-banner.phtml"></block>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_make" name="make-list" template="homebase/category/list-no-img.phtml"></block>
+        </reference>
+        <reference name="footer">
+            <block type="hauto/home_shopby_category" name="footer_shopby"/>
+        </reference>
+    </hautopart_model_index>
+
+    <hautopart_model_model>
+        <reference name="root">
+            <action method="addBodyClass"><classname>make-model-page</classname></action>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <type>css/ymm-style.css</type>
+            </action>
+        </reference>
+        <reference name="top.container">
+            <action method="setElementId"><value>banner-section</value></action>
+            <action method="setElementClass"><value>top-container bg-gray</value></action>
+            <reference name="pageHeader">
+                <action method="setTemplate">
+                    <template>page/html/content-header.phtml</template>
+                </action>
+                <block type="core/template" name="content.header.banner" template="page/html/content-banner.phtml"></block>
+                <reference name="page.header">
+                    <block type="hautopart/ymm" name="ymm" template="page/ymm/box-wo-banner.phtml"></block>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_model" name="make-list" template="homebase/category/model/list.phtml">
+                <block type="hautopart/category_ListingYmm" name="category.partname" template="homebase/category/partname.phtml"/>
+            </block>
+        </reference>
+        <reference name="before_footer">
+            <block type="core/template" name="category.popular.product.wrapper" template="popular/wrapper.phtml">
+                <block type="gr_popular/list" name="category.popular.product" template="popular/list.phtml"/>
+            </block>
+        </reference>
+        <reference name="footer">
+            <block type="gr_popular/list" name="category.popular.product" template="popular/list.phtml"/>
+            <block type="hauto/home_shopby_category" name="footer_shopby"/>
+        </reference>
+    </hautopart_model_model>
+
+    <hautopart_model_ymm>
+        <reference name="root">
+            <action method="addBodyClass"><classname>ymm-page</classname></action>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <type>css/ymm-style.css</type>
+            </action>
+        </reference>
+        <reference name="top.container">
+            <action method="setElementId"><value>banner-section</value></action>
+            <action method="setElementClass"><value>top-container bg-gray</value></action>
+            <reference name="pageHeader">
+                <action method="setTemplate">
+                    <template>page/html/content-header.phtml</template>
+                </action>
+                <block type="core/template" name="content.header.banner" template="page/html/content-banner.phtml"></block>
+                <reference name="page.header">
+                    <block type="hautopart/ymm" name="ymm" template="page/ymm/box-wo-banner.phtml"></block>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <block type="hautopart/category_year" name="ymm-list" template="homebase/category/custom.phtml">
+                <block type="hautopart/category_ListingYmm" name="category.partname" template="homebase/category/partname/ymm.phtml"/>
+                <block type="core/template" name="ymm.product.listing-test" template="homebase/category/ymmlisting.phtml"/>
+            </block>
+        </reference>
+        <reference name="before_footer">
+            <block type="core/template" name="gr_recommended_wrapper" template="recommended/wrapper.phtml">
+                <block type="gr_recommended/recommended" name="gr_recommended" template="recommended/list.phtml" />
+            </block>
+        </reference>
+        <reference name="footer">
+            <block type="hauto/home_shopby_category" name="footer_shopby"/>
+        </reference>
+    </hautopart_model_ymm>
+
+    <hautopart_model_cat>
+        <reference name="root">
+            <action method="addBodyClass"><classname>ymm-cat-page</classname></action>
+            <action method="setTemplate"><template>page/1column-listing.phtml</template></action>
+        </reference>
+        <reference name="top.container">
+            <action method="setElementId"><value>banner-section</value></action>
+            <action method="setElementClass"><value>top-container bg-gray</value></action>
+            <reference name="pageHeader">
+                <action method="setTemplate">
+                    <template>page/html/content-header.phtml</template>
+                </action>
+                <block type="core/template" name="content.header.banner" template="page/html/content-banner.phtml"></block>
+                <reference name="page.header">
+                    <block type="hautopart/ymm" name="ymm" template="page/ymm/box-wo-banner.phtml"></block>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="product-container" template="hauto/layout.phtml">
+                <block type="hautopart/display_category" name="product-list" template="catalog/product/list.phtml">
+                    <block type="hauto/layered_attributes2" name="layered-proxy" template="hauto/layered/attributes.phtml"></block>
+                    <block type="hautopart/display_list_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="hautopart/display_list_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName"><name>display_list_toolbar</name></action>
+                </block>
+            </block>
+        </reference>
+    </hautopart_model_cat>
+
+    <hautopart_model_sku>
+        <reference name="head">
+            <action method="addJs"><script>smartwave/jquery/plugins/slimscroll/jquery.slimscroll.js</script></action>
+        </reference>
+        <update handle="catalog_product_view"></update>
+        <reference name="head">
+            <action method="addCss"><stylesheet>megamenu/css/font-awesome.min.css</stylesheet></action>
+        </reference>
+        <reference name="top.container">
+            <action method="setElementId"><value>banner-section</value></action>
+            <action method="setElementClass"><value>top-container bg-gray</value></action>
+            <reference name="pageHeader">
+                <action method="setTemplate">
+                    <template>page/html/content-header.phtml</template>
+                </action>
+                <block type="core/template" name="content.header.banner" template="page/html/content-banner.phtml"></block>
+                <reference name="page.header">
+                    <block type="hautopart/ymm" name="ymm" template="page/ymm/box-wo-banner.phtml"></block>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <remove name="ajaxcart_mask"></remove>
+        </reference>
+    </hautopart_model_sku>
+
+    <hautopart_model_ymms>
+        <update handle="hautopart_model_sku"></update>
+    </hautopart_model_ymms>
+
+    <PRODUCT_TYPE_autopart translate="label" module="hautopart">
+        <label>Catalog Product View (Autopart)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_autopart>
+
+</layout>

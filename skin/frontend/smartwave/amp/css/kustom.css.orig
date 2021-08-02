@@ -1,0 +1,10 @@
+.ratings{
+    display:none;
+}
+
+.catalog-product-view .main.container:after,.catalog-product-view .main.container:before{
+    top:20px;
+}
+.catalog-category-view .price-box p{
+    display:none;
+}

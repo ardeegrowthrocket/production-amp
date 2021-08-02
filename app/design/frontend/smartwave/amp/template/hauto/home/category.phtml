@@ -1,0 +1,53 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/25/17
+ * Time: 11:52 PM
+ */
+
+$list = $this->getListing();
+$ctr = 0;
+
+?>
+
+<div class="popular-category-container">
+    <h1><?php echo $this->getTitle(); ?></h1>
+    <?php foreach($list as $item): ?>
+        <?php if($ctr%2 == 0) :?>
+            <div class="row">
+        <?php endif; ?>
+            <div class="col-sm-6">
+                <div class="col-sm-4">
+                  <?php $base =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);?>
+                    <?php  $label = str_replace(" ", "-", $item->getLabel()); ?>
+                    <?php $label = strtolower($label);?>
+                    <img src="<?php echo $base.'home/'.$label ?>.jpg" alt="" width="100%">
+                </div>
+                <div class="col-sm-8">
+                    <h2><a href="<?php echo $item->getLink(); ?>"><?php echo $item->getLabel(); ?></a></h2>
+                    <?php
+                    $parts = $item->getParts();
+                    ?>
+                    <ul class="auto-sublist">
+                        <?php foreach($parts as $part):?>
+                            <li>
+                                <a href="<?php echo $part->getLink(); ?>">
+                                    <?php echo $part->getLabel(); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="pop-cat-see">
+                        <a href="<?php echo $item->getLink(); ?>">
+                            See More...
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php if($ctr%2 == 1) :?>
+            </div>
+        <?php endif; ?>
+        <?php $ctr++; ?>
+    <?php endforeach; ?>
+</div>

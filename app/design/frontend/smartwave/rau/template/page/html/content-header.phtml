@@ -1,0 +1,20 @@
+<div class="banner-container">
+    <?php echo $this->getChildHtml('content.header.banner'); ?>
+    <div class="banner-header">
+        <?php echo $this->getChildHtml("page.header");?>
+    </div>
+</div>
+<div class="container">
+    <?php
+    $breadcrumbs = $this->getChildHtml("breadcrumbs");
+    if ($breadcrumbs) :
+        ?>
+        <div class="breadcrumbs">
+            <div class="container no-padding">
+                <div class="row">
+                    <?php echo $breadcrumbs; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

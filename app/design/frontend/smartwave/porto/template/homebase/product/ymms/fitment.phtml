@@ -1,0 +1,39 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/22/17
+ * Time: 12:18 AM
+ */
+?>
+<?php $fitment= $this->getFitment();
+$make = "";
+?>
+<h2 class="fitment-guide-title" style="margin-bottom: 0;">Vehicle Fitment</h2>
+<p>This product fits the following vehicles:</p>
+<div class="fitment-guide-wrapper">
+    <table id="fitment-guide" class="data-table">
+        <thead>
+        <tr>
+            <th><?php echo $this->__('Year'); ?></th>
+            <th><?php echo $this->__('Make'); ?></th>
+            <th><?php echo $this->__('Model'); ?></th>
+        </tr>
+        </thead>
+        <tbody>
+            <?php foreach($fitment as $item):?>
+                <td><?php echo $item[0]?></td>
+                <td><?php echo $item[1]?></td>
+                <td><?php echo $item[2]?></td>
+                <?php  $make = $item[1] ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    // decorateTable("fitment-guide")
+</script>
+<script type="text/javascript">
+    var productMake = "<?php echo $make ?>";
+</script>

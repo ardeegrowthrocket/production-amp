@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Growthrocket_Fitment>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Growthrocket_Fitment>
+    </modules>
+</config>

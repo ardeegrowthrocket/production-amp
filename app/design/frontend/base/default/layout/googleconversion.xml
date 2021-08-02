@@ -1,0 +1,9 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <checkout_onepage_success>    
+    <reference name="content">   
+      <block type="googleconversion/index" name="googleconversion" template="googleconversion/checkout.phtml"/>   
+    </reference>   
+  </checkout_onepage_success>    
+</layout>   
+	

@@ -1,0 +1,11 @@
+<?php
+    $searchTerms = array(
+        "search_term" => $this->helper('catalogsearch')->getEscapedQueryText(),
+        "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+        "category" => "",
+        "id" => ""
+    );
+?>
+<script>
+    var searchTerms = <?php echo json_encode($searchTerms) ?>;
+</script>

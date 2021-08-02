@@ -1,0 +1,54 @@
+
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-car-models')->toHtml(); ?>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-featured-models')->toHtml(); ?>
+    </div>
+</div>
+<div class="container-fluid banner-about-us">
+    <div class="container">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-about-us')->toHtml(); ?>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-shop-with-us')->toHtml(); ?>
+    </div>
+</div>
+
+<?php echo Mage::app()->getLayout()->createBlock('gr_bestseller/collection')->setTemplate('bestseller/list.phtml')->toHtml(); ?>
+
+<div class="container-fluid shop-mopar-parts">
+    <div class="container">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-shop-mopar-parts')->toHtml(); ?>
+    </div>
+</div>
+
+<div class="container must-have">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('must_have_for_your_car')->toHtml(); ?>
+    </div>
+</div>
+
+<?php echo Mage::app()->getLayout()->createBlock('featuredproduct/List')->setTemplate('featured/product.phtml')->toHtml(); ?>
+
+<div class="container-fluid custom-shop-ymm">
+    <div class="container">
+        <div class="row">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homepage_shop_by_ymm')->toHtml(); ?>
+        </div>
+    </div>
+</div>
+
+<div class="container home-bottom-description">
+    <div class="row">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-bottom-description')->toHtml(); ?>
+    </div>
+</div>
+
+

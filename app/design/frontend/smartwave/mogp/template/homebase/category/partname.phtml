@@ -1,0 +1,95 @@
+<?php
+    $collection = $this->collection();
+    if(!empty($collection)):
+$counter = 0;
+$actionName = Mage::app()->getRequest()->getActionName();
+$categoryUrl = array('index','model');
+?>
+<div class="category-part-listing accordion" id="partnameAccordion">
+    <?php foreach ($collection as $category =>  $partCollection): ?>
+    <?php
+        $counter++;
+        $partId =  uniqid();
+    ?>
+
+    <div class="part-header collapsed"  data-toggle="collapse" data-target="#<?php echo $partId; ?>" data-parent="#partnameAccordion" aria-controls="<?php echo $partId; ?>">
+        <span><?php echo $category ?></span>
+        <span class="icon plus"><i class="fa fa-plus"></i></span>
+        <span class="icon minus"><i class="fa fa-minus"></i> </span>
+    </div>
+    <?php
+    if(Mage::helper('hautopart')->getSortPartName() ==  'alphabetical') {
+        ksort($partCollection);
+    }
+    $innerCounter = 1;
+    $totalPart = count($partCollection);
+    ?>
+    <div class="wrapper cat-owl-wrapper collapse" id="<?php echo $partId ?>" data-custom-nav="<?php echo 'pn' . $partId ?>" aria-labelledby="<?php echo $partId; ?>" data-parent="#partnameAccordion">
+
+        <?php if(count($partCollection) > 12): ?>
+        <div class="cat-list owl-carousel two-row-carousel">
+            <?php foreach ($partCollection as $partname => $partData): ?>
+            <?php if($innerCounter == 1): ?>
+                <div class="part-item">
+            <?php endif; ?>
+                   <div class="inner-item">
+                       <a class="link image-container" href="<?php echo $partData['link'] ?>">
+                           <img class="lazyload" data-src="<?php echo $partData['image_url'] ?>"/>
+                       </a>
+                       <a class="link title" href="<?php echo $partData['link'] ?>"><?php echo $partData['name'] ?></a>
+                   </div>
+                <?php if($innerCounter % 2 == 0 && $innerCounter < $totalPart): ?>
+                    </div>
+                    <div class="part-item">
+                <?php endif; ?>
+                 <?php $innerCounter++ ?>
+                <?php if($innerCounter > $totalPart): ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php else: ?>
+           <div class="cat-list no-carousel one-row-carousel row">
+               <?php foreach ($partCollection as $partname => $partData): ?>
+                   <div class="part-item col-md-2 col-sm-4 col-xs-12">
+                       <div class="inner-item">
+                           <a class="link image-container" href="<?php echo $partData['link'] ?>">
+                               <img class="lazyload" data-src="<?php echo $partData['image_url'] ?>"/>
+                           </a>
+                           <a class="link title" href="<?php echo $partData['link'] ?>"><?php echo $partData['name'] ?></a>
+                       </div>
+                   </div>
+               <?php endforeach; ?>
+               </div>
+        <?php endif; ?>
+            <div class="custom-nav pn-<?php echo $partId ?>"></div>
+           <div class="col-sm-12 text-center">
+               <?php if(in_array($actionName, $categoryUrl)): ?>
+               <a href="<?php echo $this->getCategoryUrl($category) ?>" class="button part-button"><?php echo $this->__('Browse Category') ?></a>
+                <?php else: ?>
+                   <a href="<?php echo $this->getCategoryUrl($category, true) ?>" class="button part-button"><?php echo $this->__('Browse Category') ?></a>
+                <?php endif; ?>
+            </div>
+    </div>
+    <?php endforeach; ?>
+    <?php /* ?>
+    <div class="part-header collapsed" data-toggle="collapse" data-target="#rp001" data-parent="#partnameAccordion" aria-controls="rp001" aria-expanded="false">
+        <span>Repair Parts</span>
+        <span class="icon plus"><i class="fa fa-plus"></i></span>
+        <span class="icon minus"><i class="fa fa-minus"></i> </span>
+    </div>
+    <div class="wrapper cat-owl-wrapper collapse" id="rp001" data-custom-nav="pnrp001" aria-labelledby="rp001" data-parent="#partnameAccordion">
+        <div class="cat-list no-carousel one-row-carousel row">
+            <div class="part-item part-item col-md-2 col-sm-4 col-xs-12">
+                <div class="inner-item">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('gi')->toHtml(); ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 text-center">
+            <a href="https://parts.moparoriginalparts.com" target="_blank" class="button part-button"><?php echo $this->__('Browse Our Repair Catalog') ?></a>
+        </div>
+    </div>
+    <?php */ ?>
+</div>
+<?php endif; ?>

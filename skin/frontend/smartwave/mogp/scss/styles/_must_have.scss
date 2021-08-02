@@ -1,0 +1,76 @@
+.must-have{
+  margin-top: 60px;
+  background-color: $tertiary-bg-color;
+  padding-bottom: 60px;
+  padding-top: 60px;
+
+  h2{
+    font-size: 36px;
+    color: $h2-text-color;
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+
+  .owl-carousel{
+
+    .owl-item{
+      background-color: $white-color;
+      max-height: 280px;
+      text-align: left;
+      @include border-radius(4px,4px,4px,4px);
+      position: relative;
+      height: 266px;
+      padding-top: 30px;
+
+      img{
+        height: 90px;
+        margin: auto;
+        max-width: 118px;
+        width: auto;
+      }
+    .content{
+      position: absolute;
+      bottom: 0;
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-bottom: 30px;
+      height: 125px;
+
+      a{
+        text-decoration: none;
+      }
+      h3{
+        font-size: 22px;
+        color: $secondary-bg-color;
+        margin: 22px 0 10px 0;
+        position: relative;
+
+      }
+      p{
+        font-size: 16px;
+        line-height: 20px;
+        font-family: Roboto;
+      }
+      .fa{
+        position: absolute;
+        font-size: 14px;
+        right: 0px;
+        top: 8px;
+      }
+    }
+
+      &:hover{
+        .content{
+          background-color: $secondary-bg-color;
+          -webkit-transition: background .5s; /* For Safari 3.0 to 6.0 */
+          transition: background .5s; /* For modern browsers */
+          @include border-radius(0px,0px,4px,4px);
+
+          h3, p{
+            color: $white-color;
+          }
+        }
+      }
+    }
+  }
+}

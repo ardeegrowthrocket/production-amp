@@ -1,0 +1,436 @@
+/**
+    Settings
+ */
+.must-have {
+  margin-top: 50px;
+  color: #4F4F4F; }
+  .must-have .heading {
+    width: 56%;
+    margin: 36px auto; }
+    .must-have .heading h2 {
+      font-family: 'exo 2';
+      font-size: 36px;
+      font-weight: 700;
+      color: #002F64; }
+  .must-have .owl-carousel .owl-item {
+    padding: 10px; }
+    .must-have .owl-carousel .owl-item .item {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      -ms-border-radius: 3px 3px 3px 3px;
+      border-radius: 3px 3px 3px 3px;
+      height: 288px;
+      padding-top: 25px; }
+      .must-have .owl-carousel .owl-item .item h3 {
+        padding-left: 25px;
+        padding-right: 25px;
+        color: #002F64;
+        text-align: left; }
+        .must-have .owl-carousel .owl-item .item h3 i {
+          float: right; }
+      .must-have .owl-carousel .owl-item .item p {
+        font-size: 16px;
+        padding-left: 25px;
+        padding-right: 25px;
+        text-align: left; }
+
+#mopar-homepage-bestseller {
+  background-color: #F2F2F2;
+  padding-top: 60px;
+  padding-bottom: 50px; }
+  #mopar-homepage-bestseller .heading h2 {
+    color: #002F64;
+    font-family: 'exo 2';
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 35px; }
+  #mopar-homepage-bestseller .best-seller-list .owl-item {
+    background-color: #FFFFFF;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    padding: 25px;
+    min-height: 315px;
+    text-align: left; }
+    #mopar-homepage-bestseller .best-seller-list .owl-item .item-wrapper .b-price {
+      font-size: 20px;
+      font-family: robotobold;
+      color: #002F64;
+      margin-top: 20px; }
+    #mopar-homepage-bestseller .best-seller-list .owl-item .item-wrapper .b-name {
+      font-size: 16px;
+      margin-top: 10px; }
+      #mopar-homepage-bestseller .best-seller-list .owl-item .item-wrapper .b-name h5 {
+        color: #333333;
+        font-family: robotobold; }
+    #mopar-homepage-bestseller .best-seller-list .owl-item .item-wrapper .b-part-number {
+      font-size: 12px;
+      color: #252525;
+      margin-top: 5px; }
+  #mopar-homepage-bestseller .custom-nav {
+    margin-top: 30px; }
+    #mopar-homepage-bestseller .custom-nav button {
+      border: none;
+      background: none;
+      font-size: 22px;
+      padding: 0 20px; }
+
+#featured-product .heading {
+  margin-top: 50px;
+  margin-bottom: 40px; }
+  #featured-product .heading h2 {
+    font-family: 'exo 2';
+    font-size: 36px;
+    font-weight: 700;
+    color: #002F64; }
+#featured-product ul li {
+  color: #828282;
+  background-color: #F2F2F2;
+  font-size: 24px;
+  border-bottom: 2px solid #E0E0E0;
+  text-align: left;
+  padding: 20px 10px 20px 30px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -ms-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  max-width: 85%;
+  cursor: pointer; }
+  #featured-product ul li.active {
+    color: #40609F; }
+  #featured-product ul li:last-child {
+    border: none; }
+#featured-product .featured-item {
+  display: none;
+  text-align: left; }
+  #featured-product .featured-item img {
+    width: 180px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); }
+  #featured-product .featured-item h4.name {
+    margin-top: 35px;
+    font-size: 20px;
+    color: #4F4F4F; }
+  #featured-product .featured-item div.desc {
+    font-size: 16px;
+    color: #4F4F4F;
+    margin: 20px 0; }
+  #featured-product .featured-item a.link {
+    font-size: 16px;
+    color: #40609F;
+    display: block;
+    font-family: robotobold;
+    margin-bottom: 50px; }
+  #featured-product .featured-item a.model-link {
+    background-color: #EEB709;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    border-bottom: 3px solid #D5A408;
+    font-family: 'exo 2';
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 0px; }
+  #featured-product .featured-item.active {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+#featured-product .mobile-featured-selector {
+  display: none; }
+
+.shop-by-category {
+  background-color: #191919;
+  margin: 0;
+  color: #FFFFFF;
+  text-align: left;
+  padding: 50px 0; }
+  .shop-by-category h2 {
+    color: #FFFFFF;
+    font-family: 'exo 2';
+    font-size: 36px;
+    font-weight: 600; }
+  .shop-by-category p {
+    color: #FFFFFF; }
+  .shop-by-category .group-sby-group-listing a {
+    color: #FFFFFF;
+    display: block;
+    margin: 15px 0px; }
+  .shop-by-category .heading {
+    padding-right: 30px; }
+
+.main .col-main {
+  padding: 0;
+  background-color: #191919; }
+
+.car-model {
+  margin-top: 70px; }
+  .car-model h2 {
+    color: #002F64;
+    font-family: "exo 2";
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 50px; }
+  .car-model a {
+    border: 2px solid #E0E0E0;
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    text-decoration: none; }
+    .car-model a:hover {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); }
+    .car-model a img {
+      max-height: 124px; }
+    .car-model a span {
+      display: block;
+      color: #4F4F4F;
+      text-align: left;
+      padding: 15px 0 15px 30px;
+      font-family: 'exo 2';
+      font-size: 24px;
+      font-weight: 700; }
+
+.top-selling {
+  margin-top: 40px; }
+  .top-selling h2 {
+    color: #002F64;
+    font-family: "exo 2";
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 40px; }
+  .top-selling .inner-wrapper {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative; }
+    .top-selling .inner-wrapper img {
+      width: 100%; }
+    .top-selling .inner-wrapper .links {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      text-align: left;
+      width: 70%; }
+      .top-selling .inner-wrapper .links h3 {
+        font-family: "exo 2";
+        font-weight: 600;
+        font-size: 28px;
+        color: #FFFFFF; }
+      .top-selling .inner-wrapper .links a {
+        display: block;
+        color: #FFFFFF;
+        font-size: 18px;
+        margin: 13px 0px; }
+
+.banner-about-us {
+  min-height: 536px;
+  margin-top: 60px;
+  position: relative;
+  color: #FFFFFF; }
+  .banner-about-us img {
+    width: 100%;
+    height: 536px; }
+  .banner-about-us .container {
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+    .banner-about-us .container h2 {
+      font-family: 'exo 2';
+      font-size: 36px;
+      font-weight: 600;
+      color: #FFFFFF; }
+    .banner-about-us .container .row {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+    .banner-about-us .container .pos-left p {
+      font-size: 18px; }
+    .banner-about-us .container .pos-right p {
+      font-size: 16px; }
+    .banner-about-us .container p {
+      color: #FFFFFF; }
+
+.home-description-1 {
+  color: #FFFFFF;
+  margin-top: 50px; }
+  .home-description-1 .top-c {
+    background-color: #191919; }
+    .home-description-1 .top-c p {
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 50px;
+      color: #FFFFFF; }
+  .home-description-1 .bottom-c-left .row {
+    background-color: #002F64; }
+    .home-description-1 .bottom-c-left .row .half-container {
+      max-width: 615px;
+      width: 100%;
+      float: right;
+      text-align: left;
+      padding: 70px 57px 50px 0px; }
+      .home-description-1 .bottom-c-left .row .half-container p {
+        color: #FFFFFF; }
+  .home-description-1 .bottom-c-right .row .half-container {
+    max-width: 615px;
+    width: 100%;
+    float: left;
+    text-align: right;
+    padding: 65px 10px 50px; }
+
+.home-description-2 .top-container {
+  margin: 50px auto; }
+.home-description-2 .row.c-overlay {
+  position: relative; }
+  .home-description-2 .row.c-overlay:before {
+    width: 50%;
+    height: 390px;
+    position: absolute;
+    background-image: url("../images/road_view.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    z-index: 0; }
+  .home-description-2 .row.c-overlay:after {
+    width: 50%;
+    height: 390px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    background-image: url("../images/blue_design.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom; }
+  .home-description-2 .row.c-overlay:last-child:before {
+    background-image: url("../images/blue_design.png"); }
+  .home-description-2 .row.c-overlay:last-child:after {
+    background-image: url("../images/wheels.jpg");
+    background-position: top; }
+  .home-description-2 .row.c-overlay:last-child .p3 {
+    color: #FFFFFF;
+    text-align: left;
+    padding-right: 45px; }
+    .home-description-2 .row.c-overlay:last-child .p3 h2 {
+      font-family: 'exo 2';
+      font-size: 28px;
+      font-weight: 600;
+      color: #FFFFFF; }
+    .home-description-2 .row.c-overlay:last-child .p3 p {
+      color: #FFFFFF; }
+  .home-description-2 .row.c-overlay:last-child .p4 {
+    background-color: #FFFFFF;
+    text-align: left;
+    padding: 30px 22px;
+    margin-left: 60px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    margin-bottom: 0px; }
+  .home-description-2 .row.c-overlay .container {
+    min-height: 390px;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .home-description-2 .row.c-overlay .container .p1 {
+      background-color: #FFFFFF;
+      text-align: left;
+      padding: 30px 22px;
+      margin-right: 60px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      -ms-border-radius: 3px 3px 3px 3px;
+      border-radius: 3px 3px 3px 3px;
+      margin-bottom: 0px; }
+    .home-description-2 .row.c-overlay .container .p2 {
+      color: #FFFFFF;
+      text-align: left;
+      padding-left: 45px; }
+      .home-description-2 .row.c-overlay .container .p2 h2 {
+        font-family: 'exo 2';
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFFFFF; }
+      .home-description-2 .row.c-overlay .container .p2 p {
+        color: #FFFFFF; }
+
+/** Home Description bottom */
+.home-bottom-description {
+  position: relative;
+  margin-top: 60px;
+  background-color: #002F64; }
+  .home-bottom-description:before {
+    position: absolute;
+    width: 50%;
+    background-color: #F2F2F2;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0; }
+  .home-bottom-description:after {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    z-index: 0; }
+  .home-bottom-description .desc {
+    z-index: 1;
+    position: relative;
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 50px; }
+    .home-bottom-description .desc h3 {
+      font-family: 'exo 2';
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px; }
+    .home-bottom-description .desc.left {
+      padding-right: 40px; }
+      .home-bottom-description .desc.left p {
+        color: #4F4F4F; }
+    .home-bottom-description .desc.mid {
+      background-color: #333333;
+      padding-left: 50px;
+      padding-right: 40px;
+      color: #FFFFFF;
+      min-height: 365px; }
+      .home-bottom-description .desc.mid h3 {
+        font-family: 'exo 2';
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFFFFF; }
+      .home-bottom-description .desc.mid p {
+        color: #FFFFFF; }
+    .home-bottom-description .desc.right {
+      padding-left: 30px;
+      color: #FFFFFF; }
+      .home-bottom-description .desc.right h3 {
+        font-family: 'exo 2';
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFFFFF; }
+      .home-bottom-description .desc.right p {
+        color: #FFFFFF; }
+
+/*# sourceMappingURL=homepage.css.map */

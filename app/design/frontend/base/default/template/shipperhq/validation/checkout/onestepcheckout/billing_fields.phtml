@@ -1,0 +1,560 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Zowta, LLC (http://www.webshopapps.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php echo $this->getChildHtml('billing_address_orig') ?>
+
+<script type="text/javascript">
+//<![CDATA[
+var addressValEnabled = '<?php echo Mage::helper('shipperhq_shipper')->isModuleEnabled('Shipperhq_Validation', 'carriers/shipper/AV_ENABLED'); ?>';
+if(addressValEnabled) {
+    deferredShipperHQCode(function () {
+
+        var not_validated = '<?php echo Shipperhq_Validation_Model_Validator_Result::NOT_VALIDATED; ?>';
+
+        var validStr =
+            '<li class="fields">'+
+                '<div class="field">'+
+                '<div class="input-box">'+
+                '<input type="hidden" name="billing[address_valid]" id="billing:address_valid" value="0">'+
+                '</div>'+
+                '</div>'+
+                '</li>';
+        var destinationType =
+            '<li class="fields">'+
+                '<div class="field">'+
+                '<div class="input-box">'+
+                '<input type="hidden" name="billing[destination_type]" id="billing:destination_type" value="">'+
+                '</div>'+
+                '</div>'+
+                '</li>';
+        var shipValidStr =
+            '<li class="fields">'+
+                '<div class="field">'+
+                '<div class="input-box">'+
+                '<input type="hidden" name="shipping[address_valid]" id="shipping:address_valid" value="0">'+
+                '</div>'+
+                '</div>'+
+                '</li>';
+        var shipDestinationType =
+            '<li class="fields">'+
+                '<div class="field">'+
+                '<div class="input-box">'+
+                '<input type="hidden" name="shipping[destination_type]" id="shipping:destination_type" value="">'+
+                '</div>'+
+                '</div>'+
+                '</li>';
+        var dialog = '<div id="dialog-candidates" title="Valid Addresses" style="display: none;"></div>';
+        var ajaxLoader = '<div class="loading-ajax-login" id="address-validation-loading" style="display:none;" name="address_val_loading"></div>';
+
+        $("billing:telephone").insert({after:dialog});
+        // SHQ18-122 billing:postcode is probably the least likely field to be absent, so let's hook off of it
+        var parentUl = $("billing:postcode").up('ul');
+        parentUl.insert({bottom:validStr});
+        parentUl.insert({bottom:destinationType});
+        $("billing:use_for_shipping_yes").insert({before:ajaxLoader});
+
+        $("shipping:telephone").insert({after:shipValidStr});
+        $("shipping:telephone").insert({after:shipDestinationType});
+
+        Event.observe($('billing:street1'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+        Event.observe($('billing:street2'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+        Event.observe($('billing:city'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+        Event.observe($('billing:region_id'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+        Event.observe($('billing:postcode'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+        Event.observe($('billing:country_id'), 'change', function(){
+            $("billing:address_valid").value = not_validated;
+        });
+
+
+
+        Event.observe($('shipping:street1'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+        Event.observe($('shipping:street2'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+        Event.observe($('shipping:city'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+        Event.observe($('shipping:region_id'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+        Event.observe($('shipping:postcode'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+        Event.observe($('shipping:country_id'), 'change', function(){
+            $("shipping:address_valid").value = not_validated;
+        });
+
+    });
+
+    function get_save_billing_function(url, set_methods_url, update_payments, triggered)
+    {
+        var original_triggered = triggered;
+        if(typeof update_payments == 'undefined')    {
+            var update_payments = false;
+        }
+
+        if(typeof triggered == 'undefined')    {
+            var triggered = true;
+        }
+
+        if(!triggered){
+            return function(){return;};
+        }
+
+        return function()    {
+            var form = $('onestepcheckout-form');
+            var items = exclude_unchecked_checkboxes($$('input[name^=billing]').concat($$('select[name^=billing]')));
+            var names = items.pluck('name');
+            var values = items.pluck('value');
+            var parameters = {
+                shipping_method: $RF(form, 'shipping_method')
+            };
+
+            var street_count = 0;
+            for(var x=0; x < names.length; x++)    {
+                if(names[x] != 'payment[method]')    {
+
+                    var current_name = names[x];
+
+                    if(names[x] == 'billing[street][]')    {
+                        current_name = 'billing[street][' + street_count + ']';
+                        street_count = street_count + 1;
+                    }
+
+                    parameters[current_name] = values[x];
+                }
+            }
+
+            var use_for_shipping = $('billing:use_for_shipping_yes');
+
+            if(use_for_shipping && use_for_shipping.getValue() != '1')    {
+                var items = $$('input[name^=shipping]').concat($$('select[name^=shipping]'));
+                var shipping_names = items.pluck('name');
+                var shipping_values = items.pluck('value');
+                var shipping_parameters = {};
+                var street_count = 0;
+
+                for(var x=0; x < shipping_names.length; x++)    {
+                    if(shipping_names[x] != 'shipping_method')    {
+                        var current_name = shipping_names[x];
+                        if(shipping_names[x] == 'shipping[street][]')    {
+                            current_name = 'shipping[street][' + street_count + ']';
+                            street_count = street_count + 1;
+                        }
+
+                        parameters[current_name] = shipping_values[x];
+                    }
+                }
+            }
+            var validateUrl = "<?php echo $this->getUrl('shipperhq_validation/checkout/oscValidateAddress', array('_secure'=>true)) ?>";
+            $('address-validation-loading').show();
+
+            new Ajax.Request(validateUrl, {
+                method: 'post',
+                onSuccess: function(transport)    {
+                    $('address-validation-loading').hide();
+                    if(transport.status == 200)    {
+                        var invalid = '<?php echo Shipperhq_Validation_Model_Validator_Result::INVALID; ?>';
+                        var valid = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+                        var needs_review = '<?php echo Shipperhq_Validation_Model_Validator_Result::AMBIGUOUS; ?>';
+                        var valid_corrected = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID_CORRECTED; ?>';
+                        var results = transport.responseText.evalJSON();
+                        var candidateCount = results.candidate_count;
+
+                        var outcome = results.outcome;
+
+                        var prefix = 'shipping';
+                        if(use_for_shipping && use_for_shipping.getValue() == '1') {
+                            prefix = 'billing';
+                        }
+                        switch(outcome) {
+                            case valid:  {
+                                $(prefix + ":address_valid").value = results.outcome;
+                                orig_get_save_billing_function(url,set_methods_url,update_payments,original_triggered)
+                                break;
+                            }
+                            case invalid: {
+                                var content = results.html;
+                                showConfirmContinue(content, prefix, url, set_methods_url, update_payments, original_triggered);
+                                break;
+                            }
+                            case needs_review: {
+                                $(prefix + ":address_valid").value = results.outcome;
+                                var content = results.html;
+                                showCandidates(content, prefix, url,set_methods_url,update_payments,original_triggered);
+                                break;
+                            }
+                            case valid_corrected: {
+                                $(prefix + ":address_valid").value = results.outcome;
+                                var content = results.html;
+                                showCandidates(content, prefix, url,set_methods_url,update_payments,original_triggered);
+                                break;
+                            }
+                            default : {
+                                //   $("billing:address_valid").value = results.outcome;
+                                orig_get_save_billing_function(url,set_methods_url,update_payments,original_triggered);
+                                break;
+                            }
+                        }
+
+                    }
+                },
+                parameters: parameters
+            });
+
+        }
+    }
+
+    function showCandidates(content, prefix, url,set_methods_url,update_payments,triggered) {
+        var titleText = "<?php echo $this->__('Select an address'); ?>";
+        $j("#dialog-candidates").dialog({
+            autoOpen: true,
+            height: "auto",
+            width: "auto",
+            draggable:true,
+            title: titleText,
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "<?php echo $this->__('Use The Address I\'ve Entered'); ?>" : function() {
+                    $j( this ).dialog( "close" );
+                    $(prefix + ":address_valid").value = '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    orig_get_save_billing_function(url,set_methods_url,update_payments,triggered);
+                },
+                "<?php echo $this->__('Use Validated Address'); ?>" : function() {
+                    if(candidateSwitcherBilling()) {
+                        $j( this ).dialog( "close" );
+                        orig_get_save_billing_function(url,set_methods_url,update_payments,triggered);
+                    }
+                }
+            }
+        });
+        $('dialog-candidates').update(content);
+    }
+    function showConfirmContinue(content, prefix, url, set_methods_url, update_payments, triggered)
+    {
+
+        var titleText = "<?php echo $this->__('No valid addresses found'); ?>";
+        $j("#dialog-candidates").dialog({
+            autoOpen: true,
+            height: "auto",
+            width: "auto",
+            draggable:true,
+            title: titleText,
+            modal: true,
+            closeOnEscape: false,
+            open: function(event, ui) { $j(".ui-dialog-titlebar-close").hide(); },
+            buttons: {
+                "<?php echo $this->__('Edit The Address'); ?>" : function() {
+                    $j( this ).dialog( "close" );
+                },
+                "<?php echo $this->__('Use The Address I\'ve Entered'); ?>" : function() {
+                    $(prefix +":address_valid").value = '<?php echo Shipperhq_Validation_Model_Validator_Result::CUSTOMER_OVERRIDE; ?>';
+                    $j( this ).dialog( "close" );
+                    orig_get_save_billing_function(url,set_methods_url,update_payments,triggered);
+                }
+            }
+        });
+        $('dialog-candidates').update(content);
+
+    }
+
+    function updateAddressValidResult(transport)
+    {
+        if(transport.responseText != '') {
+            var results = transport.responseText.evalJSON();
+            var outcome = results.valid_result;
+            $('billing:address_valid').value = outcome;
+        }
+
+    }
+
+    function candidateSwitcherBilling() {
+        var selected = $F("candidates");
+        var use_for_shipping = $('billing:use_for_shipping_yes');
+        var prefix = 'shipping';
+        if(use_for_shipping && use_for_shipping.getValue() == '1') {
+            prefix = 'billing';
+        }
+        if(selected == -1) {
+            $(prefix +":address_valid").value = 0;
+            return false;
+        }
+
+        var splitAddress = selected.split('|');
+
+        //define here to be populated below
+        var addressLine = '';
+        var addressLine2 = '';
+        var city = '';
+        var state = '';
+        var zip = '';
+        var countryId = '';
+        var addressType = '';
+
+        for(var i=0; i<splitAddress.length; i++) {
+            switch(i) {
+                case 0: addressLine = splitAddress[i]; break;
+                case 1: addressLine2 = splitAddress[i]; break;
+                case 2: city = splitAddress[i]; break;
+                case 3: state = splitAddress[i]; break;
+                case 4: zip = splitAddress[i]; break;
+                case 5: countryId = splitAddress[i]; break;
+                case 6: addressType = splitAddress[i]; break;
+            }
+        }
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+        <?php if($this->isCustomerLoggedIn()): ?>
+        this.checkout.getStep('billing').newAddress(true);
+        <?php endif; ?>
+        <?php endif; ?>
+
+        if( $(prefix +":street0")) {
+            $(prefix +":street0").value = addressLine;
+            if($(prefix +":street1")) {
+                $(prefix +":street1").value = addressLine2;
+            }
+        }
+        else {
+            $(prefix +":street1").value = addressLine;
+            $(prefix +":street2").value = addressLine2;
+        }
+        $(prefix +":city").value = city;
+        $(prefix +":region_id").value = state;
+        $(prefix +":postcode").value = zip;
+        $(prefix +":country_id").value = countryId;
+        $(prefix +":destination_type").value = addressType;
+        $(prefix +":address_valid").value = '<?php echo Shipperhq_Validation_Model_Validator_Result::VALID; ?>';
+
+
+        <?php if(Mage::helper('shipperhq_shipper')->isModuleEnabled('EcomDev_CheckItOut', 'ecomdev_checkitout/settings/active')): ?>
+        this.checkout.getStep(prefix).handleChange({});
+        <?php endif; ?>
+
+
+        return true;
+    }
+
+    /**
+     * Method to change the selected value of a select dropdown
+     * @param ddlID String - the name of the element
+     * @param value String - value to set it to
+     * @param change Boolean - should we fire onchange
+     */
+    function changeSelectByValue(ddlID, value, change) {
+        var ddl = document.getElementById(ddlID);
+
+        for (var i = 0; i < ddl.options.length; i++) {
+            if (ddl.options[i].value == value) {
+                if (ddl.selectedIndex != i) {
+                    ddl.selectedIndex = i;
+                    if (change) {
+                        ddl.onchange();
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    function orig_get_save_billing_function(url, set_methods_url, update_payments, triggered)
+    {
+        if(typeof update_payments == 'undefined')    {
+            var update_payments = false;
+        }
+
+        if(typeof triggered == 'undefined')    {
+            var triggered = true;
+        }
+
+        if(!triggered){
+            return function(){return;};
+        }
+
+        var form = $('onestepcheckout-form');
+        var items = exclude_unchecked_checkboxes($$('input[name^=billing]').concat($$('select[name^=billing]')));
+        var names = items.pluck('name');
+        var values = items.pluck('value');
+        var parameters = {
+            shipping_method: $RF(form, 'shipping_method')
+        };
+
+        var street_count = 0;
+        for(var x=0; x < names.length; x++)    {
+            if(names[x] != 'payment[method]')    {
+
+                var current_name = names[x];
+
+                if(names[x] == 'billing[street][]')    {
+                    current_name = 'billing[street][' + street_count + ']';
+                    street_count = street_count + 1;
+                }
+
+                parameters[current_name] = values[x];
+            }
+        }
+
+        var use_for_shipping = $('billing:use_for_shipping_yes');
+
+
+
+
+        if(use_for_shipping && use_for_shipping.getValue() != '1')    {
+            var items = $$('input[name^=shipping]').concat($$('select[name^=shipping]'));
+            var shipping_names = items.pluck('name');
+            var shipping_values = items.pluck('value');
+            var shipping_parameters = {};
+            var street_count = 0;
+
+            for(var x=0; x < shipping_names.length; x++)    {
+                if(shipping_names[x] != 'shipping_method')    {
+                    var current_name = shipping_names[x];
+                    if(shipping_names[x] == 'shipping[street][]')    {
+                        current_name = 'shipping[street][' + street_count + ']';
+                        street_count = street_count + 1;
+                    }
+
+                    parameters[current_name] = shipping_values[x];
+                }
+            }
+        }
+
+        var shipment_methods = $$('div.onestepcheckout-shipping-method-block')[0];
+        var shipment_methods_found = false;
+
+        if(typeof shipment_methods != 'undefined') {
+            shipment_methods_found = true;
+        }
+
+        if(shipment_methods_found)  {
+            shipment_methods.update('<div class="loading-ajax">&nbsp;</div>');
+        }
+
+        var payment_method = $RF(form, 'payment[method]');
+        parameters['payment_method'] = payment_method;
+        parameters['payment[method]'] = payment_method;
+
+        if(update_payments){
+            var payment_methods = $$('div.payment-methods')[0];
+            payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
+        }
+
+        var totals = get_totals_element();
+        totals.update('<div class="loading-ajax">&nbsp;</div>');
+
+
+        new Ajax.Request(url, {
+            method: 'post',
+            onSuccess: function(transport)    {
+                if(transport.status == 200)    {
+
+                    var data = transport.responseText.evalJSON();
+
+                    // Update shipment methods
+                    if(shipment_methods_found)  {
+                        shipment_methods.update(data.shipping_method);
+                    }
+
+                    if(update_payments){
+                        payment_methods.replace(data.payment_method);
+                    }
+
+                    totals.update(data.summary);
+
+
+                }
+            },
+            onComplete: function(transport){
+                if(transport.status == 200)    {
+                    if(shipment_methods_found)  {
+                        $$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(set_methods_url, update_payments));
+                        $$('dl.shipment-methods input').invoke('observe', 'click', function() {
+                            $$('div.onestepcheckout-shipment-method-error').each(function(item) {
+                                new Effect.Fade(item);
+                            });
+                        });
+                        //explicitly click radios to trigger totals calculation with new rates
+                        var shipMethodRadios = document.getElementsByClassName('shipping-method-radio');
+                        for (var i = 0; i < shipMethodRadios.length; i++) {
+                            var radio = shipMethodRadios[i];
+                            if(radio.checked) {
+                                radio.click();
+                            }
+                        }
+                    }
+
+                    if(update_payments){
+                        $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(set_methods_url));
+
+                        $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                            $$('div.onestepcheckout-payment-method-error').each(function(item) {
+                                new Effect.Fade(item);
+                            });
+                        });
+
+                        if($RF(form, 'payment[method]') != null)    {
+                            try    {
+                                var payment_method = $RF(form, 'payment[method]');
+                                $('container_payment_method_' + payment_method).show();
+                                $('payment_form_' + payment_method).show();
+                            } catch(err)    {
+
+                            }
+                        }
+                    }
+                }
+            },
+            parameters: parameters
+        });
+        return;
+    }
+}
+//]]>
+</script>

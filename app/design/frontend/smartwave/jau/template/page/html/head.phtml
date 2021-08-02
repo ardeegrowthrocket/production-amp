@@ -1,0 +1,178 @@
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<!-- Google Tag Manager -->
+<script nodefer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K369HCT');</script>
+<!-- End Google Tag Manager -->
+
+<?php $controllerName = $this->getRequest()->getControllerName(); ?>
+<?php $storeCode = $this->getRequest()->getStoreCodeFromPath(); ?>
+<?php $moduleName = $this->getRequest()->getModuleName(); ?>
+<?php if($meta_title=$this->getMetaTitle()): ?>
+    <title><?php echo htmlspecialchars($meta_title) ?></title>
+<?php else: ?>
+        <?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()): ?>
+            <title>Discount Jeep Parts, OEM Jeep Parts & Jeep Catalog | JeepsAreUs</title>
+        <?php else: ?>
+            <?php if($moduleName != 'hautopart' && $controllerName !='category') : ?>
+                <title><?php echo $this->getTitle(); ?></title>
+            <?php endif; ?>
+        <?php endif; ?>
+<?php endif; ?>
+
+<?php
+
+    $routeAction = $this->getRequest()->getActionName();
+    if($controllerName === 'model'):
+        $helper = Mage::helper('hautopart');
+        $query = $this->getRequest()->getParam('ymm_params',-1);
+        if($query != -1):
+            $combination = unserialize($query);
+?>
+            <?php if($routeAction === 'index'): ?>
+                <?php
+                    $modelList = $helper->getAvailableMakeModels($combination['make']);
+                    $selectedIndices = array_rand($modelList,3);
+                    $models = array();
+                    foreach($selectedIndices as $indice){
+                        $models[] = $modelList[$indice];
+                    }
+                    $lastIndexKey = count($models) - 1;
+                    $modelLabels = '';
+                    foreach($models as $ndx =>$model){
+                        if($ndx < $lastIndexKey){
+                            $modelLabels.=ucwords($helper->getOptionValue($model)) . ', ';
+                        }else{
+                            $modelLabels.= 'and ' . ucwords($helper->getOptionValue($model));
+                        }
+                    }
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                ?>
+                <title>Discount <?php echo $makeLabel;  ?> Parts & Genuine Dealer Accessories Online</title>
+                <meta name="description" content="<?php echo sprintf('Buy genuine mopar %s parts & accessories. Browse our %s dealer catalog and find discount %s for models such as the %s.',$makeLabel,$makeLabel,$makeLabel,$modelLabels);?>">
+            <?php endif; ?>
+            <?php if($routeAction === 'model'): ?>
+                <?php
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                    $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                ?>
+                <?php if($storeCode != Mage::getStoreConfig('hauto/jau/code')): ?>
+                    <title>Genuine <?php echo $makeLabel ;  ?> <?php echo $modelLabel;  ?> Parts & Accessories</title>
+                    <meta name="description" content="<?php echo sprintf('Shop online for discount %s %s parts & accessories. Find OEM dealer parts for your %s %s at AllMoparParts.com.',$makeLabel,$modelLabel,$makeLabel,$modelLabel); ?>"/>
+                <?php else: ?>
+                    <title><?php echo sprintf('%s %s - OEM Jeep Parts | JeepsAreUs', $makeLabel, $modelLabel);?></title>
+                    <?php $metacontent = sprintf('Get quality %s %s parts from JeepsAreUs. Discount %s parts for models: 2013, 2014, 2015 & more.',$makeLabel,$modelLabel, $modelLabel);?>
+                    <meta name="description" content="<?php echo  htmlspecialchars(html_entity_decode(trim($metacontent),ENT_QUOTES, 'UTF-8')); ?>"/>
+
+                <?php endif; ?>
+            <?php endif; ?>
+            <?php if($routeAction === 'ymm'): ?>
+                <?php
+                $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                $yearLabel = ucwords($helper->getOptionValue($combination['year']));
+                $range = $helper->getAvailableYearRange($combination['make'], $combination['model']);
+
+                ?>
+                <title><?php echo sprintf('%s %s %s Parts & Accessories',$yearLabel,$makeLabel,$modelLabel); ?></title>
+                <meta name="description" content="<?php echo sprintf('Buy %s %s %s parts & accessories online. Get the best genuine OEM dealer parts for your %s %s %s.', $yearLabel,$makeLabel,$modelLabel,$yearLabel,$makeLabel,$modelLabel) ?>"/>
+            <?php endif; ?>
+            <?php if($routeAction === 'cat'): ?>
+                <?php
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                    $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                    $yearLabel = ucwords($helper->getOptionValue($combination['year']));
+                    $range = $helper->getAvailableYearRange($combination['make'], $combination['model']);
+                    $catLabel = ucwords($helper->getOptionValue($combination['category']));
+                ?>
+                <title><?php echo sprintf('%s %s %s %s',$yearLabel,$makeLabel,$modelLabel,$catLabel)?></title>
+                <meta name="description" content="<?php echo sprintf('Find genuine OEM %s %s %s. We offer dealer discounts on %s accessories for your %s %s.',$makeLabel,$modelLabel,$catLabel,$makeLabel,$yearLabel,$modelLabel); ?>"/>
+            <?php endif; ?>
+            <?php if($routeAction === 'sku' || $routeAction === 'ymms'): ?>
+            <?php
+                $_product = Mage::registry('current_product');
+                $name = $_product->getName();
+                $sku = $_product->getSku();
+                $savings = $_product->getMsrp() - $_product->getFinalPrice();
+                $_coreHelper = $this->helper('core');
+            ?>
+            <title><?php echo sprintf('%s - %s | JeepsAreUs', $name, $sku); ?></title>
+            <?php $metacontent = sprintf('Buy %s - PN: %s. Get the best deal & save up to $%.2f. Compatibility, price & details available.', $name, $sku,$savings);?>
+            <meta name="description" content="<?php echo  htmlspecialchars(html_entity_decode(trim($metacontent), ENT_QUOTES, 'UTF-8')); ?>"/>
+            <?php endif; ?>
+        <?php endif; ?>
+
+<?php elseif($controllerName == 'category'): ?>
+        <?php $helper = Mage::helper('hfitment/url'); ?>
+        <?php $ymm = unserialize($this->getRequest()->getParam('ymm_params', null)); ?>
+        <?php $category = $ymm['category']; ?>
+        <?php
+            $title = $helper->getOptionText('category',$category, 0, true);
+            $block = $this->getLayout()->createBlock('hauto/category');
+            /** @var Varien_Data_Collection $parts */
+            $parts = $block->getAvailableParts($ymm['category']);
+            $labelColumns = $parts->getColumnValues('label');
+            $randomIndices = array_rand($labelColumns, 3);
+            $randomPick = array();
+            foreach($randomIndices as $index){
+                array_push($randomPick,$labelColumns[$index]);
+            }
+            $subcats = implode(', ',$randomPick);
+            $metacontent = sprintf('Get quality OEM %s for your Jeep. Browse discount Jeep parts: %s & more. Shop now!', $title, $subcats);
+        ?>
+        <title><?php echo sprintf('%s - OEM Jeep Parts | JeepsAreUs', $title); ?></title>
+        <meta name="description" content="<?php echo  htmlspecialchars(html_entity_decode(trim($metacontent), ENT_QUOTES, 'UTF-8')); ?>"
+<?php endif; ?>
+
+
+<?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()): ?>
+    <meta name="description" content="<?php echo $this->getDescription(); ?>"/>
+<?php endif; ?>
+<?php if($routeAction === 'ymms') :?>
+    <meta name="robots" content="NOINDEX,FOLLOW" />
+<?php else: ?>
+    <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<?php endif; ?>
+
+<?php
+    $theme = Mage::helper('porto');
+    $charSubset = '&subset=latin';
+    $d = $theme->getCfgSectionDesign();
+    $s = $theme->getCfgSectionSettings();
+	if(!isset($s['general']['disable_responsive']) || (isset($s['general']['disable_responsive']) && !$s['general']['disable_responsive'])){
+?>	
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<?php
+	}
+?>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<?php //Include Google fonts character subsets (such as extended latin, cyrillic)
+    if (isset($d['font']['primary_char_latin_ext']) && $d['font']['primary_char_latin_ext']==1 )
+        $charSubset .= ',latin-ext';
+    if (isset($d['font']['custom_char_subset']) && $d['font']['custom_char_subset'])
+        $charSubset .= ','.$d['font']['custom_char_subset'];
+    $font_sizes = "%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic";
+?>
+<?php if ($d['font']['custom'] && $d['font']['primary_font_family_group'] == 'google'): ?>
+<link rel="stylesheet" href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $d['font']['primary_font_family']).$font_sizes; echo $charSubset; ?>' type='text/css' />
+<?php else: ?>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&amp;v1&amp;subset=latin%2Clatin-ext" type="text/css" media="screen"/>
+<?php endif;?>
+<link href='//fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'/>
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof dailydealTimeCountersCategory == 'undefined') {
+	var dailydealTimeCountersCategory = new Array();
+	var i = 0;
+}
+//]]>
+</script>
+<!--<?php echo "Porto Magento Theme: v".Mage::getConfig()->getModuleConfig("Smartwave_Porto")->version; ?>-->

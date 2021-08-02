@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <containers>
+        <hfitment_query_block>
+            <block>hfitment/query</block>
+            <container>Mirasvit_Fpc_Model_Container_Base</container>
+            <depends></depends>
+            <in_app>0</in_app>
+        </hfitment_query_block>
+    </containers>
+</config>

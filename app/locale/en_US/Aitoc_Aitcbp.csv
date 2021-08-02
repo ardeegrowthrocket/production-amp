@@ -1,0 +1,88 @@
+"General Information","General Information"
+"Group Name","Group Name"
+"Markup Type","Markup Type"
+"Markup Amount","Markup Amount"
+Status,Status
+Active,Active
+Inactive,Inactive
+"Customer Groups","Customer Groups"
+ID,ID
+Name,Name
+SKU,SKU
+Price,Price
+"Group Information","Group Information"
+General,General
+"Group Products","Group Products"
+"Save Group","Save Group"
+"Delete Group","Delete Group"
+"Save And Continue Edit","Save And Continue Edit"
+Alert,Alert
+"Add Group","Add Group"
+"Edit Group '%s'","Edit Group '%s'"
+"Group Title","Group Title"
+Type,Type
+Fixed,Fixed
+Percent,Percent
+Amount,Amount
+Action,Action
+Edit,Edit
+Actions,Actions
+Select,Select
+"Increase Markup","Increase Markup"
+"Decrease Markup","Decrease Markup"
+"Increase Percent Markup","Increase Percent Markup"
+"Decrease Percent Markup","Decrease Percent Markup"
+"Increase Fixed Markup","Increase Fixed Markup"
+"Decrease Fixed Markup","Decrease Fixed Markup"
+"Increase/decrease by ","Increase/decrease by "
+"Stop further rules processing","Stop further rules processing"
+Yes,Yes
+No,No
+"day (s)","day (s)"
+"month (s)","month (s)"
+"year (s)","year (s)"
+is,is
+"is not","is not"
+"equals or greater than","equals or greater than"
+"equals or less than","equals or less than"
+"greater than","greater than"
+"less than","less than"
+"is one of","is one of"
+"is not one of","is not one of"
+"Rule Name","Rule Name"
+Group,Group
+Priority,Priority
+"Rule Information","Rule Information"
+Conditions,Conditions
+"Save Rule","Save Rule"
+"Delete Rule","Delete Rule"
+"Add Rule","Add Rule"
+"Edit Rule '%s'","Edit Rule '%s'"
+"Rule Groups","Rule Groups"
+"Manage Groups","Manage Groups"
+"Manage Automatic Price Rules","Manage Automatic Price Rules"
+"Group manager","Group manager"
+Catalog,Catalog
+"Cost Based Price","Cost Based Price"
+"New Group","New Group"
+"Group does not exist","Group does not exist"
+"Group was successfully saved","Group was successfully saved"
+"Item was successfully deleted","Item was successfully deleted"
+"Rules manager","Rules manager"
+"New Rule","New Rule"
+"Rule does not exist","Rule does not exist"
+"Rule was successfully saved","Rule was successfully saved"
+"Automatic Pricing","Automatic Pricing"
+Groups,Groups
+Rules,Rules
+"Delivery Date","Delivery Date"
+"Automatic Pricing Settings","Automatic Pricing Settings"
+"Automatic Pricing Enabled by Default","Automatic Pricing Enabled by Default"
+Disabled,Disabled
+inactive,inactive
+"Automatic Pricing Group","Automatic Pricing Group"
+"If revenue for the last","If revenue for the last"
+"Cost based price","Cost based price"
+"Tier price","Tier price"
+"Use improved schema of price re-indexing","Use improved schema of price re-indexing"
+"Selecting Yes disables some minor checks at the process of price reindexing, speeding up the entire process of either product or price group resaving. Please use this setting if you're experiencing troubles with resaving at a product or price group level.","Selecting Yes disables some minor checks at the process of price reindexing, speeding up the entire process of either product or price group resaving. Please use this setting if you're experiencing troubles with resaving at a product or price group level."

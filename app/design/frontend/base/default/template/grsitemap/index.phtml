@@ -1,0 +1,51 @@
+<?php
+    $collection = $this->getPartCollection();
+    $routes = $this->getRoute();
+    $routeParam = Mage::app()->getRequest()->getParam('route');
+    $ctr = 0;
+?>
+<div class="sitemap-container category-products">
+    <div class="col-md-2">
+        <div class="row">
+            <div class="sitemap-route sidebar">
+                <?php if(!empty($routes)): ?>
+                    <ul>
+                        <?php foreach ($routes as $key => $label):
+                            $ctr++;
+                            ?>
+                            <li class="<?php echo ($key == $routeParam  || (empty($routeParam) && $ctr == 1)) ? 'selected' : '' ?>"><a href="<?php echo $this->getRouteUrl($key); ?>"><?php echo $label ?></a> </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="sitemap-wrapper main-content">
+                <?php if(!empty($collection)): ?>
+                    <ul>
+                        <?php
+                        foreach ($collection as $item): ?>
+                            <?php
+                            $combination = unserialize($item['combination']);
+                            $route = $item['route'];
+                            $path = $item['path']
+                            ?>
+                            <li class="col-md-4 col-sm-12"><a href="<?php echo $this->getUrl($route, $path); ?>"><?php echo $this->getName($item) ?></a> </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-toolbar">
+        <div class="toolbar"><?php echo $this->getToolbarHtml() ?></div>
+    </div>
+</div>
+
+
+

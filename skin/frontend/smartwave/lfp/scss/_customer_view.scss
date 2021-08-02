@@ -1,0 +1,268 @@
+/**
+  Customer View
+ */
+
+.customer-page-login {
+
+  .main-container {
+    padding-top: 25px;
+    padding-bottom: 50px;
+
+    .input-box {
+      .input-text {
+        @include border-radius();
+        border: 1px solid $text-box-color;
+        width: 100%;
+        height: 36px;
+        padding-left: 10px;
+      }
+    }
+
+    .field ,.form-list{
+      label {
+        font-size: 12px;
+        font-weight: normal;
+        color: $primary-text-color;
+
+        em {
+          float: right;
+        }
+      }
+    }
+    .registered-users {
+
+      .button {
+        float: left;
+        margin-right: 35px;
+      }
+
+      a.f-left {
+        font-weight: bold;
+        padding-top: 8px;
+        display: inline-block;
+      }
+    }
+  }
+
+  p.back-link {
+    margin-top: 30px;
+
+    small {
+      display: none;
+    }
+  }
+
+}
+.customer-page-view {
+  .main-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .box-account {
+      margin-bottom: 35px;
+      .box-head {
+        margin-bottom: 25px;
+      }
+    }
+
+    .col-2.default-sa, .box.newsletter, .box-title.address-book {
+      margin-top: 30px;
+    }
+    .default-ba {
+      h4 {
+        margin-top: 0px;
+      }
+    }
+
+    .addresses-additional {
+      ol {
+        li {
+
+          &.empty {
+            list-style-type: none;
+          }
+        }
+      }
+    }
+
+    .my-account {
+      .amount {
+        margin-top: 20px;
+      }
+      .order-info {
+        display: none;
+      }
+    }
+
+    .input-box {
+      .input-text {
+        @include border-radius();
+        border: 1px solid $text-box-color;
+        width: 100%;
+        height: 36px;
+        padding-left: 10px;
+      }
+    }
+
+    .field {
+      label {
+        font-size: 12px;
+        font-weight: normal;
+        color: $primary-text-color;
+
+        em {
+          float: right;
+        }
+      }
+    }
+    .sidebar {
+
+      margin-top: 45px;
+
+      .block {
+        margin-bottom: 10px;
+
+        .block-title {
+          @include sidebar-toolbar-label();
+          @include border-radius(3px , 3px, 0px, 0px);
+          background-color: $primary-bg-color;
+          color: $white-text-color;
+          padding: 15px 0px 15px 20px;
+          font-size: 14px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+
+        .block-content {
+          @include border-radius(0px, 0px, 3px, 3px);
+          background-color: $grey-bg-color;
+          padding: 20px;
+
+          ul, ol {
+            padding: 0px;
+            list-style-type: none;
+
+            li {
+              margin-bottom: 10px;
+              color: $primary-text-color;
+              text-transform: capitalize;
+              a{
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        &.block-reorder {
+            .actions {
+              a {
+                text-align: center;
+                margin-top: 15px;
+                display: block;
+              }
+            }
+        }
+      }
+
+      #cart-sidebar-reorder {
+        .radio, .checkbox, p.product-name{
+          display: inline;
+        }
+      }
+
+      .actions button {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        @include border-radius();
+      }
+
+    }
+
+    .data-table {
+      thead {
+        tr {
+          th {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #122A4E;
+            padding: 0px 10px 10px 10px;
+            border-bottom: 2px solid $primary-bg-color;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          td{
+            border-bottom: 2px solid $primary-bg-color;
+          }
+
+          &.last {
+            td{
+              border-bottom: 5px solid $primary-bg-color;
+            }
+          }
+        }
+      }
+    }
+
+    .fieldset{
+
+      .field, .form-list li{
+        margin-bottom: 15px;
+
+        .radio, .checkbox{
+          display: inline;
+          margin-right: 10px;
+        }
+
+        label {
+          font-size: 12px;
+          font-weight: normal;
+          color: $primary-text-color;
+
+          em {
+            float: right;
+          }
+        }
+      }
+    }
+    p.back-link {
+      margin-top: 30px;
+
+      small {
+        display: none;
+      }
+    }
+
+    .pager {
+      li {
+        font-size: 20px;
+        font-weight: bold;
+        width: 30px;
+        text-align: center;
+        height: 30px;
+        margin: 0px 15px;
+
+        a {
+          color: $secondary-text-color;
+
+          &.i-previous, &.i-next {
+            color: $deep-pastel-blue;
+            font-weight: normal;
+          }
+        }
+
+        &.current {
+          color: #ffffff;
+          background: #1579BA;
+          height: 35px;
+          width: 35px;
+          padding: 3px 0px 0px 0px;
+        }
+      }
+    }
+
+  }
+}

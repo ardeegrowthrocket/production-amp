@@ -1,0 +1,46 @@
+.cms-blog {
+  .content {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .date{
+    color: #215f9f;
+    font-size: 12px;
+  }
+}
+
+.cms-blog-listing {
+  .main-wrapper {
+
+    margin-top: 20px;
+
+    .page-title {
+      h1 {
+        color: #282828;
+      }
+    }
+    .listing {
+      .item {
+        margin-top: 40px;
+
+        h3.title {
+            a {
+              text-decoration: none;
+          }
+        }
+      }
+    }
+    .sidebar {
+      .view-mode, .pager {
+          display: none;
+      }
+    }
+    .footer-toolbar {
+      margin: 20px 0px 50px;
+      .view-mode {
+        display: none;
+      }
+    }
+  }
+}

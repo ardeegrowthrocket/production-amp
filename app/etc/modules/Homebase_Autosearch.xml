@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Homebase_Autosearch>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Homebase_Autosearch>
+  </modules>
+</config>

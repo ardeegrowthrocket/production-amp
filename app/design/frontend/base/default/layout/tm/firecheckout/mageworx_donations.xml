@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <firecheckout_index_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>tm/firecheckout/js/integration/mageworx_donations.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <file>tm/firecheckout/css/integration/mageworx_donations.css</file>
+            </action>
+        </reference>
+        <reference name="info">
+            <block type="mageworx_donations/roundupamount" name="donations.roundupamount" as="roundupamount" template="mageworx/donations/roundupamount.phtml" />
+        </reference>
+    </firecheckout_index_index>
+
+    <firecheckout_index_updatecheckout>
+        <reference name="checkout.review">
+            <block type="mageworx_donations/roundupamount" name="donations.roundupamount" as="roundupamount" template="mageworx/donations/roundupamount.phtml" />
+        </reference>
+    </firecheckout_index_updatecheckout>
+</layout>

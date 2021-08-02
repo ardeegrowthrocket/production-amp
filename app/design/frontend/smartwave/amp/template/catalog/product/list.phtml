@@ -1,0 +1,307 @@
+<?php
+
+if(function_exists('trim_text') === false){
+    function trim_text($input, $length, $ellipses = true, $strip_html = true) {
+        //strip tags, if desired
+        if ($strip_html) {
+            $input = strip_tags($input);
+        }
+
+        //no need to trim, already shorter than trim length
+        if (strlen($input) <= $length) {
+            return $input;
+        }
+
+        //find last space within length
+        $last_space = strrpos(substr($input, 0, $length), ' ');
+        $trimmed_text = substr($input, 0, $last_space);
+
+        //add ellipses (...)
+        if ($ellipses) {
+            $trimmed_text .= '...';
+        }
+
+        return $trimmed_text;
+    }
+}
+
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$_image_helper = $this->helper('catalog/image');
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+
+$aspect_ratio = $this->getData("aspect_ratio");
+if($aspect_ratio == null) {
+    $aspect_ratio = Mage::getStoreConfig("porto_settings/category/aspect_ratio",$code);
+}
+$ratio_width = $this->getData("image_width");
+if(!$ratio_width) {
+    $ratio_width = Mage::getStoreConfig("porto_settings/category/ratio_width",$code);
+}
+$ratio_height = $this->getData("image_height");
+if(!$ratio_height) {
+    $ratio_height = Mage::getStoreConfig("porto_settings/category/ratio_height",$code);
+}
+
+if(!$ratio_width) $ratio_width = 300;
+if(!$ratio_height) $ratio_height = 400;
+
+$_coreHelper = $this->helper('core');
+
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+$isMobile = Mage::helper('mobiledetect')->isMobile();
+$isDesktop = Mage::helper('mobiledetect')->isDesktop();
+$isTablet = Mage::helper('mobiledetect')->isTablet();
+
+/** get YMM */
+$request = Mage::app()->getRequest();
+$getYmm = unserialize($request->getParam('ymm_params'));
+$category = isset($getYmm['category']) ? Mage::Helper('hauto')->getAutoLabelById($getYmm['category'])  : "";
+$currentPage = $request->getParam('p', 1);
+$perPage    = $request->getParam('limit', Mage::getStoreConfig('catalog/frontend/grid_per_page'));
+$productPosition = ($currentPage * $perPage) - $perPage;
+?>
+
+
+<?php if ($_coreHelper->isModuleEnabled("Magegiant_Dailydeal")): ?>
+    <script type="text/javascript">
+        //<![CDATA[
+        var dailydealTimeCountersCategory = new Array();
+        var i = 0;
+        //]]>
+    </script>
+<?php endif; ?>
+
+<?php if(!$_productCollection->count()): ?>
+    <div class="category-products">
+        <div class="col-md-3 lfp-cpr">
+            <div class="layered-proxy-container no-product">
+                <?php echo $this->getChildHtml('layered-proxy'); ?>
+            </div>
+        </div>
+        <div class="col-md-9 lfp-cpl">
+            <p class="note-msg">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('no-product-error-msg')->toHtml(); ?>
+            </p> 
+        </div>
+    </div>
+<?php else: ?>
+    <div class="category-products">
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="sidebar-toolbar">
+                    <?php echo $this->getToolbarHtml() ?>
+                </div>
+
+                <div class="layered-proxy-container">
+                    <?php echo $this->getChildHtml('layered-proxy'); ?>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <?php //START GRID DISPLAY ?>
+                <?php $_collectionSize = $_productCollection->count() ?>
+                <?php $_columnCount = Mage::getStoreConfig("porto_settings/category_grid/columns",$code); ?>
+
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h1><?php echo $this->getListingTitle();?></h1>
+                    </div>
+                </div>
+
+                <div class="listing-top-text">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+                </div>
+                <ul class="products-grid <?php if(Mage::getStoreConfig("porto_settings/category_grid/flex_grid",$code)):?>flex-grid<?php endif; ?> columns3<?php if(!Mage::getStoreConfig("porto_settings/category_grid/show_addtolinks", $code)):?> hide-addtolinks<?php endif; ?><?php if(!Mage::getStoreConfig("porto_settings/category_grid/show_addtocart", $code)):?> hide-addtocart<?php endif; ?><?php if(Mage::getStoreConfig("porto_settings/category_grid/move_actions", $code)):?> move-action<?php endif; ?>">
+                    <?php $i = 0; ?>
+                    <?php foreach ($_productCollection as $_product): ?>
+                        <?php $product = $_product;//Mage::getModel('catalog/product')->load($_product->getId()); ?>
+                        <li class="item">
+                            <?php
+                            if(empty($category)) {
+                                $category = mage::Helper('growthrocket_gtm')->getCustomCategory($product);
+                            }
+                            $varDataLayer = [
+                                "name" => $product->getName(),
+                                "category" => $category,
+                                "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+                                "id" => $product->getSku(),
+                                "price" => Mage::getModel('directory/currency')->format(
+                                    $_product->getFinalPrice(),
+                                    array('display'=>Zend_Currency::NO_SYMBOL),
+                                    false
+                                ),
+                                "list" => mage::Helper('growthrocket_gtm')->getListType(),
+                                "position" => $productPosition += 1,
+                                "url" => $product->getProductUrl(),
+                            ];
+                            ?>
+                            <div class="item-area ga-impressions ga-productClick" data-layer-variable="<?php echo htmlentities( json_encode($varDataLayer)) ?>">
+
+                                <div class="row">
+                                    <div class="col-md-8 col-xs-12">
+                                        <div class="col-md-4 col-xs-12">
+                                            <!-- PRODUCT THUMBAIL AREA -->
+                                            <?php if($isMobile): ?>
+                                                <div class="col-md-12 col-xs-12 product-small-view">
+                                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" style="color:#333;">
+                                                        <h2 class="product-name">
+                                                            <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                                        </h2>
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div class="col-md-12 col-xs-6">
+
+
+                                                <div class="product-image-area">
+                                                    <div class="loader-container">
+                                                        <div class="loader">
+                                                            <i class="ajax-loader medium animate-spin"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image" rel="nofollow">
+                                                        <?php if(Mage::getStoreConfig("porto_settings/category/alternative_image", $code)) : ?>
+                                                            <img id="product-collection-image-<?php echo $_product->getId(); ?>" class="defaultImage lazyload" data-src="<?php if($aspect_ratio):?><?php echo $_image_helper->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);?><?php else: ?><?php echo $_image_helper->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" width="<?php echo $ratio_width; ?>" <?php if(!$aspect_ratio):?>height="<?php echo $ratio_height; ?>"<?php endif; ?> alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                                        <?php else : ?>
+                                                            <img class="lazyload" id="product-collection-image-<?php echo $_product->getId(); ?>" data-src="<?php if($aspect_ratio):?><?php echo $_image_helper->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);?><?php else: ?><?php echo $_image_helper->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" width="<?php echo $ratio_width; ?>" <?php if(!$aspect_ratio):?>height="<?php echo $ratio_height; ?>"<?php endif; ?> alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                                        <?php endif; ?>
+
+
+                                                    </a>
+
+                                                </div>
+
+
+                                            </div>
+                                            <?php if($isMobile) : ?>
+                                                <div class="col-md-12 col-xs-6 product-small-view">
+                                                    <div class="part-no">
+                                                        <label>Part Number: </label>
+
+                                                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" >
+                                                            <?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?>
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="yotpo-review"><?php echo $this->helper('yotpo')->showBottomline($this, $_product); ?></div>
+
+                                                    <!-- PRODUCT PRICE -->
+                                                    <?php if(Mage::getStoreConfig("porto_settings/category/product_price", $code)):?>
+                                                        <?php echo $this->getPriceHtml($_product, true) ?>
+
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                            <!-- PRODUCT THUMBAIL AREA -->
+                                        </div>
+
+                                        <?php if($isTablet || $isDesktop) : ?>
+                                        <div class="col-md-8 col-xs-12">
+                                            <!-- Product Name - Sku -->
+                                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" style="color:#333;">
+                                                <h2 class="product-name">
+                                                    <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                                </h2>
+                                            </a>
+                                            <div class="part-no">
+                                                <label>Part Number: </label>
+
+                                                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" >
+                                                    <?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?>
+                                                </a>
+                                            </div>
+                                            <div class="yotpo-review"><?php echo $this->helper('yotpo')->showBottomline($this, $_product); ?></div>
+                                            <!-- Product Name - Sku -->
+                                        </div>
+                                        <?php endif; ?>
+
+                                        <div class="col-md-12">
+                                            <div class="details-area">
+
+                                                <!-- PRODUCT DESCRIPTION -->
+                                                <?php $_rproduct = Mage::getModel('catalog/product')->load($_product->getId()); ?>
+                                                <?php if ($_rproduct->getDescription()):?>
+                                                    <div class="product-description">
+                                                        <?php $shortDesc =  $_helper->productAttribute($_rproduct, nl2br($_rproduct->getDescription()), 'description') ?>
+                                                        <?php echo trim_text($shortDesc, 150, true, true); ?>
+
+                                                        <a href="<?php echo $_rproduct->getProductUrl() ?>" title="<?php echo $this->stripTags($_rproduct->getName(), null, true) ?>" rel="nofollow" >
+                                                            LEARN MORE
+                                                        </a>
+
+                                                    </div>
+                                                <?php endif; ?>
+
+                                            </div>
+
+                                            <?php if($isMobile): ?>
+                                                <?php if(Mage::getStoreConfig("porto_settings/category/actions", $code)) : ?>
+                                                    <div class="actions margin-button product-small-view">
+                                                        <!-- ADD TO WISHLIST -->
+                                                        <a class="button button-blue"  href="<?php echo $_product->getProductUrl() ?>" class="addtocart" title="More Info" rel="nofollow">More Info</a>
+
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </div>
+
+                                    </div>
+
+                                    <?php if($isTablet || $isDesktop): ?>
+                                        <div class="col-md-4 col-xs-12">
+                                            <div class="product-info-wrapper">
+                                                <!-- PRODUCT PRICE -->
+                                                <?php if(Mage::getStoreConfig("porto_settings/category/product_price", $code)):?>
+                                                    <?php echo $this->getPriceHtml($_product, true) ?>
+
+                                                <?php endif; ?>
+                                                <!-- PRODUCT ACTIONS -->
+                                                <?php if(Mage::getStoreConfig("porto_settings/category/actions", $code)) : ?>
+                                                    <div class="actions margin-button">
+                                                        <!-- ADD TO WISHLIST -->
+                                                        <a class="button button-blue"  href="<?php echo $_product->getProductUrl() ?>" class="addtocart" title="More Info" rel="nofollow">More Info</a>
+
+                                                    </div>
+                                                <?php endif; ?>
+
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <div class="footer-toolbar">
+                    <?php echo $this->getToolbarHtml() ?>
+                </div>
+                <div class="listing-bottom-text">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+                </div>
+            </div>
+            <!-- -->
+
+
+        </div>
+    </div>
+<?php endif; ?>
+
+<style type="text/css">
+    .pager .pages li{
+        list-style: none;
+        display: inline-block;
+    }
+    .pager .pages ol{
+        padding-left: 0;
+        padding-bottom: 30px;
+    }
+</style>

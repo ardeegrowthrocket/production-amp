@@ -1,0 +1,148 @@
+<?php /** Growthrocket_Fitment_Block_Adminhtml_Attribute_Website $this */ ?>
+<?php $model = Mage::getModel('grfitment/category'); ?>
+<div id="web-attr-tree-container"></div>
+<input type="hidden" name="web-attr-tree-data" id="web-attr-tree-data"/>
+<script type="text/javascript">
+    (function($){
+        function RuleValidator(treeEl){
+            this.el = treeEl;
+            this.websiteNodes = [];
+            this.init = function(websites){
+                for(var idx = 0; idx< websites.length; idx++){
+                    var node = $(this.el).tree('getNodeById', websites[idx]);
+                    this.websiteNodes.push(node);
+                }
+            },
+            this.stopCloning = function(movedNode,targetNode){
+                var inWebsiteNodeCollection = [];
+                var stopCloning = true;
+                //Check children
+                for(var webIdx = 0; webIdx < this.websiteNodes.length; webIdx++){
+                    var websiteNode = this.websiteNodes[webIdx];
+                    var inWebsiteNode = false;
+                    if(websiteNode.id !== targetNode.id){
+                        for(var childIdx = 0 ; childIdx < websiteNode.children.length; childIdx++){
+                            var childNode = websiteNode.children[childIdx];
+                            if(childNode.option_id == movedNode.option_id){
+                                inWebsiteNode = true;
+                            }
+                        }
+                    }else{
+                        inWebsiteNode = true;
+                    }
+                    inWebsiteNodeCollection.push(inWebsiteNode);
+                }
+                for(var idx = 0; idx < inWebsiteNodeCollection.length; idx++){
+                    if(!inWebsiteNodeCollection[idx]){
+                        stopCloning = false;
+                        break;
+                    }
+                }
+                return stopCloning;
+            },
+            this.isduplicate = function (movedNode, targetNode){
+                var movedNodeOptionId = movedNode.option_id;
+                var exists = false;
+                for(var childIdx = 0; childIdx < targetNode.children.length; childIdx++){
+                    var childNode = targetNode.children[childIdx];
+                    if(childNode.option_id == movedNodeOptionId){
+                        exists= true;
+                        break;
+                    }
+                }
+                return exists;
+            }
+        }
+        $(document).ready(function(){
+            var data = <?php echo $this->getJsonConfig(); ?>;
+
+            $('#web-attr-tree-container').tree({
+                data: data,
+                dragAndDrop: true,
+                autoOpen: 0
+            });
+            var rule = new RuleValidator($('#web-attr-tree-container'));
+            rule.init([1,2]);
+            //Events
+            $('#web-attr-tree-container').on('tree.init',function(){
+
+            });
+            $('#web-attr-tree-container').on('tree.move',function(event){
+                var movedNode = event.move_info.moved_node;
+                var targetNode = event.move_info.target_node;
+
+                console.log(targetNode);
+                //Prevent move other than inside
+                if(event.move_info.position !=='inside'){
+                    event.preventDefault();
+                    return;
+                }
+                if(!movedNode.is_draggable){
+                    event.preventDefault();
+                    return;
+                }
+                if(targetNode.noChild){
+                    event.preventDefault();
+                    return;
+                }
+                if(rule.isduplicate(movedNode,targetNode)){
+                    if(targetNode.id ==0){
+                        $('#web-attr-tree-container').tree('removeNode',movedNode);
+                    }else{
+                        event.preventDefault();
+                        alert("Attribute already added to " + targetNode.name);
+                        return;
+                    }
+                }
+
+
+                if(!rule.stopCloning(movedNode,targetNode)){
+                    $('#web-attr-tree-container').tree(
+                        'addNodeAfter',
+                        {
+                            label: movedNode.name,
+                            id: Math.floor(Math.random() * 1000),
+                            is_draggable: true,
+                            noChild:true,
+                            option_id: movedNode.option_id
+                        },
+                        movedNode
+                    );
+                }
+
+                event.move_info.do_move();
+
+                var root = [];
+                var treeRootData = $("#web-attr-tree-container").tree('getTree');
+                var node = {element: treeRootData};
+                root.push(node);
+                var flattenTreeData = rebuildTreeData(root);
+                $('#web-attr-tree-data').val(JSON.stringify(flattenTreeData));
+            });
+        });
+        function rebuildTreeData(root){
+            var current;
+            var children, i, len;
+            var depth;
+            var flattenTree = [];
+            while (current = root.pop()) {
+                current = current.element;
+                children = current.children;
+                for (i = 0, len = children.length; i < len; i++) {
+                    root.push({
+                        element: children[i],
+                    });
+                }
+                var item ={
+                    id: $(current).prop('id'),
+                    parent: $(current.parent).prop('id'),
+                    option_id: $(current).prop('option_id')
+                };
+                if((typeof $(item).prop('id') !=='undefined' )&& (typeof $(item).prop('parent') !=='undefined' )){
+                    flattenTree.push(item);
+                }
+            }
+            return flattenTree;
+        }
+    })(jQuery);
+</script>

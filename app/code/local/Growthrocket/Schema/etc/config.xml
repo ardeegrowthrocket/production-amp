@@ -1,0 +1,28 @@
+<config>
+    <modules>
+        <Growthrocket_Schema>
+            <version>0.1.0</version>
+        </Growthrocket_Schema>
+    </modules>
+    <global>
+        <helpers>
+            <grschema>
+                <class>Growthrocket_Schema_Helper</class>
+            </grschema>
+        </helpers>
+        <blocks>
+            <grschema>
+                <class>Growthrocket_Schema_block</class>
+            </grschema>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <grcontent>
+                    <file>grschema/content.xml</file>
+                </grcontent>
+            </updates>
+        </layout>
+    </frontend>
+</config>

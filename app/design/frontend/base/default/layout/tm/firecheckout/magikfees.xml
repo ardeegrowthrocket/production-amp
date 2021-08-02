@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+   <firecheckout_index_index>
+        <reference name="firecheckout.shipping.after">
+            <action method="setTemplate"><template>magikfees/checkout--onepage--shipping_method.phtml</template></action>
+            <block type="magikfees/magikfees" name="checkout.onepage.shipping_magikfees" as="shipping_magikfees" template="magikfees/magikfees.phtml"/>
+        </reference>
+    </firecheckout_index_index>
+</layout>

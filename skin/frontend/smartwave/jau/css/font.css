@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'antonregular';
+    src: url('../fonts/karla/anton-regular-webfont.woff2') format('woff2'),
+    url('../fonts/karla/anton-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'karlabold';
+    src: url('../fonts/karla/karla-bold-webfont.woff2') format('woff2'),
+    url('../fonts/karla/karla-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'karlabolditalic';
+    src: url('../fonts/karla/karla-bolditalic-webfont.woff2') format('woff2'),
+    url('../fonts/karla/karla-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'karlaitalic';
+    src: url('../fonts/karla/karla-italic-webfont.woff2') format('woff2'),
+    url('../fonts/karla/karla-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'karlaregular';
+    src: url('../fonts/karla/karla-regular-webfont.woff2') format('woff2'),
+    url('../fonts/karla/karla-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/** Global and Default font family **/
+html,body {
+    font-family: 'antonregular';
+}

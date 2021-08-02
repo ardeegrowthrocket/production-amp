@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Homebase_Finder>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Homebase_Finder>
+    </modules>
+</config>

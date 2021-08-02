@@ -1,0 +1,180 @@
+#homepage-bestseller {
+  margin-top: 52px;
+  margin-bottom: 40px;
+  font-family: "karlaregular";
+}
+@media (max-width: 950px) {
+  #homepage-bestseller {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+#homepage-bestseller h2 {
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: 45px;
+  font-weight: bold;
+  font-family: "antonregular";
+}
+#homepage-bestseller ul.best-seller-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+#homepage-bestseller ul.best-seller-list li.item .b-price {
+  color: #e0a61b;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+#homepage-bestseller ul.best-seller-list li.item .b-name a {
+  color: #333333;
+}
+#homepage-bestseller ul.best-seller-list li.item .b-name h5 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+  padding: 0px 10px 0px 0px;
+  margin: 0px;
+}
+#homepage-bestseller ul.best-seller-list li.item .b-part-number {
+  color: #333333;
+  font-size: 16px;
+}
+#homepage-bestseller ul.best-seller-list .owl-buttons {
+  visibility: hidden;
+}
+#homepage-bestseller ul.best-seller-list .owl-buttons .owl-prev, #homepage-bestseller ul.best-seller-list .owl-buttons .owl-next {
+  background-color: #e0a61b;
+}
+#homepage-bestseller ul.best-seller-list:hover .owl-buttons {
+  visibility: visible;
+}
+
+/**
+ Must Have for your Car
+ */
+#must-have-item {
+  background-color: #3A401F;
+  padding-bottom: 70px;
+  padding-top: 50px;
+}
+@media (max-width: 950px) {
+  #must-have-item {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+#must-have-item h2 {
+  text-align: center;
+  color: #FFFFFF;
+  font-family: "antonregular";
+  font-size: 45px;
+}
+#must-have-item p.sub-title {
+  text-align: center;
+  color: #FFFFFF;
+  font-family: "karlaregular";
+  display: block;
+  max-width: 80%;
+  margin: 30px auto 30px;
+}
+@media (max-width: 950px) {
+  #must-have-item p.sub-title {
+    max-width: 100%;
+  }
+}
+#must-have-item ul.item-wrapper {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+#must-have-item ul.item-wrapper li {
+  background-color: #FFFFFF;
+  max-width: 210px;
+  padding: 20px;
+  height: 217px;
+  position: relative;
+}
+@media (max-width: 950px) {
+  #must-have-item ul.item-wrapper li {
+    margin: auto;
+  }
+}
+#must-have-item ul.item-wrapper li h3 {
+  margin-top: 0px;
+  color: #e0a61b;
+  font-size: 20px;
+  font-family: "antonregular";
+}
+#must-have-item ul.item-wrapper li h3 i.fa {
+  float: right;
+  font-weight: normal;
+  font-size: 16px;
+  margin-top: 2px;
+}
+#must-have-item ul.item-wrapper li p {
+  font-family: "karlaregular";
+  font-size: 16px;
+  color: #333333;
+  line-height: 20px;
+}
+#must-have-item ul.item-wrapper li img {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+.cms-index-index #spp-banner {
+  margin-top: 0px;
+}
+
+ .owl-carousel-default.owl-carousel.owl-theme .owl-buttons div {
+      position: absolute;
+      background: transparent !important;
+      color: #323232 !important;
+      font-size: 55px !important;
+      z-index: 9;
+      opacity: 1;
+      top: 25%;
+  }  
+.owl-carousel-default.owl-carousel.owl-theme .owl-prev {
+    left: -30px;
+   
+    
+}
+ .owl-carousel-default.owl-carousel.owl-theme .owl-next {
+    right:  -30px;
+    
+}
+.owl-carousel-default.owl-carousel.owl-theme .owl-item {
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+}
+.owl-carousel-default.owl-carousel.owl-theme .owl-item  img{
+    width: auto;
+    max-height: 115px;
+}
+.owl-item div span {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+div#feat-model h2 {
+    text-align: center;
+    color: #000;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+div#feat-model {
+    margin: 50px 0;
+}
+/*# sourceMappingURL=bestseller.css.map */

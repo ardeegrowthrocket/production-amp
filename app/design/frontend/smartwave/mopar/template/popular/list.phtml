@@ -1,0 +1,27 @@
+<?php
+    $popularCollection = $this->popularProductCollection();
+?>
+<?php if(count($popularCollection) > 0 ): ?>
+<div class="popular-products">
+   <div class="heading">
+       <h2><span class="bold">Popular</span> Products</h2>
+   </div>
+    <div class="popular-wrapper owl-carousel">
+        <?php foreach ($popularCollection as $product): ?>
+        <div class="item">
+            <div class="image">
+                <a href="<?php echo $product['link'] ?>">
+                    <img src="<?php echo $product['image'] ?>" title="<?php echo $product['name'] ?>" alt="<?php echo $product['name'] ?>" />
+                </a>
+            </div>
+            <div class="price"><?php echo $product['price'] ?></div>
+            <div class="title">
+                <a href="<?php echo $product['link'] ?>"><?php echo $product['name'] ?></a>
+            </div>
+            <div class="part_name">Part Number: <?php echo $product['part_number'] ?></div>
+            <div class="small-review"><div class="yotpo bottomLine" data-product-id="<?php echo $product['product_id'] ?>" data-url="<?php echo $product['link'] ?>"></div></div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>

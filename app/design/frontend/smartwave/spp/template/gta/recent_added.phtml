@@ -1,0 +1,21 @@
+<?php
+$recentAddedId = Mage::getSingleton('core/session')->getCartRecentAdded();
+if(!empty($recentAddedId)):
+$cartItemArray = [];
+$quoteItem = Mage::getModel('sales/quote_item')->load($recentAddedId);
+
+$_product = Mage::getModel('catalog/product')->load($quoteItem->getProductId());
+$cartItemArray[] = [
+    "name" => $_product->getName(),
+    "category" => $_product->getAttributeText('auto_type'),
+    "brand" => mage::Helper('growthrocket_gtm')->getDefaultBrand(),
+    "id" => $_product->getSku(),
+    "qty" => (int) $quoteItem->getQty(),
+    "cart_value" => str_replace(",","",Mage::getModel('directory/currency')->format($quoteItem->getRowTotal(), array('display'=> Zend_Currency::NO_SYMBOL), false )),
+];
+?>
+<script type="text/javascript">
+    var recentAddedItem = <?php echo json_encode($cartItemArray); ?>
+</script>
+<?php endif; ?>
+<?php Mage::getSingleton('core/session')->unsCartRecentAdded() ?>

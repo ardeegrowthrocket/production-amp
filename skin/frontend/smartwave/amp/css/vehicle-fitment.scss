@@ -1,0 +1,228 @@
+.form-vehicle-checker{
+  display: none;
+  background-color: #252525;
+  width: 582px;
+
+    .header{
+      border-bottom: 10px solid #F3691E;
+      text-align: center;
+      padding: 30px 0px 25px;
+      color: #FFFFFF;
+
+        p{
+          font-size: 24px;
+        }
+
+      h3{
+        font-size: 42px;
+      }
+    }
+    .form-selector{    
+
+      max-width: 428px;
+      margin: auto;
+      padding-bottom: 50px;
+
+      .field{
+          position: relative;
+         margin-top: 20px;
+
+        span{
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width: 36px;
+          height: 43px;
+          text-align: center;
+          font-size: 18px;
+          color: #FFFFFF;
+          background: #444444;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        select{
+          padding-left: 50px;
+          font-size: 18px;
+          background-color: #FFFFFF;
+        }
+      }
+
+      .submit{
+        button{
+          text-align: center;
+          width: 100%;
+          background-color: #F3691E;
+          border-bottom: 5px solid #AD5325;
+          height: 53px;
+          color: #FFFFFF;
+          text-transform: uppercase;
+          margin-top: 45px;
+          border-top: 0;
+          border-left: 0;
+          font-size: 18px;
+          border-right: 0px;
+          font-weight: bold;
+
+          &:disabled{
+            background-color: #cccccc;
+            border-bottom: 5px solid #333333;
+          }
+        }
+
+
+      }
+    }
+}
+
+.hautopart-model-sku{
+  .fancybox-close {
+    top: 12px;
+    right: 14px;
+  }
+}
+
+
+
+#compatibility-checker{
+  color: #FFFFFF;
+  padding: 0px 25px;
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .info{
+    span{
+      font-family: Avenir-Heavy;
+    }
+  }
+
+  .fa-info-circle{
+    font-size: 16px;
+  }
+  .loader {
+    font-size: 36px;
+    text-align: center;
+    color: #F3691E;
+    width: 100%;
+
+  }
+
+  &.vehicle-empty{
+      background-color: #2372AA;
+  }
+
+  &.vehicle-fit{
+      background-color: #1FCE65;
+
+    .open-form {
+      margin-top: 20px;
+    }
+
+    .inner-content{
+      .colpart-3{
+        margin-top: 10px;
+      }
+
+    }
+  }
+
+  &.vehicle-unfit{
+    background-color: #DF280A;
+
+    .open-form {
+      margin-top: 20px;
+    }
+    .inner-content{
+      .colpart-3{
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .inner-content{
+    width: 100%;
+    padding: 23px 0px;
+    .colpart-1, .colpart-2{
+      float: left;
+      color: #FFFFFF;
+
+      a{
+        color: #FFFFFF;
+        text-decoration: underline;
+        text-transform: uppercase;
+        font-family: avenir-heavy;
+      }
+    }
+
+    .colpart-1{
+      i{
+        font-size: 20px;
+      }
+    }
+
+    .colpart-2{
+      i.fa{
+        padding-left: 3px;
+      }
+      span.alternative{
+        display: block;
+      }
+
+    }
+    .colpart-3{
+      float: right;
+
+      a{
+        color: #FFFFFF;
+        text-decoration: underline;
+        text-transform: uppercase;
+        font-family: Avenir-Heavy;
+      }
+
+    }
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .product-info-wrapper{
+    min-width: auto;
+
+  }
+
+  .form-vehicle-checker{
+    width: 320px;
+
+    .form-selector{
+      padding-left: 15px;
+      padding-right: 15px; 
+    }
+
+    .header{
+      p{
+        font-size: 20px;
+      }
+
+      h3{
+        font-size: 32px;
+      }
+    }
+  }
+
+  #compatibility-checker .inner-content .colpart-3{
+    float: left;
+  }
+  #compatibility-checker.vehicle-empty .inner-content .colpart-3{
+    float: left;
+    display: block;
+    padding-top: 10px;
+    width: 100%;
+  }
+  #compatibility-checker .inner-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}

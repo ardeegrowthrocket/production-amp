@@ -1,0 +1,107 @@
+<?php //echo $this->getChildHtml('sticky.nav') ?>
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+$helper = Mage::helper('hutility');
+?>
+
+<div class="header-container type6">
+    <div class="top-links-container">
+        <div class="top-links container">
+            <div class="top-header-text">
+                <div class="black-side"></div>
+                <p class="bg-black"><?php echo $this->getChildHtml('welcome') ?></p>
+            </div>
+
+            <?php
+            $store_currency = $this->getChildHtml('store_currency');
+            $store_language = $this->getChildHtml('store_language');
+            $compare_link = $this->getChildHtml('compare_link');
+            ?>
+            <?php echo $store_currency; ?>
+            <?php if($store_currency && $store_language):?>
+            <?php endif; ?>
+            <?php //echo $store_language; ?>
+            <?php if(($store_currency || $store_language) && $compare_link):?>
+                <span class="split"></span>
+            <?php endif; ?>
+            <?php echo $compare_link; ?>
+            <div class="top-links-area">
+                <?php /* <div class="top-links-icon"><a href="javascript:void(0)"><?php echo $this->__("links"); ?></a></div> */ ?>
+                <?php
+                echo $this->getChildHtml('minicart');
+                echo $this->getChildHtml('topLinks');
+                ?>
+            </div>
+            <!-- <p class="welcome-msg"><?php echo $this->getChildHtml('welcome'); ?> <?php echo $this->getAdditionalHtml(); ?></p> -->
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <div class="header container">
+        <div class="container">
+            <!-- LOGO -->
+            <div class="col-xs-12 col-md-3  col-sm-3 logo-container">
+                <?php if ($this->getIsHomePage()):?>
+                    <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                <?php else:?>
+                    <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                <?php endif; ?>
+            </div>
+            <!-- LOGO -->
+            <!-- Search -->
+            <div class="header-search-box col-xs-12 col-md-9 col-sm-9" style="padding:0;">
+                <div class="col-sm-8 col-md-7">
+                    <?php echo $this->getChildHtml('topSearch');?>
+                     <div class="mini-cart">
+                        <a href="/checkout/cart/" class="mybag-link">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <div class="header-container-parts-catalog">
+
+                        <div>
+                            <p class="cta-tagline">
+                                <span>Looking for repair parts?</span>
+                            </p>
+                            <button class="button btn-cta-desktop" title="View Parts Here" onclick="window.open('http://parts.jeepsareus.com/', '_blank')"><span><span><span class="btn-lbl">SHOP OUR REPAIR PARTS CATALOG HERE</span></span></span></button>
+                            <button class="button btn-cta-mobile" title="View Parts Here" onclick="window.open('http://parts.jeepsareus.com/', '_blank')"><span><span><span class="btn-lbl">Shop REpair Parts Here</span></span></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Search -->
+        </div>
+
+
+    </div>
+    <!-- menu -->
+    <div class="menu-container <?php echo $helper->hasActiveFitmentQuery() ? 'hidden':'' ?>"">
+        <div class="menu-icon"><a href="javascript:void(0)" title="<?php echo $this->__('Menu'); ?>"><i class="fa fa-bars"></i></a></div>
+        <?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+    <!-- menu -->
+</div>
+<?php echo $this->getChildHtml('mobileMenu') ?>
+<?php //echo $this->getChildHtml('mobile.nav') ?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(document).ready(function(){
+        var scrolled = false;
+        jQuery(window).scroll(function(){
+            if(200<jQuery(window).scrollTop() && !scrolled){
+                jQuery('#slideshow .ymm-form-container').addClass('sticky-header').css('top','-50px').animate({top:'0px'}, 500);
+                scrolled = true;
+            }
+            if(200>jQuery(window).scrollTop() && scrolled){
+                jQuery('#slideshow .ymm-form-container').removeClass('sticky-header');
+                scrolled = false;
+            }
+        })
+    });
+    //]]>
+</script>

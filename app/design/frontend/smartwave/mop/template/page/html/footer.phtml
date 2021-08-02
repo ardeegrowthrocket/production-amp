@@ -1,0 +1,57 @@
+<?php
+$store = Mage::app()->getStore();
+$storeName = Mage::getStoreConfig('general/store_information/name');
+$code  = $store->getCode();
+$footer = Mage::getStoreConfig('porto_settings/footer',$code);
+$footer_class = ($footer['fixed_position_footer_enabled'])?" fixed-position":"";
+$year = date("Y");
+$baseUrl = Mage::getBaseUrl();
+?>
+<div class="footer-container <?php echo $footer_class; ?>">
+    <div class="footer">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 site-addresss">
+                           <div class="row">
+                               <div class="block">
+                                   <div class="block-title">
+                                       <span><?php echo $storeName; ?></span>
+                                   </div>
+                                   <div class="block-content">
+                                       <p><?php echo Mage::getStoreConfig('general/store_information/address'); ?></p>
+                                       <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('social_icons_links')->toHtml(); ?>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 footer-vertical-separator">
+                            <div class="block">
+                                <div class="block-title">
+                                    <span>Get our Newsletter!</span>
+                                </div>
+                                <div class="block-content">
+                                    <?php echo $this->getChildHtml('footer.newsletter'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div class="footer-menu-links row clearfix">
+                                <div class="col-sm-6 col-xs-12 col-md-6">
+                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_bottom_col5')->toHtml(); ?>
+                                </div> 
+                                <div class="col-sm-6 col-xs-12 col-md-6">
+                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_bottom_col6')->toHtml(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="copyright ">
+        <ul class="clearfix">
+            <li><?php echo "Copyright &copy; {$year} {$storeName}" ?></li>
+        </ul>
+    </div>
+</div>

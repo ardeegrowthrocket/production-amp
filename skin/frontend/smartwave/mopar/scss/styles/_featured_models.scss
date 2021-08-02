@@ -1,0 +1,70 @@
+.featured-models{
+  margin-top: 65px;
+
+  .heading{
+    position: relative;
+    margin-bottom: 30px;
+
+    h2{
+      margin-bottom: 0px;
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        content:"";
+        display: inline-block;
+        height: 0.3em;
+        vertical-align: bottom;
+        width: 100%;
+        margin-right: -100%;
+        margin-left: 10px;
+        border-top: 1px solid $line-color;
+      }
+    }
+
+    .custom-nav{
+      position: absolute;
+      right: 0;
+      top:-3px;
+      height: 28px;
+      padding-left: 8px;
+      background-color: $white-color;
+
+      button{
+        border: 0px;
+        background: none;
+        color: $tertiary-bg-color;
+        padding:0;
+
+        .fa{
+          font-weight: bold;
+          font-size: 20px;
+          font-size: 32px;
+        }
+
+        &.owl-prev{
+          padding: 0 25px 0 10px;
+        }
+      }
+    }
+  }
+
+  .model-wrapper{
+    .item{
+      a{
+        text-decoration: none;
+        img{
+          width: auto;
+          text-align: center;
+          margin: auto;
+        }
+        h5{
+          font-size: 18px;
+          color: $tertiary-bg-color;
+          text-align: center;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}

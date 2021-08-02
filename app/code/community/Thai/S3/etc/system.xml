@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <thai_extensions>
+            <label>Thai's Extensions</label>
+            <sort_order>4000000</sort_order>
+        </thai_extensions>
+    </tabs>
+    <sections>
+        <thai_s3>
+            <class>separator-top</class>
+            <label>S3</label>
+            <tab>thai_extensions</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <access_key>
+                            <label>Access Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </access_key>
+                        <secret_key>
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </secret_key>
+                        <bucket>
+                            <label>Bucket</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                        </bucket>
+                        <region>
+                            <label>Region</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>thai_s3/adminhtml_system_config_source_s3_region</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                            <comment>This extension only supports regions that support the Signature Version 2 signing process.</comment>
+                        </region>
+                        <prefix>
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </prefix>
+                        <custom_endpoint_enabled>
+                            <label>Enable Custom Endpoint</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                            <comment>Turn this on if you want to use a custom S3-compatible endpoint instead, e.g. DreamHost or Digital Ocean.</comment>
+                        </custom_endpoint_enabled>
+                        <custom_endpoint>
+                            <label>Custom Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><custom_endpoint_enabled>1</custom_endpoint_enabled></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>70</sort_order>
+                            <comment>Don't include the http:// or https:// prefix.</comment>
+                        </custom_endpoint>
+                        <custom_headers>
+                            <label>Custom Headers</label>
+                            <frontend_model>thai_s3/adminhtml_form_field_headers</frontend_model>
+                            <backend_model>thai_s3/system_config_backend_headers</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>80</sort_order>
+                        </custom_headers>
+                    </fields>
+                </general>
+            </groups>
+        </thai_s3>
+    </sections>
+</config>

@@ -1,0 +1,45 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+
+<div>
+    <ul>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            <?php if($_crumbInfo['link']): ?>
+                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>">
+                    <?php echo $this->escapeHtml(str_replace('Repair Parts & Accessories','',$_crumbInfo['label'])); ?>
+                </a>
+            <?php else: ?>
+                <span><?php echo $this->escapeHtml($_crumbInfo['label']) ?></span>
+            <?php endif; ?>
+            <?php if(!$_crumbInfo['last']): ?>
+                <!-- <span class="breadcrumbs-split"><i class="icon-right-open"></i></span> -->
+                <span class="breadcrumbs-split">|</span>
+            <?php endif; ?>
+            </li>
+
+        <?php endforeach; ?>
+
+<?php $counter = 1; ?> 
+<script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : 
+      [
+          
+    <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+    {
+        "@type" : "ListItem",
+        "position" :<?php echo $counter++; ?>,
+        "item" : { "name" : " <?php echo $this->escapeHtml(str_replace('Repair Parts & Accessories','',$_crumbInfo['label'])); ?>", "@id" : "<?php echo $_crumbInfo['link'] ?>" }
+    }<?php if(!$_crumbInfo['last']): ?>,<?php endif; ?>
+       <?php endforeach; ?>
+        ]
+  }
+</script>
+
+    </ul>
+</div>
+
+
+<?php endif; ?>

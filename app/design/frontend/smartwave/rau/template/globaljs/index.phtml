@@ -1,0 +1,29 @@
+<?php if(Mage::helper('growthrocket_gtm/captcha')->isEnabled()): ?>
+<?php $cmsIdentifier =  Mage::getSingleton('cms/page')->getIdentifier();
+if($cmsIdentifier == 'contact-us'): ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>"></script>
+<?php else: ?>
+    <script type="text/javascript">
+        if ('NodeList' in window) {
+            if (!NodeList.prototype.each && NodeList.prototype.forEach) {
+                NodeList.prototype.each = NodeList.prototype.forEach;
+            }
+        }
+        jQuery(window).ready(function () {
+            setTimeout(function(){
+                var head = document.getElementsByTagName('head')[0];
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = "https://www.google.com/recaptcha/api.js?render=<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>";
+                head.appendChild(script);
+            }, 5000);
+        })
+    </script>
+<?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/index.js') ?>" defer></script>
+<?php if(Mage::helper('firecheckout')->canFireCheckout()): ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/firecheckout_ga_events.js') ?>" defer ></script>
+<?php endif ?>
+
+  

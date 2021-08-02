@@ -1,0 +1,28 @@
+/**
+    Settings
+ */
+@import 'settings/_color';
+@import 'settings/_fonts';
+@import 'settings/_mixin';
+@import 'settings/_bootstrap';
+
+
+
+body, html {
+  font-family: robotoregular;
+}
+p, .std{
+  font-family: robotoregular;
+  font-size: 16px;
+  color: $grey-text-color;
+}
+.bold{
+  font-family: robotobold;
+}
+
+@import 'styles/header';
+@import 'styles/footer';
+@import 'styles/ymm_selector';
+@import 'styles/banner';
+@import 'styles/breadcrumbs';
+@import 'responsive/main';

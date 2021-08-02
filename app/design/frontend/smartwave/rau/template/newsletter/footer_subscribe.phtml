@@ -1,0 +1,98 @@
+<?php
+/**
+Made by Smartwave.
+ */
+?>
+<style>
+    .grecaptcha-badge{
+        display:none;
+    }
+</style>
+<div class="footer-newsletter-component">
+    <div class="newsletter-horizontal">
+        <div class="horizon-1 horizon-section">
+            <div class="newsletter-labeltag">SIGN UP FOR OUR NEWSLETTER <span class="fa-container"><i class="fa fa-chevron-right fa-chevron-right-1"></i><i class="fa fa-chevron-right fa-chevron-right-2"></i></span></div>
+        </div>
+        <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="footer-newsletter-validate-detail" onsubmit="setNewsletterCookie()">
+            <div class="horizon-2 horizon-section newsletter-input">
+                <input type="text" name="email" id="newsletter_footer" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="Email Address" />
+            </div>
+            <div class="horizon-3 horizon-section newsletter-action">
+                <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button"><span><span><?php echo $this->__('Join Now') ?></span></span></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    (function($){
+        $(document).ready(function(){
+            var form = $('#footer-newsletter-validate-detail');
+            var url = $(form).attr('action');
+            var input = $('#newsletter_footer');
+            var parent = input.parent();
+            var isEnableCaptcha = '<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('newsletter') ?>';
+            $(form).on('submit',function(evt){
+                var emailVal = $(input).val();
+                evt.preventDefault();
+                if(emailVal === '') {
+                    messagehandler(parent, 'error','Please enter a valid email address.');
+                    return;
+                }
+
+                if(validateEmail(emailVal)){
+
+                    if(isEnableCaptcha) {
+                        grecaptcha.ready(function() {
+                            grecaptcha.execute('<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>', {action: 'submit_newsletter'}).then(function(token) {
+                                subscribeNewsletter(emailVal, parent, url, token);
+                            });
+                        });
+                    }else {
+                        subscribeNewsletter(emailVal, parent, url, '');
+                    }
+
+                }else{
+                    messagehandler(parent, 'error','Please enter a valid email address.');
+                }
+            });
+        });
+
+        function subscribeNewsletter(emailVal, parent, url, token)
+        {
+
+            if(validateEmail(emailVal)){
+
+                $.ajax({
+                    url: url,
+                    data: {email: emailVal, is_ajax: 1 , token:token},
+                    method: 'post',
+                    complete: function(response,  textStatus){
+                        var res = jQuery.parseJSON(response.responseText);
+                        if(res.class == 'success') {
+                            messagehandler(parent, 'success','Success! You\'ve been signed up!');
+                        }else {
+                            messagehandler(parent, 'error',res.message);
+                        }
+                    }
+                });
+            }else{
+                messagehandler(parent, 'error','Please enter a valid email address.');
+            }
+        }
+        function messagehandler(parentEl,msgType,text){
+            var message = $("<p/>");
+            if($(parentEl).prev('p').length > 0){
+                message = $(parentEl).prev('p');
+            }
+            $(message).html(text);
+            $(message).attr('class', msgType);
+            $(message).insertBefore(parentEl);
+        }
+    })(jQuery);
+    function ajaxNewsletter(){
+        return false;
+    }
+    function validateEmail(v){
+        return Validation.get('IsEmpty').test(v) || /^([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9,!\#\$%&'\*\+\/=\?\^_`\{\|\}~-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*@([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z0-9-]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*\.(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]){2,})$/i.test(v);
+    }
+</script>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Homebase_Uncachecontent>
+      <version>0.1.0</version>
+    </Homebase_Uncachecontent>
+  </modules>
+  <global>
+    <helpers>
+      <uncachecontent>
+        <class>Homebase_Uncachecontent_Helper</class>
+      </uncachecontent>
+    </helpers>
+	<blocks>
+	  <uncachecontent>
+		<class>Homebase_Uncachecontent_Block</class>
+	  </uncachecontent>
+			<catalog>
+				<rewrite>
+					<category_view>Homebase_Uncachecontent_Block_Catalog_Category_View</category_view>
+				</rewrite>
+			</catalog>
+	</blocks>
+  </global>
+</config> 

@@ -1,0 +1,61 @@
+<?php //echo $this->getChildHtml('sticky.nav') ?>
+<?php
+$helper = Mage::helper('hutility');
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+?>
+<div class="header-container type6">
+    <div class="top-links-container">
+        <div class="top-links container">
+            <div class="menu-icon"><a href="javascript:void(0)" title="<?php echo $this->__('Menu'); ?>"><i class="fa fa-bars"></i></a></div>
+            <div class="top-header-text col-sm-12 col-lg-8 text-left no-padding">
+                <ul>
+                    <li><?php echo $this->getChildHtml('welcome') ?></li>
+                    <li><span>Subaru Bucks: </span><?php echo $this->__('We Accept Subaru Reward Dollars!') ?></li>
+                </ul>
+            </div>
+            <div class="top-links-area col-sm-12 col-xs-12 col-lg-4">
+                <?php echo $this->getChildHtml('minicart'); ?>
+                <?php echo $this->getChildHtml('topLinks'); ?>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <div class="header container-fluid">
+       <div class="container">
+           <!-- LOGO -->
+           <div class="row parent-row">
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 logo-container">
+                   <?php if ($this->getIsHomePage()):?>
+                           <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                   <?php else:?>
+                       <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+                   <?php endif; ?>
+               </div>
+               <!-- LOGO -->
+               <!-- Search -->
+               <div class="header-search-box col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                   <div class="col-xs-12 col-sm-12">
+                       <?php echo $this->getChildHtml('topSearch'); ?>
+                   </div>
+                   <div class="col-xs-12 megamenu col-sm-4">
+                       <div class="header-container-parts-catalog">
+                           <div>
+                               <span class="label">Replacement Parts Catalog</span>
+                               <a href="https://parts.subaruonlineparts.com" target="_blank">View Parts Here</span></a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- Search -->
+       </div>
+    </div>
+    <!-- menu -->
+    <div class="menu-container">
+            <?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+    <!-- menu -->
+</div>
+<?php echo $this->getChildHtml('mobileMenu') ?>

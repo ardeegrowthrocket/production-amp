@@ -1,0 +1,11 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php if($_menu): ?>
+    <div class="mobile-nav side-block container">
+        <span class="close-sidebar-menu"><i class="icon-cancel"></i></span>
+        <div class="menu-all-pages-container">
+            <ul class="menu sw-mobile-menu">
+                <?php echo $_menu ?>
+            </ul>
+        </div>
+    </div>
+<?php endif ?>

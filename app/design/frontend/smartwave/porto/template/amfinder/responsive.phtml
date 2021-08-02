@@ -1,0 +1,134 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 3/20/17
+ * Time: 10:16 PM
+ */
+
+/** @var Homebase_Autopart_Model_Resource_Combination_Collection $collection*/
+$collection = Mage::getModel('hautopart/combination')->getCollection();
+$collection->getSelect()->join(array('y' => 'auto_combination_list_labels'),' year=y.option',
+    array('ylabel' => 'label'))
+    ->group('label');
+$collection->addOrder('ylabel','Desc');
+$_helper = Mage::helper('hautopart');
+?>
+
+<div class="ymm-form-container">
+    <div class="container">
+        <div class="row">
+            <div class="ymm-label">
+                <span>Start Here</span>
+            </div>
+            <div class="ymm-content">
+                <form method="post" action="<?php echo $_helper->getYmmPath(); ?>" id="finderForm" class="floating">
+                    <div class="form-fields-container">
+                        <div class="amfinder-responsive">
+                            <div class="amfinder-title">
+                                <span>Product Finder</span>
+                            </div>
+                            <ul class="amfinder-toggle">
+                                <li>
+                                    <div class="dropdown-title">Year</div>
+                                    <div class="dropdown-element amshopby-clearer">
+                                        <select name="year" id="finder-year" >
+                                            <option value="0">Select Year</option>
+                                            <?php foreach($collection as $item): ?>
+                                                <option value="<?php echo $item->getYear(); ?>"><?php echo $item->getYlabel(); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown-title">Make</div>
+                                    <div class="dropdown-element amshopby-clearer">
+                                        <select name="make" id="finder-make" disabled="disabled">
+                                        <option value="0">Select Make</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown-title">Model</div>
+                                    <div class="dropdown-element amshopby-clearer">
+                                        <select name="model" id="finder-model" disabled="disabled">
+                                        <option value="0">Select Model</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="last">
+                                    <div class="amfinder-buttons">
+                                        <button class="button" id="ymm-btn" title="Shop Now" type="submit" disabled="disabled"><span><span>Shop Now</span></span></button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.observe("dom:loaded",function(){
+        /** Year field **/
+        $('finder-year').observe('change',function(event){
+            var val = $(this).getValue();
+            var condition = {
+                'year' : val,
+            };
+            callbackAjax(JSON.stringify(condition),'make',$('finder-make'));
+        });
+
+        $('finder-make').observe('change',function(event){
+            var value = $(this).getValue();
+            var condition = {
+                'year' : $('finder-year').getValue(),
+                'make' : value
+            };
+            callbackAjax(JSON.stringify(condition),'model',$('finder-model'));
+        });
+
+        $('finder-model').observe('change',function(event){
+            if($(this).getValue() != 0){
+                $('ymm-btn').enable();
+
+                var year = $$('#finder-year option:selected').pop().text;
+                var make = $$('#finder-make option:selected').pop().text;
+                var model = $$('#finder-model option:selected').pop().text;
+                var url = $('finderForm').readAttribute('action');
+                var path =   year + '-' + make.toLowerCase() + '-' + model.toLowerCase() +'.html';
+                $('finderForm').writeAttribute('action',url + path);
+                $('finderForm').submit();
+            }
+        });
+        function callbackAjax(condition,column,target){
+            new Ajax.Request('<?php echo $_helper->getHajaxPath(); ?>',{
+                method: 'get',
+                parameters: {
+                    condition: condition,
+                    column: column,
+                },
+                onSuccess: function(transport){
+                    if(transport.status == 200){
+                        var objs = transport.responseJSON;
+                        removeChildElements(target.childElements());
+                        objs.each(function(el){
+                            target.insert(new Element('option',{value:el.id}).update(el.label));
+                            target.enable();
+
+                        });
+                    }
+                }
+            });
+        }
+        function removeChildElements(elems){
+            elems.each(function(el){
+                if(el.getAttribute('value') != 0){
+                    el.remove();
+                }
+            })
+        }
+    });
+</script>

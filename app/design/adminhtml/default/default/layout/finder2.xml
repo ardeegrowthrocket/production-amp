@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_finder2_index_index>
+		<reference name="content">
+			<block type="finder2/adminhtml_finder2" name="finder2" />
+		</reference>
+	</adminhtml_finder2_index_index>
+</layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Homebase_Canonical>
+            <version>0.1.0</version>
+        </Homebase_Canonical>
+    </modules>
+    <global>
+        <helpers>
+            <canonical>
+                <class>Homebase_Canonical_Helper</class>
+            </canonical>
+        </helpers>
+        <models>
+            <canonical>
+                <class>Homebase_Canonical_Model</class>
+                <resourceModel>canonical_mysql4</resourceModel>
+            </canonical>
+        </models>
+    </global>
+    <frontend>
+        <events>
+            <core_block_abstract_to_html_after> <!-- identifier of the event we want to catch -->
+                <observers>
+                    <core_block_abstract_to_html_after_handler> <!-- identifier of the event handler -->
+                        <type>singleton</type> <!-- class method call type; valid are model, object and singleton -->
+                        <class>canonical/observer</class> <!-- observers class alias -->
+                        <method>addCanonicalToCms</method>  <!-- observer's method to be called -->
+                        <args></args> <!-- additional arguments passed to observer -->
+                    </core_block_abstract_to_html_after_handler>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+</config> 

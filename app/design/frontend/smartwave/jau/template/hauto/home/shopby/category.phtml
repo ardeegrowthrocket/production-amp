@@ -1,0 +1,52 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/26/17
+ * Time: 6:01 PM
+ */
+
+$collection = $this->getListing();
+$ctr = 0;
+$total = $collection->count();
+$column=0;
+?>
+<div id="shop-cat">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="shop-by-category">
+                    <h2>
+                        <?php if($this->getTitle()):?>
+                            <?php echo $this->getTitle(); ?>
+                        <?php else: ?>
+                            Shop By Category
+                        <?php endif;?>
+                    </h2>
+                    <div class="sby-category-listing">
+                        <?php $ctr=0;  ?>
+                        <?php foreach($collection as $item): ?>
+                            <?php if(trim($item->getTitle()) != ''): ?>
+                                <?php if($ctr % 5 == 0): ?>
+                                    <ul class="group-sby-group-listing col-md-3">
+                                <?php endif; ?>
+                                <li>
+                                    <a href="<?php echo $item->getLink(); ?>">
+                                        <?php echo $item->getTitle(); ?>
+                                    </a>
+                                </li>
+                                <?php if($ctr % 5 == 4 || $total == ($ctr+1)): ?>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php $ctr++; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

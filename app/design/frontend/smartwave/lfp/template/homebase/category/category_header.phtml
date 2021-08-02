@@ -1,0 +1,21 @@
+<?php
+$path = pathinfo($this->getRequest()->getOriginalPathInfo(), PATHINFO_FILENAME);
+$category = str_replace('-',' ', $path);
+$request = Mage::app()->getRequest();
+$module_controller_action = $request->getActionName();
+
+$titlePrefix = '&nbsp;Parts & Accessories';
+
+?>
+<div class="container-fluid category-header">
+    <div class=" product-title-section">
+        <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+        <div class="lfp-inner-md">
+            <div class="col-md-12">
+                <div class="row">
+                    <h1><?php echo uc_words($category,' '). $titlePrefix;  ?></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<?php
+    echo $this->getMessagesBlock()->getGroupedHtml();
+?>
+<?php
+    $board = json_decode(Mage::getStoreConfig('checkoutsuccess/mockup/board'));
+    if (!is_null($board)) :
+        foreach ($board as $containerName => $children) {
+            $sectionHtml[$containerName] = '';
+            foreach ($children as $child) {
+                if ($child) {
+                    $sectionHtml[$containerName] .=
+                        '<div class="checkoutsuccess-block-wrapper">'
+                        . $this->getChildHtml($child)
+                        . '</div>';
+                }
+            }
+        }
+?>
+<div class="tm-checkoutsuccess-top">
+    <?php echo $sectionHtml['top'];?>
+</div>
+<div class="tm-checkoutsuccess-middle">
+    <div class="tm-checkoutsuccess-middleleft">
+        <?php echo $sectionHtml['middleleft'];?>
+    </div>
+    <div class="tm-checkoutsuccess-middleright">
+        <?php echo $sectionHtml['middleright'];?>
+    </div>
+</div>
+<div class="tm-checkoutsuccess-bottom">
+    <?php echo $sectionHtml['bottom'];?>
+</div>
+<?php
+    endif;
+?>
+<?php echo $this->getChildHtml('checkoutsuccess.bottom.html');?>

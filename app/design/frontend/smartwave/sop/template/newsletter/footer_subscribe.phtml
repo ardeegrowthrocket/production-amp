@@ -1,0 +1,31 @@
+<?php
+/**
+Made by Smartwave.
+ */
+?>
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$footer = Mage::getStoreConfig('porto_settings/footer',$code);
+$oldUrl =  $this->getFormActionUrl();
+
+?>
+<style>
+    .grecaptcha-badge{
+        display:none;
+    }
+</style>
+
+<div class="block block-subscribe mgp-newsletter">
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletterForm" data-enable-captcha="<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('newsletter') ?>" data-site-key="<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>">
+        <div class="block-content">
+            <div class="input-box" style="margin-top:0">
+                <input type="hidden" name="is_ajax" value="1"/>
+                <input type="text" name="email" id="newsletter_footer" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text" placeholder="email@email.com" />
+                <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button"><i class="fa fa-spinner hide fa-spin"></i><?php echo $this->__('Subscribe') ?></button>
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </form>
+    <div class="newsletter-message"></div>
+</div>

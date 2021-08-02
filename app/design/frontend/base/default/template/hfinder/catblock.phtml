@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 11/21/16
+ * Time: 8:47 PM
+ */
+
+$catId = Mage::getSingleton('core/session')->getYmmCategory();
+$_category =  Mage::getModel('catalog/category')->load($catId);
+$ymmSession = Mage::getSingleton('core/session')->getYmm();
+?>
+
+<div class="container">
+    <p class="filter-title-type-2" style="margin-top:10px;">
+        <span class="title-line">&nbsp;</span>
+        <span class="section-title" style="width: 360px;text-align: center;font-weight: 600;color: #085069">
+            <?php
+                echo $ymmSession['y'] . ' ' . $ymmSession['m'] . ' ' . $ymmSession['ml']
+            ?>
+        </span>
+        <span class="title-line">&nbsp;</span>
+    </p>
+    <p class="section-description text-center">
+        <?php echo $_category->getDescription(); ?>
+    </p>
+</div>

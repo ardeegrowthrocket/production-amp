@@ -1,0 +1,124 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+
+$_infoblock = Mage::getStoreConfig('porto_settings/contacts/infoblock', $code);
+$custom_block = Mage::getStoreConfig('porto_settings/contacts/customblock', $code);
+?>
+<!-- <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div> -->
+<?php if($custom_block): ?>
+    <div class="row">
+        <div class="col-sm-12">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($custom_block)->toHtml(); ?>
+        </div>
+    </div>
+<?php endif; ?>
+<div class="row">
+    <div class="col-sm-2">
+        <?php
+        echo $_infoblock;
+        ?>
+    </div>
+    <div class="col-sm-10">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('contact-us-top-content')->toHtml(); ?>
+        <div class="callback-container custom-border-color">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('contact-us-form')->toHtml(); ?>
+        </div>
+        <div class="form-submit-ticket contacts fancybox">
+            <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" data-captcha-sitekey="<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>" data-captcha-enable="<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('contact_us') ?>">
+                <div class="row">
+                    <div class="col-md-12"> <h2>Submit Ticket</h2></div>
+                    <ul class="form-list col-sm-6">
+                        <li>
+                            <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Full Name') ?></label>
+                            <div class="input-box">
+                                <input name="name" id="name" placeholder="Full Name" title="<?php echo Mage::helper('contacts')->__('Full Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="form-list col-sm-6">
+                        <li>
+                            <label for="ticket-email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email Address') ?></label>
+                            <div class="input-box">
+                                <input name="email" placeholder="Email Address" id="ticket-email" title="<?php echo Mage::helper('contacts')->__('Email Address') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="form-list col-sm-12">
+                        <li>
+                            <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Enquiry') ?></label>
+                            <div class="input-box input-textarea">
+                                <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Enquiry') ?>" class="required-entry input-text" cols="5" rows="3" placeholder="<?php echo Mage::helper('contacts')->__('Enquiry') ?>"></textarea>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="text-right" style="margin-top:30px">
+                    <input type="hidden" value="" name="token" class="google-token">
+                    <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+                    <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button text-uppercase"><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></button>
+                </div>
+            </form>
+        </div>
+        <div class="form-request-callback contacts fancybox" >
+            <form id="callbackForm" action="<?php echo Mage::getUrl('contactform/index/callback') ?>" method="post" data-captcha-sitekey="<?php echo Mage::helper('growthrocket_gtm/captcha')->getSiteKey() ?>" data-captcha-enable="<?php echo Mage::helper('growthrocket_gtm/captcha')->isEnableCaptchaCategory('contact_us') ?>">
+                <div class="row">
+                    <div class="col-md-12"> <h2>Request Callback</h2></div>
+                    <ul class="form-list col-sm-6">
+                        <li>
+                            <label for="call_name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Full Name') ?></label>
+                            <div class="input-box">
+                                <input name="name" id="call_name" placeholder="Full Name" title="<?php echo Mage::helper('contacts')->__('Full Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="form-list col-sm-6">
+                        <li>
+                            <label for="phone" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Phone Number') ?></label>
+                            <div class="input-box">
+                                <input name="phone" placeholder="Phone Number" id="phone" title="<?php echo Mage::helper('contacts')->__('Phone Number') ?>" value="" class="input-text required-entry validate-phoneStrict" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="form-list col-sm-12">
+                        <li>
+                            <label class="required"><em>*</em><?php echo Mage::helper('contacts')->__('What can we help you with?') ?></label>
+                        </li>
+                        <li>
+                            <input type="radio" id="need_help" value="Need help finding a part" name="inquiry_type" class="validate-one-required-by-name">
+                            <label for="need_help"><?php echo Mage::helper('contacts')->__('Need help finding a part') ?></label>
+                        </li>
+                        <li>
+                            <input type="radio" id="order_question" value="Order Question" name="inquiry_type" class="validate-one-required-by-name">
+                            <label for="order_question"><?php echo Mage::helper('contacts')->__('Order Question') ?></label>
+                        </li>
+                        <li>
+                            <input type="radio" id="other" value="Other" name="inquiry_type" class="validate-one-required-by-name">
+                            <label for="other"><?php echo Mage::helper('contacts')->__('Other') ?></label>
+                        </li>
+                    </ul>
+                    <ul class="form-list col-sm-12">
+                        <li>
+                            <label for="order_number"><?php echo Mage::helper('contacts')->__('Order Number/VIN (Optional)') ?></label>
+                            <div class="input-box">
+                                <input name="order_number" placeholder="Order Number" id="order_number" title="<?php echo Mage::helper('contacts')->__('Order Number ') ?>" value="" class="input-text" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-right" style="margin-top:30px">
+                    <input type="hidden" value="" name="token" class="google-token">
+                    <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button text-uppercase"><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+    var callbackForm = new VarienForm('callbackForm', true);
+    //]]>
+</script>

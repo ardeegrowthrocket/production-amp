@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Homebase_Shipping>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Homebase_Shipping>
+    </modules>
+</config>

@@ -1,0 +1,31 @@
+<?php
+$bestSellerCollection = $this->getPdpbestSeller();
+if(count($bestSellerCollection) > 0) :
+?>
+<div id="mopar-pdp-bestseller">
+    <div class="container">
+        <div class="row">
+                <div class="heading">
+                    <h2>Customers <span class="bold">Also Purchased</span></h2>
+                </div>
+               <div class="best-seller-list owl-carousel">
+                   <?php foreach ($bestSellerCollection as $item): ?>
+                        <div class="item ga-impressions ga-productClick" data-layer-variable="<?php echo htmlentities(json_encode($item['ga_tracking'])) ?>">
+                           <div class="item-wrapper">
+                               <div class="b-image">
+                                   <a href="<?php echo $item['link'] ?>">
+                                       <img src="<?php echo $item['image'] ?>" alt="<?php echo $item['name']; ?>" title="<?php echo $item['name']; ?>"/>
+                                   </a>
+                               </div>
+                               <div class="b-price"><?php echo Mage::Helper('gr_bestseller')->formatPrice($item['price']); ?></div>
+                               <div class="b-name"><a href="<?php echo $item['link'] ?>"><?php echo $item['name']; ?></a></div>
+                               <div class="b-part-number">Part Number: <?php echo $item['part_number']; ?></div>
+                               <div class="small-review"><div class="yotpo bottomLine" data-product-id="<?php echo $item['product_id'] ?>" data-url="<?php echo $item['link'] ?>"></div></div>
+                           </div>
+                        </div>
+                    <?php endforeach; ?>
+               </div>
+            </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<layout>
+    <adminhtml_content_index_index>
+        <reference name="content">
+            <block type="grcontent/adminhtml_content"/>
+        </reference>
+    </adminhtml_content_index_index>
+    <adminhtml_content_page_index>
+        <reference name="content">
+            <block type="grcontent/adminhtml_page"/>
+        </reference>
+    </adminhtml_content_page_index>
+</layout>

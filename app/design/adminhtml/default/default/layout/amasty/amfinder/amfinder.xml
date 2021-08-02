@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<layout version="1.0.0">
+    <adminhtml_finder_edit>
+        <reference name="head">
+            <action method="addJs"><script>amasty/amfinder/ftp_upload.js</script></action>
+            <action method="addCss"><name>amasty/amfinder/style.css</name></action>
+
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="amfinder/adminhtml_finder_edit_import_popup" template="amasty/amfinder/import/popup.phtml" name="amfinder_import_overlay" />
+        </reference>
+    </adminhtml_finder_edit>
+
+
+    <adminhtml_finderimport_errors>
+        <!--<reference name="head">
+            <action method="addJs"><script>amasty/amfinder/admin_functions.js</script></action>
+            <action method="addJs"><script>amasty/amfinder/ftp_upload.js</script></action>
+            <action method="addCss"><name>amasty/amfinder/style.css</name></action>
+
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+        </reference>-->
+        <reference name="root">
+            <remove name="menu" />
+            <remove name="header" />
+            <remove name="notifications" />
+            <remove name="global_notices" />
+            <remove name="breadcrumbs" />
+            <remove name="messages" />
+            <remove name="footer" />
+        </reference>
+        <reference name="content">
+            <block type="amfinder/adminhtml_finder_edit_import_errors_grid" />
+        </reference>
+        <!--<block type="core/text_list" name="root" />
+        <reference name="root">
+            <block type="amfinder/adminhtml_finder_edit_import_errors" />
+        </reference>-->
+    </adminhtml_finderimport_errors>
+</layout>

@@ -1,0 +1,64 @@
+<?php $featuredProducts = $this->collection('make');
+?>
+<div id="featured-product">
+    <div class="container">
+        <div class="row">
+            <div class="heading">
+                <h2><span>Featured</span> Products</h2>
+                <?php $defaultClass = "current"; ?>
+                <ul class="featured-list control-products for-desktop">
+                    <?php foreach ($featuredProducts as $key => $tabLabel): ?>
+                        <li class="<?php echo $defaultClass; ?>" data-tab="<?php echo "tab-{$key}" ?>">
+                            <span><?php echo ucwords($tabLabel['make_label']) ?></span>
+                        </li>
+                        <?php
+                        $defaultClass = "";
+                    endforeach;
+                    ?>
+                </ul>
+            </div>
+            <div class="for-mobile mobile-featured-selector">
+                <select>
+                    <?php foreach ($featuredProducts as $key => $tabLabel): ?>
+                        <option value="<?php echo "tab-{$key}" ?>"><?php echo ucwords($tabLabel['make_label']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <i class="fa fa-caret-down"></i>
+            </div>
+            <div class="parent-tab-content">
+                <?php $defaultClass = "current"; $position = 1; ?>
+                <?php foreach ($featuredProducts as $key => $tabData): ?>
+                    <div class="<?php echo "tab-{$key} {$defaultClass}" ?> tab-content">
+                        <div class="row custom-row">
+                            <?php foreach ($tabData['data'] as $item): ?>
+                                <?php $item['ga_tracking']['position'] = $position++; ?>
+                                <div class="col-md-6 col-sm-6 box col-xs-12 ga-impressions ga-productClick" data-layer-variable="<?php echo htmlentities(json_encode($item['ga_tracking'])) ?>">
+                                    <div class="card-product">
+                                        <img src="<?php echo $item['image_url'] ?>">
+                                        <div class="info">
+                                            <a href="<?php echo $item['url'] ?>" class="link"><h5><?php echo $item['name'] ?></h5></a>
+                                            <p><?php echo substr(strip_tags($item['description']), 0, 100) .'...' ?></p>
+                                            <a href="<?php echo $item['url'] ?>" class="link">Learn More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                $defaultClass = "";
+                            endforeach;
+                            ?>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="card-product-action-box">
+                                    <a href="<?php echo $tabData['make_url']; ?>">
+                                        <button class="button"><?php echo "View more {$tabData['make_label']} parts" ?></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<?php
+$partCollection = $this->partCollection();
+if(!empty($partCollection)): ?>
+    <div class="part-model-list">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><?php echo $this->getMakeModelName() . $this->__(' Parts & Accessories') ?></h2>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach ($partCollection as $item): ?>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="part-list-container">
+                        <a href="<?php echo $item['link'] ?>">
+                            <span> <?php echo $item['name'] ?></span>
+                            <div class="arrow">
+                                <i class="fa fa-angle-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div >
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif ?>

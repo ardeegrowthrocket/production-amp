@@ -1,0 +1,38 @@
+.topCartContent {
+
+  .mini-products-list{
+
+    .item {
+      .product-name {
+
+        a {
+          color: $secondary-text-color;
+        }
+      }
+      .qty-price {
+        font-weight: bold;
+
+        a{
+          color: $pale-pastel-blue;
+        }
+      }
+    }
+  }
+  .actions {
+    a.btn {
+      background-color: $primary-bg-color;
+      font-weight:  500;
+      @include border-radius();
+      padding: 7px 0px;
+      border: none;
+      width: 100%;
+
+      &:hover {
+        background-color: $pale-pastel-blue;
+        color: $white-text-color;
+      }
+
+    }
+  }
+}
+

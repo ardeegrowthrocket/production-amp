@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Homebase_Auto>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Homebase_Auto>
+    </modules>
+</config>

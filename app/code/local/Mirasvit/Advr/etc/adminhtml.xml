@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <menu>
+        <advr module="advr">
+            <title>Advanced Reports</title>
+            <sort_order>70</sort_order>
+            <children>
+                <order module="advr">
+                    <title>Sales</title>
+                    <sort_order>10</sort_order>
+                    <children>
+                        <orders module="advr">
+                            <title>Sales</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/advr_order/orders</action>
+                        </orders>
+                        <plain module="advr">
+                            <title>Orders</title>
+                            <sort_order>15</sort_order>
+                            <action>adminhtml/advr_order/plain</action>
+                        </plain>
+                        <invoices module="advr">
+                            <title>Invoices</title>
+                            <sort_order>16</sort_order>
+                            <action>adminhtml/advr_order/invoices</action>
+                        </invoices>
+                        <hour module="advr">
+                            <title>Sales By Hour</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/advr_order/hour</action>
+                        </hour>
+                        <month module="advr">
+                            <title>Sales By Months</title>
+                            <sort_order>25</sort_order>
+                            <action>adminhtml/advr_order/month</action>
+                        </month>
+                        <day module="advr">
+                            <title>Sales By Day of Week</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/advr_order/day</action>
+                        </day>
+                        <geo module="advr">
+                            <title>Sales By Geo-data</title>
+                            <sort_order>35</sort_order>
+                            <action>adminhtml/advr_order/geo</action>
+                        </geo>
+                        <country module="advr">
+                            <title>Sales By Country</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/advr_order/country</action>
+                        </country>
+                        <paymenttype module="advr">
+                            <title>Sales By Payment Type</title>
+                            <sort_order>50</sort_order>
+                            <action>adminhtml/advr_order/paymentType</action>
+                        </paymenttype>
+                        <creditcardtype module="advr">
+                            <title>Sales By Credit Card Type</title>
+                            <sort_order>55</sort_order>
+                            <action>adminhtml/advr_order/creditcardType</action>
+                        </creditcardtype>
+                        <customergroup module="advr">
+                            <title>Sales By Customer Group</title>
+                            <sort_order>60</sort_order>
+                            <action>adminhtml/advr_order/customerGroup</action>
+                        </customergroup>
+                        <coupon module="advr">
+                            <title>Sales By Coupon</title>
+                            <sort_order>70</sort_order>
+                            <action>adminhtml/advr_order/coupon</action>
+                        </coupon>
+                        <pricerule module="advr">
+                            <title>Sales By Shopping Cart Price Rules</title>
+                            <sort_order>75</sort_order>
+                            <action>adminhtml/advr_order/priceRule</action>
+                        </pricerule>
+                        <taxrate module="advr">
+                            <title>Sales By Tax Rates</title>
+                            <sort_order>80</sort_order>
+                            <action>adminhtml/advr_order/taxRate</action>
+                        </taxrate>
+                        <newvsreturning module="advr">
+                            <title>New vs Returning Customers</title>
+                            <sort_order>85</sort_order>
+                            <action>adminhtml/advr_order/newVsReturning</action>
+                        </newvsreturning>
+                        <registeredvsunregistered module="advr">
+                            <title>Registered vs Unregistered Customers</title>
+                            <sort_order>90</sort_order>
+                            <action>adminhtml/advr_order/registeredVsUnregistered</action>
+                        </registeredvsunregistered>
+                        <customer module="advr">
+                            <title>Sales by Customer</title>
+                            <sort_order>100</sort_order>
+                            <action>adminhtml/advr_order/customer</action>
+                        </customer>
+                        <category module="advr">
+                            <title>Sales by Category</title>
+                            <sort_order>110</sort_order>
+                            <action>adminhtml/advr_order/category</action>
+                        </category>
+                        <shippingtime module="advr">
+                            <title>Average Shipping Time</title>
+                            <sort_order>120</sort_order>
+                            <action>adminhtml/advr_order/shippingtime</action>
+                        </shippingtime>
+                        <shippingmethod module="advr">
+                            <title>Sales by Shipping Method</title>
+                            <sort_order>130</sort_order>
+                            <action>adminhtml/advr_order/shippingmethod</action>
+                        </shippingmethod>
+                    </children>
+                </order>
+                <catalog module="advr">
+                    <title>Catalog</title>
+                    <sort_order>20</sort_order>
+                    <children>
+                        <products module="advr">
+                            <title>Products / Bestsellers</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/advr_catalog/product</action>
+                        </products>
+                        <attribute module="advr">
+                            <title>Sales By Attribute</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/advr_catalog/attribute</action>
+                        </attribute>
+                        <attribute_set module="advr">
+                            <title>Sales By Attribute Set</title>
+                            <sort_order>35</sort_order>
+                            <action>adminhtml/advr_catalog/attributeset</action>
+                        </attribute_set>
+                        <lowstock module="advr">
+                            <title>Low Stock</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/advr_catalog/lowstock</action>
+                        </lowstock>
+                        <items module="advr" translate="title">
+                            <title>Sold Items</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/advr_catalog/items</action>
+                        </items>
+                    </children>
+                </catalog>
+                <customer module="advr">
+                    <title>Customers</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <customer module="advr">
+                            <title>Customers</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/advr_customer/customer</action>
+                        </customer>
+                    </children>
+                </customer>
+                <review module="advr">
+                    <title>Reviews</title>
+                    <sort_order>40</sort_order>
+                    <children>
+                        <review module="advr">
+                            <title>Reviews</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/advr_review/review</action>
+                        </review>
+                    </children>
+                </review>
+                <settings module="advr">
+                    <title>Settings</title>
+                    <sort_order>50</sort_order>
+                    <children>
+                        <settings module="advr">
+                            <title>Configuration</title>
+                            <action>adminhtml/system_config/edit/section/advr</action>
+                            <sort_order>10</sort_order>
+                        </settings>
+                        <import_geo module="advr">
+                            <title>Import Geo Data</title>
+                            <action>adminhtml/advr_geo/import</action>
+                            <sort_order>20</sort_order>
+                        </import_geo>
+                    </children>
+                </settings>
+            </children>
+        </advr>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <advr module="advr">
+                        <title>Advanced Reports</title>
+                        <sort_order>70</sort_order>
+                        <children>
+                            <order module="advr">
+                                <title>Sales</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <orders module="advr">
+                                        <title>Sales</title>
+                                        <sort_order>10</sort_order>
+                                    </orders>
+                                    <plain module="advr">
+                                        <title>Orders</title>
+                                        <sort_order>15</sort_order>
+                                    </plain>
+                                    <hour module="advr">
+                                        <title>Sales By Hour</title>
+                                        <sort_order>20</sort_order>
+                                    </hour>
+                                    <month module="advr">
+                                        <title>Sales By Months</title>
+                                        <sort_order>25</sort_order>
+                                    </month>
+                                    <day module="advr">
+                                        <title>Sales By Day of Week</title>
+                                        <sort_order>30</sort_order>
+                                    </day>
+                                    <geo module="advr">
+                                        <title>Sales By Geo-data</title>
+                                        <sort_order>35</sort_order>
+                                    </geo>
+                                    <country module="advr">
+                                        <title>Sales By Country</title>
+                                        <sort_order>40</sort_order>
+                                    </country>
+                                    <paymenttype module="advr">
+                                        <title>Sales By Payment Type</title>
+                                        <sort_order>50</sort_order>
+                                    </paymenttype>
+                                    <creditcardtype module="advr">
+                                        <title>Sales By Credit Card Type</title>
+                                        <sort_order>55</sort_order>
+                                    </creditcardtype>
+                                    <customergroup module="advr">
+                                        <title>Sales By Customer Group</title>
+                                        <sort_order>60</sort_order>
+                                    </customergroup>
+                                    <coupon module="advr">
+                                        <title>Sales By Coupon</title>
+                                        <sort_order>65</sort_order>
+                                    </coupon>
+                                    <pricerule module="advr">
+                                        <title>Sales By Price Rule</title>
+                                        <sort_order>70</sort_order>
+                                    </pricerule>
+                                    <taxrate module="advr">
+                                        <title>Sales By Tax Rates</title>
+                                        <sort_order>75</sort_order>
+                                    </taxrate>
+                                    <newvsreturning module="advr">
+                                        <title>New vs Returning Customers</title>
+                                        <sort_order>80</sort_order>
+                                    </newvsreturning>
+                                    <registeredvsunregistered module="advr">
+                                        <title>Registered vs Unregistered Customers</title>
+                                        <sort_order>90</sort_order>
+                                    </registeredvsunregistered>
+                                    <customer module="advr">
+                                        <title>Sales by Customer</title>
+                                        <sort_order>100</sort_order>
+                                    </customer>
+                                    <category module="advr">
+                                        <title>Sales by Category</title>
+                                        <sort_order>110</sort_order>
+                                    </category>
+                                    <shippingtime module="advr">
+                                        <title>Average Shipping Time</title>
+                                        <sort_order>120</sort_order>
+                                    </shippingtime>
+                                    <shippingmethod module="advr">
+                                        <title>Sales by Shipping Method</title>
+                                        <sort_order>130</sort_order>
+                                    </shippingmethod>
+                                </children>
+                            </order>
+                            <catalog module="advr">
+                                <title>Catalog</title>
+                                <sort_order>20</sort_order>
+                                <children>
+                                    <products module="advr">
+                                        <title>Products / Bestsellers</title>
+                                        <sort_order>20</sort_order>
+                                    </products>
+                                    <attribute module="advr">
+                                        <title>Sales By Attribute</title>
+                                        <sort_order>30</sort_order>
+                                    </attribute>
+                                    <attribute_set module="advr">
+                                        <title>Sales By Attribute Set</title>
+                                        <sort_order>35</sort_order>
+                                    </attribute_set>
+                                    <lowstock module="advr">
+                                        <title>Low Stock</title>
+                                        <sort_order>40</sort_order>
+                                    </lowstock>
+                                    <items module="advr" translate="title">
+                                        <title>Sold Items</title>
+                                        <sort_order>45</sort_order>
+                                    </items>
+                                </children>
+                            </catalog>
+                            <review module="advr">
+                                <title>Reviews</title>
+                                <sort_order>40</sort_order>
+                                <children>
+                                    <review module="advr">
+                                        <title>Reviews</title>
+                                        <sort_order>10</sort_order>
+                                    </review>
+                                </children>
+                            </review>
+                            <customer module="advr">
+                                <title>Customers</title>
+                                <sort_order>30</sort_order>
+                                <children>
+                                    <customer module="advr">
+                                        <title>Customers</title>
+                                        <sort_order>10</sort_order>
+                                    </customer>
+                                </children>
+                            </customer>
+                            <settings module="advr">
+                                <title>Settings</title>
+                                <sort_order>50</sort_order>
+                                <children>
+                                    <settings module="advr">
+                                        <title>Configuration</title>
+                                        <sort_order>10</sort_order>
+                                    </settings>
+                                    <import_geo module="advr">
+                                        <title>Import Geo Data</title>
+                                        <sort_order>20</sort_order>
+                                    </import_geo>
+                                </children>
+                            </settings>
+                        </children>
+                    </advr>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <advr translate="title" module="advr">
+                                        <title>Mirasvit Advanced Reports</title>
+                                    </advr>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

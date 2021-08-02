@@ -1,0 +1,142 @@
+#featured-product{
+  .mobile-featured-selector{
+    select{
+      @include remove-selector-design();
+      border: 0px;
+    }
+  }
+  .heading{
+    position: relative;
+    margin-top: 60px;
+    h2{
+      text-align: center;
+      font-size: 36px;
+      font-family: robotobold;
+      color: $h2-text-color;
+    }
+  }
+
+  ul.control-products{
+
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    li{
+      display: inline-block;
+      font-size: 22px;
+      height: 24px;
+      cursor: pointer;
+      color: $grey-primary;
+      padding-left: 25px;
+      padding-right: 25px;
+      position: relative;
+
+      &.current{
+        font-family: robotobold;
+        color: #333;
+      }
+
+      &:after{
+        content: '\f111';
+        color: $carousel-nav-color;
+        font-family: FontAwesome;
+        font-size: 10px;
+        position: absolute;
+        right: -3px;
+        top: 8px;
+      }
+
+      &:last-child{
+        &:after{
+          content: ''
+        }
+      }
+    }
+  }
+  .custom-row{
+    margin-left: -8px;
+    margin-right:-8px;
+  }
+  .box{
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .card-product{
+    overflow: hidden;
+    @include border-radius();
+    position: relative;
+    height: 335px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    background: rgb(0,0,0);
+    background: linear-gradient(270deg, rgba(0,0,0,0.7875525210084033) 59%, rgba(0,0,0,0.3449754901960784) 100%);
+
+    img{
+      width: 100%;
+      height: 100%;
+      @include border-radius();
+      position: absolute;
+      z-index: 1;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .info{
+      color: $white-color;
+      text-align: left;
+      margin-left: 210px;
+      position: relative;
+      z-index: 2;
+
+      h5{
+        color: $white-color;
+        font-size: 28px;
+        font-family: robotobold;
+        line-height: 34px;
+        width: 90%;
+      }
+
+      p{
+        color: $white-color;
+        font-size: 16px;
+        max-width: 90%;
+      }
+
+      a{
+        color: $white-color;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-family: robotobold;
+      }
+
+    }
+  }
+  .tab-content{
+    display: none;
+
+    &.current{
+      display: block !important;
+    }
+  }
+  .for-mobile{
+    display: none;
+  }
+
+  .card-product-action-box{
+    margin-top: 40px;
+
+    button{
+      background-color: $secondary-bg-color;
+      text-transform: uppercase;
+      height: 38px;
+      padding: 12px 0px;
+      color: $white-color;
+      min-width: 225px;
+      text-align: center;
+      font-size: 14px;
+      @include box-shadow(0, 4px, 0, $box-shadow-bg);
+      @include border-radius(4px, 4px, 4px, 4px);
+    }
+  }
+}

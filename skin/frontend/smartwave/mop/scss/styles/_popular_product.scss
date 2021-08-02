@@ -1,0 +1,63 @@
+.popular-products{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid $line-color;
+  padding-bottom: 50px;
+
+  .heading {
+    position: relative;
+    margin-bottom: 30px;
+
+    h2 {
+      margin-bottom: 0px;
+      position: relative;
+      overflow: hidden;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: $grey-color-3;
+      font-family: robotolight;
+
+      span.bold{
+        font-family: robotobold;
+      }
+
+      &:after {
+        content: "";
+        display: inline-block;
+        height: 0.3em;
+        vertical-align: bottom;
+        width: 100%;
+        margin-right: -100%;
+        margin-left: 10px;
+        border-top: 1px solid $line-color;
+      }
+    }
+  }
+
+  .item{
+    .price{
+      text-align: left;
+      font-size: 24px;
+      font-family: robotobold;
+      color: $secondary-bg-color;
+      margin-top: 20px;
+
+    }
+    .title{
+      a{
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        margin: 10px 0px 10px;
+        line-height: 22px;
+        color: $grey-color-3;
+        font-family: robotobold;
+      }
+    }
+    .part_name{
+      text-align: left;
+      color: $grey-primary;
+      font-size: 16px;
+    }
+  }
+}

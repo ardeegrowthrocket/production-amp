@@ -1,0 +1,86 @@
+"General Information","Algemene informatie"
+"Group Name","Naam van de Groep"
+"Markup Type","Markup Soort"
+"Markup Amount","Markup Hoeveelheid"
+Status,Status
+Active,Actief
+Inactive,Inactief
+"Customer Groups",Klantgroepen
+ID,ID
+Name,Naam
+SKU,SKU
+Price,Prijs
+"Group Information","Groep Informatie"
+General,Algemeen
+"Group Products","Groep Producten"
+"Save Group","Groep Opslaan"
+"Delete Group","Groep Verwijderen"
+"Save And Continue Edit","Opslaan En Doorgaan Met Bewerken"
+Alert,Waarschuwing
+"Add Group","Groep Toevoegen"
+"Edit Group '%s'","Groep '%s' Bewerken"
+"Group Title","Groep Titel"
+Type,Soort
+Fixed,Vaste
+Percent,Procent
+Amount,Aantal
+Action,Actie
+Edit,Bewerken
+Actions,Acties
+Select,Selecteer
+"Increase Markup","Markup Verhogen"
+"Decrease Markup","Markup Verlagen"
+"Increase Percent Markup","Procent Markup Verhogen"
+"Decrease Percent Markup","Procent Markup Verlagen"
+"Increase Fixed Markup","Vaste Markup Verhogen"
+"Decrease Fixed Markup","Vaste Markup Verlagen"
+"Increase/decrease by ","Verhogen/verlagen met"
+"Stop further rules processing","Stop nader regels verwerking"
+Yes,Ja
+No,Nee
+"day (s)","dag (en)"
+"month (s)","maand (en)"
+"year (s)","jaar (en)"
+is,is
+"is not","is niet"
+"equals or greater than","is gelijk aan of groter dan"
+"equals or less than","is gelijk aan of minder dan"
+"greater than","groter dan"
+"less than","minder dan"
+"is one of","is een van de"
+"is not one of","is niet een van de"
+"Rule Name",Regelnaam
+Group,Groep
+Priority,Prioriteit
+"Rule Information","Regel Informatie"
+Conditions,Voorwaarden
+"Save Rule","Regel Opslaan "
+"Delete Rule","Regel Verwijderen"
+"Add Rule","Regel Toevoegen"
+"Edit Rule '%s'","Regel '%s' Bewerken "
+"Rule Groups","Regel Groepen"
+"Manage Groups","Groepen Beheren"
+"Manage Automatic Price Rules","Automatische Prijs Regels Beheren"
+"Group manager",Groepsbeheerder
+Catalog,Catalogus
+"Cost Based Price","Kosten gebaseerde prijs"
+"New Group","Nieuwe Groep"
+"Group does not exist","Groep bestaat niet"
+"Group was successfully saved","Groep was succesvol opgeslagen"
+"Item was successfully deleted","Item is succesvol verwijderd"
+"Rules manager",Regelsbeheerder
+"New Rule","Nieuwe Regel"
+"Rule does not exist","Regel bestaat niet"
+"Rule was successfully saved","Regel is succesvol opgeslagen"
+"Automatic Pricing","Automatische Prijsstelling"
+Groups,Groepen
+Rules,Regels
+"Delivery Date",Leveringsdatum
+"Automatic Pricing Settings","Automatische Prijsstelling Instellingen"
+"Automatic Pricing Enabled by Default","Automatische Prijsstelling Standaard Ingeschakeld"
+Disabled,Uitgeschakeld
+inactive,inactief
+"Automatic Pricing Group","Automatische Prijsstelling Groep"
+"If revenue for the last","Als de inkomsten voor de laatste"
+"Cost based price","Kosten gebaseerde prijs"
+"Tier price","Tier prijs"

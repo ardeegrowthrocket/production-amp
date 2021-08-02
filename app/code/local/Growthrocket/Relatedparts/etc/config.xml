@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Relatedparts>
+      <version>0.1.0</version>
+    </Growthrocket_Relatedparts>
+  </modules>
+  <frontend>
+    <routers>
+      <relatedparts>
+        <use>standard</use>
+          <args>
+            <module>Growthrocket_Relatedparts</module>
+            <frontName>relatedparts</frontName>
+          </args>
+      </relatedparts>
+    </routers>
+		<layout>
+		  <updates>
+			<relatedparts>
+			  <file>relatedparts.xml</file>
+			</relatedparts>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <relatedparts>
+        <class>Growthrocket_Relatedparts_Helper</class>
+      </relatedparts>
+    </helpers>
+  </global>
+</config> 

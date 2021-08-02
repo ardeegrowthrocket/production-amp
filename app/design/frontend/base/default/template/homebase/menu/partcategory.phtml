@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: olivercastro
+ * Date: 12/03/2017
+ * Time: 9:44 AM
+ */
+/** @var Homebase_Autopart_Block_Partcategory $this */
+
+$makes = $this->getMakes();
+/** @var Homebase_Autopart_Helper_Data $_helper */
+$_helper = Mage::helper('hautopart');
+?>
+
+<ul>
+    <?php foreach($makes as $make): ?>
+        <li class="menu-item col-sm-3">
+            <h5><?php echo $make['label'] ?></h5>
+            <ul class="sub-menu">
+                <?php $models = $this->getModels($make['id']); ?>
+                <?php foreach($models as $model): ?>
+                    <li>
+                        <a href="<?php echo $_helper->getModelPath($make['label'] . '-' . $model['label']) ?>">
+                            <?php echo $model['label']; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </li>
+    <?php endforeach; ?>
+</ul>

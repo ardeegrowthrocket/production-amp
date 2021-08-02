@@ -1,0 +1,56 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/26/17
+ * Time: 6:01 PM
+ */
+
+$collection = $this->getListing();
+$numberOfItem = ceil($collection->count()/ 3);
+$begin = true;
+$ctr = 1;
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="row">
+                <div class="heading">
+                    <h2><?php echo $this->__('Shop By Category') ?></h2>
+                    <div class="sby-category-listing">
+                        <div class="row">
+                            <?php foreach($collection as $item): ?>
+                                <?php if($begin): ?>
+                                    <div class="group-sby-group-listing  col-sm-4 col-xs-12">
+                                <?php endif;  ?>
+                                <?php if($item->getIid() != 438):?>
+                                    <a href="<?php echo $item->getLink(); ?>" class="link-item"><span><?php echo $item->getTitle(); ?></span></a>
+                                <?php endif; ?>
+                                <?php if($ctr % $numberOfItem == 0 || $ctr == $collection->count()): ?>
+                                    <?php $begin = true; ?>
+                                    </div>
+                                <?php else: ?>
+                                    <?php $begin = false; ?>
+                                <?php endif; ?>
+                                <?php
+                                $ctr++;
+                                ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12 subaru-bucks">
+            <div class="row">
+                <h2><?php echo $this->__('Subaru Bucks') ?></h2>
+                <p><?php echo $this->__('We Accept Subaru Reward Dollars') ?></p>
+                <a href="<?php echo Mage::getBaseUrl() ?>reward-dollars">
+                <img src="<?php echo Mage::getBaseUrl('media') ?>home/sop/subaru_bucks.png" alt="<?php echo $this->__('Subaru Bucks') ?>" Title="<?php echo $this->__('Subaru Bucks') ?>" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

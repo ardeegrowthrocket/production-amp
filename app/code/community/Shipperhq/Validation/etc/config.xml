@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!--
+/**
+*
+* Webshopapps Shipping Module
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade Magento to newer
+* versions in the future. If you wish to customize Magento for your
+* needs please refer to http://www.magentocommerce.com for more information.
+*
+* Shipper HQ Shipping
+*
+* @category ShipperHQ
+* @package ShipperHQ_Shipping_Carrier
+* @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+* @author ShipperHQ Team sales@shipperhq.com
+*/
+-->
+<config>
+    <modules>
+        <Shipperhq_Validation>
+            <version>0.0.3</version>
+        </Shipperhq_Validation>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_validation>
+                <class>Shipperhq_Validation_Block</class>
+            </shipperhq_validation>
+        </blocks>
+        <models>
+            <shipperhq_validation>
+                <class>Shipperhq_Validation_Model</class>
+            </shipperhq_validation>
+        </models>
+        <resources>
+            <shipperhq_validation_setup>
+                <setup>
+                    <module>Shipperhq_Validation</module>
+                    <class>Mage_Customer_Model_Resource_Setup</class>
+                </setup>
+            </shipperhq_validation_setup>
+        </resources>
+        <helpers>
+            <shipperhq_validation>
+                <class>Shipperhq_Validation_Helper</class>
+            </shipperhq_validation>
+        </helpers>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <address_valid><to_order_address>*</to_order_address><to_customer_address>*</to_customer_address></address_valid>
+                <destination_type><to_order_address>*</to_order_address><to_customer_address>*</to_customer_address></destination_type>
+            </sales_convert_quote_address>
+            <customer_address>
+                <address_valid><to_quote_address>*</to_quote_address></address_valid>
+                <destination_type><to_quote_address>*</to_quote_address></destination_type>
+            </customer_address>
+            <sales_convert_order_address>
+                <address_valid><to_quote_address>*</to_quote_address></address_valid>
+                <destination_type><to_quote_address>*</to_quote_address></destination_type>
+            </sales_convert_order_address>
+            <customer_dataflow>
+                <address_valid_string><billing>1</billing><shipping>1</shipping><billing_required>1</billing_required><shipping_required>1</shipping_required></address_valid_string>
+            </customer_dataflow>
+        </fieldsets>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <shipperhq_addressvalidation_sales_order_observer>
+                        <class>shipperhq_validation/observer</class>
+                        <method>verifyShippingAddress</method>
+                    </shipperhq_addressvalidation_sales_order_observer>
+                </observers>
+            </sales_order_place_after>
+            <controller_action_predispatch>
+                <observers>
+                    <shipperhq_addressvalidation_controller_action_predispatch>
+                        <class>shipperhq_validation/observer</class>
+                        <method>hookToControllerActionPreDispatch</method>
+                    </shipperhq_addressvalidation_controller_action_predispatch>
+                </observers>
+            </controller_action_predispatch>
+            <controller_action_postdispatch>
+                <observers>
+                    <shipperhq_addressvalidation_controller_action_postdispatch>
+                        <class>shipperhq_validation/observer</class>
+                        <method>hookToControllerActionPostDispatch</method>
+                    </shipperhq_addressvalidation_controller_action_postdispatch>
+                </observers>
+            </controller_action_postdispatch>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <shipperhq_validation>
+                <use>standard</use>
+                <args>
+                    <module>Shipperhq_Validation</module>
+                    <frontName>shipperhq_validation</frontName>
+                </args>
+            </shipperhq_validation>
+        </routers>
+        <translate>
+            <modules>
+                <Shipperhq_Validation>
+                    <files>
+                        <default>Shipperhq_Addressvalidation.csv</default>
+                    </files>
+                </Shipperhq_Validation>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <shipperhq_validation>
+                    <file>shipperhq/validation.xml</file>
+                </shipperhq_validation>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <your_module>
+                        <class>shipperhq_validation/observer</class>
+                        <type>singleton</type>
+                        <method>onAdminhtmlBlockHtmlBefore</method>
+                    </your_module>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
+    </adminhtml>
+    <!--<default>-->
+        <!--<shipping>-->
+            <!--<wsavalidation>-->
+                <!--<active>1</active>-->
+                <!--<validation_carrier>UPS</validation_carrier>-->
+                <!--<validation_options>checkout,address_book</validation_options>-->
+                <!--<sandbox>0</sandbox>-->
+            <!--</wsavalidation>-->
+        <!--</shipping>-->
+    <!--</default>-->
+</config>

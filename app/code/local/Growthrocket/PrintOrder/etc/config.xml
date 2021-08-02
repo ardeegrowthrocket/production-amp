@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_PrintOrder>
+      <version>0.1.0</version>
+    </Growthrocket_PrintOrder>
+  </modules>
+  <frontend>
+    <routers>
+      <printorder>
+        <use>standard</use>
+          <args>
+            <module>Growthrocket_PrintOrder</module>
+            <frontName>printorder</frontName>
+          </args>
+      </printorder>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <growthrocket_printorder_sales_ordercontroller>
+                <from><![CDATA[#^/sales/order/#]]></from> <!-- Mage_Sales_OrderController  -->
+                <to>/printorder/sales_order/</to> <!-- Growthrocket_PrintOrder_Sales_OrderController  -->
+            </growthrocket_printorder_sales_ordercontroller>
+		</rewrite>
+    <helpers>
+      <printorder>
+        <class>Growthrocket_PrintOrder_Helper</class>
+      </printorder>
+    </helpers>
+  </global>
+  <admin>
+	<routers>
+	  <printorder>
+	    <use>admin</use>
+		<args>
+		  <module>Growthrocket_PrintOrder</module>
+		  <frontName>admin_printorder</frontName>
+		</args>
+	  </printorder>
+	</routers>
+  </admin>
+    <websites>
+        <lfp>
+            <sales_pdf>
+                <pdf_order>
+                    <enable_order_pdf>1</enable_order_pdf>
+                </pdf_order>
+            </sales_pdf>
+        </lfp>
+    </websites>
+</config> 

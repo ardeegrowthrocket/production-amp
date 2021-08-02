@@ -1,0 +1,123 @@
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/hauto/app.css</stylesheet></action>
+        </reference>
+    </default>
+    <cms_index_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/hauto/app.css</stylesheet></action>
+        </reference>
+    </cms_index_index>
+    <hauto_category_category_index>
+        <reference name="root">
+            <action method="addBodyClass"><classname>category-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+           <block type="core/template" name="product-container" template="hauto/category-layout.phtml">
+                <block type="hauto/product_category" name="product-listing" template="catalog/product/list.phtml">
+                    <!-- convert here -->
+                    <block type="hauto/layered_attributes2" name="layered-proxy" template="hauto/layered/attributes.phtml"></block>
+                    <block type="hauto/product_listing_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.pthml">
+                      <block type="hauto/product_listing_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockname"><name>display_list_toolbar</name></action>
+                </block>
+            </block>
+        </reference>
+    </hauto_category_category_index>
+
+    <hauto_part_part_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="addBodyClass"><classname>category-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+            <block type="hauto/part_make" name="breadcrumbs" template="hauto/part.phtml"></block>
+            <block type="core/template" name="product-container" template="hauto/layout.phtml">
+                <block type="hauto/product_listing" name="product-listing" template="hauto/product/list.phtml">
+                    <!-- convert here -->
+                    <block type="hauto/layered_view_model" name="layered-proxy" template="hauto/layered/view.phtml"></block>
+                    <block type="hauto/product_listing_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.pthml">
+                        <block type="hauto/product_listing_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockname"><name>display_list_toolbar</name></action>
+                </block>
+                <block type="hauto/related_part" name="parts-related" template="hauto/related/part.phtml"></block>
+            </block>
+        </reference>
+    </hauto_part_part_index>
+
+    <part_make_partmake_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="addBodyClass"><classname>part-make-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+            <block type="hauto/part_make" name="breadcrumbs" template="hauto/part.phtml"></block>
+            <block type="core/template" name="product-container" template="hauto/layout.phtml">
+                <block type="hauto/product_listing" name="product-listing" template="hauto/product/list.phtml">
+                    <block type="hauto/layered_view_model" name="layered-proxy" template="hauto/layered/view.phtml"></block>
+                    <block type="hauto/product_listing_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.pthml">
+                        <block type="hauto/product_listing_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockname"><name>display_list_toolbar</name></action>
+                </block>
+                <block type="hauto/related_part" name="parts-related" template="hauto/related/part.phtml"></block>
+            </block>
+        </reference>
+    </part_make_partmake_index>
+
+    <part_model_partmodel_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="addBodyClass"><classname>part-make-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+            <block type="hauto/part_make" name="breadcrumbs" template="hauto/part.phtml"></block>
+            <block type="core/template" name="product-container" template="hauto/layout.phtml">
+                <block type="hauto/product_listing" name="product-listing" template="hauto/product/list.phtml">
+                    <block type="hauto/layered_view_year" name="layered-proxy" template="hauto/layered/view.phtml"></block>
+                    <block type="hauto/product_listing_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.pthml">
+                        <block type="hauto/product_listing_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockname"><name>display_list_toolbar</name></action>
+                </block>
+                <block type="hauto/related_part" name="parts-related" template="hauto/related/part.phtml"></block>
+            </block>
+        </reference>
+    </part_model_partmodel_index>
+
+    <part_ymm_partymm_index>
+        <reference name="root">
+            <action method="addBodyClass"><classname>part-make-page</classname></action>
+        </reference>
+        <reference name="page.header">
+            <block type="hautopart/ymm" name="ymm" template="homebase/ymm/box.phtml"></block>
+        </reference>
+        <reference name="content">
+            <block type="hauto/part_ymm" name="breadcrumbs" template="hauto/part.phtml"></block>
+            <block type="core/template" name="product-container" template="hauto/layout.phtml">
+                <block type="hauto/product_listing" name="product-listing" template="hauto/product/list2.phtml">
+                    <block type="hauto/product_listing_toolbar" name="display_list_toolbar" template="catalog/product/list/toolbar.pthml">
+                        <block type="hauto/product_listing_pager" name="display_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockname"><name>display_list_toolbar</name></action>
+                </block>
+                <block type="hauto/related_part" name="parts-related" template="hauto/related/part.phtml"></block>
+            </block>
+        </reference>
+    </part_ymm_partymm_index>
+</layout>

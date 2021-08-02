@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Growthrocket_Updater>
+			<version>0.1.0</version>
+		</Growthrocket_Updater>
+	</modules>
+	<global>
+		<helpers>
+			<grupdater>
+				<class>Growthrocket_Updater_Helper</class>
+			</grupdater>
+		</helpers>
+		<blocks>
+			<grupdater>
+				<class>Growthrocket_Updater_Block</class>
+			</grupdater>
+		</blocks>
+		<models>
+			<grupdater>
+				<class>Growthrocket_Updater_Model</class>
+			</grupdater>
+		</models>
+	</global>
+	<admin>
+		<routers>
+			<grupdater>
+				<use>admin</use>
+				<args>
+					<module>Growthrocket_Updater</module>
+					<frontName>admin_updater</frontName>
+				</args>
+			</grupdater>
+		</routers>
+	</admin>
+	<adminhtml>
+		<menu>
+			<grupdater module="grupdater">
+				<title>GrowthRocket</title>
+				<sort_order>100</sort_order>
+				<children>
+					<updaterbackend module="grupdater">
+						<title>Mass Product Price Updater</title>
+						<sort_order>0</sort_order>
+						<action>admin_updater/adminhtml_updaterbackend</action>
+					</updaterbackend>
+				</children>
+			</grupdater>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<grupdater translate="title" module="grupdater">
+							<title>Growthrocket</title>
+							<sort_order>1000</sort_order>
+							<children>
+								<updaterbackend translate="title">
+									<title>Mass Product Price Updater</title>
+								</updaterbackend>
+							</children>
+						</grupdater>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<grupdater>
+					<file>updater.xml</file>
+				</grupdater>
+			</updates>
+		</layout>
+	</adminhtml>
+</config> 

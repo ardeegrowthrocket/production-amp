@@ -1,0 +1,124 @@
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<?php if($meta_title=$this->getMetaTitle()): ?>
+    <title><?php echo htmlspecialchars($meta_title) ?></title>
+<?php else: ?>
+        <?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()): ?>
+            <title>All Mopar Genuine Dealer Jeep, Dodge & Chrysler Discount Auto Parts</title>
+        <?php else: ?>
+            <title><?php echo $this->getTitle() ?></title>
+        <?php endif; ?>
+<?php endif; ?>
+
+<?php
+    $controllerName = $this->getRequest()->getControllerName();
+    $routeAction = $this->getRequest()->getActionName();
+    if($controllerName === 'model'):
+        $helper = Mage::helper('hautopart');
+        $query = $this->getRequest()->getParam('ymm_params',-1);
+        if($query != -1):
+            $combination = unserialize($query);
+?>
+            <?php if($routeAction === 'index'): ?>
+                <?php
+                    $models = $helper->getAvailableMakeModels($combination['make']);
+                    $modelLabels = array();
+                    foreach($models as $model){
+                        $modelLabels[] = ucwords($helper->getOptionValue($model));
+                    }
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']))
+                ?>
+                <meta name="title" content="Discount <?php echo $makeLabel;  ?> Parts & Genuine Dealer Accessories Online"/>
+                <meta name="description" content="<?php echo sprintf('Buy genuine mopar %s parts & accessories. Browse our %s dealer catalog and find discount %s for models such as the %s.',$makeLabel,$makeLabel,$makeLabel,implode(',',$modelLabels));?>">
+            <?php endif; ?>
+            <?php if($routeAction === 'model'): ?>
+                <?php
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                    $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                ?>
+                <meta name="title" content="Genuine <?php echo $makeLabel ;  ?> <?php echo $modelLabel;  ?> Parts & Accessories"/>
+                <meta name="description" content="<?php echo sprintf('Shop online for discount %s %s parts & accessories. Find OEM dealer parts for your %s %s at AllMoparParts.com.',$makeLabel,$modelLabel,$makeLabel,$modelLabel); ?>"/>
+            <?php endif; ?>
+            <?php if($routeAction === 'ymm'): ?>
+                <?php
+                $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                $yearLabel = ucwords($helper->getOptionValue($combination['year']));
+                $range = $helper->getAvailableYearRange($combination['make'], $combination['model']);
+
+                ?>
+                <meta name="title" content="<?php echo sprintf('%s %s %s Parts & Accessories',$range,$makeLabel,$modelLabel); ?>"/>
+                <meta name="description" content="<?php echo sprintf('Buy %s %s %s parts & accessories online. Get the best genuine OEM dealer parts for your %s %s %s.', $yearLabel,$makeLabel,$modelLabel,$range,$makeLabel,$modelLabel) ?>"/>
+            <?php endif; ?>
+            <?php if($routeAction === 'cat'): ?>
+                <?php
+                    $makeLabel = ucwords($helper->getOptionValue($combination['make']));
+                    $modelLabel = ucwords($helper->getOptionValue($combination['model']));
+                    $yearLabel = ucwords($helper->getOptionValue($combination['year']));
+                    $range = $helper->getAvailableYearRange($combination['make'], $combination['model']);
+                    $catLabel = ucwords($helper->getOptionValue($combination['category']));
+                ?>
+                <meta name="title" content="<?php echo sprintf('%s %s %s %s',$range,$makeLabel,$modelLabel,$catLabel)?>"/>
+                <meta name="description" content="<?php echo sprintf('Find genuine OEM %s %s %s. We offer dealer discounts on %s accessories for your %s %s.',$makeLabel,$modelLabel,$catLabel,$makeLabel,$range,$modelLabel); ?>"/>
+            <?php endif; ?>
+            <?php if($routeAction === 'sku'): ?>
+            <?php
+                $_product = Mage::registry('current_product');
+                $name = $_product->getName();
+                $sku = $_product->getSku();
+                $savings = $_product->getMsrp() - $_product->getFinalPrice();
+                $_coreHelper = $this->helper('core');
+            ?>
+            <?php if($savings>3): ?>
+                <meta name="description" content="<?php echo sprintf('Get your %s %s & save up to %s with our best pricing! Shop genuine mopar parts.',$name,$sku,$_coreHelper->formatPrice($savings, false)); ?>"/>
+            <?php else: ?>
+                <meta name="description" content="<?php echo sprintf('Get your %s %s & save more with our best pricing! Shop genuine mopar parts.',$name,$sku); ?>"/>
+            <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
+<?php endif; ?>
+
+
+<?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()): ?>
+    <meta name="title" content="All Mopar Genuine Dealer Jeep, Dodge & Chrysler Discount Auto Parts">
+<?php endif; ?>
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<?php
+    $theme = Mage::helper('porto');
+    $charSubset = '&subset=latin';
+    $d = $theme->getCfgSectionDesign();
+    $s = $theme->getCfgSectionSettings();
+	if(!isset($s['general']['disable_responsive']) || (isset($s['general']['disable_responsive']) && !$s['general']['disable_responsive'])){
+?>	
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<?php
+	}
+?>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<?php //Include Google fonts character subsets (such as extended latin, cyrillic)
+    if (isset($d['font']['primary_char_latin_ext']) && $d['font']['primary_char_latin_ext']==1 )
+        $charSubset .= ',latin-ext';
+    if (isset($d['font']['custom_char_subset']) && $d['font']['custom_char_subset'])
+        $charSubset .= ','.$d['font']['custom_char_subset'];
+    $font_sizes = "%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic";
+?>
+<?php if ($d['font']['custom'] && $d['font']['primary_font_family_group'] == 'google'): ?>
+<link rel="stylesheet" href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $d['font']['primary_font_family']).$font_sizes; echo $charSubset; ?>' type='text/css' />
+<?php else: ?>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&amp;v1&amp;subset=latin%2Clatin-ext" type="text/css" media="screen"/>
+<?php endif;?>
+<link href='//fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'/>
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof dailydealTimeCountersCategory == 'undefined') {
+	var dailydealTimeCountersCategory = new Array();
+	var i = 0;
+}
+//]]>
+</script>
+<!--<?php echo "Porto Magento Theme: v".Mage::getConfig()->getModuleConfig("Smartwave_Porto")->version; ?>-->

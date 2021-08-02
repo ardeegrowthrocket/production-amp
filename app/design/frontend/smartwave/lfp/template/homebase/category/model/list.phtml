@@ -1,0 +1,110 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+/** @var Homebase_Autopart_Block_Display_List $this */
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+
+$titlePrefix = "";
+if($request->getActionName() == 'model') {
+    $titlePrefix = '&nbsp;Parts & Accessories';
+}
+$title = $this->getAutoName();
+?>
+    <!--YMM FORM -->
+
+<?php if(count($list) > 0): ?>
+
+<!-- listing  -->
+
+<div class="container">
+        <div class="col-md-12">
+            <h1><?php echo ucwords($title)?></h1>
+
+        <div class="listing-top-text">
+           <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+       </div>
+           
+            <div id="weekly_featured_product">
+                <div class="row product-list-container interlink">
+                    <?php foreach ($list as $item): ?>
+                        <div class="product-noimage-container col-sm-4 col-xs-12">
+                            <?php if($this instanceof Homebase_Autopart_Block_Category_Model):?>
+                                <a href="<?php echo $this->getCustomLink($item->getLabel()); ?>"><?php echo ucwords($item->getLabel()); ?> <?php echo ucwords($this->getAutoName()); ?>
+                                    <span class="arrow"><i class="fa fa-angle-right"></i></span>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<!-- -->
+
+
+<!-- accordion -->
+<div class="container">
+   <div class="col-md-12">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <?php echo $this->getChildHtml('category.partname') ?>
+        
+      </div>
+    </div>
+</div>
+<!-- accordion-->
+
+<?php if($this->getChildHtml('category.popular.product')):?>
+<div class="full-wrapper">
+  <div class="container">
+      <div class="col-md-12">
+          <?php echo $this->getChildHtml('category.popular.product') ?>
+      </div>
+  </div>
+</div>
+<?php endif;?>
+<div class="container">
+    <div class="listing-bottom-text col-md-12">
+            <?php $content = $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+            <?php
+                if(strpos($content, '[view-more]') !== false){
+                    echo $content = str_replace('[view-more]','<span class="viewmore"></span>', $content);
+                    echo '<a href="" class="view-more">View More</a>';
+                }else {
+                    echo $content;
+                }
+            ?>
+        </div>
+        <?php if(empty($content)): ?>
+            <?php echo $this->getChildHtml('default-listing-content'); ?>
+        <?php endif; ?>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+         jQuery('#shop-cat').detach().insertBefore('.footer-container ');
+         jQuery('img').imageFallback(['/media/category/model-watermark.png']);
+    });
+
+</script>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

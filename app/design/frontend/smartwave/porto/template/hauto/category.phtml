@@ -1,0 +1,62 @@
+<?php
+
+
+$listing = $this->getParts();
+$ctr = 0;
+$limit = $this->getLimit();
+$total = $listing->count();
+/** @var Mage_Core_Controller_Request_Http $request */
+$request = $this->getRequest();
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+
+?>
+<div class="row">
+    <div class="part-listing-title">
+        <div class="col-md-12">
+            <h1><?php echo $this->getTitle(); ?></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="listing-top-text">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="listing-top-text">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+    <div class="part-listing-container">
+        <div class="col-sm-12">
+            <?php foreach($listing as $item): ?>
+                <?php if($ctr % $limit == 0 ): ?>
+                    <ul class="col-sm-3 parts-listing listing-group-<?php echo $ctr+1; ?>">
+                <?php endif; ?>
+                    <li>
+                        <a href="<?php echo $item->getLink(); ?>">
+                            <?php echo $item->getLabel(); ?>
+                        </a>
+                    </li>
+                <?php if($ctr % $limit == ($limit - 1) || ($ctr+1) == $total): ?>
+                    </ul>
+                <?php endif; ?>
+                <?php $ctr++; ?>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="listing-bottom-text">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+</div>

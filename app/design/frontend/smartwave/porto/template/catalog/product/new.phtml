@@ -1,0 +1,53 @@
+<?php
+
+	$_helper = $this->helper('catalog/output');
+	
+	$collection = array();
+
+	$category = new Mage_Catalog_Model_Category();
+
+	// $category->load($categoryId);
+
+	$collection = $category->getProductCollection();
+
+	$collection->addAttributeToSelect('*');
+
+	$collection->setPageSize(8);
+
+	$collection->setOrder('created_at', 'desc');
+
+	?>
+
+	<div class="row">
+	<?php 
+
+	$x = 0;
+
+	foreach ($collection as $_product) {
+
+		if($x == 4){
+			echo '</div>';
+			echo '<div class="row">';
+			$x = 0;
+		}
+
+		$x++;
+			
+
+	?>
+		<div class="col-sm-3">
+			<div class="product-item-container" style="margin-bottom:25px">
+				<div class="product-item-thumb" style="height: 175px">
+					<img src="<?php if($aspect_ratio):?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(50);?><?php else: ?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+				</div>
+				<h2 class="product-name" style="font-weight:bold"><a href="<?php echo $_product->getProductUrl(); ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+			</div>
+		</div>
+	<?php
+	
+	} ?>
+
+	</div>
+
+
+

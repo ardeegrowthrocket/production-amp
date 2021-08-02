@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitcbp>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Cost Based Pricing</self_name>
+            <priority>10090</priority>
+        </Aitoc_Aitcbp>
+    </modules>
+</config>

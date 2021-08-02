@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <firecheckout_index_index>
+        <reference name="head">
+            <action method="addJs" ifconfig="payment/upg/enabled">
+                <script>Upg/upg.js</script>
+            </action>
+            <action method="addJs" ifconfig="payment/upg/enabled">
+                <script>Upg/jquery.fancybox.pack.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>Upg/jquery.fancybox.css</name>
+            </action>
+             <action method="addItem">
+                <type>skin_js</type>
+                <name>tm/firecheckout/js/integration/upg_payments.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="upg_payments/javascriptConfig" name="upg_config" as="upg_config" />
+        </reference>
+        <reference name="before_body_end">
+            <block type="upg_payments/payment_jsOverwrite" name="upg_js_overwrite" template="upg/checkout/onepage/upg.phtml" />
+        </reference>
+        <reference name="firecheckout.billing.name.email.after">
+            <block type="firecheckout/checkout_billing" name="checkout.onepage.billing.upg_payments" as="upg_payments">
+                <action method="setTemplate">
+                    <template>tm/firecheckout/upg/billing.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </firecheckout_index_index>
+</layout>

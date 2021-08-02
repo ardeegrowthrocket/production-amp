@@ -1,0 +1,18 @@
+.shipping-method-single {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.carrier-group-name {
+    font-weight:bold;
+    font-size: 12px;
+}
+
+.carrier-group-items {
+    font-weight:bold;
+}
+
+.customer-account-label {
+    min-width: 200px !important;
+}
+

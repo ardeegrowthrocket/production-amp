@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Acart
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Acart>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Amasty_Geoip/>
+            </depends>
+        </Amasty_Acart>
+    </modules>
+</config>

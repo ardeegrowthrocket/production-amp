@@ -1,0 +1,20 @@
+
+
+@media (min-width: 1200px) {
+  .customer-account-create{
+    .customer-name-middlename{
+        .field.name-firstname, .field.name-middlename {
+          min-height: 90px;
+        }
+    }
+    .form-list .field {
+      width: 50%;
+      padding-right: 15px;
+    }
+  }
+  .customer-address-form, .customer-account-changeforgotten{
+    .form-list .field {
+      padding-right: 15px;
+    }
+  }
+}

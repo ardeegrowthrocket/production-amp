@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Fontis Australia Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Fontis
+ * @package    fontis_australia
+ * @author     Chris Norton
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * Shipper HQ Shipping
+ *
+ * @category ShipperHQ
+ * @package ShipperHQ_Shipping_Carrier
+ * @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @author ShipperHQ Team sales@shipperhq.com
+ */
+-->
+<config>
+    <modules>
+        <Shipperhq_Lookup>
+            <version>1.0.0</version>
+        </Shipperhq_Lookup>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_lookup>
+                <class>Shipperhq_Lookup_Block</class>
+            </shipperhq_lookup>
+        </blocks>
+        <helpers>
+            <shipperhq_lookup>
+                <class>Shipperhq_Lookup_Helper</class>
+            </shipperhq_lookup>
+        </helpers>
+        <models>
+            <shipperhq_lookup>
+                <class>Shipperhq_Lookup_Model</class>
+            </shipperhq_lookup>
+        </models>
+        <resources>
+            <shipperhq_lookup_setup>
+                <setup>
+                    <module>Shipperhq_Lookup</module>
+                </setup>
+                <connection>
+                    <use>directory_setup</use>
+                </connection>
+            </shipperhq_lookup_setup>
+            <shipperhq_lookup_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </shipperhq_lookup_write>
+            <shipperhq_lookup_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </shipperhq_lookup_read>
+        </resources>
+        <events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <shipperhq_lookup_cart_estimate_autocomplete>
+                        <class>shipperhq_lookup/observer</class>
+                        <method>cartEstimateAutocomplete</method>
+                    </shipperhq_lookup_cart_estimate_autocomplete>
+                </observers>
+            </core_block_abstract_to_html_before>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <shipperhq_lookup>
+                <use>standard</use>
+                <args>
+                    <module>Shipperhq_Lookup</module>
+                    <frontName>shipperhq_lookup</frontName>
+                </args>
+            </shipperhq_lookup>
+        </routers>
+        <layout>
+            <updates>
+                <shipperhq_lookup module="Shipperhq_Lookup">
+                    <file>shipperhq/lookup.xml</file>
+                </shipperhq_lookup>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <shipperhq_lookup>
+            <postcode_autocomplete>
+                <max_results>20</max_results>
+            </postcode_autocomplete>
+        </shipperhq_lookup>
+    </default>
+</config>

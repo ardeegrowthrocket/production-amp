@@ -1,0 +1,55 @@
+<config>
+    <modules>
+        <Growthrocket_Defercss>
+            <version>0.0.1</version>
+        </Growthrocket_Defercss>
+    </modules>
+    <global>
+        <models>
+            <grdefercss>
+                <class>Growthrocket_Defercss_Model</class>
+            </grdefercss>
+        </models>
+        <helpers>
+            <grdefercss>
+                <class>Growthrocket_Defercss_Helper</class>
+            </grdefercss>
+        </helpers>
+    </global>
+    <frontend>
+        <events>
+            <controller_action_postdispatch>
+                <observers>
+                    <grdefercss_controller_action_postdispatch_handler>
+                        <class>grdefercss/observer</class>
+                        <method>doDeferCss</method>
+                    </grdefercss_controller_action_postdispatch_handler>
+                </observers>
+            </controller_action_postdispatch>
+        </events>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everyting</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <grdefercss>
+                                            <title>GrowthRocket Defer CSS</title>
+                                        </grdefercss>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

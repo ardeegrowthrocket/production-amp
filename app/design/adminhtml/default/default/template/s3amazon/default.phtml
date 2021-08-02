@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    if (typeof jQuery == 'undefined'){
+        document.write(unescape("%3Cscript src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+</script>
+<script type="text/javascript">
+
+    var wk = jQuery.noConflict();
+    var baseUrl = "<?php echo Mage::helper('adminhtml')->getUrl('s3amazon/adminhtml_s3Amazon/download')."?url="; ?>";
+    wk("#link_items_body > tr").each(function() {
+        var item = wk(this).find(".validate-downloadable-url");
+        var url = item.val();
+        if (url != "") {
+            var result = url.split("/");
+            var file = result[result.length-1];
+            item.parent().after("<a data-url='"+url+"' href='javascript:void(0)' class='wk-download-link' >"+file+"</a>");
+        }
+    });
+    wk(document).on("click", ".wk-download-link", function() {
+        url = wk(this).attr("data-url");
+        url = baseUrl+url;
+        location.href= url;
+    });
+
+</script>

@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/26/17
+ * Time: 6:01 PM
+ */
+
+$collection = $this->getListing();
+$ctr = 0;
+$total = $collection->count();
+$column=0;
+?>
+<div class="row">
+    <div class="shop-by-category">
+        <h2><?php echo $this->getTitle(); ?></h2>
+        <div class="sby-category-listing">
+            <?php foreach($collection as $item): ?>
+                <?php if($ctr % 5 == 0): ?>
+                    <?php $column++; ?>
+                    <ul class="group-<?php echo ($ctr+1); ?> sby-group-listing <?php echo ($column == 3 || $column == 4)? 'col-sm-3' : 'col-sm-2'?>">
+                <?php endif; ?>
+                <li>
+                    <a href="<?php echo $item->getLink(); ?>">
+                        <?php echo $item->getTitle(); ?>
+                    </a>
+                </li>
+                <?php if($ctr % 5 == 4 || $total == ($ctr+1)): ?>
+                    </ul>
+                <?php endif; ?>
+                <?php $ctr++; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+

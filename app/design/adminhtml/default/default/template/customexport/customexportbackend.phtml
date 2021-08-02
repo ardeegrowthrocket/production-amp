@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">jQuery.noConflict();</script>
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody><tr>
+            <td style="width:50%;"><h3 class="icon-head">Export Shipping Dimensional Data</h3></td>
+        </tr>
+        </tbody></table>
+</div>
+<div>
+    <?php $websites = $this->getAllStores(); ?>
+    <form id="exportProduct"
+          action="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/customexportbackend/exportProduct'); ?>"
+          method="post"
+          data-download-link="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/customexportbackend/downloadPdf'); ?>">
+        <input name="form_key" class="form-key-ymm" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <input name="website_data" type="hidden" value="<?php echo htmlentities(json_encode($websites)) ?>" /> 
+        <input type="hidden" value="0" name="next_page" id="nextPage" />
+        <table>
+            <tr>
+                <td>
+                    <?php if(!empty($websites)): ?>
+                        <label for="website">Websites: </label>
+                        <select name="website" id="website">
+                            <option value="0">Select All</option>
+                            <?php foreach ($websites as $key =>  $website): ?>
+                                <option value="<?php echo $key ?> "><?php echo $website['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 20px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button>Run Export</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="export-notice"></div>
+                    <div class="loading-bar" style="display: none">
+                        <label>Loading...</label>
+                        <div id="progressbar"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    (function($){
+
+        var app ={
+            'action': '',
+            'formData': '',
+            'root': {},
+            'init' : function () {
+                let formElem = $('#exportProduct');
+                if(formElem.length){
+                    formElem.on('submit', function (e) {
+                        e.preventDefault();
+                        app.root = $(this);
+                        app.root.find('#nextPage').val(0);
+                        app.request();
+                        app.root.find('button').hide();
+                        $('.export-notice').html('');
+                        $( "#progressbar" ).progressbar({value: 1,max:10,
+                            create: function(event, ui) {$(this).find('.ui-widget-header').css({'background-color':'#eb5e00'})}
+                        });
+                    });
+                }
+            },
+            'nextPage' : function () {
+                setTimeout(function() {
+                    app.request();
+                }, 500);
+
+            },
+            'request': function () {
+                $.ajax({
+                    method: "POST",
+                    dataType: 'json',
+                    url: app.root.attr('action'),
+                    data: app.root.serialize(),
+                    beforeSend : function () {
+                        $('.loading-bar').show();
+                    }
+                }).done(function( res ) {
+
+                    let currentPage = res.currentPage;
+                    let totalPage = res.totalPage;
+                    if(currentPage >= totalPage){
+                        $( "#progressbar" ).progressbar({value: totalPage, max: totalPage});
+                        $('.export-notice').html('Data Exported Successfully');
+                        window.location = app.root.attr('data-download-link');
+                        app.root.find('button').show();
+                        $('.loading-bar').hide();
+                        return;
+                    }
+                    $( "#progressbar" ).progressbar({value: currentPage, max: totalPage});
+                    app.root.find('#nextPage').val(currentPage);
+                    app.nextPage();
+                });
+            }
+        }
+
+        app.init();
+
+    })(jQuery);
+</script>

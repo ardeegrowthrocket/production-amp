@@ -1,0 +1,78 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php /* @var $this Amasty_Finder_Block_Adminhtml_Finder_Edit_Tab_Import */ ?>
+<div class="entry-edit custom-options product-custom-options" id="amfinder-uploads">
+
+	<input type="hidden" id="amfinder_ajax_action" name="amfinder_ajax_action" value="<?php echo $this->getUrl('*/finderImport/upload');?>">
+	<input type="hidden" id="amfinder_id" name="amfinder_id" value="<?php echo $this->getFinderId();?>">
+
+
+
+
+
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend" onClick="showDebugButtons()"><?php echo $this->__('Upload Files'); ?></h4>
+	</div>
+
+	<div class="fieldset fieldset-wide">
+
+		<div class="hor-scroll">
+			<table cellspacing="0" class="form-list">
+				<tbody>
+				<tr>
+					<td class="label"><label for="delete_existing_data"><?php echo $this->__('Delete Existing Data'); ?></label></td>
+					<td class="value">
+						<select id="delete_existing_data" name="delete_existing_data" class=" select">
+							<option value="0" selected="selected"><?php echo $this->__('No'); ?></option>
+							<option value="1"><?php echo $this->__('Yes'); ?></option>
+						</select>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="files_box" class="hor-scroll container">
+			<ul id="preloader" class="messages">
+				<li id="preloader_message" style="display: none"></li>
+			</ul>
+			<div class="drop main" id="ftp_import_drag_n_drop"><?php echo $this->__('Click or drop files here'); ?></div>
+
+		</div>
+		<div class="form-list">
+			<p class="note" id="note_template"><span><?php echo $this->__('dropdown1, dropdown2, ..., SKU')?></span></p>
+		</div>
+	</div>
+
+	<div id="debug_buttons" style="display: none">
+		<a href="<?php echo $this->getUrl('*/finderImport/runAll') ?>" target="_blank"><span><span>Run All Test</span></span></a>
+		<a href="<?php echo $this->getUrl('*/finderImport/clearHistory') ?>" target="_blank"><span><span>Clear History Test</span></span></a>
+	</div>
+
+</div>
+
+<script>
+	var countClicks = 0;
+
+	function showDebugButtons()
+	{
+		countClicks++;
+		if(countClicks > 2) {
+			$('debug_buttons').show();
+		}
+		setTimeout(function(){countClicks=0}, 1000);
+	}
+
+</script>
+
+
+
+
+
+<?php echo $this->getLayout()->createBlock('amfinder/adminhtml_finder_edit_import_processFiles_grid')->toHtml(); ?>
+<?php echo $this->getLayout()->createBlock('amfinder/adminhtml_finder_edit_import_popup')->toHtml(); ?>

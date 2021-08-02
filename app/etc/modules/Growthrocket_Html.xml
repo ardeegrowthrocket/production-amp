@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Growthrocket_Html>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Smartwave_Porto/>
+            </depends>
+        </Growthrocket_Html>
+    </modules>
+</config>

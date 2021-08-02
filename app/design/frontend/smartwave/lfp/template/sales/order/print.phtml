@@ -1,0 +1,174 @@
+<?php
+$skinUrl =  Mage::getModel ( 'core/design_package' )->getSkinUrl ();
+?>
+<style type="text/css">
+    body{
+        font-family: "sans-serif;
+    }
+    h1 {
+        text-align: center;
+        font-size: 20px;
+        color: #333333;
+        margin-top: 30px;
+    }
+    .order-no {
+        font-size: 18px;
+        color: #20609E;
+        font-weight: bold;
+    }
+    .order-date {
+        color: #6F7989;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .hr-blue {
+        border-bottom: 2px solid #238ABC;
+        margin: 5px 0px;
+    }
+    h2 {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333333;
+    }
+    address,.shipping-method {
+        font-style: normal;
+        color: #6F7989;
+        font-size: 12px;
+    }
+
+    .payment-methods p {
+        color: #6F7989;
+        font-size: 12px;
+        margin: 0px 0px 10px;
+    }
+
+    .payment-methods p  strong{
+        text-transform: uppercase;
+        display: block;
+    }
+    #my-orders-table tfoot td {
+        padding: 0px 0px 10px;
+        color: #3A3A3A;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+
+    }
+    #my-orders-table tfoot td .price {
+        color: #6F7989;
+        font-weight: normal;
+    }
+    #my-orders-table tfoot .subtotal td , #my-orders-table tfoot .grand_total td {
+        border-top: 2px solid #F8CC59;
+        padding-top: 10px;
+    }
+    #my-orders-table tfoot .grand_total td {
+        color: #20609E;
+        text-transform: uppercase;
+    }
+    #my-orders-table {
+        width: 100%;
+    }
+    #my-orders-table thead th {
+        text-transform: uppercase;
+        text-align: left;
+        font-size: 12px;
+    }
+    #my-orders-table tbody tr td .product-name {
+        font-weight: normal;
+        margin: 0px;
+    }
+    #my-orders-table tbody tr td {
+        font-size: 12px;
+        color: #6F7989;
+        font-weight: normal;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        vertical-align: top;
+    }
+</style>
+<?php
+$logoPath = Mage::getStoreConfig('design/header/logo_src');
+$logoPathInfo = pathinfo($logoPath);
+$siteDir =  Mage::getBaseDir('skin');
+if($logoPathInfo['extension'] == 'svg') {
+    $logoPath = "{$logoPathInfo['dirname']}/{$logoPathInfo['filename']}.jpg";
+}
+?>
+<?php $_order = $this->getOrder() ?>
+
+<div id="content">
+    <center>
+        <img width="318" src="<?php echo Mage::getDesign()->getSkinBaseDir() . "/" . $logoPath  ?>" alt="<?php echo Mage::getStoreConfig('design/header/logo_alt'); ?>" />
+        <h1>ORDER CONFIRMATION</h1>
+    </center>
+</div>
+<h2 class="order-no"><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h2>
+<p class="order-date"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
+<table style="width: 100%">
+    <tr>
+        <?php if (!$_order->getIsVirtual()): ?>
+        <td style="width: 50%">
+            <div class="col-1">
+                <h2><?php echo $this->__('Shipping Address') ?></h2>
+                <address><?php echo $_order->getShippingAddress()->format('html') ?></address>
+            </div>
+        </td>
+        <?php else: ?>
+
+        <?php endif; ?>
+        <td style="width: 50%">
+            <div>
+                <h2><?php echo $this->__('Billing Address') ?></h2>
+                <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
+            </div>
+        </td>
+    </tr>
+</table>
+<div class="hr-blue">&nbsp;</div>
+<?php if (!$_order->getIsVirtual()): ?>
+</div>
+<div class="col2-set">
+    <div class="col-1">
+        <h2><?php echo $this->__('Shipping Method') ?></h2>
+       <div class="shipping-method">
+           <?php echo $this->escapeHtml($_order->getShippingDescription()) ?>
+       </div>
+    </div>
+<?php endif; ?>
+<div class="hr-blue">&nbsp;</div>
+<div class="col-2">
+    <h2><?php echo $this->__('Payment Method') ?></h2>
+    <div class="payment-methods">
+        <?php echo $this->getPaymentInfoHtml() ?>
+    </div>
+</div>
+</div>
+<div class="hr-blue">&nbsp;</div>
+<h2><?php echo $this->__('Items Ordered') ?></h2>
+<table class="data-table" style="border-spacing: 0" id="my-orders-table">
+    <thead>
+        <tr>
+            <th width="200"><?php echo $this->__('Product Name') ?></th>
+            <th><?php echo $this->__('SKU') ?></th>
+            <th ><?php echo $this->__('Price') ?></th>
+            <th ><?php echo $this->__('Qty') ?></th>
+            <th ><?php echo $this->__('Subtotal') ?></th>
+        </tr>
+    </thead>
+    <?php $_items = $_order->getItemsCollection(); ?>
+    <?php $_count = $_items->count(); ?>
+    <?php foreach ($_items as $_item): ?>
+    <?php if ($_item->getParentItem()) continue; ?>
+    <tbody>
+        <?php echo $this->getItemHtml($_item) ?>
+    </tbody>
+        <?php endforeach; ?>
+    <tfoot>
+    <?php echo $this->getChildHtml('order_totals') ?>
+    </tfoot>
+</table>
+<table width="100%">
+</table>
+

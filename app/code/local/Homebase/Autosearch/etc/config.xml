@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Homebase_Autosearch>
+            <version>0.1.0</version>
+        </Homebase_Autosearch>
+    </modules>
+    <global>
+        <helpers>
+            <autosearch>
+                <class>Homebase_Autosearch_Helper</class>
+            </autosearch>
+        </helpers>
+        <models>
+            <autosearch>
+                <class>Homebase_Autosearch_Model</class>
+                <resourceModel>autosearch_mysql4</resourceModel>
+            </autosearch>
+            <catalogsearch_resource>
+                <rewrite>
+                    <fulltext_engine>Homebase_Autosearch_Model_CatalogSearch_Resource_Fulltext_Engine</fulltext_engine>
+                </rewrite>
+            </catalogsearch_resource>
+        </models>
+    </global>
+</config> 

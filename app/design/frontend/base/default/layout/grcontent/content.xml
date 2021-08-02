@@ -1,0 +1,38 @@
+<layout>
+    <hauto_category_category_index>
+        <reference name="content">
+            <reference name="category-list">
+                <block type="grcontent/content_category" name="default-category-content" block_id="2">
+                </block>
+            </reference>
+        </reference>
+    </hauto_category_category_index>
+    <hauto_part_part_index>
+        <reference name="content">
+            <reference name="product-listing">
+                <block type="grcontent/content_part" name="default-listing-content" block_id="2"/>
+            </reference>
+        </reference>
+    </hauto_part_part_index>
+    <part_make_partmake_index>
+        <reference name="content">
+            <reference name="product-listing">
+                <block type="grcontent/content_part_make" name="default-listing-content"/>
+            </reference>
+        </reference>
+    </part_make_partmake_index>
+    <part_model_partmodel_index>
+        <reference name="content">
+            <reference name="product-listing">
+                <block type="grcontent/content_part_model" name="default-listing-content"/>
+            </reference>
+        </reference>
+    </part_model_partmodel_index>
+    <hautopart_model_model>
+        <reference name="content">
+            <reference name="make-list">
+                <block type="grcontent/content_model" name="default-listing-content"/>
+            </reference>
+        </reference>
+    </hautopart_model_model>
+</layout>

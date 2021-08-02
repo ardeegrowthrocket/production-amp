@@ -1,0 +1,53 @@
+@import 'settings/_color';
+@import 'settings/_mixin';
+
+@import "styles/customer";
+
+.form-wrap,#form-validate,#login-form{
+    display:block;
+    border:1px solid #ececec;
+    border-radius:5px;
+    background:#fff;
+    border-top:4px solid $secondary-bg-color;
+    padding:35px 25px;
+    box-shadow:0 2px 3px rgba(0,0,0,0.08)}
+.form-wrap h2,#form-validate h2{
+    color: $primary-bg-color;
+    text-transform:uppercase;
+    margin:0 0 20px
+  }
+
+.back-link{
+  a.back-link{
+    color: $primary-bg-color;
+  }
+}
+
+#is_subscribed {
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+@media (max-width: 767px){
+  .customer-account-create{
+    .field{
+      width: 100% !important;
+      padding: 0 !important;
+    }
+  }
+
+}
+
+@media (max-width: 460px){
+
+
+  .buttons-set{
+    .back-link, .f-left {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+  }
+}
+

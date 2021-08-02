@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <cmsblog_adminhtml_cmsblog_index>
+	<reference name="content">
+	  <block type="cmsblog/adminhtml_cmsblog" name="cmsblog" />
+	</reference>
+  </cmsblog_adminhtml_cmsblog_index>
+
+	<cmsblog_adminhtml_cmsblog_new>
+		<reference name="head">
+			<action method="setCanLoadExtJs"><flag>1</flag></action>
+			<action method="setCanLoadTinyMce"><flag>1</flag></action>
+			<action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+			<action method="addJs"><name>lib/uploader/flow.min.js</name></action>
+			<action method="addJs"><name>lib/uploader/fusty-flow.js</name></action>
+			<action method="addJs"><name>lib/uploader/fusty-flow-factory.js</name></action>
+			<action method="addJs"><name>mage/adminhtml/uploader/instance.js</name></action>
+			<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+			<action method="addJs"><script>prototype/window.js</script></action>
+			<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+			<action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+		</reference>
+	</cmsblog_adminhtml_cmsblog_new>
+
+	<cmsblog_adminhtml_cmsblog_edit>
+		<reference name="head">
+			<action method="setCanLoadExtJs"><flag>1</flag></action>
+			<action method="setCanLoadTinyMce"><flag>1</flag></action>
+			<action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+			<action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+			<action method="addJs"><name>lib/uploader/flow.min.js</name></action>
+			<action method="addJs"><name>lib/uploader/fusty-flow.js</name></action>
+			<action method="addJs"><name>lib/uploader/fusty-flow-factory.js</name></action>
+			<action method="addJs"><name>mage/adminhtml/uploader/instance.js</name></action>
+			<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+			<action method="addJs"><script>prototype/window.js</script></action>
+			<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+			<action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+		</reference>
+	</cmsblog_adminhtml_cmsblog_edit>
+</layout>

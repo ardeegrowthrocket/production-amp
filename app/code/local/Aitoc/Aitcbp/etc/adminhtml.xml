@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+		<menu>
+		    <catalog>
+                <children>
+                    <aitcbp translate="title" module="aitcbp">
+                        <title>Automatic Pricing</title>
+                        <sort_order>220</sort_order>
+                        <children>
+                        	<groups translate="title" module="aitcbp">
+		                        <title>Groups</title>
+		                        <sort_order>10</sort_order>
+		                        <action>adminhtml/aitcbp_groups</action>
+		                    </groups>
+		                    <rules translate="title" module="aitcbp">
+		                        <title>Rules</title>
+		                        <sort_order>20</sort_order>
+		                        <action>adminhtml/aitcbp_rules</action>
+		                    </rules>
+                        </children>
+                    </aitcbp>
+                </children>
+            </catalog>
+		</menu>
+		
+<!--         <acl>
+            <resources>
+                <admin>
+                    <children>
+            		    <sales>
+                            <children>
+                                <adjdeliverydate translate="title" module="adjdeliverydate">
+                                    <title>Delivery Date</title>
+                                    <sort_order>220</sort_order>
+                                </adjdeliverydate>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>  -->
+</config>

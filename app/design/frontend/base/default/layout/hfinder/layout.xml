@@ -1,0 +1,10 @@
+<layout>
+    <amfinder_index_test>
+        <reference name="content">
+            <block type="core/template" template="hfinder/searchbar.phtml" name="searchbar"></block>
+            <block type="core/template" template="hfinder/bread.phtml" name="bread"></block>
+            <block type="core/template" template="hfinder/catblock.phtml" name="catblock"></block>
+            <block type="core/template" template="hfinder/catlist.phtml" name="sublist"></block>
+        </reference>
+    </amfinder_index_test>
+</layout>

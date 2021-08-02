@@ -1,0 +1,23 @@
+.top-banner{
+  min-height: 50vh;
+  background-position: center;
+  background-size: cover;
+  background-color: #122A4E;
+  background-repeat: no-repeat;
+  position: relative;
+
+  .homepage-title{
+    position: absolute;
+    text-align: left;
+    color: $white-color;
+    bottom: 0;
+    span{
+      font-size: 22px;
+    }
+    h1{
+      color: $white-color;
+      @include secondary-font(42px, 700);
+      margin-bottom: 60px;
+    }
+  }
+}

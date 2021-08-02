@@ -1,0 +1,110 @@
+<?php
+
+
+
+if(!function_exists('trim_text')){
+	function trim_text($input, $length, $ellipses = true, $strip_html = true) {
+	    //strip tags, if desired
+	    if ($strip_html) {
+	        $input = strip_tags($input);
+	    }
+	  
+	    //no need to trim, already shorter than trim length
+	    if (strlen($input) <= $length) {
+	        return $input;
+	    }
+	  
+	    //find last space within length
+	    $last_space = strrpos(substr($input, 0, $length), ' ');
+	    $trimmed_text = substr($input, 0, $last_space);
+	  
+	    //add ellipses (...)
+	    if ($ellipses) {
+	        $trimmed_text .= '...';
+	    }
+	  
+	    return $trimmed_text;
+	}	
+}
+
+
+$_helper = $this->helper('catalog/output');
+
+$categoryId = $this->getCategory_id();
+
+$collection = array();
+
+if(is_null($categoryId) === false){
+
+	$category = new Mage_Catalog_Model_Category();
+
+	$category->load($categoryId);
+
+	$collection = $category->getProductCollection();
+
+	$collection->addAttributeToSelect('*');
+
+	$collection->setPageSize(1);
+
+	$collection->setOrder('created_at', 'desc');
+
+	foreach ($collection as $_product) {
+		
+	?>
+		<div class="product-item-container">
+			<a href="<?php echo $_product->getProductUrl(); ?>">
+			<div class="product-item-thumb">
+				<img src="<?php if($aspect_ratio):?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(50);?><?php else: ?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+			</div></a>
+			<h2 class="product-name"><a href="<?php echo $_product->getProductUrl(); ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+			<?php if ($_product->getDescription()):?>
+				<div class="product-description" style="clear:both; float:none; height:55px" <?php if($enabled_richsnippets): ?>itemprop="description"<?php endif; ?>>
+					<?php $shortDesc = $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+					<?php echo trim_text($shortDesc, 150, true, true); ?>
+				</div>
+			<?php endif; ?>
+			<?php
+			$cats = $_product->getCategoryIds();
+			foreach ($cats as $category_id) {
+			    $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+			    echo '<div><a href="'.$_cat->getUrl().'" class="product_category_link">See all '.$_cat->getName().'</a></div>';
+			} 
+			?>
+		</div>
+
+	<?php
+	
+	}
+
+} else {
+
+	$productId = $this->getProduct_id(); 
+
+	$_product = Mage::getModel('catalog/product')->load($productId);
+
+?>
+	<div class="product-item-container">
+		<a href="<?php echo $_product->getProductUrl(); ?>">
+		<div class="product-item-thumb">
+			<img src="<?php if($aspect_ratio):?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(50);?><?php else: ?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+		</div>
+		</a>
+		<h2 class="product-name"><a href="<?php echo $_product->getProductUrl(); ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+		<?php if ($_product->getDescription()):?>
+			<div class="product-description" style="clear:both; float:none; height:75px" <?php if($enabled_richsnippets): ?>itemprop="description"<?php endif; ?>>
+				<?php $shortDesc = $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+				<?php echo trim_text($shortDesc, 150, true, true); ?>
+			</div>
+		<?php endif; ?>
+		<?php
+		$cats = $_product->getCategoryIds();
+		foreach ($cats as $category_id) {
+		    $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+		    echo '<div><a href="'.$_cat->getUrl().'" class="product_category_link">See all '.$_cat->getName().'</a></div>';
+		} 
+		?>
+	</div>
+<?php
+
+}
+

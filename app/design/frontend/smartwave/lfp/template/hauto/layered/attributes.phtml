@@ -1,0 +1,91 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/28/17
+ * Time: 7:51 PM
+ */
+$attributeCollection = $this->getAttributeCollection();
+$limit = 30;
+?>
+
+<?php if(!empty($attributeCollection)): ?>
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <?php echo $this->__('Filter By ') ?>
+    </div>
+
+    <?php
+    $ymmNavigation = $this->getMakeNavigation();
+    if($ymmNavigation): ?>
+    <?php if(isset($ymmNavigation['ymm'])): ?>
+        <div class="ymm-selected">
+            <label><?php echo $ymmNavigation['ymm'] ?></label>
+            <a href="<?php echo $ymmNavigation['reset']  ?>" class="clear"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;clear</a>
+        </div>
+    <?php else: ?>
+        <?php foreach ($ymmNavigation as $key =>  $ymm): ?>
+            <div class="block-content toggle-content">
+                <div id="narrow-by-list">
+                    <div class="head col-sm-12 no-padding"><?php echo $key ?></div>
+                    <div class="content col-sm-12 no-padding">
+                        <ol>
+                            <?php foreach ($ymm as $attribute): ?>
+                            <li  class="">
+                                <a href="<?php echo $attribute['url'] ?>" rel="nofollow"><?php echo $attribute['label'] ?></a>
+                            </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+    <?php endif; ?>
+    <?php endif; ?>
+<?php foreach ($attributeCollection as $key => $attribute): ?>
+    <div class="block-content toggle-content">
+        <div id="narrow-by-list">
+            <div class="head col-sm-12 no-padding"><?php echo $key; ?>
+            <?php if(!empty($this->clearFilter($key))): ?>
+                <a href="<?php echo $this->clearFilter($key) ?>" class="clear"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;clear</a>
+            <?php endif; ?>
+            </div>
+            <div class="content col-sm-12 no-padding">
+                <ol class="custom-filter">
+                    <?php
+                    $counter = 0;
+                    ?>
+                    <?php foreach($attribute as $item): ?>
+                        <?php
+                        $counter = $counter + 1;
+                        $hideClass = '';
+                        if($counter > $limit){
+                            $hideClass = 'hide more-items';
+                        }
+                        ?>
+                        <li  class="<?php echo $hideClass ?>">
+                                <label>
+                                    <?php if($item['is_selected']): ?>
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    <?php else: ?>
+                                    <i class="fa fa-square-o" aria-hidden="true"></i>
+                                    <?php endif; ?>
+                                    <input class="hide" type="checkbox" rel="nofollow" onclick="window.location='<?php echo $item['url'] ?>'" <?php echo $item['is_selected'] ? "checked" : "" ?>>
+                                    <span><?php echo  $item['label'] ?></span>
+                                </label>
+                        </li>
+                    <?php endforeach; ?>
+                    <?php if(count($attribute) > $limit): ?>
+                        <li class="show-hide">
+                            <div class="action-show-hide">Show More</div>
+                        </li>
+                    <?php endif; ?>
+                </ol>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+<?php endforeach; ?>
+</div>
+<?php endif;?>

@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: admin
+ * Date: 19/11/2018
+ * Time: 9:58 AM
+ */
+/** @var Mage_Core_Block_Template $this */
+$p = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+$path = pathinfo($this->getRequest()->getOriginalPathInfo(), PATHINFO_FILENAME);
+$category = str_replace('-',' ', $path);
+?>
+
+<img src="<?php echo $p; ?>home/rau/interior_accessory_cat.jpg" alt="">
+<div class="container">
+    <h1><?php echo uc_words($category,' '); ?></h1>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Imageindexer>
+      <version>0.1.0</version>
+    </Growthrocket_Imageindexer>
+  </modules>
+  <global>
+    <helpers>
+      <imageindexer>
+        <class>Growthrocket_Imageindexer_Helper</class>
+      </imageindexer>
+    </helpers>
+	<models>
+	  <imageindexer>
+		<class>Growthrocket_Imageindexer_Model</class>
+		<resourceModel>imageindexer_mysql4</resourceModel>
+	  </imageindexer>
+	</models>
+  </global>
+    <crontab>
+        <jobs>
+			<imageindexer_updatemissingmediagallery>
+                <schedule><cron_expr>0 8 * *  *</cron_expr></schedule>
+                <run><model>imageindexer/cron::UpdateMissingMediaGallery</model></run>
+            </imageindexer_updatemissingmediagallery>
+        </jobs>
+    </crontab>
+</config> 

@@ -1,0 +1,40 @@
+<?php
+$_order = Mage::registry('current_order');
+
+if (!$_order) {
+    return;
+}
+
+$_comment = $_order->getFirecheckoutCustomerComment();
+if (!$_comment) {
+    return;
+}
+
+?>
+
+<div id="firecheckout_comment">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label">
+                    <label><?php echo $this->__('Comment') ?></label>
+                </td>
+                <td class="value">
+                    <?php echo $this->escapeHtml($_comment) ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+document.observe('dom:loaded', function() {
+    var div = $('sales_order_view_tabs_order_info_content').down('.box-right').down('.fieldset');
+    if (!div) {
+        return;
+    }
+    div.insert({
+        bottom: $('firecheckout_comment')
+    });
+});
+</script>

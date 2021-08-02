@@ -1,0 +1,81 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "<span>Here are the available accessories</span>  for your vehicle:";
+}
+$request = $this->getRequest();
+$ymmParam = unserialize($request->getParam('ymm_params'));
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+$h1Title = $this->getAutoName();
+?>
+    <!--YMM FORM -->
+<?php if(count($list) > 0): ?>
+    <div class="container">
+        <div class="row">
+            <h1><?php echo $h1Title; ?> Parts & Accessories</h1>
+            <div class="listing-top-text">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+    <div class="full-wrapper">
+        <div class="container">
+           <div class="row">
+               <?php echo $this->getChildHtml('category.partname') ?>
+           </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="ymm-interlink" data-ymm="<?php  echo htmlentities(json_encode($ymmParam)) ?>" data-request-url="<?php echo Mage::getUrl('hajax/index/interlink') ?>" data-form-key="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+                <h2 class="interlink-title"></h2>
+                <div class="row">
+                    <div class="product-list-container interlink">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid popular-products">
+        <?php echo $this->getChildHtml('category.popular.product') ?>
+    </div>
+
+    <?php $content = $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+    <?php if(!empty($content)): ?>
+        <div class="container">
+            <div class="row">
+                <div class="listing-bottom-text col-md-12">
+                    <?php
+                    if(strpos($content, '[view-more]') !== false){
+                        echo $content = str_replace('[view-more]','<span class="viewmore"></span>', $content);
+                        echo '<a href="" class="view-more">View More</a>';
+                    }else {
+                        echo $content;
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

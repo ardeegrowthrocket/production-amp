@@ -1,0 +1,145 @@
+<style type="text/css">
+	.main-container.col1-layout {
+		padding:0; margin-bottom:-30px
+	}
+	.top-container {
+		display: none;
+	}
+</style>
+<?php
+
+if(function_exists('trim_text') === false){
+	function trim_text($input, $length, $ellipses = true, $strip_html = true) {
+	    //strip tags, if desired
+	    if ($strip_html) {
+	        $input = strip_tags($input);
+	    }
+	  
+	    //no need to trim, already shorter than trim length
+	    if (strlen($input) <= $length) {
+	        return $input;
+	    }
+	  
+	    //find last space within length
+	    $last_space = strrpos(substr($input, 0, $length), ' ');
+	    $trimmed_text = substr($input, 0, $last_space);
+	  
+	    //add ellipses (...)
+	    if ($ellipses) {
+	        $trimmed_text .= '...';
+	    }
+	  
+	    return $trimmed_text;
+	}	
+}
+
+$_helper    = Mage::helper('catalog/output');
+
+$_category  = Mage::registry('current_category');
+
+$_description = $_category->getDescription();
+
+$children = Mage::getModel('catalog/category')->load($_category->getId())->getChildrenCategories();
+
+$hFinder = Mage::getSingleton('core/session')->getHFinder_1();
+
+
+?>
+
+<div class="breadcrumbs" style="margin:0 0 20px">
+	<div class="container">
+		<div class="row">
+			<?php echo $this->getLayout()->getBlock('breadcrumbs')->toHtml(); ?>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<p class="filter-title-type-2" style="margin-top:10px;">
+		<span class="title-line">&nbsp;</span>
+		<span class="section-title" style="width: 490px;text-align: center;font-weight: 600;color: #085069"><?php echo $_category->getName(); ?></span>
+		<span class="title-line">&nbsp;</span>
+	</p>
+	<p class="section-description text-center"><?php echo $_helper->categoryAttribute($_category, $_description, 'description'); ?></p>
+	<div id="weekly_featured_product" class="hide-addtocart hide-addtolinks owl-middle-outer-narrow" style="margin: 50px -10px 0">
+		<div class="row product-list-container">
+			
+			<?php if($children->count() > 0) : ?>
+				<?php $x = 0; ?>
+				<?php $unq = 0; ?>
+				<?php foreach($children as $category) : ?>
+					<?php if($unq == 0): ?>
+						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('repair_parts')->toHtml(); ?>
+						<?php $x++; ?>
+					<?php endif; ?>
+					<?php $unq++; ?>
+					<div class="col-sm-3">
+						<?php
+							$categoryName = $category->getName();
+							if(count($hFinder) > 0){
+								$modelName = Mage::getModel('amfinder/value')->load($hFinder[2]);
+								$needle = $modelName->getName();
+								$categoryName = str_replace($needle,'',$categoryName);
+							}
+						?>
+
+						<h3><a href="<?php echo $category->getUrl(); ?>"><?php echo $categoryName; ?></a></h3>
+
+						<div class="product-item-container">
+							<a href="<?php echo $category->getUrl(); ?>">
+								<div class="product-item-thumb">
+									<?php $rcat = Mage::getModel('catalog/category')->load($category->getId()); ?>
+									<img src="<?php echo $rcat->getImageUrl(); ?>"/>
+								</div>
+							</a>
+
+							<br>
+							<!-- <h2 class="product-name"><a href="<?php echo $category->getProductUrl(); ?>"><?php echo $_helper->productAttribute($category, $category->getName(), 'name') ?></a></h2> -->
+							<?php 
+							$subCategory = Mage::getModel('catalog/category')->load($category->getId());
+							$layer = Mage::getSingleton('catalog/layer');
+						  	$layer->setCurrentCategory($subCategory);
+							?>
+							<div class="product-description" style="clear:both; float:none; min-height:30px; max-height:210px" <?php if($enabled_richsnippets): ?>itemprop="description"<?php endif; ?>>
+								<?php if ($layer->getCurrentCategory()->getDescription()):?>
+										<?php $shortDesc = nl2br($layer->getCurrentCategory()->getDescription()); ?>
+										<p><?php echo trim_text($shortDesc, 150, true, true); ?></p>
+								<?php endif; ?>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
+					<?php
+					if($x == 3){
+						echo '</div>';
+						echo '<div class="row product-list-container">';
+						$x = 0;
+					}else{
+						$x++; 
+					}
+					?>
+
+				<?php endforeach; ?>
+
+			<?php else : ?>
+
+				<div class="std">
+					<h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+					<p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+				</div>
+
+			<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+<div class="clearfix"></div>
+<!--<div class="container" style="margin-bottom: 60px;">-->
+<!--	<p class="section-description text-center">-->
+<!--		--><?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('results_bottom')->toHtml(); ?>
+<!--	</p>-->
+<!--</div>-->

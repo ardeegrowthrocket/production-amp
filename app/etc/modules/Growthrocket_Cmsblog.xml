@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Cmsblog>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Growthrocket_Cmsblog>
+  </modules>
+</config>

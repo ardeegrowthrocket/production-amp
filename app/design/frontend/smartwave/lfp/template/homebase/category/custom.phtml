@@ -1,0 +1,89 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 4/2/17
+ * Time: 7:02 PM
+ */
+
+
+$list = $this->getList();
+$rowCount = 0;
+$flag = 0;
+
+$subtitle = "";
+if (strpos(Mage::helper('core/url')->getCurrentUrl(), '/year/') !== false) {
+    $subtitle = "Here are the available accessories for your vehicle:";
+}
+$request = $this->getRequest();
+$ymmParam = unserialize($request->getParam('ymm_params'));
+$requestString = $request->getRequestString();
+$requestSegments = array_filter(explode('/', $requestString));
+
+$blockowner = str_replace('.html','',end($requestSegments));
+$h1Title = $this->getAutoName();
+?>
+    <!--YMM FORM -->
+<?php if(count($list) > 0): ?>
+    <div class="container">
+        <div class="col-md-12">
+            <h1><?php echo ucwords($h1Title); ?></h1>
+            <div class="listing-top-text">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('listing-top-' . $blockowner)->toHtml(); ?>
+            </div>
+            <div id="weekly_featured_product">
+            </div>
+            <?php if (!empty($subtitle)) : ?>
+                <p><?php echo $subtitle; ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+        <div class="container">
+           <div class="col-md-12">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <?php echo $this->getChildHtml('category.partname') ?>
+                </div>
+           </div>
+        </div>
+    
+    <div class="container">
+        <div id="ymm-interlink" class="col-md-12" data-ymm="<?php  echo htmlentities(json_encode($ymmParam)) ?>" data-request-url="<?php echo Mage::getUrl('hajax/index/interlink') ?>" data-form-key="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+            <h2 class="interlink-title"></h2>
+            <div class="row product-list-container"></div>
+        </div>
+    </div>
+    <div class="container-fluid recommended-container">
+        <div class="container">
+            <div class="">
+                <div class="col-md-12 ymm-product-listing">
+                    <h2 class="ymm-listing-title"><?php echo "Recommended Products for Your {$h1Title}"; ?></h2>
+                    <?php echo $this->getChildHtml('gr_recommended') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="listing-bottom-text col-md-12">
+            <?php $content = $this->getLayout()->createBlock('cms/block')->setBlockId('listing-bottom-' . $blockowner)->toHtml(); ?>
+            <?php
+            if(strpos($content, '[view-more]') !== false){
+                echo $content = str_replace('[view-more]','<span class="viewmore"></span>', $content);
+                echo '<a href="" class="view-more">View More</a>';
+            }else {
+                echo $content;
+            }
+            ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('.product-list-container img').imageFallback(['<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>category/model-watermark.png']);
+        });
+    </script>
+<?php else: ?>
+    <div class="std">
+        <h1 style="text-align:center;margin: 20px 0; font-size: 70px;margin-top:70px">No Product Found<i class="icon-doc"></i></h1>
+        <p style="text-align:center; font-size: 15px;">Please select another category that have products.</a></p>
+    </div>
+<?php endif; ?>

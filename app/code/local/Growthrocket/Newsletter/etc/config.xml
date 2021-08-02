@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Growthrocket_Newsletter>
+      <version>0.1.0</version>
+    </Growthrocket_Newsletter>
+  </modules>
+  <frontend>
+    <routers>
+      <newsletter>
+        <use>standard</use>
+        <args>
+          <modules>
+            <Growthrocket_Newsletter before="Mage_Newsletter">Growthrocket_Newsletter</Growthrocket_Newsletter>
+          </modules>
+        </args>
+      </newsletter>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <growthrocket_newsletter_newsletter_subscribercontroller>
+                <from><![CDATA[#^/newsletter/subscriber/#]]></from> <!-- Mage_Newsletter_SubscriberController  -->
+                <to>/newsletter/newsletter_subscriber/</to> <!-- Growthrocket_Newsletter_Newsletter_SubscriberController  -->
+            </growthrocket_newsletter_newsletter_subscribercontroller>
+		</rewrite>
+    <helpers>
+      <newsletter>
+        <class>Growthrocket_Newsletter_Helper</class>
+      </newsletter>
+    </helpers>
+  </global>
+  <websites>
+    <lfp>
+      <mailchimp>
+        <general>
+            <active>1</active>
+            <apikey>dc948ee9cd89bf2a8719272e485275d2-us20</apikey>
+           <webhook_active>1</webhook_active>
+        </general>
+      </mailchimp>
+    </lfp>
+  </websites>
+</config> 

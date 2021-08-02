@@ -1,0 +1,183 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 10/16/17
+ * Time: 8:25 PM
+ */
+?>
+
+
+<div class="admin-fitment-actions">
+</div>
+<table id="fitment-combination-table">
+    <thead>
+        <tr>
+            <th><?php echo Mage::helper('catalog')->__('Year'); ?></th>
+            <th><?php echo Mage::helper('catalog')->__('Make'); ?></th>
+            <th><?php echo Mage::helper('catalog')->__('Model'); ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="fitment-combination-data">
+    </tbody>
+</table>
+<input type="hidden" name="product_combinations" id="product_combination_serial" value='<?php echo $this->getFitmentCombinations(); ?>'/>
+
+
+
+<script type="text/javascript">
+    var fitmentTemplate = '<tr class="fitment-option validate-fitment-combination" id="fitment_{{id}}" data-serial=\'{{serial}}\' data-id="{{id}}" >' +
+                '<td><?php echo $this->getYearSelectHtml(); ?></td>'+
+                '<td><?php echo $this->getMakeSelectHtml(); ?></td>'+
+                '<td><?php echo $this->getModelSelectHtml(); ?></td>'+
+                '<td><?php echo $this->jsQuoteEscape($this->getDeleteButtonHtml()); ?></td>'+
+            '</tr>';
+    var fitmentCombination = {
+        tbody: $('fitment-combination-data'),
+        templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+        templateText : fitmentTemplate,
+        itemCount : 1,
+        add:function(data){
+            this.template = new Template(this.templateText, this.templateSyntax);
+            if(!data.id){
+                data = {};
+                data.id  = this.itemCount;
+            } else {
+                this.itemCount = data.item_count;
+            }
+            Element.insert(this.tbody, {'top':this.template.evaluate(data)});
+            this.itemCount++;
+            fitmentCombinationType.bindButton();
+            fitmentCombinationType.bindSelectInputType();
+
+        }
+    };
+    var fitmentCombinationType = {
+        addDataToValues: function(data){
+            var serial = JSON.parse(data['serial']);
+            //year
+            var year = serial['y'];
+            var make = serial['m'];
+            var model = serial['ml'];
+            var index = serial['i'];
+            if(year){
+                $A($('product_combination_'+index + '_year').options).each(function(option){
+                    if(option.value == year){
+                        option.selected = true;
+                    }
+                });
+            }
+            if(make){
+                $A($('product_combination_'+index + '_make').options).each(function(option){
+                    if(option.value == make){
+                        option.selected = true;
+                    }
+                });
+            }
+            if(model){
+                $A($('product_combination_'+index + '_model').options).each(function(option){
+                    if(option.value == model){
+                        option.selected = true;
+                    }
+                });
+            }
+        },
+        bindSelectInputType: function(){
+            var types = $$('.select-fitment');
+            for(var i=0; i<types.length; i++){
+                if(!$(types[i]).binded){
+                    $(types[i]).binded = true;
+                    Event.observe(types[i], 'change', function(event){
+                        fitmentCombinationType.update(event);
+                    })
+                }
+            }
+        },
+        bindButton: function(){
+            var buttons = $$('.delete-fitment-combination');
+            for(var i=0; i<buttons.length; i++){
+                if(!$(buttons[i]).binded){
+                    $(buttons[i]).binded = true;
+                    Event.observe(buttons[i], 'click', function(event){
+                        fitmentCombinationType.delete(event);
+                    });
+                }
+            }
+        },
+        delete:function(event){
+            var id =  $(Event.findElement(event,'button')).getAttribute("id");
+            var combinationSerials = JSON.parse($('product_combination_serial').getValue());
+            var index = fitmentCombinationType.search(combinationSerials,id);
+            if(index > -1){
+                combinationSerials[index]['delete'] = 1;
+                $('product_combination_serial').setAttribute('value',JSON.stringify(combinationSerials));
+                $('fitment_'+id).addClassName('no-display');
+                $('fitment_'+id).addClassName('ignore-validate');
+                $('fitment_'+id).hide();
+            }
+        },
+        update: function(event){
+            var el = event.target;
+            var parent = fitmentCombinationType.parent(el);
+            var component = $(el).getAttribute('data-comp');
+            var value = $(el).getValue();
+            var serial = $(parent).getAttribute('data-serial');
+            var objectSerial = {y: "", m: "", ml: ""};
+            if(serial){
+                objectSerial = JSON.parse(serial);
+            }
+            objectSerial[component] = value;
+            $(parent).setAttribute('data-serial',JSON.stringify(objectSerial));
+            if(objectSerial['y'] && objectSerial['m'] && objectSerial['ml']){
+                var combinationSerials = JSON.parse($('product_combination_serial').getValue());
+                var fitmentSerial = JSON.parse($(parent).getAttribute('data-serial'));
+                var fitment = {
+                    id: $(parent).getAttribute('data-id'),
+                    serial: fitmentSerial
+                };
+                var index = fitmentCombinationType.index(combinationSerials,fitment);
+                if( index == -1){
+                    combinationSerials.push(fitment);
+                }else{
+                    if(typeof fitment.serial.id !=="undefined"){
+                        fitment.update = 1;
+                    }
+                    combinationSerials[index] = fitment;
+                }
+                $('product_combination_serial').setAttribute('value',JSON.stringify(combinationSerials));
+            }
+        },
+        index:function(array,el){
+            for(var i=0; i < array.length; i++){
+                if(el.id == array[i].id){
+                    return i;
+                }
+            }
+            return -1;
+        },
+        search: function(array,id){
+            for(var i=0; i < array.length; i++){
+                if(id == array[i].id){
+                    return i;
+                }
+            }
+            return -1;
+        },
+        parent: function(el){
+            return Element.up(el,1);
+        }
+    };
+    Validation.addAllThese([
+        ['validate-fitment-combination', <?php echo $this->helper('core')->jsonEncode(Mage::helper('hautopart')->__('Duplicate Fitment Combination')) ?>, function(v, elm) {
+            console.log(elm.up(1));
+            return true;
+        }]]);
+    <?php foreach($this->getFitmentValues() as $_value): ?>
+        fitmentCombination.add(<?php echo $_value->toJson(); ?>);
+        fitmentCombinationType.addDataToValues(<?php echo $_value->toJson(); ?>);
+    <?php endforeach; ?>
+    if($('<?php echo $this->getAddButtonId() ?>')){
+        Event.observe('<?php echo $this->getAddButtonId() ?>', 'click', fitmentCombination.add.bind(fitmentCombination));
+    }
+</script>

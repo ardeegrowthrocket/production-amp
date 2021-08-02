@@ -1,0 +1,53 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php $baseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>
+<?php $browseModel = $this->getBrowseModel(); ?>
+<?php
+
+$makes = array(
+    array('name' => 'Chrysler', 'child' => array('200','300','Aspen','Pacifica','Town & Country')),
+    array('name' => 'Dodge', 'child' => array('Avenger','Caliber','Challenger','Charger','Dakota','Dart','Durango','Grand Caravan','Journey','Magnum','Nitro','Viper')),
+    array('name' => 'Jeep', 'child' => array('Cherokee','Commander','Compass','Grand Cherokee','Liberty','Patriot','Renegade','Wrangler JK','Wrangler JL')),
+    array('name' => 'Ram', 'child' => array('1500','1500 DT','2500','3500','4500','Promaster','Promaster City')),
+);
+?>
+<div class="mobile-nav side-block container">
+   <span class="close-sidebar-menu"><i class="icon-cancel"></i></span>
+   <div class="menu-all-pages-container">
+      <ul class="menu sw-mobile-menu">
+          <li class="act">
+              <a href="<?php echo $baseUrl ?>customer/account">My Account</a>
+              <ul style="display: none">
+                  <?php
+                  if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                      ?>
+                      <li><a href="<?php echo Mage::getUrl('customer/account'); ?>"><?php echo $this->__('Dashboard'); ?></a></li>
+                      <li><a href="<?php echo Mage::getUrl('customer/account/logout'); ?>"><?php echo $this->__('Log out'); ?></a></li>
+                  <?php } else {
+                      ?>
+                      <li><a href="<?php echo Mage::getUrl('customer/account/login'); ?>"><?php echo $this->__('Log in'); ?></a></li>
+                      <li><a href="<?php echo Mage::getUrl('customer/account/create'); ?>"><?php echo $this->__('Register'); ?></a></li>
+                  <?php } ?>
+              </ul>
+          </li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/mopar-performance-parts.html">Mopar Performance Parts</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/interior-accessories.html">Interior Accessories</a></li>
+         <li class="act"><a href="<?php echo $baseUrl; ?>category/exterior-accessories.html">Exterior Accessories</a></li>
+         <li class="menu-full-width">
+              <a href="#">Browse By Model</a>
+              <ul class="sw-mobile-menu" style="display: none">
+                  <?php foreach($browseModel as $key => $list): ?>
+                      <li>
+                          <a href="<?php echo array_values($list)[0]['make_url'] ?>"><?php echo $key; ?></a>
+                          <ul style="display: none;">
+                              <?php foreach($list as $row):?>
+                                  <li><a href="<?php echo $row['model_url']; ?>"><?php echo $row['model']; ?></a></li>
+                              <?php endforeach; ?>
+                          </ul>
+                      </li>
+                  <?php endforeach; ?>
+              </ul>
+          </li>
+         
+      </ul>
+   </div>
+</div>

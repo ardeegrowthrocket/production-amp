@@ -1,0 +1,33 @@
+<layout>
+    <default>
+        <reference name="before_body_end">
+            <block type="grschema/universal" name="universal_schema"/>
+            <block type="grschema/breadcrumbs" name="breadcrumbs_schema"/>
+        </reference>
+    </default>
+    <catalog_product_view>
+        <reference name="before_body_end">
+            <block type="grschema/product" name="product_schema"/>
+        </reference>
+    </catalog_product_view>
+    <hauto_part_part_index>
+        <reference name="before_body_end">
+            <block type="grschema/listing" name="product_schema"/>
+        </reference>
+    </hauto_part_part_index>
+    <part_make_partmake_index>
+        <reference name="before_body_end">
+            <block type="grschema/listing" name="product_schema"/>
+        </reference>
+    </part_make_partmake_index>
+    <part_model_partmodel_index>
+        <reference name="before_body_end">
+            <block type="grschema/listing" name="product_schema"/>
+        </reference>
+    </part_model_partmodel_index>
+    <part_ymm_partymm_index>
+        <reference name="before_body_end">
+            <block type="grschema/listing" name="product_schema"/>
+        </reference>
+    </part_ymm_partymm_index>
+</layout>

@@ -1,0 +1,59 @@
+#mopar-homepage-bestseller{
+  background-color: $grey-color-6;
+  padding-top: 60px;
+  padding-bottom: 50px;
+
+  .heading{
+    h2{
+      color: $primary-bg-color;
+      @include secondary-font(36px,700);
+      margin-bottom: 35px;
+    }
+  }
+
+  .best-seller-list{
+    .owl-item{
+      background-color: $white-color;
+      @include border-radius();
+      padding: 25px;
+      min-height: 315px;
+      text-align: left;
+
+      .item-wrapper{
+        .b-price{
+          font-size: 20px;
+          font-family: robotobold;
+          color: $primary-bg-color;
+          margin-top: 20px;
+        }
+
+        .b-name{
+          font-size: 16px;
+          margin-top: 10px;
+
+          h5{
+            color: $grey-color-3;
+            font-family: robotobold;
+          }
+        }
+
+        .b-part-number{
+          font-size: 12px;
+          color: $dark-grey;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .custom-nav{
+    margin-top: 30px;
+    button{
+      border: none;
+      background:none;
+      font-size: 22px;
+      padding: 0 20px;
+
+    }
+  }
+}

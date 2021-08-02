@@ -1,0 +1,43 @@
+
+
+@media (min-width: 1200px) {
+  .customer-account-create{
+    .customer-name-middlename{
+        .field.name-firstname, .field.name-middlename {
+          min-height: 90px;
+        }
+    }
+    .form-list .field {
+      width: 50%;
+      padding-right: 15px;
+    }
+  }
+  .customer-address-form, .customer-account-changeforgotten{
+    .form-list .field {
+      padding-right: 15px;
+    }
+  }
+}
+
+.customer-account-login, .customer-account-create,.customer-account-forgotpassword{
+  .main-container{
+    .container{
+      h2{
+        color: $h1-text-color !important;
+      }
+      #login-form, #form-validate{
+        border-top-color: $secondary-bg-color !important;
+      }
+    }
+    #is_subscribed{
+      padding-left: 10px;
+      margin-left: 6px;
+      margin-top: 0;
+    }
+    .buttons-set{
+      a{
+        color: $blue-link-color;
+      }
+    }
+  }
+}

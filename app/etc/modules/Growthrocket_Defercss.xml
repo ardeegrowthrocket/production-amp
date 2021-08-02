@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Growthrocket_Defercss>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Growthrocket_Defercss>
+    </modules>
+</config>

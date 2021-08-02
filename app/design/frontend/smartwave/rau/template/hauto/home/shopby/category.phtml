@@ -1,0 +1,66 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ocastro
+ * Date: 6/26/17
+ * Time: 6:01 PM
+ */
+$p = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+?>
+<div id="shop-by-section">
+    <div class="container-fluid">
+        <div class="container">
+            <div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="section-header">
+                        <h2>
+                            <?php if($this->getTitle()):?>
+                                <?php echo $this->getTitle(); ?>
+                            <?php else: ?>
+                                Shop By<br/>Category
+                            <?php endif;?>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-7">
+                    <div class="section-listing">
+                        <ul>
+                            <li>
+                                <a href="<?php echo $p; ?>category/exterior-accessories.html">Exterior Accessories</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/interior-accessories.html"">Interior Accessories</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/carpet-mats.html"">Carpet Mats</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/rubber-all-weather-mats.html">Rubber All Weather Mats</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5">
+                    <div class="section-listing">
+                        <ul>
+                            <li>
+                                <a href="<?php echo $p; ?>category/mopar-performance-parts.html">Ram Performance Parts</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/tuneup-and-maintenance-parts.html">Tune-Up & Maintenance Parts</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/remote-start-electronics-and-audio-accessories.html">Remote Start</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $p; ?>category/remote-start-electronics-and-audio-accessories.html">Electronics & Audio Accessories</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,60 @@
+<?php if($this->getCollection()->getSize()): ?>
+<div class="toolbar">
+    <?php if( $this->isExpanded() ): ?>
+    <div class="sorter">
+        <div class="sort-by custom-select">
+            <label><?php echo $this->__('Sort By') ?>:</label>
+            <select onchange="setLocation(this.value)">
+                <option value="<?php echo $this->getOrderUrl('price','desc') ?>" <?php if($this->getCurrentDirection() =='desc' && $this->isOrderCurrent('price')): ?> selected="selected" <?php endif; ?>>
+                    <?php echo $this->__('Price (High to Low)'); ?>
+                </option>
+                <option value="<?php echo $this->getOrderUrl('price','asc') ?>" <?php if($this->getCurrentDirection() =='asc' && $this->isOrderCurrent('price')): ?> selected="selected" <?php endif; ?>>
+                    <?php echo $this->__('Price (Low to High)'); ?>
+                </option>
+                <option value="<?php echo $this->getOrderUrl('name','asc') ?>" <?php if($this->getCurrentDirection() =='asc' && $this->isOrderCurrent('name')): ?> selected="selected" <?php endif; ?>">
+                    <?php echo $this->__('Name (Ascending)'); ?>
+                </option>
+                <option value="<?php echo $this->getOrderUrl('name','desc') ?>" <?php if($this->getCurrentDirection() =='desc' && $this->isOrderCurrent('name')): ?> selected="selected" <?php endif; ?>>
+                    <?php echo $this->__('Name (Descending)'); ?>
+                </option>
+<!--            --><?php //foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+<!--                <option value="--><?php //echo $this->getOrderUrl($_key, 'asc') ?><!--"--><?php //if($this->isOrderCurrent($_key)): ?><!-- selected="selected"--><?php //endif; ?><!-->-->
+<!--                    --><?php //echo $this->__($_order) ?>
+<!--                </option>-->
+<!--            --><?php //endforeach; ?>
+            </select>
+        </div>
+        <div class="limiter custom-select">
+            <label><?php echo $this->__('Results Per Page') ?></label>
+            <select onchange="setLocation(this.value)">
+            <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                    <?php echo $_limit ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
+        
+        </div>
+
+        <?php if( $this->isEnabledViewSwitcher() ): ?>
+        <p class="view-mode">
+            <label><?php echo $this->__('View') ?>:</label>
+            <?php $_modes = $this->getModes(); ?>
+            <?php if($_modes && count($_modes)>1): ?>
+            <?php foreach ($this->getModes() as $_code=>$_label): ?>
+                <?php if($this->isModeActive($_code)): ?>
+                    <strong title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?>"><i class="icon-mode-<?php echo strtolower($_code); ?>"></i></strong>&nbsp;
+                <?php else: ?>
+                    <a href="<?php echo $this->getModeUrl($_code) ?>" title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?>"><i class="icon-mode-<?php echo strtolower($_code); ?>"></i></a>&nbsp;
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </p>
+        <?php endif; ?>
+        <div class="pager">
+            <?php echo $this->getPagerHtml() ?>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+<?php endif ?>

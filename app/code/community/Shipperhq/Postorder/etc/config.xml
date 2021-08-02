@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--
+/**
+*
+* Webshopapps Shipping Module
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade Magento to newer
+* versions in the future. If you wish to customize Magento for your
+* needs please refer to http://www.magentocommerce.com for more information.
+*
+* Shipper HQ Shipping
+*
+* @category ShipperHQ
+* @package ShipperHQ_Shipping_Carrier
+* @copyright Copyright (c) 2014 Zowta LLC (http://www.ShipperHQ.com)
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+* @author ShipperHQ Team sales@shipperhq.com
+*/
+-->
+<config>
+    <modules>
+        <Shipperhq_Postorder>
+            <version>0.0.1</version>
+        </Shipperhq_Postorder>
+    </modules>
+    <global>
+        <blocks>
+            <shipperhq_postorder>
+                <class>Shipperhq_Postorder_Block</class>
+            </shipperhq_postorder>
+
+        </blocks>
+        <helpers>
+            <shipperhq_postorder>
+                <class>Shipperhq_Postorder_Helper</class>
+            </shipperhq_postorder>
+        </helpers>
+        <models>
+            <shipperhq_postorder>
+                <class>Shipperhq_Postorder_Model</class>
+            </shipperhq_postorder>
+        </models>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <shipperhq_postorder_order_observer>
+                        <type>singleton</type>
+                        <class>shipperhq_postorder/observer</class>
+                        <method>saveOrderAfter</method>
+                    </shipperhq_postorder_order_observer>
+                </observers>
+            </sales_order_place_after>
+            <sales_order_invoice_save_after>
+                <observers>
+                    <shipperhq_postorder_invoice_observer>
+                        <type>singleton</type>
+                        <class>shipperhq_postorder/observer</class>
+                        <method>saveOrderAfter</method>
+                    </shipperhq_postorder_invoice_observer>
+                </observers>
+            </sales_order_invoice_save_after>
+            <adminhtml_block_html_before>
+                <observers>
+                    <shipperhq_postorder_adminhtml_block_before_observer>
+                        <class>shipperhq_postorder/adminhtml_observer</class>
+                        <method>onBlockHtmlBefore</method>
+                    </shipperhq_postorder_adminhtml_block_before_observer>
+                </observers>
+            </adminhtml_block_html_before>
+            <sales_order_shipment_grid_collection_load_before>
+                <observers>
+                    <shipperhq_postorder_adminhtml_shipment_grid_before_observer>
+                        <class>shipperhq_postorder/adminhtml_observer</class>
+                        <method>onSalesOrderShipmentGridLoadBefore</method>
+                    </shipperhq_postorder_adminhtml_shipment_grid_before_observer>
+                </observers>
+            </sales_order_shipment_grid_collection_load_before>
+            <sales_order_grid_collection_load_before>
+                <observers>
+                    <shipperhq_postorder_adminhtml_order_grid_before_observer>
+                        <class>shipperhq_postorder/adminhtml_observer</class>
+                        <method>onSalesOrderGridLoadBefore</method>
+                    </shipperhq_postorder_adminhtml_order_grid_before_observer>
+                </observers>
+            </sales_order_grid_collection_load_before>
+
+        </events>
+        <resources>
+            <shipperhq_postorder_setup>
+                <setup>
+                    <module>Shipperhq_Postorder</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </shipperhq_postorder_setup>
+        </resources>
+        <template>
+            <email>
+                <sales_email_shipperhq_postorder_order_template translate="label" module="sales">
+                    <label>New ShipperHQ Shipment</label>
+                    <file>sales/shipperhq_shipment_new.html</file>
+                    <type>html</type>
+                </sales_email_shipperhq_postorder_order_template>
+            </email>
+        </template>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <shipperhq_postorder after="Mage_Adminhtml">Shipperhq_Postorder_Adminhtml</shipperhq_postorder>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <layout>
+            <updates>
+                <postorder module="Shipperhq_Postorder" >
+                    <file>shipperhq/postorder.xml</file>
+                </postorder>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <postorder module="Shipperhq_Postorder" >
+                    <file>shipperhq/postorder.xml</file>
+                </postorder>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Shipperhq_Postorder>
+                    <files>
+                        <default>Shipperhq_Postorder.csv</default>
+                    </files>
+                </Shipperhq_Postorder>
+            </modules>
+        </translate>
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <shipperhq_test>
+                        <type>singleton</type>
+                        <class>shipperhq_postorder/observer</class>
+                        <method>insertAdminBlock</method>
+                    </shipperhq_test>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </adminhtml>
+</config>

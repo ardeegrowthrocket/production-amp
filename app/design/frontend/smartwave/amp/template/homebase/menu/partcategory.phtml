@@ -1,0 +1,56 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: olivercastro
+ * Date: 13/03/2017
+ * Time: 12:03 AM
+ */
+
+/** @var Homebase_Autopart_Block_Partcategory $this */
+
+$makes = $this->getMakes();
+/** @var Homebase_Autopart_Helper_Data $_helper */
+$_helper = Mage::helper('hautopart');
+
+?>
+
+<div class="nav-sublist-dropdown">
+    <div class="container">
+        <div class="mega-columns">
+            <div class="block1">
+                <div class="row" style="margin:0">
+                    <ul>
+                        <li class="menu-item col-sm-12">
+                            <h5><?php echo $this->__('Browse by Model'); ?></h5>
+                            <div class="col-sm-12">
+                                <?php foreach($makes as $make): ?>
+                                    <?php if($make['id'] != 422): ?>
+                                        <ul class="col-sm-3 parts-listing">
+                                            <li class="menu-item col-sm-3">
+                                                <h5><?php echo $make['label'] ?></h5>
+                                                <ul class="sub-menu">
+                                                    <?php $models = $this->getModels($make['id']); ?>
+                                                    <?php foreach($models as $model): ?>
+                                                        <li>
+
+                                                            <a href="<?php echo $_helper->getModelPath($make['label'] . '-' . $_helper->scrubLabel($model['label'])); ?>">
+                                                                <?php echo $model['label']; ?>
+                                                            </a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

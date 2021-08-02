@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<adminhtml_catalog_product_edit>
+		<reference name="head">
+			<action method="addItem"><type>js</type><name>aitcbp/product.js</name></action>
+		</reference>
+		<reference name="js">
+			<block type="aitcbp/adminhtml_js" name="js_handler" template="aitcbp/js.phtml" />
+		</reference> 
+	</adminhtml_catalog_product_edit>
+	
+	<adminhtml_aitcbp_groups_index>
+        <reference name="content">
+            <block type="aitcbp/adminhtml_groups" name="groups" />
+        </reference>
+    </adminhtml_aitcbp_groups_index>
+    
+    <adminhtml_aitcbp_groups_edit>
+    	<reference name="content">
+    		<block type="aitcbp/adminhtml_groups_edit" name="groups_edit" />
+    	</reference>
+    	
+    	<reference name="left">
+    		<block type="aitcbp/adminhtml_groups_edit_tabs" name="groups_tabs" />
+    	</reference>
+    	
+    	<reference name="js">
+			<block type="aitcbp/adminhtml_groups_edit_js" name="group.edit.js" template="aitcbp/group/edit/js.phtml" />
+		</reference> 
+    </adminhtml_aitcbp_groups_edit>
+    
+    <adminhtml_aitcbp_rules_index>
+        <reference name="content">
+            <block type="aitcbp/adminhtml_rules" name="rules" />
+        </reference>
+    </adminhtml_aitcbp_rules_index>
+    
+    <adminhtml_aitcbp_rules_edit>
+       	<reference name="content">
+    		<block type="aitcbp/adminhtml_rules_edit" name="rules_edit" />
+    	</reference>
+    	
+    	<reference name="left">
+    		<block type="aitcbp/adminhtml_rules_edit_tabs" name="rules_tabs" />
+    	</reference>
+    </adminhtml_aitcbp_rules_edit>
+</layout>

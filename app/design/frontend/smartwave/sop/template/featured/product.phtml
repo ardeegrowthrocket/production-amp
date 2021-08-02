@@ -1,0 +1,47 @@
+<?php $featuredProducts = $this->collection();
+?>
+<div id="featured-product" class="container-fluid">
+    <div class="heading">
+        <h2>Featured Products</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 no-padding">
+                <ul class="navigation">
+                    <?php foreach ($featuredProducts  as $key => $tabLabel): ?>
+                        <?php $handleActive += 1; ?>
+                       <li class="<?php if($handleActive == 1){ echo 'active'; } ?>" data-tab="<?php echo "tab-{$key}" ?>"><?php echo $tabLabel['model_label'] ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <div class="mobile-featured-selector">
+                    <select class="">
+                        <?php foreach ($featuredProducts  as $key => $tabLabel): ?>
+                            <?php $handleActive += 1; ?>
+                            <option class="<?php if($handleActive == 1){ echo 'active'; } ?>" value="<?php echo "tab-{$key}" ?>"><?php echo $tabLabel['model_label'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-9 no-padding">
+                <?php foreach ($featuredProducts as $key => $item): ?>
+                    <?php $activeTab += 1; ?>
+                    <?php $getTopItems  = array_slice($item['data'], 0, 4, true); ?>
+                        <div class="tab-content featured-item tab-<?php echo $key ?><?php if($activeTab == 1){ echo ' active wow fadeInDown'; } ?>">
+                            <?php foreach ($getTopItems as $product): ?>
+                                <div class="single-item col-sm-6 col-xs-12">
+                                    <a href="<?php echo $product['url'] ?>"><img src="<?php echo $product['image_url'] ?>"/></a>
+                                    <a href="<?php echo $product['url'] ?>"><h4 class="name"><?php echo $product['name'] ?></h4></a>
+                                    <div class="desc"><?php echo $product['description'] ?></div>
+                                    <a class="link" href="<?php echo $product['url'] ?>">Learn More</a>
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <a class="model-link" href="<?php echo $item['model_url'] ?>"><?php echo "View all {$item['model_label']} Parts" ?></a>
+                            </div>
+                        </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
